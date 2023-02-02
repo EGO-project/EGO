@@ -19,6 +19,11 @@
 		4E64E0BE2980DE0500124F56 /* EGOUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
 		BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */; };
+		CC03A29829892CE40050CDC5 /* messageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29729892CE40050CDC5 /* messageViewController.swift */; };
+		CC03A29C29892D780050CDC5 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29B29892D780050CDC5 /* eggAddViewController.swift */; };
+		CC03A29E298938660050CDC5 /* mothlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29D298938660050CDC5 /* mothlyViewController.swift */; };
+		CCB01C22298BB34E0049D01C /* mothlyAdd_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB01C21298BB34E0049D01C /* mothlyAdd_1ViewController.swift */; };
+		CCB01C24298BB3590049D01C /* mothlyAdd_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB01C23298BB3590049D01C /* mothlyAdd_2ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,11 @@
 		795F58B55B98937046906613 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CC03A29729892CE40050CDC5 /* messageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewController.swift; sourceTree = "<group>"; };
+		CC03A29B29892D780050CDC5 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
+		CC03A29D298938660050CDC5 /* mothlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyViewController.swift; sourceTree = "<group>"; };
+		CCB01C21298BB34E0049D01C /* mothlyAdd_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_1ViewController.swift; sourceTree = "<group>"; };
+		CCB01C23298BB3590049D01C /* mothlyAdd_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,11 @@
 				4E64E09A2980DE0400124F56 /* AppDelegate.swift */,
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
+				CC03A29729892CE40050CDC5 /* messageViewController.swift */,
+				CC03A29B29892D780050CDC5 /* eggAddViewController.swift */,
+				CC03A29D298938660050CDC5 /* mothlyViewController.swift */,
+				CCB01C21298BB34E0049D01C /* mothlyAdd_1ViewController.swift */,
+				CCB01C23298BB3590049D01C /* mothlyAdd_2ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
@@ -164,7 +179,6 @@
 				4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */,
 				78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -407,9 +421,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB01C24298BB3590049D01C /* mothlyAdd_2ViewController.swift in Sources */,
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
 				4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */,
+				CCB01C22298BB34E0049D01C /* mothlyAdd_1ViewController.swift in Sources */,
+				CC03A29829892CE40050CDC5 /* messageViewController.swift in Sources */,
+				CC03A29E298938660050CDC5 /* mothlyViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
+				CC03A29C29892D780050CDC5 /* eggAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
