@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.6.4)
   - Firebase (10.4.0):
     - Firebase/Core (= 10.4.0)
   - Firebase/Core (10.4.0):
@@ -74,6 +75,17 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
+  - KakaoSDKAuth (2.14.0):
+    - KakaoSDKCommon (= 2.14.0)
+  - KakaoSDKCommon (2.14.0):
+    - KakaoSDKCommon/Common (= 2.14.0)
+    - KakaoSDKCommon/Network (= 2.14.0)
+  - KakaoSDKCommon/Common (2.14.0)
+  - KakaoSDKCommon/Network (2.14.0):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.14.0)
+  - KakaoSDKUser (2.14.0):
+    - KakaoSDKAuth (= 2.14.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -83,9 +95,13 @@ PODS:
 
 DEPENDENCIES:
   - Firebase
+  - KakaoSDKAuth
+  - KakaoSDKCommon
+  - KakaoSDKUser
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -93,10 +109,14 @@ SPEC REPOS:
     - FirebaseInstallations
     - GoogleAppMeasurement
     - GoogleUtilities
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - nanopb
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   Firebase: ba3501b5142a57747eac74d27c96d2b313bdec90
   FirebaseAnalytics: 0be84b933ca3222bca03e8cccf020ad9b1c3c6ff
   FirebaseCore: b8697a177690b69b0dbce9d612b69b893be70469
@@ -104,9 +124,12 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 36b38c733fd37e50857e5e8d74138648f466f18c
   GoogleAppMeasurement: 173fa22ce7d62c29332568e853b39b2525a0e584
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
+  KakaoSDKAuth: 8fca87815de22062a23297983f327613b087b8bb
+  KakaoSDKCommon: 0ce638f7a2e49704943c0b74a087a9f8067bba1c
+  KakaoSDKUser: 2ca18314ce72e6690f76cb1f6f9fbc771d31a803
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: 610d212e81f9298854392705f695e2f81aa46ecf
+PODFILE CHECKSUM: 7b3dedf0a8a31c7284944d6297fa6dbbdfd5c476
 
 COCOAPODS: 1.11.3

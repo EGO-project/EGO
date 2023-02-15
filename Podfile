@@ -7,6 +7,10 @@ target 'EGO' do
 
   pod 'Firebase'
 
+  pod 'KakaoSDKCommon'
+  pod 'KakaoSDKAuth'
+  pod 'KakaoSDKUser'
+
   # Pods for EGO
 
   target 'EGOTests' do
