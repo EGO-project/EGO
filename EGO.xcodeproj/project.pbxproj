@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */; };
+		4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063EE299B876700F8F3B8 /* SocialViewController.swift */; };
+		4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */; };
+		4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */; };
 		4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09A2980DE0400124F56 /* AppDelegate.swift */; };
 		4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09C2980DE0400124F56 /* SceneDelegate.swift */; };
 		4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09E2980DE0400124F56 /* ViewController.swift */; };
@@ -42,6 +45,9 @@
 		00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO_EGOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
 		3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5063EE299B876700F8F3B8 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
+		4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
+		4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E64E0972980DE0400124F56 /* EGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E64E09A2980DE0400124F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +136,9 @@
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
+				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
+				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
+				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
 				4E64E0A82980DE0500124F56 /* Info.plist */,
@@ -164,7 +173,6 @@
 				4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */,
 				78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -409,7 +417,10 @@
 			files = (
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
 				4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */,
+				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
+				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
+				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
