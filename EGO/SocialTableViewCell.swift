@@ -11,6 +11,9 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
 
     @IBOutlet weak var friendName: UILabel!
     @IBOutlet weak var friendMainEgg: UIImageView!
+    @IBOutlet weak var friendSubEgg1: UIImageView!
+    @IBOutlet weak var friendSubEgg2: UIImageView!
+    @IBOutlet weak var friendSubEgg3: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +28,7 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
         // 셀 모서리 둥글게
         contentView.layer.cornerRadius = 10
         // 셀 배경색 지정
-        contentView.backgroundColor = UIColor(displayP3Red: 255/255, green: 233/255, blue: 176/255, alpha: 1) // FFE9B0
+        contentView.backgroundColor = UIColor(displayP3Red: 255/255, green: 233/255, blue: 176/255, alpha: 1)
     }
     
     // 셀 간격 조정
