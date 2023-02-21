@@ -9,6 +9,7 @@ import UIKit
 import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
@@ -22,13 +23,24 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnKakaoLogin: UIButton!
     @IBOutlet weak var btnRegister: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnKakaoLogin.setTitle("", for: .normal)
         btnAppleLogin.setTitle("", for: .normal)
         btnGoogleLogin.setTitle("", for: .normal)
+        
         lblSocialLogin.text = "소셜로그인"
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func googleSignIn(sender: Any) {
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+        guard error == nil else { return }
+        
+            self.setUserInfoGoogle()
+        // If sign in succeeded, display the app's main content View.
+      }
     }
     
     @IBAction func kakaoLogin(_ sender: UIButton) {
@@ -43,7 +55,7 @@ class LoginViewController: UIViewController {
 
                     //do something
                     _ = oauthToken
-                    self.setUserInfo()
+                    self.setUserInfoKakao()
                 }
             }
         }
@@ -60,7 +72,7 @@ class LoginViewController: UIViewController {
             }
     }
     
-    func setUserInfo() {
+    func setUserInfoKakao() {
         UserApi.shared.me {(user, error) in
             if let error = error {
                 print(error)
@@ -77,6 +89,25 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func setUserInfoGoogle(){
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+            guard error == nil else { return }
+            guard let signInResult = signInResult else { return }
+
+            let user = signInResult.user
+
+            let emailAddress = user.profile?.email
+
+            let fullName = user.profile?.name
+            let givenName = user.profile?.givenName
+            let familyName = user.profile?.familyName
+
+            let profilePicUrl = user.profile?.imageURL(withDimension: 320)
+            
+            self.NickNameLabel.text = fullName
+            self.EmailLabel.text = emailAddress
+        }
+    }
     
     /*
     // MARK: - Navigation
