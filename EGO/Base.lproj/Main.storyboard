@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ho3-qK-n9h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,6 +9,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSans-Regular.ttf">
+            <string>NotoSans-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--EGO ROOM-->
         <scene sceneID="lgU-MP-Nh1">
@@ -457,43 +462,92 @@
         <!--login-->
         <scene sceneID="p3K-Xq-eN6">
             <objects>
-                <viewController title="login" id="AyV-hu-94U" sceneMemberID="viewController">
+                <viewController title="login" id="AyV-hu-94U" customClass="LoginViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cte-A8-3gw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-aB-7oa">
-                                <rect key="frame" x="147" y="190" width="97" height="50"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egoBI" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-aB-7oa">
+                                <rect key="frame" x="101" y="91" width="187" height="391"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDo-P6-Ph6">
-                                <rect key="frame" x="152" y="343" width="87" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCs-iY-Nlp">
+                                <rect key="frame" x="170" y="432" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6DT-4D-YVO">
-                                <rect key="frame" x="70" y="397" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="kakao_login_medium_narrow"/>
+                                <buttonConfiguration key="configuration" style="plain" image="kakaoLogo"/>
+                                <connections>
+                                    <action selector="kakaoLogin:" destination="AyV-hu-94U" eventType="touchUpInside" id="w4M-0p-cAM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tO8-tS-dp7">
+                                <rect key="frame" x="91" y="157" width="207" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CyS-iP-Bbx">
-                                <rect key="frame" x="270" y="397" width="50" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c23-21-1wX">
+                                <rect key="frame" x="158" y="595" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-qC-X3r">
-                                <rect key="frame" x="161" y="520" width="70" height="24"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="kakaoLogout:" destination="AyV-hu-94U" eventType="touchUpInside" id="pww-oW-N0n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oS4-Vx-ZoJ">
+                                <rect key="frame" x="70" y="432" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcC-lc-uQb">
-                                <rect key="frame" x="170" y="397" width="50" height="50"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="appleLogo"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i0A-Ng-hPZ">
+                                <rect key="frame" x="270" y="432" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="googleLogo"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUP-23-SX9">
+                                <rect key="frame" x="91" y="193" width="207" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YtQ-am-E8G">
+                                <rect key="frame" x="149" y="362" width="92" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="NotoSans-Regular" family="Noto Sans" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CQ-SQ-eN3">
+                                <rect key="frame" x="161" y="555" width="74" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="회원가입">
+                                    <fontDescription key="titleFontDescription" name="NotoSans-Regular" family="Noto Sans" pointSize="20"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYY-cz-DXT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="EmailLabel" destination="YUP-23-SX9" id="qng-3w-k9h"/>
+                        <outlet property="NickNameLabel" destination="tO8-tS-dp7" id="Hbp-pr-e7I"/>
+                        <outlet property="btnAppleLogin" destination="oS4-Vx-ZoJ" id="nqY-rN-EnZ"/>
+                        <outlet property="btnGoogleLogin" destination="i0A-Ng-hPZ" id="0ra-4G-jwY"/>
+                        <outlet property="btnKakaoLogin" destination="bCs-iY-Nlp" id="9b5-Ey-CbF"/>
+                        <outlet property="btnRegister" destination="oS4-Vx-ZoJ" id="i94-l9-mGo"/>
+                        <outlet property="lblSocialLogin" destination="YtQ-am-E8G" id="to9-kB-1wY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5KF-Rj-2YO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1392" y="-730"/>
+            <point key="canvasLocation" x="-1392.3076923076922" y="-730.09478672985779"/>
         </scene>
         <!--register-->
         <scene sceneID="3lL-vZ-anb">
@@ -1256,9 +1310,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="appleLogo" width="51" height="50"/>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="arrowshape.left.fill" catalog="system" width="128" height="104"/>
         <image name="arrowshape.right.fill" catalog="system" width="128" height="104"/>
+        <image name="egoBI" width="749" height="1564"/>
+        <image name="googleLogo" width="51" height="50"/>
+        <image name="kakaoLogo" width="50" height="50"/>
+        <image name="kakao_login_medium_narrow" width="183" height="45"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
