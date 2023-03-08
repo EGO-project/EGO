@@ -46,13 +46,27 @@ class LoginViewController: UIViewController {
     @IBAction func kakaoLogin(_ sender: UIButton) {
         // 카카오톡 실행 가능 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoAccount() {(oauthToken, error) in
+            UserApi.shared.loginWithKakaoTalk() {(oauthToken, error) in
                 if let error = error {
                     print(error)
                 }
                 else {
                     print("loginWithKakaoTalk() success.")
 
+                    //do something
+                    _ = oauthToken
+                    self.setUserInfoKakao()
+                }
+            }
+        }
+        else {
+            UserApi.shared.loginWithKakaoAccount() {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    
                     //do something
                     _ = oauthToken
                     self.setUserInfoKakao()
