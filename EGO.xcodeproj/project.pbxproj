@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */; };
+		4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C328029B8447400E176B5 /* GoogleService-Info.plist */; };
 		4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09A2980DE0400124F56 /* AppDelegate.swift */; };
 		4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09C2980DE0400124F56 /* SceneDelegate.swift */; };
 		4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09E2980DE0400124F56 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
 		3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E5C328029B8447400E176B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4E64E0972980DE0400124F56 /* EGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E64E09A2980DE0400124F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E64E09C2980DE0400124F56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +144,10 @@
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
 				4E64E0A82980DE0500124F56 /* Info.plist */,
+				4E5C328029B8447400E176B5 /* GoogleService-Info.plist */,
 				4E659D3C29A3726200C7A917 /* LoginViewController.swift */,
+				4ECA05F529B81DE100515698 /* Model */,
+				4ECA05F629B81DE800515698 /* ViewModel */,
 			);
 			path = EGO;
 			sourceTree = "<group>";
@@ -170,6 +175,20 @@
 				4ECA05F329A4A75500515698 /* Noto_Sans */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4ECA05F529B81DE100515698 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4ECA05F629B81DE800515698 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		ADE0F5C13DBB691A9072510A /* Pods */ = {
@@ -296,6 +315,7 @@
 			files = (
 				4E64E0A72980DE0500124F56 /* LaunchScreen.storyboard in Resources */,
 				4ECA05F429A4A75500515698 /* Noto_Sans in Resources */,
+				4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */,
 				4E64E0A42980DE0500124F56 /* Assets.xcassets in Resources */,
 				4E64E0A22980DE0400124F56 /* Main.storyboard in Resources */,
 			);
