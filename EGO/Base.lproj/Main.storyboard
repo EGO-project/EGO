@@ -116,7 +116,7 @@
         <!--more-->
         <scene sceneID="PuY-iY-C0M">
             <objects>
-                <viewController title="more" id="PtJ-JN-gpN" sceneMemberID="viewController">
+                <viewController title="more" id="PtJ-JN-gpN" customClass="MoreViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vc3-Sm-0x4">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -170,7 +170,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="4vF-aA-h0t">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="88" id="4vF-aA-h0t" customClass="ProfileCustomCell" customModule="EGO" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="358" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4vF-aA-h0t" id="sFf-k8-HVs">
@@ -198,10 +198,17 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="profileId" destination="7W8-Rv-Ifh" id="DwF-bO-1KH"/>
+                                            <outlet property="profileImg" destination="sFf-k8-HVs" id="ETO-CC-iKR"/>
+                                            <outlet property="profileName" destination="7W8-Rv-Ifh" id="Wur-oP-Qdl"/>
                                             <segue destination="R6H-Sv-fE1" kind="show" id="Sgb-i3-YvT"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="PtJ-JN-gpN" id="RF8-np-RJL"/>
+                                    <outlet property="delegate" destination="PtJ-JN-gpN" id="dbv-9S-mAs"/>
+                                </connections>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
                                 <rect key="frame" x="304" y="336" width="43" height="40"/>
@@ -220,6 +227,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="I0b-WZ-4Bo"/>
+                    <connections>
+                        <outlet property="logOut" destination="ve7-hX-UTn" id="LEr-tI-Zr4"/>
+                        <outlet property="profileView" destination="2le-q1-sJH" id="nDE-g8-Jmc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iAv-T4-e50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -411,9 +422,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="ajb-nB-nRg" kind="relationship" relationship="viewControllers" id="dgj-nK-tuw"/>
-                        <segue destination="6lg-KU-8D2" kind="relationship" relationship="viewControllers" id="3sA-3P-6Ld"/>
-                        <segue destination="5lG-yR-Lzx" kind="relationship" relationship="viewControllers" id="srZ-l3-7t1"/>
                         <segue destination="Fup-nI-FgM" kind="relationship" relationship="viewControllers" id="ZPB-QE-Oiy"/>
+                        <segue destination="aVO-bz-sHA" kind="relationship" relationship="viewControllers" id="3sA-3P-6Ld"/>
+                        <segue destination="5lG-yR-Lzx" kind="relationship" relationship="viewControllers" id="srZ-l3-7t1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mU5-n5-JBf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -692,7 +703,7 @@
         <!--공지사항-->
         <scene sceneID="pjB-Z0-X0u">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="l6v-nJ-XdV" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="l6v-nJ-XdV" customClass="NoticeViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OCf-ie-vip">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -803,6 +814,9 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="이용약관"/>
+                                <connections>
+                                    <segue destination="Z73-sR-0GO" kind="show" id="INn-1V-RmJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHC-NC-hPH">
                                 <rect key="frame" x="25" y="215" width="341" height="35"/>
@@ -810,6 +824,9 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="개인정보처리방침"/>
+                                <connections>
+                                    <segue destination="gSV-jV-7HQ" kind="show" id="IGm-6P-Dsq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBr-8I-qaf">
                                 <rect key="frame" x="25" y="319" width="341" height="35"/>
@@ -850,10 +867,60 @@
             </objects>
             <point key="canvasLocation" x="5314" y="1538"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="CIK-gg-RYL">
+            <objects>
+                <viewController id="Z73-sR-0GO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J37-Ib-nIP">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이용약관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuZ-q5-1cl">
+                                <rect key="frame" x="166" y="117" width="59" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Y5g-LT-zNW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SSN-2h-tWn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUU-OB-H6I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4882" y="2298"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="mDS-vI-nR2">
+            <objects>
+                <viewController id="gSV-jV-7HQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FTp-bV-YLs">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
+                                <rect key="frame" x="136" y="115" width="118" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fmD-EP-d79"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LQN-te-jgU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bdX-XN-Xdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5768" y="2298"/>
+        </scene>
         <!--프로필-->
         <scene sceneID="btg-yn-ZYL">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="R6H-Sv-fE1" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="R6H-Sv-fE1" customClass="ProfileViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bm9-KJ-EqJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -904,6 +971,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucf-f5-nmC">
+                                <rect key="frame" x="294" y="264" width="54" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="수정"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Vzb-mX-rOi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1109,7 +1182,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zSP-al-WCm">
-                                <rect key="frame" x="-5" y="56" width="393" height="44"/>
+                                <rect key="frame" x="-16" y="56" width="399" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="글 작성" id="lnR-FT-pUz">
@@ -1224,9 +1297,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSz-Bt-3NK">
-
-                                <rect key="frame" x="-5" y="47" width="393" height="44"/>
-
+                                <rect key="frame" x="-11" y="47" width="400" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="글 확대" id="bPa-lU-TE4">
