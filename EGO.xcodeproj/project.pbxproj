@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */; };
+		0AD9AB2A2C2D9311B9A7D54E /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F555B09AA32815653976BEDB /* Pods_EGO.framework */; };
+		3074422CF1A2DB65E5B92F8B /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D29A294C93D2246A4ECD80 /* Pods_EGOTests.framework */; };
 		4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09A2980DE0400124F56 /* AppDelegate.swift */; };
 		4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09C2980DE0400124F56 /* SceneDelegate.swift */; };
 		4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09E2980DE0400124F56 /* ViewController.swift */; };
@@ -17,8 +18,7 @@
 		4E64E0B22980DE0500124F56 /* EGOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0B12980DE0500124F56 /* EGOTests.swift */; };
 		4E64E0BC2980DE0500124F56 /* EGOUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0BB2980DE0500124F56 /* EGOUITests.swift */; };
 		4E64E0BE2980DE0500124F56 /* EGOUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */; };
-		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
-		BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */; };
+		5E54E62506912AA6CD82E562 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A81CAD7506816075D05FA0 /* Pods_EGO_EGOUITests.framework */; };
 		CC03A29829892CE40050CDC5 /* messageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29729892CE40050CDC5 /* messageViewController.swift */; };
 		CC03A29C29892D780050CDC5 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29B29892D780050CDC5 /* eggAddViewController.swift */; };
 		CC03A29E298938660050CDC5 /* mothlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC03A29D298938660050CDC5 /* mothlyViewController.swift */; };
@@ -44,10 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO_EGOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
-		3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0C8CD5259AB4D8F80FC12065 /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1151C4B0168AD2397F9631CA /* Pods-EGOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.release.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.release.xcconfig"; sourceTree = "<group>"; };
+		3295152929D3FF98D2D93E2D /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E64E0972980DE0400124F56 /* EGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E64E09A2980DE0400124F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E64E09C2980DE0400124F56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,16 +60,17 @@
 		4E64E0B72980DE0500124F56 /* EGOUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EGOUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E64E0BB2980DE0500124F56 /* EGOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOUITests.swift; sourceTree = "<group>"; };
 		4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
-		78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.release.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.release.xcconfig"; sourceTree = "<group>"; };
-		795F58B55B98937046906613 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
-		B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BF769DFB80941E573DEA304B /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
+		C3A81CAD7506816075D05FA0 /* Pods_EGO_EGOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO_EGOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9D29A294C93D2246A4ECD80 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC03A29729892CE40050CDC5 /* messageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewController.swift; sourceTree = "<group>"; };
 		CC03A29B29892D780050CDC5 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
 		CC03A29D298938660050CDC5 /* mothlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyViewController.swift; sourceTree = "<group>"; };
 		CCB01C21298BB34E0049D01C /* mothlyAdd_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_1ViewController.swift; sourceTree = "<group>"; };
 		CCB01C23298BB3590049D01C /* mothlyAdd_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_2ViewController.swift; sourceTree = "<group>"; };
+		CD397A23760D717F02F65B68 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D8C70281ED21A43EB5F985E4 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
+		F555B09AA32815653976BEDB /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */,
+				0AD9AB2A2C2D9311B9A7D54E /* Pods_EGO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */,
+				3074422CF1A2DB65E5B92F8B /* Pods_EGOTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,23 +94,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */,
+				5E54E62506912AA6CD82E562 /* Pods_EGO_EGOUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4AC66D4E4F8679F78C278070 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */,
-				00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */,
-				795F58B55B98937046906613 /* Pods_EGOTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4E64E08E2980DE0400124F56 = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +109,7 @@
 				4E64E0BA2980DE0500124F56 /* EGOUITests */,
 				4E64E0982980DE0400124F56 /* Products */,
 				ADE0F5C13DBB691A9072510A /* Pods */,
-				4AC66D4E4F8679F78C278070 /* Frameworks */,
+				9FE0BBE2B2D630D73859F901 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,15 +159,25 @@
 			path = EGOUITests;
 			sourceTree = "<group>";
 		};
+		9FE0BBE2B2D630D73859F901 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F555B09AA32815653976BEDB /* Pods_EGO.framework */,
+				C3A81CAD7506816075D05FA0 /* Pods_EGO_EGOUITests.framework */,
+				C9D29A294C93D2246A4ECD80 /* Pods_EGOTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ADE0F5C13DBB691A9072510A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */,
-				1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */,
-				B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */,
-				90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */,
-				4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */,
-				78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */,
+				D8C70281ED21A43EB5F985E4 /* Pods-EGO.debug.xcconfig */,
+				BF769DFB80941E573DEA304B /* Pods-EGO.release.xcconfig */,
+				3295152929D3FF98D2D93E2D /* Pods-EGO-EGOUITests.debug.xcconfig */,
+				CD397A23760D717F02F65B68 /* Pods-EGO-EGOUITests.release.xcconfig */,
+				0C8CD5259AB4D8F80FC12065 /* Pods-EGOTests.debug.xcconfig */,
+				1151C4B0168AD2397F9631CA /* Pods-EGOTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -189,11 +189,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E64E0C12980DE0500124F56 /* Build configuration list for PBXNativeTarget "EGO" */;
 			buildPhases = (
-				7D58CBEDCC9782035F21D6C4 /* [CP] Check Pods Manifest.lock */,
+				5D78B62D2D5E79D3DD181323 /* [CP] Check Pods Manifest.lock */,
 				4E64E0932980DE0400124F56 /* Sources */,
 				4E64E0942980DE0400124F56 /* Frameworks */,
 				4E64E0952980DE0400124F56 /* Resources */,
-				A09EB7DAC766DCF824958BF3 /* [CP] Embed Pods Frameworks */,
+				7F5FAA1855130FB7FE592572 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,7 +208,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E64E0C42980DE0500124F56 /* Build configuration list for PBXNativeTarget "EGOTests" */;
 			buildPhases = (
-				6E53B29F23CC50C8AE092000 /* [CP] Check Pods Manifest.lock */,
+				67810F0021A07597F1A3DA47 /* [CP] Check Pods Manifest.lock */,
 				4E64E0A92980DE0500124F56 /* Sources */,
 				4E64E0AA2980DE0500124F56 /* Frameworks */,
 				4E64E0AB2980DE0500124F56 /* Resources */,
@@ -227,11 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E64E0C72980DE0500124F56 /* Build configuration list for PBXNativeTarget "EGOUITests" */;
 			buildPhases = (
-				892BEC3D3A15D0883215F806 /* [CP] Check Pods Manifest.lock */,
+				E72206645E17B4D68C002BE0 /* [CP] Check Pods Manifest.lock */,
 				4E64E0B32980DE0500124F56 /* Sources */,
 				4E64E0B42980DE0500124F56 /* Frameworks */,
 				4E64E0B52980DE0500124F56 /* Resources */,
-				0346B2F0D220D7D341BAE65A /* [CP] Embed Pods Frameworks */,
+				F824A55703C5CBC73CCAF6AA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -314,46 +314,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0346B2F0D220D7D341BAE65A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6E53B29F23CC50C8AE092000 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EGOTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D58CBEDCC9782035F21D6C4 /* [CP] Check Pods Manifest.lock */ = {
+		5D78B62D2D5E79D3DD181323 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -375,7 +336,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		892BEC3D3A15D0883215F806 /* [CP] Check Pods Manifest.lock */ = {
+		67810F0021A07597F1A3DA47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EGOTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F5FAA1855130FB7FE592572 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E72206645E17B4D68C002BE0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -397,21 +397,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A09EB7DAC766DCF824958BF3 /* [CP] Embed Pods Frameworks */ = {
+		F824A55703C5CBC73CCAF6AA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EGO/Pods-EGO-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -600,7 +600,7 @@
 		};
 		4E64E0C22980DE0500124F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */;
+			baseConfigurationReference = D8C70281ED21A43EB5F985E4 /* Pods-EGO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -632,7 +632,7 @@
 		};
 		4E64E0C32980DE0500124F56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */;
+			baseConfigurationReference = BF769DFB80941E573DEA304B /* Pods-EGO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -664,7 +664,7 @@
 		};
 		4E64E0C52980DE0500124F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */;
+			baseConfigurationReference = 0C8CD5259AB4D8F80FC12065 /* Pods-EGOTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -684,7 +684,7 @@
 		};
 		4E64E0C62980DE0500124F56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */;
+			baseConfigurationReference = 1151C4B0168AD2397F9631CA /* Pods-EGOTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -704,7 +704,7 @@
 		};
 		4E64E0C82980DE0500124F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */;
+			baseConfigurationReference = 3295152929D3FF98D2D93E2D /* Pods-EGO-EGOUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -722,7 +722,7 @@
 		};
 		4E64E0C92980DE0500124F56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */;
+			baseConfigurationReference = CD397A23760D717F02F65B68 /* Pods-EGO-EGOUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
