@@ -14,11 +14,6 @@ import Firebase
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var NickNameLabel: UILabel!
-    @IBOutlet weak var EmailLabel: UILabel!
-    
-    @IBOutlet weak var lblSocialLogin: UILabel!
     
     @IBOutlet weak var btnGoogleLogin: GIDSignInButton!
     @IBOutlet weak var btnAppleLogin: UIButton!
@@ -32,128 +27,156 @@ class LoginViewController: UIViewController {
         btnAppleLogin.setTitle("", for: .normal)
         //btnGoogleLogin.setTitle("", for: .normal)
         
-        lblSocialLogin.text = "소셜로그인"
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //        if Auth.auth().currentUser?.uid != nil {
+        //            print("auto login success")
+        //            let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+        //            VC.modalPresentationStyle = .fullScreen
+        //            self.present(VC, animated: true,completion: nil)
+        //        } else {
+        //            print("auto login failed")
+        //        }
     }
     
     @IBAction func googleSignIn(sender: GIDSignInButton) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-
-        // Start the sign in flow!
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
-          guard error == nil else {
-            return
-          }
-
-          guard let user = result?.user,
-            let idToken = user.idToken?.tokenString
-          else {
-            return
-          }
-
-          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                         accessToken: user.accessToken.tokenString)
-
-            Auth.auth().signIn(with: credential) { result, error in
-
-              // At this point, our user is signed in
+        
+        if AuthApi.hasToken() {
+            UserApi.shared.accessTokenInfo { _, error in
+                if let error = error {
+                    print("_________login error_________")
+                    print(error)
+                    // Start the sign in flow!
+                    GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+                        guard error == nil else {
+                            return
+                        }
+                        
+                        guard let user = result?.user,
+                              let idToken = user.idToken?.tokenString
+                        else {
+                            return
+                        }
+                        
+                        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+                        Auth.auth().signIn(with: credential) { result, error in
+                            // At this point, our user is signed in
+                        }
+                        print("good login")
+                        let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+                        VC.modalPresentationStyle = .fullScreen
+                        self.present(VC, animated: true, completion: nil)
+                    }
+                } else {
+                    print("good login")
+                    let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+                    VC.modalPresentationStyle = .fullScreen
+                    self.present(VC, animated: true, completion: nil)
+                }
             }
         }
-        
     }
     
     @IBAction func kakaoLogin(_ sender: UIButton) {
-        // 카카오톡 실행 가능 여부 확인
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk() {(oauthToken, error) in
+        if AuthApi.hasToken() {
+            UserApi.shared.accessTokenInfo { _, error in
                 if let error = error {
+                    print("_________login error_________")
                     print(error)
-                }
-                else {
-                    print("loginWithKakaoTalk() success.")
-
-                    //do something
-                    _ = oauthToken
-                    self.setUserInfoKakao()
-                }
-            }
-        }
-        else {
-            UserApi.shared.loginWithKakaoAccount() {(oauthToken, error) in
-                if let error = error {
-                    print(error)
-                }
-                else {
-                    print("loginWithKakaoTalk() success.")
-                    
-                    //do something
-                    _ = oauthToken
-                    self.setUserInfoKakao()
-                }
-            }
-        }
-    }
-    @IBAction func kakaoLogout(_ sender: UIButton) {
-        UserApi.shared.logout{(error) in
-                if let error = error {
-                    print(error)
+                    if UserApi.isKakaoTalkLoginAvailable() {
+                        UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                print("New Kakao Login")
+                                
+                                //do something
+                                _ = oauthToken
+                                
+                                // 로그인 성공 시
+                                UserApi.shared.me { user, error in
+                                    if let error = error {
+                                        print("------KAKAO : user loading failed------")
+                                        print(error)
+                                    } else {
+                                        Auth.auth().createUser(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))") { fuser, error in
+                                            if let error = error {
+                                                print("FB : signup failed")
+                                                print(error)
+                                                Auth.auth().signIn(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))", completion: nil)
+                                            } else {
+                                                print("FB : signup success")
+                                            }
+                                        }
+                                    }
+                                }
+                                let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+                                VC.modalPresentationStyle = .fullScreen
+                                self.present(VC, animated: true, completion: nil)
+                            }
+                        }
+                    }
                 } else {
-                    print("kakao logout success")
-                    self.NickNameLabel.text = "Nickname :"
-                    self.EmailLabel.text = "Email :"
+                    print("good login")
+                    let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+                    VC.modalPresentationStyle = .fullScreen
+                    self.present(VC, animated: true, completion: nil)
                 }
             }
-    }
-    
-    func setUserInfoKakao() {
-        UserApi.shared.me {(user, error) in
-            if let error = error {
-                print(error)
-            } else {
-                print("nickname: \(user?.kakaoAccount?.profile?.nickname ?? "no nickname")")
-                print("email: \(user?.kakaoAccount?.email ?? "no email")")
-                
-                guard let userId = user?.id else {return}
-                
-                print("닉네임 : \(user?.kakaoAccount?.profile?.nickname ?? "no nickname").....이메일 : \(user?.kakaoAccount?.email ?? "no nickname"). . . . .유저 ID : \(userId)")
-                self.NickNameLabel.text = "Nickname : \(user?.kakaoAccount?.profile?.nickname ?? "no nickname")"
-                self.EmailLabel.text = "Email : \(user?.kakaoAccount?.email ?? "no nickname")"
+        } else {
+            if UserApi.isKakaoTalkLoginAvailable() {
+                UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        print("New Kakao Login")
+                        
+                        //do something
+                        _ = oauthToken
+                        
+                        // 로그인 성공 시
+                        UserApi.shared.me { user, error in
+                            if let error = error {
+                                print("------KAKAO : user loading failed------")
+                                print(error)
+                            } else {
+                                Auth.auth().createUser(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))") { fuser, error in
+                                    if let error = error {
+                                        print("FB : signup failed")
+                                        print(error)
+                                        Auth.auth().signIn(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))", completion: nil)
+                                    } else {
+                                        print("FB : signup success")
+                                    }
+                                }
+                            }
+                        }
+                        
+                        let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+                        VC.modalPresentationStyle = .fullScreen
+                        self.present(VC, animated: true, completion: nil)
+                    }
+                }
             }
         }
     }
-    
-    func setUserInfoGoogle(){
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-            guard error == nil else { return }
-            guard let signInResult = signInResult else { return }
-
-            let user = signInResult.user
-
-            let emailAddress = user.profile?.email
-
-            let fullName = user.profile?.name
-            let givenName = user.profile?.givenName
-            let familyName = user.profile?.familyName
-
-            let profilePicUrl = user.profile?.imageURL(withDimension: 320)
-            
-            self.NickNameLabel.text = fullName
-            self.EmailLabel.text = emailAddress
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
