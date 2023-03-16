@@ -7,7 +7,11 @@
 		<key>EGO.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>0</integer>
+=======
+			<integer>21</integer>
+>>>>>>> origin/merge_check
 		</dict>
 	</dict>
 </dict>

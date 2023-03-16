@@ -6,14 +6,24 @@
 //
 
 import UIKit
+import KakaoSDKCommon
+import KakaoSDKAuth
+import GoogleSignIn
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //카카오로그인
+        KakaoSDK.initSDK(appKey: "bbfabe81f9909eed954b792cadb0db1d")
+        
+        //파이어베이스 연결
+        FirebaseApp.configure()
         return true
     }
 
@@ -30,7 +40,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    //구글로그인
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+      var handled: Bool
 
+      handled = GIDSignIn.sharedInstance.handle(url)
+      if handled {
+        return true
+      }
 
+      // Handle other custom URL types.
+
+      // If not handled by this app, return false.
+      return false
+    }
+    
 }
 
