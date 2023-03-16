@@ -31,14 +31,14 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //        if Auth.auth().currentUser?.uid != nil {
-        //            print("auto login success")
-        //            let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-        //            VC.modalPresentationStyle = .fullScreen
-        //            self.present(VC, animated: true,completion: nil)
-        //        } else {
-        //            print("auto login failed")
-        //        }
+        if Auth.auth().currentUser?.uid != nil {
+            print("auto login success")
+            let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+            VC.modalPresentationStyle = .fullScreen
+            self.present(VC, animated: true,completion: nil)
+        } else {
+            print("auto login failed")
+        }
     }
     
     @IBAction func googleSignIn(sender: GIDSignInButton) {
