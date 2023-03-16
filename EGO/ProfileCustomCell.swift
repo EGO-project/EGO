@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileCustomCell: UITableViewCell {
-    @IBOutlet weak var profileImg: UIView!
+    @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var profileName: UIView!
     @IBOutlet weak var profileId: UILabel!
     
