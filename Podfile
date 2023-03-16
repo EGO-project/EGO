@@ -7,6 +7,7 @@ target 'EGO' do
 
   #DB
   pod 'Firebase'
+  pod 'Firebase/Auth'
 
   #Kakao
   pod 'KakaoSDKCommon'

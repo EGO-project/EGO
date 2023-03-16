@@ -10,6 +10,8 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 import GoogleSignIn
+import Firebase
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -18,7 +20,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var lblSocialLogin: UILabel!
     
-    @IBOutlet weak var btnGoogleLogin: UIButton!
+    @IBOutlet weak var btnGoogleLogin: GIDSignInButton!
     @IBOutlet weak var btnAppleLogin: UIButton!
     @IBOutlet weak var btnKakaoLogin: UIButton!
     @IBOutlet weak var btnRegister: UIButton!
@@ -28,19 +30,40 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         btnKakaoLogin.setTitle("", for: .normal)
         btnAppleLogin.setTitle("", for: .normal)
-        btnGoogleLogin.setTitle("", for: .normal)
+        //btnGoogleLogin.setTitle("", for: .normal)
         
         lblSocialLogin.text = "소셜로그인"
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func googleSignIn(sender: Any) {
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-        guard error == nil else { return }
+    @IBAction func googleSignIn(sender: GIDSignInButton) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+          guard error == nil else {
+            return
+          }
+
+          guard let user = result?.user,
+            let idToken = user.idToken?.tokenString
+          else {
+            return
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: user.accessToken.tokenString)
+
+            Auth.auth().signIn(with: credential) { result, error in
+
+              // At this point, our user is signed in
+            }
+        }
         
-            self.setUserInfoGoogle()
-        // If sign in succeeded, display the app's main content View.
-      }
     }
     
     @IBAction func kakaoLogin(_ sender: UIButton) {
