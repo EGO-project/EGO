@@ -15,15 +15,17 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
     // reference는 데이터베이스의 특정 위치를 나타내고 읽고 쓰게끔 해준다
     let ref = Database.database().reference()
     
-    var data = ["1234", "4214"]
+    var labelValue: [String] = []
+    
+    lazy var notice = [labelValue]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return notice.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
+        cell.textLabel?.text = notice[indexPath.row].joined(separator: ",")
         
         // 셀 선택시 색변경 없앰
         cell.selectionStyle = .none
@@ -32,11 +34,19 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func updateLabel() {
-        ref.child("announcement").observeSingleEvent(of: .value) { snapshot, error  in
-            guard let labelValue = snapshot.value as? [String] else { return }
-                self.data = labelValue
+        ref.child("announcement").observe(.value, with: { snapshot  in
+            if let labelValue = snapshot.value as? [String: Any] {
+                //self.data = labelValue
+                let key1Value = labelValue["1"] as? String
+                let key2Value = labelValue["2"] as? String
+                
+            }
+        }) { error in
+            print(error.localizedDescription)
         }
     }
+                                                     
+
     
     
     // 테이블 뷰에 대한 아울렛 변수 anTable 선언
@@ -44,6 +54,7 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateLabel()
         anTable.dataSource = self
         anTable.delegate = self
     }
