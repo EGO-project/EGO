@@ -12,6 +12,9 @@ target 'EGO' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
+
+  # Pods for FSCalendar_Tuto
+  pod 'FSCalendar'
   
   #Google
   pod 'GoogleSignIn'
