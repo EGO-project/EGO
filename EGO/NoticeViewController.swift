@@ -11,41 +11,49 @@ import FirebaseDatabase
 
 class NoticeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
-    // 상수 ref에 파이어베이스 주소를 넣음
-    // reference는 데이터베이스의 특정 위치를 나타내고 읽고 쓰게끔 해준다
+    // Firebase Realtime Database 참조 가져오기
     let ref = Database.database().reference()
     
-    var labelValue: [String] = []
+    var dataArray = [Any]()
     
-    lazy var notice = [labelValue]
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notice.count
+    func fetchData() {
+        ref.child("announcement").observeSingleEvent(of: .value, with: { snapshot in
+            if let value = snapshot.value as? [Any] {
+                // 키 밑의 값을 가져와 배열에 추가
+                for data in value {
+                    if let data = data as? String {
+                        self.dataArray.append(data)
+                    }
+                }
+                
+                // 가져온 값 출력
+//                print(dataArray)
+                
+                // 테이블 뷰 업데이트
+                DispatchQueue.main.async {
+                    self.anTable.reloadData()
+                }
+            }
+        }) { error in
+            print(error.localizedDescription)
+        }
     }
-    
+
+    // 테이블 뷰 업데이트
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray.count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = notice[indexPath.row].joined(separator: ",")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = "\(dataArray[indexPath.row])"
         
         // 셀 선택시 색변경 없앰
         cell.selectionStyle = .none
         
         return cell
     }
-    
-    func updateLabel() {
-        ref.child("announcement").observe(.value, with: { snapshot  in
-            if let labelValue = snapshot.value as? [String: Any] {
-                //self.data = labelValue
-                let key1Value = labelValue["1"] as? String
-                let key2Value = labelValue["2"] as? String
-                
-            }
-        }) { error in
-            print(error.localizedDescription)
-        }
-    }
-                                                     
 
     
     
@@ -54,7 +62,8 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateLabel()
+        // fetchData() 함수 호출
+        fetchData()
         anTable.dataSource = self
         anTable.delegate = self
     }
