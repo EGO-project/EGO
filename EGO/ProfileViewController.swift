@@ -8,11 +8,22 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    // 이전 MoreViewController에서 text 값을 받아오기 위한 변수
+    var pNameLbl: String?
+    var pCodeLbl: String?
 
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var codeLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+    // MoreViewController에서 가져온 값을 각 Label에 적용
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nameLbl.text = self.pNameLbl
+        codeLbl.text = self.pCodeLbl
     }
 }
 

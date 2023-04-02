@@ -30,6 +30,7 @@
 		FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38329A23492008B88A2 /* MoreViewController.swift */; };
 		FE90C38A29A23A01008B88A2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38929A23A01008B88A2 /* ProfileViewController.swift */; };
 		FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */; };
+		FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA4F32029D98DEF00C6647A /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		FE90C38329A23492008B88A2 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		FE90C38929A23A01008B88A2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		FEA4F32029D98DEF00C6647A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
 				FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
+				FEA4F32029D98DEF00C6647A /* SettingViewController.swift */,
 				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
 				FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */,
@@ -477,6 +480,7 @@
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
+				FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,8 +44,10 @@ class MoreViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextViewController: ProfileViewController = segue.destination as? ProfileViewController else {return}
+        nextViewController.pNameLbl = profileName?.text
+        nextViewController.pCodeLbl = profileId?.text
+    }
 }
-// 파이어 베이스에서 이미지 이름 받아오기
-// Id  값 난수 정해서 넣기 (#1234)
-// 프로필 데이터 베이스에서 받아서 표시
-// 로그아웃 기능 구현
