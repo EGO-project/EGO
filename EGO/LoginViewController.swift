@@ -15,33 +15,45 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var btnGoogleLogin: GIDSignInButton!
+    @IBOutlet weak var btnGoogleLogin: UIButton!
     @IBOutlet weak var btnAppleLogin: UIButton!
     @IBOutlet weak var btnKakaoLogin: UIButton!
     @IBOutlet weak var btnRegister: UIButton!
+    
+    @IBOutlet weak var lblLogin: UILabel!
+    @IBOutlet weak var bgLoginBox: UIView!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnKakaoLogin.setTitle("", for: .normal)
         btnAppleLogin.setTitle("", for: .normal)
-        //btnGoogleLogin.setTitle("", for: .normal)
+        btnGoogleLogin.setTitle("", for: .normal)
+        
+        lblLogin.text = "로그인"
+        lblLogin.font = UIFont(name: "Noto Sans Regular", size: 20)
+        bgLoginBox.layer.cornerRadius = 10
+        
+        self.view.backgroundColor = UIColor.white
         
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if Auth.auth().currentUser?.uid != nil {
-            print("auto login success")
-            let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-            VC.modalPresentationStyle = .fullScreen
-            self.present(VC, animated: true,completion: nil)
-        } else {
-            print("auto login failed")
-        }
-    }
+    //auto login
+//    override func viewDidAppear(_ animated: Bool) {
+//        if Auth.auth().currentUser?.uid != nil {
+//            print("auto login success")
+//            let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
+//            VC.modalPresentationStyle = .fullScreen
+//            self.present(VC, animated: true,completion: nil)
+//        } else {
+//            print("auto login failed")
+//        }
+//    }
     
-    @IBAction func googleSignIn(sender: GIDSignInButton) {
+    //Google login
+    @IBAction func googleSignIn(sender: UIButton) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
         // Create Google Sign In configuration object.
@@ -69,21 +81,22 @@ class LoginViewController: UIViewController {
                         Auth.auth().signIn(with: credential) { result, error in
                             // At this point, our user is signed in
                         }
-                        print("good login")
-                        let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-                        VC.modalPresentationStyle = .fullScreen
-                        self.present(VC, animated: true, completion: nil)
+                        print("google login")
+                        let VC = self.storyboard?.instantiateViewController(identifier: "MainTabBar")
+                        VC?.modalPresentationStyle = .fullScreen
+                        self.present(VC!, animated: true, completion: nil)
                     }
                 } else {
-                    print("good login")
-                    let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-                    VC.modalPresentationStyle = .fullScreen
-                    self.present(VC, animated: true, completion: nil)
+                    print("google login")
+                    let VC = self.storyboard?.instantiateViewController(identifier: "MainTabBar")
+                    VC?.modalPresentationStyle = .fullScreen
+                    self.present(VC!, animated: true, completion: nil)
                 }
             }
         }
     }
     
+    //Kakao login
     @IBAction func kakaoLogin(_ sender: UIButton) {
         if AuthApi.hasToken() {
             UserApi.shared.accessTokenInfo { _, error in
@@ -124,10 +137,10 @@ class LoginViewController: UIViewController {
                         }
                     }
                 } else {
-                    print("good login")
-                    let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-                    VC.modalPresentationStyle = .fullScreen
-                    self.present(VC, animated: true, completion: nil)
+                    print("kakao login")
+                    let VC = self.storyboard?.instantiateViewController(identifier: "MainTabBar")
+                    VC?.modalPresentationStyle = .fullScreen
+                    self.present(VC!, animated: true, completion: nil)
                 }
             }
         } else {
@@ -159,15 +172,28 @@ class LoginViewController: UIViewController {
                             }
                         }
                         
-                        let VC = self.storyboard?.instantiateViewController(identifier: "MainVC") as! MainViewController
-                        VC.modalPresentationStyle = .fullScreen
-                        self.present(VC, animated: true, completion: nil)
+                        let VC = self.storyboard?.instantiateViewController(identifier: "MainTabBar")
+                        VC?.modalPresentationStyle = .fullScreen
+                        self.present(VC!, animated: true, completion: nil)
                     }
                 }
             }
         }
     }
+    
+    func moveToMainTabBarController(){
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
+        mainTabBarVC.modalPresentationStyle = .fullScreen
+        self.present(mainTabBarVC, animated: false, completion: nil)
+//        self.performSegue(withIdentifier: "MainTabBar", sender: self)
+        
+        
+    }
 }
+
+
 
 /*
  // MARK: - Navigation
