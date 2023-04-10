@@ -18,8 +18,33 @@ var friendsubEgg2: [String] = []
 var friendsubEgg3: [String] = []
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    // 파이어베이스 이용
+    var ref : DatabaseReference! // ref에 파베주소 넣음
+    @IBOutlet weak var firebaseLbl: UILabel! // 가져온 값 확인 레이블
+    @IBAction func firebaseBtn(_ sender: UIButton) { // 값 보내기, 가져오기 버튼
+        self.ref = Database.database().reference()
+        
+        // 파이어베이스에 값 넣기
+        let myNameRef = self.ref.child("myName")
+        let myCodeRef = self.ref.child("myCode")
+        myNameRef.setValue(self.myTopName.text)
+        myCodeRef.setValue(self.myTopCode.text)
+
+        // 파이어베이스 값 가져오기
+        ref.child("myName").observeSingleEvent(of: .value) { snapshot in
+            print("\(snapshot)")
+            let value = snapshot.value as? String ?? ""
+            DispatchQueue.main.async {
+                self.firebaseLbl.text = value
+            }
+        }
+        
+    }
     
     @IBOutlet weak var socialTable: UITableView!
     
@@ -27,7 +52,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var myTopName: UILabel!
     @IBOutlet weak var myTopCode: UILabel!
     
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         socialTable.delegate = self
@@ -37,6 +62,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTopName.text = "\(myName[0])"
         myTopCode.text = "\(myCode[0])"
     }
+    
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

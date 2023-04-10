@@ -10,6 +10,7 @@ import KakaoSDKCommon
 import KakaoSDKAuth
 import GoogleSignIn
 import FirebaseCore
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KakaoSDK.initSDK(appKey: "bbfabe81f9909eed954b792cadb0db1d")
         
         //파이어베이스 연결
-        FirebaseApp.configure()
+        FirebaseApp.configure()        
         return true
     }
 
@@ -50,6 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
       }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
       // Handle other custom URL types.
 
       // If not handled by this app, return false.

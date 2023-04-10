@@ -13,6 +13,9 @@ PODS:
     - FirebaseAnalytics (~> 10.4.0)
   - Firebase/CoreOnly (10.4.0):
     - FirebaseCore (= 10.4.0)
+  - Firebase/Database (10.4.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 10.4.0)
   - FirebaseAnalytics (10.4.0):
     - FirebaseAnalytics/AdIdSupport (= 10.4.0)
     - FirebaseCore (~> 10.0)
@@ -37,6 +40,9 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreInternal (10.4.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseDatabase (10.4.0):
+    - FirebaseCore (~> 10.0)
+    - leveldb-library (~> 1.22)
   - FirebaseInstallations (10.4.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -100,6 +106,7 @@ PODS:
     - KakaoSDKCommon/Common (= 2.14.0)
   - KakaoSDKUser (2.14.0):
     - KakaoSDKAuth (= 2.14.0)
+  - leveldb-library (1.22.1)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -109,6 +116,8 @@ PODS:
 
 DEPENDENCIES:
   - Firebase
+  - Firebase/Core
+  - Firebase/Database
   - GoogleSignIn
   - KakaoSDKAuth
   - KakaoSDKCommon
@@ -122,6 +131,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreInternal
+    - FirebaseDatabase
     - FirebaseInstallations
     - GoogleAppMeasurement
     - GoogleSignIn
@@ -131,6 +141,7 @@ SPEC REPOS:
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
+    - leveldb-library
     - nanopb
     - PromisesObjC
 
@@ -141,6 +152,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 0be84b933ca3222bca03e8cccf020ad9b1c3c6ff
   FirebaseCore: b8697a177690b69b0dbce9d612b69b893be70469
   FirebaseCoreInternal: e301297f4c15a17489e48ed722d733b1578e0c02
+  FirebaseDatabase: 91f6f2ecb55fa5dff37cc3f2aae9ed6d6bf05266
   FirebaseInstallations: 36b38c733fd37e50857e5e8d74138648f466f18c
   GoogleAppMeasurement: 173fa22ce7d62c29332568e853b39b2525a0e584
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
@@ -150,9 +162,10 @@ SPEC CHECKSUMS:
   KakaoSDKAuth: 8fca87815de22062a23297983f327613b087b8bb
   KakaoSDKCommon: 0ce638f7a2e49704943c0b74a087a9f8067bba1c
   KakaoSDKUser: 2ca18314ce72e6690f76cb1f6f9fbc771d31a803
+  leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: 0a0892a42445cad201d248f91fc842f59931813c
+PODFILE CHECKSUM: 46e4b9451fcd36545f43fb5f777a07de037accec
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0
