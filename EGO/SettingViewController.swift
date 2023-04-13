@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications // 알람 객체를 사용하기  프레임워크 임포트
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var alarmSwitch: UISwitch!
@@ -13,25 +14,45 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var lavel: UILabel!
     
     @IBAction func switchChange(_ sender: Any) {
-        if self.alarmSwitch.isOn { return } // 1
-             
-             self.alarmSwitch.setOn(true, animated: true) // 2
-             let alert = UIAlertController(title: "해당 기능을 끄시겠습니까?", message: "지정하신 알람도 꺼지게 됩니다.", preferredStyle: .alert)
-          
-             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                 // self.mySwitch.setOn(true, animated: true) // 3
-             }))
-             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                 self.alarmSwitch.setOn(false, animated: true) // 4
-             }))
-          
-             self.present(alert, animated: true, completion: nil)
+        if alarmSwitch.isOn {
+        } else {
+        }
     }
+    
+    @IBAction func reservePushClick(_ sender: UIButton) {
+         
+                sendNotification(duration: 6) //6초 후 push 실행
+        }
+         @IBAction func removePushClick(_ sender: UIButton) {
+         
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer notification"])
+        }
+        
+        
+        func sendNotification(duration: Int) {
+            let content = UNMutableNotificationContent()
+            content.title = "title"
+            content.subtitle = "subtitle"
+            content.body = "body"
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(duration), repeats: false)
+            let request = UNNotificationRequest(identifier: "timer notification", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+    }
+
+    extension SettingViewController: UNUserNotificationCenterDelegate {
+        func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.alert, .sound])
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alarmSwitch.setOn(true, animated: true)
+        
+        UNUserNotificationCenter.current().delegate = self
+                UNUserNotificationCenter.current().requestAuthorization(options:  [.alert, .sound], completionHandler: {
+                    didAllow, Error in})
         // Do any additional setup after loading the view.
     }
-
+    
 }

@@ -81,6 +81,7 @@
 		90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
+		FE80442629DAE69000D1C9A5 /* EGO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EGO.entitlements; sourceTree = "<group>"; };
 		FE90C38329A23492008B88A2 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		FE90C38929A23A01008B88A2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		4E64E0992980DE0400124F56 /* EGO */ = {
 			isa = PBXGroup;
 			children = (
+				FE80442629DAE69000D1C9A5 /* EGO.entitlements */,
 				4ECA05F229A4A73000515698 /* Fonts */,
 				4E64E09A2980DE0400124F56 /* AppDelegate.swift */,
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
@@ -656,6 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EGO/EGO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XN8YRXHNP7;
@@ -690,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EGO/EGO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XN8YRXHNP7;
