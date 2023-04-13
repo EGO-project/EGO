@@ -29,21 +29,31 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func firebaseBtn(_ sender: UIButton) { // 값 보내기, 가져오기 버튼
         self.ref = Database.database().reference()
         
-        // 파이어베이스에 값 넣기
-        let myNameRef = self.ref.child("myName")
-        let myCodeRef = self.ref.child("myCode")
-        myNameRef.setValue(self.myTopName.text)
-        myCodeRef.setValue(self.myTopCode.text)
+//.       // 파이어베이스에 값 넣기
+//        let myNameRef = self.ref.child("myName")
+//        let myCodeRef = self.ref.child("myCode")
+//        myNameRef.setValue(self.myTopName.text)
+//        myCodeRef.setValue(self.myTopCode.text)
+                
+//        // 키 값 설정
+//        let announcement1 = self.ref.child("announcement").child("5").child("title")
+//        let announcement2 = self.ref.child("announcement").child("5").child("description")
+//
+//        // 밸류 설정
+//        announcement1.setValue("제목")
+//        announcement2.setValue("내용")
+        
+        // 38 ~ 44 한 줄 로
+        self.ref.child("announcement/7").updateChildValues(["title": "제목7", "description": "내용7"])
 
         // 파이어베이스 값 가져오기
-        ref.child("myName").observeSingleEvent(of: .value) { snapshot in
+        ref.child("announcement").child("7").child("title").observeSingleEvent(of: .value) { snapshot in
             print("\(snapshot)")
             let value = snapshot.value as? String ?? ""
             DispatchQueue.main.async {
                 self.firebaseLbl.text = value
             }
         }
-        
     }
     
     @IBOutlet weak var socialTable: UITableView!
@@ -122,5 +132,4 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             detailView.receiveImage(friendsEgg[(indexPath?.row)!])
         }
     }
-    
 }
