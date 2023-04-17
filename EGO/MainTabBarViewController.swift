@@ -8,7 +8,7 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
-
+    
     // Swipe Gesture Recognizer!!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,11 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
- 
+        
         // Do any additional setup after loading the view.
     }
- 
- 
+    
+    
     @objc func handleSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
         
         if gesture.direction == .left {
@@ -50,12 +50,12 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     func animateToTab(toIndex: Int) {
         guard let tabViewControllers = viewControllers,
-            let selectedVC = selectedViewController else { return }
+              let selectedVC = selectedViewController else { return }
         
         guard let fromView = selectedVC.view,
-            let toView = tabViewControllers[toIndex].view,
-            let fromIndex = tabViewControllers.firstIndex(of: selectedVC),
-            fromIndex != toIndex else { return }
+              let toView = tabViewControllers[toIndex].view,
+              let fromIndex = tabViewControllers.firstIndex(of: selectedVC),
+              fromIndex != toIndex else { return }
         
         
         // Add the toView to the tab bar view
@@ -70,16 +70,10 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         // Disable interaction during animation
         view.isUserInteractionEnabled = false
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 0.0,
-                       usingSpringWithDamping: 1,
-                       initialSpringVelocity: 0,
-                       options: .curveEaseOut,
-                       animations: {
-                        // Slide the views by -offset
-                        fromView.center = CGPoint(x: fromView.center.x - offset, y: fromView.center.y)
-                        toView.center = CGPoint(x: toView.center.x - offset, y: toView.center.y)
-                        
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            // Slide the views by -offset
+            fromView.center = CGPoint(x: fromView.center.x - offset, y: fromView.center.y)
+            toView.center = CGPoint(x: toView.center.x - offset, y: toView.center.y)
         }, completion: { finished in
             // Remove the old view from the tabbar view.
             fromView.removeFromSuperview()
@@ -88,16 +82,16 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         })
     }
 }
+
+
+/*
+ // MARK: - Navigation
  
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
