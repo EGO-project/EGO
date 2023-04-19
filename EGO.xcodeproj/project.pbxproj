@@ -26,6 +26,10 @@
 		4ECA05F429A4A75500515698 /* Noto_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 4ECA05F329A4A75500515698 /* Noto_Sans */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
 		BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */; };
+		CC4803E629DAF2FF006037A9 /* egg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4803E529DAF2FF006037A9 /* egg.swift */; };
+		CC838FA529D2FEED0007E91B /* diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FA429D2FEED0007E91B /* diary.swift */; };
+		CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FA829D304040007E91B /* diaryListTableViewCell.swift */; };
+		CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FAA29D319C30007E91B /* detailViewController.swift */; };
 		CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */; };
 		CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */; };
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
@@ -84,6 +88,10 @@
 		795F58B55B98937046906613 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CC4803E529DAF2FF006037A9 /* egg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = egg.swift; sourceTree = "<group>"; };
+		CC838FA429D2FEED0007E91B /* diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diary.swift; sourceTree = "<group>"; };
+		CC838FA829D304040007E91B /* diaryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaryListTableViewCell.swift; sourceTree = "<group>"; };
+		CC838FAA29D319C30007E91B /* detailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailViewController.swift; sourceTree = "<group>"; };
 		CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_1ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_2ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
@@ -165,11 +173,14 @@
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
+				CC838FAA29D319C30007E91B /* detailViewController.swift */,
+				CC838FA829D304040007E91B /* diaryListTableViewCell.swift */,
 				CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */,
 				CCC30CD129C9D055008A9466 /* mothlyViewController.swift */,
 				CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */,
-				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
+				CC838FA429D2FEED0007E91B /* diary.swift */,
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
+				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
 				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
@@ -177,6 +188,7 @@
 				FE90C38929A23A01008B88A2 /* ProfileViewController.swift */,
 				FE90C38329A23492008B88A2 /* MoreViewController.swift */,
 				FE90C38529A236D2008B88A2 /* ProfileCustomCell.swift */,
+				CC4803E529DAF2FF006037A9 /* egg.swift */,
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
 				4E64E0A82980DE0500124F56 /* Info.plist */,
@@ -482,12 +494,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */,
+				CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */,
 				4E659D3D29A3726200C7A917 /* LoginViewController.swift in Sources */,
+				CC4803E629DAF2FF006037A9 /* egg.swift in Sources */,
 				FE90C38A29A23A01008B88A2 /* ProfileViewController.swift in Sources */,
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
 				CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
+				CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */,
 				CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */,
 				4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */,
 				CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */,
@@ -497,6 +512,7 @@
 				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
 				FE90C38629A236D2008B88A2 /* ProfileCustomCell.swift in Sources */,
+				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN8YRXHNP7;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -708,7 +724,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN8YRXHNP7;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";

@@ -9,12 +9,43 @@ import UIKit
 
 class eggAddViewController: UIViewController {
 
-    @IBAction func backBut(_ sender: UIBarButtonItem) {
+    @IBAction func backBut(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
+    @IBAction func saveBut(_ sender: Any) {
+       // let newEgg = egg(name: eggName.text, type: )
+        
+    }
+    
+    @IBOutlet weak var eggName: UITextField!
+    
+    @IBOutlet weak var eggImg: UIImageView!
+    
+    
+    @IBAction func but1(_ sender: Any) {
+        eggImg.image = UIImage(named:  "egg_다람쥐.png")
+
+    }
+    
+    @IBAction func but2(_ sender: Any) {
+        eggImg.image = UIImage(named:  "egg_사자.png")
+    }
+    
+    @IBAction func but3(_ sender: Any) {
+        eggImg.image = UIImage(named:  "egg_수달.png")
+    }
+    
+    @IBAction func but4(_ sender: Any) {
+        eggImg.image = UIImage(named:  "egg_코알라.png")
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
     }
     

@@ -14,6 +14,7 @@ class mothlyAdd_1ViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var dateLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
