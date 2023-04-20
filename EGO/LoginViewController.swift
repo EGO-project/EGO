@@ -62,7 +62,6 @@ class LoginViewController: UIViewController {
     //Auto login
     func autoLogin(){
         if Auth.auth().currentUser != nil {
-            print("\(Auth.auth().currentUser) != nil")
             // 사용자가 로그인한 상태
             // 메인 화면으로 이동
             self.moveToMainTabBarController()
