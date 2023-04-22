@@ -10,6 +10,22 @@
 				<string>kr.ac.induk.EGO</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.826949985719-2jqc869jb714tetpdgevuj5pir7r86fr</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakaobbfabe81f9909eed954b792cadb0db1d</string>
+			</array>
+		</dict>
 	</array>
 	<key>GIDSignInClientID</key>
 	<string>826949985719-2jqc869jb714tetpdgevuj5pir7r86fr.apps.googleusercontent.com</string>
