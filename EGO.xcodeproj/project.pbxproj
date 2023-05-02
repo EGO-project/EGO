@@ -38,10 +38,12 @@
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
 		CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD129C9D055008A9466 /* mothlyViewController.swift */; };
 		CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */; };
+		FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */; };
+		FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */; };
 		FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38329A23492008B88A2 /* MoreViewController.swift */; };
-		FE90C38629A236D2008B88A2 /* ProfileCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38529A236D2008B88A2 /* ProfileCustomCell.swift */; };
 		FE90C38A29A23A01008B88A2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38929A23A01008B88A2 /* ProfileViewController.swift */; };
 		FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */; };
+		FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA4F32029D98DEF00C6647A /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,10 +105,13 @@
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
 		CCC30CD129C9D055008A9466 /* mothlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyViewController.swift; sourceTree = "<group>"; };
 		CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
+		FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
+		FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLblViewController.swift; sourceTree = "<group>"; };
+		FE80442629DAE69000D1C9A5 /* EGO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EGO.entitlements; sourceTree = "<group>"; };
 		FE90C38329A23492008B88A2 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
-		FE90C38529A236D2008B88A2 /* ProfileCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomCell.swift; sourceTree = "<group>"; };
 		FE90C38929A23A01008B88A2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		FEA4F32029D98DEF00C6647A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +179,7 @@
 		4E64E0992980DE0400124F56 /* EGO */ = {
 			isa = PBXGroup;
 			children = (
+				FE80442629DAE69000D1C9A5 /* EGO.entitlements */,
 				4ECA05F229A4A73000515698 /* Fonts */,
 				4E64E09A2980DE0400124F56 /* AppDelegate.swift */,
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
@@ -188,13 +194,15 @@
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
 				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
 				4E646E2A29C2D45B00E68840 /* MainViewController.swift */,
+				FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */,
+				FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
+				FEA4F32029D98DEF00C6647A /* SettingViewController.swift */,
 				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
 				FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */,
 				FE90C38929A23A01008B88A2 /* ProfileViewController.swift */,
 				FE90C38329A23492008B88A2 /* MoreViewController.swift */,
-				FE90C38529A236D2008B88A2 /* ProfileCustomCell.swift */,
 				CC4803E529DAF2FF006037A9 /* egg.swift */,
 				4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */,
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
@@ -511,6 +519,7 @@
 				CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */,
 				4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
+				FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
 				CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */,
 				CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */,
@@ -523,9 +532,10 @@
 				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
+				FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
-				FE90C38629A236D2008B88A2 /* ProfileCustomCell.swift in Sources */,
 				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,
+				FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +711,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EGO/EGO.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XN8YRXHNP7;
@@ -720,6 +732,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.ac.induk.EGO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -735,6 +748,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EGO/EGO.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XN8YRXHNP7;
@@ -754,6 +769,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.ac.induk.EGO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

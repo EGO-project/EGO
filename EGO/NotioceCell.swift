@@ -1,17 +1,14 @@
 //
-//  ProfileCustomCell.swift
+//  NotioceCell.swift
 //  EGO
 //
-//  Created by 박기태 on 2023/02/19.
+//  Created by 박기태 on 2023/03/25.
 //
 
 import UIKit
 
-class ProfileCustomCell: UITableViewCell {
-    @IBOutlet weak var profileImg: UIImageView!
-    @IBOutlet weak var profileName: UIView!
-    @IBOutlet weak var profileId: UILabel!
-    
+class NotioceCell: UITableViewCell {
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

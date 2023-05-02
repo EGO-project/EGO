@@ -154,7 +154,11 @@ GitHub Actions will verify that any code changes are done in a style compliant
 way. Install `clang-format` and `mint`:
 
 ```console
+<<<<<<< HEAD
 brew install clang-format@16
+=======
+brew install clang-format@15
+>>>>>>> kitae
 brew install mint
 ```
 

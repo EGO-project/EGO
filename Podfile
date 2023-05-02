@@ -8,6 +8,7 @@ target 'EGO' do
   #DB
   pod 'Firebase'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
   pod 'Firebase/Database'
 
   #Kakao
