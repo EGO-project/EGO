@@ -11,7 +11,9 @@
 		4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063EE299B876700F8F3B8 /* SocialViewController.swift */; };
 		4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */; };
 		4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */; };
+		4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */; };
 		4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C328029B8447400E176B5 /* GoogleService-Info.plist */; };
+		4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E646E2A29C2D45B00E68840 /* MainViewController.swift */; };
 		4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09A2980DE0400124F56 /* AppDelegate.swift */; };
 		4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09C2980DE0400124F56 /* SceneDelegate.swift */; };
 		4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09E2980DE0400124F56 /* ViewController.swift */; };
@@ -23,6 +25,7 @@
 		4E64E0BE2980DE0500124F56 /* EGOUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */; };
 		4E659D3D29A3726200C7A917 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E659D3C29A3726200C7A917 /* LoginViewController.swift */; };
 		4E659D3F29A3773300C7A917 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E659D3E29A3773300C7A917 /* LocalAuthentication.framework */; };
+		4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */; };
 		4ECA05F429A4A75500515698 /* Noto_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 4ECA05F329A4A75500515698 /* Noto_Sans */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
 		BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */; };
@@ -66,7 +69,9 @@
 		4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
 		4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4E5C328029B8447400E176B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4E646E2A29C2D45B00E68840 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4E64E0972980DE0400124F56 /* EGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E64E09A2980DE0400124F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E64E09C2980DE0400124F56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4E659D3C29A3726200C7A917 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4E659D3E29A3773300C7A917 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		4ECA05F329A4A75500515698 /* Noto_Sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Noto_Sans; sourceTree = "<group>"; };
 		7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
 		78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.release.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 				CC838FA429D2FEED0007E91B /* diary.swift */,
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
 				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
+				4E646E2A29C2D45B00E68840 /* MainViewController.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
 				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
@@ -189,6 +196,7 @@
 				FE90C38329A23492008B88A2 /* MoreViewController.swift */,
 				FE90C38529A236D2008B88A2 /* ProfileCustomCell.swift */,
 				CC4803E529DAF2FF006037A9 /* egg.swift */,
+				4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */,
 				4E64E0A32980DE0500124F56 /* Assets.xcassets */,
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
 				4E64E0A82980DE0500124F56 /* Info.plist */,
@@ -196,6 +204,7 @@
 				4E659D3C29A3726200C7A917 /* LoginViewController.swift */,
 				4ECA05F529B81DE100515698 /* Model */,
 				4ECA05F629B81DE800515698 /* ViewModel */,
+				4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */,
 			);
 			path = EGO;
 			sourceTree = "<group>";
@@ -500,6 +509,7 @@
 				FE90C38A29A23A01008B88A2 /* ProfileViewController.swift in Sources */,
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
 				CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */,
+				4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
 				CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */,
@@ -508,6 +518,9 @@
 				CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */,
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */,
+				4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */,
+				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
+				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
@@ -690,7 +703,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XN8YRXHNP7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -724,7 +737,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = XN8YRXHNP7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
