@@ -128,6 +128,7 @@ PODS:
 DEPENDENCIES:
   - Firebase
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
   - FSCalendar
   - GoogleSignIn
@@ -184,6 +185,6 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
 
-PODFILE CHECKSUM: d920fcb2faafa0d214356be72d75daddab7b96d7
+PODFILE CHECKSUM: 00022744400f05428d2acdd45ae89b60ed6fa273
 
 COCOAPODS: 1.12.1

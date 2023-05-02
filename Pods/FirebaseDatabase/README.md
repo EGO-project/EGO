@@ -155,10 +155,14 @@ way. Install `clang-format` and `mint`:
 
 ```console
 <<<<<<< HEAD
+<<<<<<< HEAD
 brew install clang-format@16
 =======
 brew install clang-format@15
 >>>>>>> kitae
+=======
+brew install clang-format@15
+>>>>>>> ba5bb9801a421819ad8afe5ad0fadceffbba6974
 brew install mint
 ```
 
