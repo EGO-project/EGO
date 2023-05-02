@@ -113,6 +113,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
     //Google login
     @IBAction func googleSignIn(sender: UIButton) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
