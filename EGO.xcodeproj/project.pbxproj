@@ -10,16 +10,12 @@
 		44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */; };
 		4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063EE299B876700F8F3B8 /* SocialViewController.swift */; };
 		4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */; };
-		4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */; };
+		4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */; };
+		4CCD70C12A03EA08007C38A9 /* AddSocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */; };
+		4CCD70C72A0413AD007C38A9 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */; };
 		4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */; };
 		4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C328029B8447400E176B5 /* GoogleService-Info.plist */; };
 		4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E646E2A29C2D45B00E68840 /* MainViewController.swift */; };
-		4C2A01B029E80010007E2CB9 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A01AF29E80010007E2CB9 /* AddFriendsViewController.swift */; };
-		4C2A01B229E8004C007E2CB9 /* AddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A01B129E8004C007E2CB9 /* AddFriendsTableViewCell.swift */; };
-		4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063EE299B876700F8F3B8 /* SocialViewController.swift */; };
-		4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */; };
-		4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */; };
-		4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C328029B8447400E176B5 /* GoogleService-Info.plist */; };
 		4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09A2980DE0400124F56 /* AppDelegate.swift */; };
 		4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09C2980DE0400124F56 /* SceneDelegate.swift */; };
 		4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E09E2980DE0400124F56 /* ViewController.swift */; };
@@ -73,11 +69,11 @@
 		00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO_EGOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
 		3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C2A01AF29E80010007E2CB9 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
-		4C2A01B129E8004C007E2CB9 /* AddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		4C5063EE299B876700F8F3B8 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
-		4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDetailViewController.swift; sourceTree = "<group>"; };
+		4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSocialViewController.swift; sourceTree = "<group>"; };
+		4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSocialTableViewCell.swift; sourceTree = "<group>"; };
+		4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4E5C328029B8447400E176B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -193,6 +189,9 @@
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
+				4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */,
+				4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */,
+				4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */,
 				CC838FAA29D319C30007E91B /* detailViewController.swift */,
 				CC838FA829D304040007E91B /* diaryListTableViewCell.swift */,
 				CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */,
@@ -204,11 +203,8 @@
 				4E646E2A29C2D45B00E68840 /* MainViewController.swift */,
 				FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */,
 				FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */,
-				4C2A01B129E8004C007E2CB9 /* AddFriendsTableViewCell.swift */,
-				4C2A01AF29E80010007E2CB9 /* AddFriendsViewController.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
 				FEA4F32029D98DEF00C6647A /* SettingViewController.swift */,
-				4C5063F2299B93BD00F8F3B8 /* SocialDetailViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
 				FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */,
 				FE90C38929A23A01008B88A2 /* ProfileViewController.swift */,
@@ -522,8 +518,9 @@
 			files = (
 				CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */,
 				CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */,
-				4C2A01B029E80010007E2CB9 /* AddFriendsViewController.swift in Sources */,
 				4E659D3D29A3726200C7A917 /* LoginViewController.swift in Sources */,
+				4CCD70C12A03EA08007C38A9 /* AddSocialTableViewCell.swift in Sources */,
+				4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */,
 				CC4803E629DAF2FF006037A9 /* egg.swift in Sources */,
 				FE90C38A29A23A01008B88A2 /* ProfileViewController.swift in Sources */,
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
@@ -542,9 +539,8 @@
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
-				4C2A01B229E8004C007E2CB9 /* AddFriendsTableViewCell.swift in Sources */,
-				4C5063F3299B93BD00F8F3B8 /* SocialDetailViewController.swift in Sources */,
 				FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */,
+				4CCD70C72A0413AD007C38A9 /* FriendViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
 				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,
 				FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */,
@@ -727,7 +723,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN8YRXHNP7;
+				DEVELOPMENT_TEAM = Z9S6MZGC9J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -736,6 +732,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -764,7 +761,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN8YRXHNP7;
+				DEVELOPMENT_TEAM = Z9S6MZGC9J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -773,6 +770,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
