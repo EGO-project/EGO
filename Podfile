@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '14.0'
 
 target 'EGO' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -16,6 +16,9 @@ target 'EGO' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
+
+  pod 'KakaoSDKShare'    # 메시지(카카오링크)
+  pod 'KakaoSDKTemplate' # 메시지 템플릿
 
 
   # Pods for FSCalendar_Tuto

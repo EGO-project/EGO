@@ -6,13 +6,20 @@
 //
 
 import UIKit
-
+import KakaoSDKShare
+import KakaoSDKTemplate
+import KakaoSDKCommon
+import SafariServices
 
 class AddSocialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var newFriendsTable: UITableView!
     
     @IBOutlet weak var searchCode: UISearchBar!
+
+    // 카톡 공유 버튼
+    let templateId = 93508
+    let templateArgs = ["frCode": "123456"]
 
        
     override func viewDidLoad() {
@@ -32,7 +39,7 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 내 친구코드 복사 버튼
     @IBAction func linkBtn(_ sender: Any) {
-        UIPasteboard.general.string = "친구코드 : 77777777"
+        UIPasteboard.general.string = "친구코드 : 000000"
         guard let code = UIPasteboard.general.string else {
             return print("값 없음")
         }
@@ -46,7 +53,22 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 카카오톡 공유버튼
     @IBAction func kakaoBtn(_ sender: Any) {
-        
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            // 카카오톡으로 카카오톡 공유 가능
+            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs: templateArgs) {(sharingResult, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("shareCustom() success.")
+                    if let sharingResult = sharingResult {
+                        // 카카오톡 오픈
+                        UIPasteboard.general.string = "친구코드 : 123456"
+                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        }
     }
     
     
