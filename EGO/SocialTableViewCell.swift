@@ -24,9 +24,6 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
         super.layoutSubviews()
             // Cell 간격 조정
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
-        contentView
         contentView.layer.cornerRadius = 10
-
-        
       }      
 }

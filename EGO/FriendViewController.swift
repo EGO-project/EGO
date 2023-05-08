@@ -20,6 +20,8 @@ class FriendViewController: UIViewController {
     }
     
 
+    
+    
     /*
     // MARK: - Navigation
 

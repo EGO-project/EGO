@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -432,11 +432,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" text="" placeholder="EGO 코드로 검색" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hn-HP-P0q">
-                                <rect key="frame" x="20" y="110" width="374" height="44"/>
+                                <rect key="frame" x="20" y="98" width="374" height="56"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.39803602220000001" green="0.40128268350000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="Hpa-jp-2se" id="PMS-D0-P8K"/>
                                 </connections>
@@ -527,6 +531,7 @@
                     <navigationItem key="navigationItem" id="eSo-yo-OeG"/>
                     <connections>
                         <outlet property="newFriendsTable" destination="VYX-Ra-LVT" id="1kY-M4-IdS"/>
+                        <outlet property="searchCode" destination="2Hn-HP-P0q" id="AOa-sY-YM6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqB-5h-jZm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
