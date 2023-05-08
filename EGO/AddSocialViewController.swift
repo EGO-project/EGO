@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import kakaos
 
 
 class AddSocialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {

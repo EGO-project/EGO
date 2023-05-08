@@ -12,11 +12,11 @@ target 'EGO' do
   pod 'Firebase/Database'
 
   #Kakao
+
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
-  pod 'KakaoSDKLink' 
-  pod 'KakaoSDKTemplate' 
+
 
   # Pods for FSCalendar_Tuto
   pod 'FSCalendar'
