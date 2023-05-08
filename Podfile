@@ -15,6 +15,8 @@ target 'EGO' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
+  pod 'KakaoSDKLink' 
+  pod 'KakaoSDKTemplate' 
 
   # Pods for FSCalendar_Tuto
   pod 'FSCalendar'

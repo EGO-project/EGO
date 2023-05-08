@@ -11,6 +11,9 @@ import FirebaseDatabase
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var nameList: [String] = ["친구1","친구2","친구3","친구4"]
+    var egoList : [String] = ["다람쥐.png", "사자.png", "수달.png", "코알라.png"]
+    
     // 파이어베이스 주소
     let ref = Database.database().reference()
     
@@ -20,8 +23,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var myTopName: UILabel!
     @IBOutlet weak var myTopCode: UILabel!
     
-    var nameList: [String] = ["친구1","친구2","친구3","친구4","친구5","친구6"]
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +42,44 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
-       
+        
         cell.friendsName.text = nameList[indexPath.row]
+        cell.friendsEgo1.image = UIImage(named: egoList[indexPath.row])
+        cell.friendsEgo2.image = UIImage(named: egoList[indexPath.row])
+        cell.friendsEgo3.image = UIImage(named: egoList[indexPath.row])
+        cell.friendsEgo4.image = UIImage(named: egoList[indexPath.row])
+        
         return cell
     }
     
+
+
+    //  segue 연결 후 뷰간 값 전달 하는 법
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // sender가 기존에는 nil이지만, 셀의 ndex의 값을 받아와야 하므로 sender의 값을 indexPath.row로 변경
+        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
+    }
+    
+    // performSegue()가 실행되기 전에 수행되는 함수, 실질적으로 다음 뷰로 값을 전달해준다.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" { // segue가 showDetail이면 실행
+            
+            // vc를 FriendViewController로 다운캐스팅하여 프로퍼티에 접근
+            let vc = segue.destination as? FriendViewController
+            if let row = sender as? Int {
+                vc?.name = nameList[row]
+                vc?.ego = egoList[row]
+            }
+        }
+    }
+    
+    
     // 셀 높이 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-          return 130
-      }
-    
-    // 파베에서 내 이름 가져오기
+        return 130
+    }
+        
+        // 파베에서 내 이름 가져오기
     func myNameFB() {
         self.ref.child("member").child("2699328344").child("nickname").observeSingleEvent(of: .value) { snapshot  in
             print("\(snapshot)")
@@ -60,7 +89,10 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
-}
+    
+    
+    
+    }
 
 //    // 파이어베이스 이용
 //    var ref : DatabaseReference! // ref에 파베주소 넣음

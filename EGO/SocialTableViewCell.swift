@@ -14,6 +14,7 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
     @IBOutlet weak var friendsEgo1: UIImageView!
     @IBOutlet weak var friendsEgo2: UIImageView!
     @IBOutlet weak var friendsEgo3: UIImageView!
+    @IBOutlet weak var friendsEgo4: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

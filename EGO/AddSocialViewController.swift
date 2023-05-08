@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import kakaos
+
 
 class AddSocialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
@@ -28,6 +30,27 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         searchCode.placeholder = "EGO 코드로 검색"
         
     }
+    
+    // 내 친구코드 복사 버튼
+    @IBAction func linkBtn(_ sender: Any) {
+        UIPasteboard.general.string = "친구코드 : 77777777"
+        guard let code = UIPasteboard.general.string else {
+            return print("값 없음")
+        }
+        let alert = UIAlertController(title: "친구코드 복사됨", message: "\(code)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            print("수행 할 동작")
+          }
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
+    }
+    
+    // 카카오톡 공유버튼
+    @IBAction func kakaoBtn(_ sender: Any) {
+        
+    }
+    
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
