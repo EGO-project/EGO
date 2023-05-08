@@ -197,6 +197,7 @@ class LoginViewController: UIViewController {
         }
     }
 
+
     func saveUserDataToFirebase(id: String, email: String, nickname: String) {
         let databaseRef = Database.database().reference().child("member").child(id)
         databaseRef.observeSingleEvent(of: .value) { snapshot in
@@ -205,22 +206,51 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            let values = ["email": email, "nickname": nickname]
-            databaseRef.updateChildValues(values) { error, _ in
-                guard error == nil else { return }
-                print("DB : signup success")
+            func generateUniqueFriendCode() {
+                let ranInt = Int.random(in: 00000...99999)
+                let friendCode = String(format: "#%05d", ranInt)
+                
+                let query = Database.database().reference().child("member").queryOrdered(byChild: "nickname").queryEqual(toValue: nickname)
+                query.observeSingleEvent(of: .value) { snapshot in
+                    var isFriendCodeUnique = true
+                    
+                    for childSnapshot in snapshot.children {
+                        if let child = childSnapshot as? DataSnapshot,
+                           let childValue = child.value as? [String: Any],
+                           let childFriendCode = childValue["friendCode"] as? String {
+                            if childFriendCode == friendCode {
+                                isFriendCodeUnique = false
+                                break
+                            }
+                        }
+                    }
+                    
+                    if isFriendCodeUnique {
+                        let values = ["email": email, "nickname": nickname, "friendCode": friendCode]
+                        databaseRef.updateChildValues(values) { error, _ in
+                            guard error == nil else { return }
+                            print("DB : signup success")
+                        }
+                    } else {
+                        generateUniqueFriendCode()
+                    }
+                }
             }
+            
+            generateUniqueFriendCode()
         }
     }
 
+
     
-    
+    //회원가입 화면으로 이동
     @IBAction func register(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC")
         self.present(registerVC, animated: true, completion: nil)
     }
     
+    //메인 화면으로 이동
     func moveToMainTabBarController(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
