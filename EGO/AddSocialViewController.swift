@@ -14,7 +14,10 @@ import SafariServices
 class AddSocialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var newFriendsTable: UITableView!
-       
+    
+    var dataSource: [String] = ["iOS", "iOS 앱", "iOS 앱 개발", "iOS 앱 개발 알아가기", "iOS 앱 개발 알아가기 jake"]
+    var filteredDataSource: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newFriendsTable.dataSource = self
@@ -24,8 +27,8 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 검색창
     func searchCode() {
-        var bounds = UIScreen.main.bounds
-        var width = bounds.size.width //화면 너비
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width //화면 너비
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: width - 28, height: 0))
         searchBar.placeholder = "EGO 코드로 검색"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
