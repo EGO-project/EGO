@@ -31,6 +31,7 @@
 	<string>826949985719-2jqc869jb714tetpdgevuj5pir7r86fr.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>instagram</string>
 		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
 	</array>
