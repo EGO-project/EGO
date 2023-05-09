@@ -3,8 +3,10 @@ import Firebase
 import FirebaseDatabase
 
 class NoticeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    @IBOutlet weak var anTable: UITableView!
     var dataArray: [String] = []
+    var keyArray: [String] = []
     let ref = Database.database().reference()
     
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
             for child in children {
                 if let value = child.childSnapshot(forPath: "title").value as? String {
                     self.dataArray.insert(value, at: 0) // 내림차순
+                    self.keyArray.insert(child.key, at: 0)
                 }
             }
             self.anTable.reloadData()
@@ -44,20 +47,17 @@ class NoticeViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let announcementKey = dataArray[indexPath.row]
-            performSegue(withIdentifier: "showNoticeLbl", sender: announcementKey)
-        }
-
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "showNoticeLbl" {
-                if let noticeLblViewController = segue.destination as? NoticeLblViewController {
-                    noticeLblViewController.announcementKey = sender as? String
-                }
-            }
-        }
-    
-    @IBOutlet weak var anTable: UITableView!
-    
+        // 1. 선택된 셀의 인덱스 경로를 얻는다.
+        let selectedIndexPath = indexPath
+        
+        // 2. 인덱스 경로를 사용하여 dataArray에서 선택된 항목의 값을 가져온다.
+        let announcementKey = keyArray[selectedIndexPath.row]
+        
+        // 3. NoticeLblViewController 인스턴스를 만들고, 이전 뷰 컨트롤러에서 선택된 값을 설정한다.
+        guard let noticeLblViewController = storyboard?.instantiateViewController(withIdentifier: "NoticeLblViewController") as? NoticeLblViewController else { return }
+        noticeLblViewController.announcementKey = announcementKey
+        
+        navigationController?.pushViewController(noticeLblViewController, animated: true)
+    }
 }
