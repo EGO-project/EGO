@@ -10,27 +10,29 @@ import UIKit
 class mothlyListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var diaryListView: UITableView!
+    
+    var diaryItems: [diary] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        diaryListView.dataSource = self
-        diaryListView.delegate = self
+      //  diaryItems.dataSource = self
+       // diaryItems.delegate = self
 
         // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return diary.diaryList.count
+        return diaryItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let diarycell = tableView.dequeueReusableCell(withIdentifier: "diaryCell", for: indexPath) as! diaryListTableViewCell
         
-        let target = diary.diaryList[indexPath.row]
+        let target = diaryItems[indexPath.row]
         
-        diarycell.contentLabel?.text = target.content
+        diarycell.contentLabel?.text = target.description
         diarycell.dateLabel?.text = "\(target.date)"
 
         return diarycell

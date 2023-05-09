@@ -6,11 +6,28 @@
 //
 
 import UIKit
+import Firebase
 
 class MainViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var eggName: UILabel!
+    @IBOutlet weak var eggImg: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let databaseRef = Database.database().reference()
+        let eggRef = databaseRef.child("egg")
+        
+        eggRef.observe(.value) { snapshot in
+            if let value = snapshot.value as? [String: Any],
+               let name = value["name"] as? String {
+                // 가져온 name 값을 UILabel에 설정합니다.
+                self.eggName.text = name
+            }
+        }
 
         // Do any additional setup after loading the view.
     }

@@ -28,7 +28,7 @@ class mothlyAdd_2ViewController: UIViewController {
         let mothlyList = self.storyboard?.instantiateViewController(withIdentifier: "diaryList")
             mothlyList?.modalPresentationStyle = .fullScreen
         
-        let newDiary = diary(content: textView.text)
+        let newDiary = diary(description: textView.text)
         
         if textView.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -43,9 +43,9 @@ class mothlyAdd_2ViewController: UIViewController {
             //확인 버튼 만들기
             let ok = UIAlertAction(title: "확인", style: .default, handler: {
                 action in
-                self.present(mothlyList!, animated: true, completion: nil);
-                diary.diaryList.append(newDiary)
+                newDiary.save(); // 내용 저장
                 
+                self.present(mothlyList!, animated: true, completion: nil)
             })
             
             alert.addAction(ok)
