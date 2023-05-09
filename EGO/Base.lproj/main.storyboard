@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -319,7 +319,7 @@
                                                     <rect key="frame" x="186" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_코알라" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
                                                     <rect key="frame" x="263" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -2067,6 +2067,7 @@
         <image name="egg_다람쥐" width="200" height="200"/>
         <image name="egg_사자" width="200" height="200"/>
         <image name="egg_수달" width="200" height="200"/>
+        <image name="egg_코알라" width="200" height="200"/>
         <image name="egoBI" width="749" height="1564"/>
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>

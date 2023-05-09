@@ -11,8 +11,8 @@ import FirebaseDatabase
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var nameList: [String] = ["친구1","친구2","친구3"]
-    var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png"]
+    var nameList: [String] = ["친구1","친구2","친구3", "친구4"]
+    var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
     
     // 파이어베이스 주소
     let ref = Database.database().reference()
