@@ -12,21 +12,17 @@ class NoticeLblViewController: UIViewController {
     
     let ref = Database.database().reference()
     var announcementKey: String?
-    
-//    override func viewWillAppear(_ animated: Bool) {
-            //super.viewWillAppear(animated)
+
     func fetchData() {
-            if let key = announcementKey {
-                print("23")
-                ref.child("announcement/\(key)").observeSingleEvent(of: .value, with: { snapshot in
-                    if let title = snapshot.childSnapshot(forPath: "description").value as? String {
-                        print(title)
-                        self.notceLbl.text = title
-                    }
-                }) { error in
-                    print(error.localizedDescription)
+        if let key = announcementKey {
+            ref.child("announcement/\(key)").observeSingleEvent(of: .value, with: { snapshot in
+                if let description = snapshot.childSnapshot(forPath: "description").value as? String {
+                    self.notceLbl.text = description
                 }
+            }) { error in
+                print(error.localizedDescription)
             }
         }
+    }
 
     }
