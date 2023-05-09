@@ -8,10 +8,13 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+import KakaoSDKAuth
+import KakaoSDKUser
+
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var nameList: [String] = ["친구1","친구2","친구3", "친구4"]
+    var nameList: [String] = ["친구1", "친구2", "친구3", "친구4"]
     var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
     
     // 파이어베이스 주소
@@ -22,15 +25,14 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var myTopEgg: UIImageView!
     @IBOutlet weak var myTopName: UILabel!
     @IBOutlet weak var myTopCode: UILabel!
-    
-
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         socialTable.delegate = self
         socialTable.dataSource = self
         
-        myNameFB()
+//        myNameFB()
+        nowUser()
     }
     
     
@@ -79,7 +81,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 130
     }
         
-        // 파베에서 내 이름 가져오기
+    //    파베에서 내 친구코드 가져오기
     func myNameFB() {
         self.ref.child("member").child("2699328344").child("nickname").observeSingleEvent(of: .value) { snapshot  in
             print("\(snapshot)")
@@ -90,7 +92,32 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
+    // 현재 사용자 카카오톡 데이터
+    func nowUser() {
+        UserApi.shared.me { user, error in
+            guard error == nil else {
+                print("카카오톡 정보 가져오지 못함")
+                print(error!)
+                return
+            }
+            
+            guard let id = user?.id,
+//                  let email = user?.kakaoAccount?.email,
+                  let nickname = user?.kakaoAccount?.profile?.nickname else {
+                return
+            }
+            // 현재 사용자 이름
+            self.myTopName.text = nickname
+            // 현재 사용자 친구코드
+            self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
+                print("\(snapshot)")
+                let value = snapshot.value as? String ?? ""
+                DispatchQueue.main.async {
+                    self.myTopCode.text = value
+                }
+            }
+        }
+    }
     
     }
 
