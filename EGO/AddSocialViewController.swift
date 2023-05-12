@@ -11,18 +11,29 @@ import KakaoSDKTemplate
 import KakaoSDKCommon
 import SafariServices
 
+import KakaoSDKAuth
+import KakaoSDKUser
+import Firebase
+import FirebaseDatabase
+
 class AddSocialViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
+    let ref = Database.database().reference()
 
     @IBOutlet weak var newFriendsTable: UITableView!
     
     var dataSource: [String] = ["iOS", "iOS 앱", "iOS 앱 개발", "iOS 앱 개발 알아가기", "iOS 앱 개발 알아가기 jake"]
     var filteredDataSource: [String] = []
     
+    // 파베친구코드 저장
+    var myCode: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newFriendsTable.dataSource = self
         newFriendsTable.delegate = self
         searchCode()
+        nowUser()
     }
     
     // 검색창
@@ -34,6 +45,30 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
     }
     
+    // 파이어 베이스에서 친구코드 추출
+    func nowUser() {
+        UserApi.shared.me { user, error in
+            guard error == nil else {
+                print("카카오톡 정보 가져오지 못함")
+                print(error!)
+                return
+            }
+            
+            guard let id = user?.id else {
+                return
+            }
+
+            // 현재 사용자 친구코드
+            self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
+                print("\(snapshot)")
+                let value = snapshot.value as? String ?? ""
+                DispatchQueue.main.async {
+                    self.myCode = value
+                }
+            }
+        }
+    }
+    
     // 친구코드 공유버튼
     @IBAction func linkBtn(_ sender: Any) {
         copyMSG()
@@ -43,7 +78,7 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func kakaoBtn(_ sender: Any) {
         
         let templateId = 93508
-        let templateArgs = ["frCode": "000000"]
+        let templateArgs = ["frCode": "\(String(describing: myCode))"]
         
         if ShareApi.isKakaoTalkSharingAvailable() {
             // 카카오톡으로 카카오톡 공유 가능
@@ -78,6 +113,27 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    // 친구코드 복사 성공메세지
+    func copyMSG() {
+        UIPasteboard.general.string = "친구코드 : \(String(describing: myCode))"
+        guard let mycode = UIPasteboard.general.string else {
+            return print("값 없음")
+        }
+        let alert = UIAlertController(title: "친구코드 복사됨", message: "\(mycode)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            print("수행 할 동작")
+        }
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
+    }
+    
+    // 친구코드 복사 오류메세지
+    func errorMSG(appName: String) {
+        let alert = UIAlertController(title: "\(appName)이 설치되어 있지 않습니다.", message: "\(appName)을 설치하고 다시 시도해주세요.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     // 새로운친구 추천 테이블뷰
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -91,24 +147,4 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    // 친구코드 복사 성공메세지
-    func copyMSG() {
-        UIPasteboard.general.string = "친구코드 : 000000"
-        guard let mycode = UIPasteboard.general.string else {
-            return print("값 없음")
-        }
-        let alert = UIAlertController(title: "친구코드 복사됨", message: "\(mycode)", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-            print("수행 할 동작")
-          }
-        alert.addAction(okAction)
-        present(alert, animated: false, completion: nil)
-    }
-    
-    // 친구코드 복사 오류메세지
-    func errorMSG(appName: String) {
-        let alert = UIAlertController(title: "\(appName)이 설치되어 있지 않습니다.", message: "\(appName)을 설치하고 다시 시도해주세요.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
 }

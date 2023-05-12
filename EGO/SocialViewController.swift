@@ -11,30 +11,32 @@ import FirebaseDatabase
 import KakaoSDKAuth
 import KakaoSDKUser
 
+var nameList: [String] = ["친구1", "친구2", "친구3", "친구4"]
+var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var nameList: [String] = ["친구1", "친구2", "친구3", "친구4"]
-    var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
-    
     // 파이어베이스 주소
     let ref = Database.database().reference()
+    
+    // 카카오톡 로그인시 현재 사용자 정보
+    var kakaoId: Int64?
+    var kakaoName: String?
+    var kakaoEmail: String?
     
     @IBOutlet weak var socialTable: UITableView!
     
     @IBOutlet weak var myTopEgg: UIImageView!
     @IBOutlet weak var myTopName: UILabel!
     @IBOutlet weak var myTopCode: UILabel!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         socialTable.delegate = self
         socialTable.dataSource = self
         
-//        myNameFB()
         nowUser()
     }
-    
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,8 +56,8 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-
-
+    
+    
     //  segue 연결 후 뷰간 값 전달 하는 법
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // sender가 기존에는 nil이지만, 셀의 ndex의 값을 받아와야 하므로 sender의 값을 indexPath.row로 변경
@@ -80,17 +82,17 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
-        
+    
     //    파베에서 내 친구코드 가져오기
-    func myNameFB() {
-        self.ref.child("member").child("2699328344").child("nickname").observeSingleEvent(of: .value) { snapshot  in
-            print("\(snapshot)")
-            let value = snapshot.value as? String ?? ""
-            DispatchQueue.main.async {
-                self.myTopName.text = value
-            }
-        }
-    }
+    //    func myNameFB() {
+    //        self.ref.child("member").child("2699328344").child("nickname").observeSingleEvent(of: .value) { snapshot  in
+    //            print("\(snapshot)")
+    //            let value = snapshot.value as? String ?? ""
+    //            DispatchQueue.main.async {
+    //                self.myTopName.text = value
+    //            }
+    //        }
+    //    }
     
     // 현재 사용자 카카오톡 데이터
     func nowUser() {
@@ -102,12 +104,19 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             guard let id = user?.id,
-//                  let email = user?.kakaoAccount?.email,
+                  let email = user?.kakaoAccount?.email,
                   let nickname = user?.kakaoAccount?.profile?.nickname else {
                 return
             }
+            
             // 현재 사용자 이름
             self.myTopName.text = nickname
+            
+            // 프로퍼티에 저장
+            self.kakaoId = id
+            self.kakaoName = nickname  // nil일 경우 ""로 초기화
+            self.kakaoEmail = email  // nil일 경우 ""로 초기화
+            
             // 현재 사용자 친구코드
             self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
                 print("\(snapshot)")
@@ -119,37 +128,37 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    }
-
-//    // 파이어베이스 이용
-//    var ref : DatabaseReference! // ref에 파베주소 넣음
-//    @IBOutlet weak var firebaseLbl: UILabel! // 가져온 값 확인 레이블
-//    @IBAction func firebaseBtn(_ sender: UIButton) { // 값 보내기, 가져오기 버튼
-//        self.ref = Database.database().reference()
-//
-//       // 파이어베이스에 값 넣기
-//        let myNameRef = self.ref.child("myName")
-//        let myCodeRef = self.ref.child("myCode")
-//        myNameRef.setValue(self.myTopName.text)
-//        myCodeRef.setValue(self.myTopCode.text)
-//
-//        // 키 값 설정
-//        let announcement1 = self.ref.child("announcement").child("5").child("title")
-//        let announcement2 = self.ref.child("announcement").child("5").child("description")
-//
-//        // 밸류 설정
-//        announcement1.setValue("제목")
-//        announcement2.setValue("내용")
-//
-//        // 38 ~ 44 한 줄 로
-//        self.ref.child("announcement/7").updateChildValues(["title": "제목7", "description": "내용7"])
-//
-//        // 파이어베이스 값 가져오기
-//        ref.child("announcement").child("7").child("title").observeSingleEvent(of: .value) { snapshot in
-//            print("\(snapshot)")
-//            let value = snapshot.value as? String ?? ""
-//            DispatchQueue.main.async {
-//                self.firebaseLbl.text = value
-//            }
-//        }
-//    }
+    
+    //    // 파이어베이스 이용
+    //    var ref : DatabaseReference! // ref에 파베주소 넣음
+    //    @IBOutlet weak var firebaseLbl: UILabel! // 가져온 값 확인 레이블
+    //    @IBAction func firebaseBtn(_ sender: UIButton) { // 값 보내기, 가져오기 버튼
+    //        self.ref = Database.database().reference()
+    //
+    //       // 파이어베이스에 값 넣기
+    //        let myNameRef = self.ref.child("myName")
+    //        let myCodeRef = self.ref.child("myCode")
+    //        myNameRef.setValue(self.myTopName.text)
+    //        myCodeRef.setValue(self.myTopCode.text)
+    //
+    //        // 키 값 설정
+    //        let announcement1 = self.ref.child("announcement").child("5").child("title")
+    //        let announcement2 = self.ref.child("announcement").child("5").child("description")
+    //
+    //        // 밸류 설정
+    //        announcement1.setValue("제목")
+    //        announcement2.setValue("내용")
+    //
+    //        // 38 ~ 44 한 줄 로
+    //        self.ref.child("announcement/7").updateChildValues(["title": "제목7", "description": "내용7"])
+    //
+    //        // 파이어베이스 값 가져오기
+    //        ref.child("announcement").child("7").child("title").observeSingleEvent(of: .value) { snapshot in
+    //            print("\(snapshot)")
+    //            let value = snapshot.value as? String ?? ""
+    //            DispatchQueue.main.async {
+    //                self.firebaseLbl.text = value
+    //            }
+    //        }
+    //    }
+}
