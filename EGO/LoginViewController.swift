@@ -19,6 +19,8 @@ import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
+    let LoginManager = FirebaseManager.shared
+    
     @IBOutlet weak var btnGoogleLogin: UIButton!
     @IBOutlet weak var btnAppleLogin: UIButton!
     @IBOutlet weak var btnKakaoLogin: UIButton!
@@ -127,7 +129,7 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(with: credential) { result, error in
                 guard let uid = result?.user.uid else { return }
                 
-                self?.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
+                FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
                 self?.moveToMainTabBarController()
             }
         }
@@ -157,7 +159,7 @@ class LoginViewController: UIViewController {
                 
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
-                self.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
+                FirebaseManager.shared.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
                 self.moveToMainTabBarController()
             }
         }
@@ -197,52 +199,6 @@ class LoginViewController: UIViewController {
         }
     }
 
-
-    func saveUserDataToFirebase(id: String, email: String, nickname: String) {
-        let databaseRef = Database.database().reference().child("member").child(id)
-        databaseRef.observeSingleEvent(of: .value) { snapshot in
-            guard !snapshot.exists() else {
-                print("이미 존재하는 아이디입니다.")
-                return
-            }
-            
-            func generateUniqueFriendCode() {
-                let ranInt = Int.random(in: 00000...99999)
-                let friendCode = String(format: "#%05d", ranInt)
-                
-                let query = Database.database().reference().child("member").queryOrdered(byChild: "nickname").queryEqual(toValue: nickname)
-                query.observeSingleEvent(of: .value) { snapshot in
-                    var isFriendCodeUnique = true
-                    
-                    for childSnapshot in snapshot.children {
-                        if let child = childSnapshot as? DataSnapshot,
-                           let childValue = child.value as? [String: Any],
-                           let childFriendCode = childValue["friendCode"] as? String {
-                            if childFriendCode == friendCode {
-                                isFriendCodeUnique = false
-                                break
-                            }
-                        }
-                    }
-                    
-                    if isFriendCodeUnique {
-                        let values = ["email": email, "nickname": nickname, "friendCode": friendCode]
-                        databaseRef.updateChildValues(values) { error, _ in
-                            guard error == nil else { return }
-                            print("DB : signup success")
-                        }
-                    } else {
-                        generateUniqueFriendCode()
-                    }
-                }
-            }
-            
-            generateUniqueFriendCode()
-        }
-    }
-
-
-    
     //회원가입 화면으로 이동
     @IBAction func register(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

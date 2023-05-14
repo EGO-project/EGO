@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333336"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -681,28 +681,28 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZX-wa-4r7">
-                                        <rect key="frame" x="22" y="177" width="42" height="21"/>
+                                        <rect key="frame" x="22" y="177" width="287" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Me7-hr-kuw">
-                                        <rect key="frame" x="22" y="252" width="42" height="21"/>
+                                        <rect key="frame" x="22" y="252" width="287" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5NR-9N-VV0">
-                                        <rect key="frame" x="22" y="328" width="42" height="21"/>
+                                        <rect key="frame" x="22" y="328" width="287" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQd-JS-Ldq">
-                                        <rect key="frame" x="22" y="98" width="42" height="21"/>
+                                        <rect key="frame" x="22" y="98" width="287" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -822,17 +822,17 @@
                         <outlet property="btnRegister" destination="hqT-dN-i5o" id="hvu-uW-8e5"/>
                         <outlet property="fieldEmail" destination="WmY-24-kBU" id="wA0-wA-8pi"/>
                         <outlet property="fieldNickName" destination="bzW-FM-fsg" id="8es-yg-LVo"/>
-                        <outlet property="fieldPasswd" destination="hd8-I8-VnA" id="0xN-mP-JCb"/>
-                        <outlet property="fieldPasswdCheck" destination="FBm-Tq-f5E" id="gg5-DK-1Al"/>
+                        <outlet property="fieldPassword" destination="hd8-I8-VnA" id="2Vx-4L-9Cw"/>
+                        <outlet property="fieldPasswordCheck" destination="FBm-Tq-f5E" id="Y4L-vB-Cwy"/>
                         <outlet property="lblEmailError" destination="rQd-JS-Ldq" id="Cex-Lb-eYe"/>
                         <outlet property="lblNickNameError" destination="BZX-wa-4r7" id="YAz-eW-ngP"/>
-                        <outlet property="lblPasswdCheckError" destination="5NR-9N-VV0" id="XyS-gF-n24"/>
-                        <outlet property="lblPasswdError" destination="Me7-hr-kuw" id="ceB-yY-azc"/>
+                        <outlet property="lblPasswordCheckError" destination="5NR-9N-VV0" id="qPt-kR-0Ie"/>
+                        <outlet property="lblPasswordError" destination="Me7-hr-kuw" id="eIw-ui-ScS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dqH-oS-uNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-440" y="-730.09478672985779"/>
+            <point key="canvasLocation" x="-440.57971014492756" y="-730.58035714285711"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YFX-fX-Obd">
