@@ -17,30 +17,36 @@ class MoreViewController: UIViewController {
     
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var profileId: UILabel!
+    @IBOutlet weak var profileCode: UILabel!
     @IBOutlet weak var logOut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 함수 업데이트
-        updateLabel()
-        updateCode()
+        myNameFB()
+        myCodeFB()
     }
+    
     // user Name을 파이어베이스에 받아와서 화면에 출력
-    func updateLabel() {
-        ref.child("myName").observeSingleEvent(of: .value) { snapshot in
-            let labelValue = snapshot.value as? String ?? ""
+    func myNameFB() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { snapshot  in
+            print("\(snapshot)")
+            let value = snapshot.value as? String ?? ""
             DispatchQueue.main.async {
-                self.profileName.text = labelValue
+                self.profileName.text = value
             }
         }
     }
-    // user ID Code을 파이어베이스에 받아와서 화면에 출력
-    func updateCode() {
-        ref.child("myCode").observeSingleEvent(of: .value) { snapshot in
-            let labelValue = snapshot.value as? String ?? ""
+    
+    // user Code을 파이어베이스에 받아와서 화면에 출력
+    func myCodeFB() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { snapshot  in
+            print("\(snapshot)")
+            let value = snapshot.value as? String ?? ""
             DispatchQueue.main.async {
-                self.profileId.text = labelValue
+                self.profileCode.text = value
             }
         }
     }
@@ -48,6 +54,6 @@ class MoreViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let nextViewController: ProfileViewController = segue.destination as? ProfileViewController else {return}
         nextViewController.pNameLbl = profileName?.text
-        nextViewController.pCodeLbl = profileId?.text
+        nextViewController.pCodeLbl = profileCode.text
     }
 }

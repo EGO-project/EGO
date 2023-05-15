@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -252,7 +252,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="logOut" destination="ve7-hX-UTn" id="WEb-Eu-dbN"/>
-                        <outlet property="profileId" destination="Cf2-sG-x5P" id="aZr-k1-SOc"/>
+                        <outlet property="profileCode" destination="Cf2-sG-x5P" id="63m-aN-tUu"/>
                         <outlet property="profileImg" destination="pVo-Pl-Pju" id="dK5-pS-uGG"/>
                         <outlet property="profileName" destination="aAj-oe-USW" id="tZF-S3-ls9"/>
                     </connections>
