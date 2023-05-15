@@ -52,6 +52,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.friendsEgo2.image = UIImage(named: egoList[indexPath.row])
         cell.friendsEgo3.image = UIImage(named: egoList[indexPath.row])
         cell.friendsEgo4.image = UIImage(named: egoList[indexPath.row])
+
         
         return cell
     }
