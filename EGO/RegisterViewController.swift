@@ -11,20 +11,20 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
-    weak var lblPageName: UILabel!
     
     @IBOutlet weak var fieldEmail: UITextField!
     @IBOutlet weak var fieldNickName: UITextField!
     @IBOutlet weak var fieldPassword: UITextField!
     @IBOutlet weak var fieldPasswordCheck: UITextField!
     
+    @IBOutlet weak var lblPageName: UILabel!
     @IBOutlet weak var lblEmailError: UILabel!
     @IBOutlet weak var lblNickNameError: UILabel!
     @IBOutlet weak var lblPasswordError: UILabel!
     @IBOutlet weak var lblPasswordCheckError: UILabel!
 
-
     @IBOutlet weak var btnRegister: UIButton!
+    @IBOutlet weak var btnIdCheck: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,13 @@ class RegisterViewController: UIViewController {
         btnRegister.setTitleColor(UIColor(hexCode: "959595"), for: .normal)
         btnRegister.tintColor = UIColor(hexCode: "FFF3C7")
 
+        btnIdCheck.tintColor = UIColor(hexCode: "FFC965")
+        btnIdCheck.setTitle("중복확인", for: .normal)
+        
         lblEmailError.text = ""
+        lblEmailError.font = UIFont(name: "Noto Sans Regular", size: 10)
+        lblEmailError.textColor = UIColor(hexCode: "6A6A6A")
+        
         lblNickNameError.text = ""
         lblPasswordError.text = ""
         lblPasswordCheckError.text = ""
@@ -42,6 +48,27 @@ class RegisterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func IDDuplicateCheck(_ sender: Any) {
+        guard let email = fieldEmail.text else{
+            lblEmailError.text = "*이메일을 입력해주세요"
+            lblEmailError.textColor = UIColor.red
+            return
+        }
+        // 파이어베이스 경로 문제로 인해 . 을 -로 치환
+        let safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        FirebaseManager.shared.checkDuplicateID(id: safeEmail) { (isDuplicate) in
+            if isDuplicate {
+                self.lblEmailError.text = "*이미 존재하는 아이디입니다"
+                self.lblEmailError.textColor = UIColor.red
+                return
+            }
+            else {
+                self.lblEmailError.text = "*사용 가능한 아이디입니다"
+                self.lblEmailError.textColor = UIColor.green
+                return
+            }
+        }
+    }
     @IBAction func register(_ sender: Any) {
         
         guard let email = fieldEmail.text else{

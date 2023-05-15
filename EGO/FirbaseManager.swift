@@ -145,4 +145,16 @@ class FirebaseManager {
             generateUniqueFriendCode()
         }
     }
+    
+    func checkDuplicateID(id: String, completion: @escaping (Bool) -> Void) {
+        let databaseRef = Database.database().reference().child("member").child(id)
+        databaseRef.observeSingleEvent(of: .value) { snapshot in
+            guard !snapshot.exists() else {
+                completion(true)
+                return
+            }
+            completion(false)
+        }
+    }
+    
 }
