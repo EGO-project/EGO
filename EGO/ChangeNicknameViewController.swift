@@ -16,6 +16,9 @@ class ChangeNicknameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // clear 버튼 모드를 "편집 중에만"으로 설정합니다.
+        nickNameCh.clearButtonMode = .whileEditing
         
         // Firebase Realtime Database의 루트 참조
         databaseRef = Database.database().reference()
@@ -52,4 +55,10 @@ class ChangeNicknameViewController: UIViewController {
             }
         }
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+            // clear 버튼이 탭되었을 때 추가 작업을 수행합니다.
+            // true를 반환하여 기본 clear 동작도 수행하도록 합니다.
+            return true
+        }
 }
