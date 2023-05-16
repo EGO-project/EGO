@@ -1,18 +1,9 @@
-//
-//  MoreViewController.swift
-//  EGO
-//
-//  Created by 박기태 on 2023/02/19.
-//
-
 import UIKit
 import Firebase
 import FirebaseDatabase
 
 class MoreViewController: UIViewController {
     
-    // 상수 ref에 파이어베이스 주소를 넣음
-    // reference는 데이터베이스의 특정 위치를 나타내고 읽고 쓰게끔 해준다
     let ref = Database.database().reference()
     
     @IBOutlet weak var profileImg: UIImageView!
@@ -22,16 +13,45 @@ class MoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 함수 업데이트
+        
         myNameFB()
         myCodeFB()
+        
+        // 파이어베이스 데이터 변경 감지
+        observeFirebaseChanges()
     }
     
-    // user Name을 파이어베이스에 받아와서 화면에 출력
+    func observeFirebaseChanges() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        
+        // "member" 경로의 변경 사항을 감시하고 실시간으로 업데이트된 데이터를 받아옴
+        self.ref.child("member").child(safeEmail).observe(.value) { [weak self] snapshot in
+            guard let self = self else { return }
+            
+            if let value = snapshot.value as? [String: Any] {
+                // nickname 값이 변경되었을 경우 Label에 업데이트
+                if let nickname = value["nickname"] as? String {
+                    DispatchQueue.main.async {
+                        self.profileName.text = nickname
+                    }
+                }
+                
+                // friendCode 값이 변경되었을 경우 Label에 업데이트
+                if let friendCode = value["friendCode"] as? String {
+                    DispatchQueue.main.async {
+                        self.profileCode.text = friendCode
+                    }
+                }
+            }
+        }
+    }
+    
+    // 기존 코드와 동일하게 구현
     func myNameFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { snapshot  in
-            print("\(snapshot)")
+        self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
+            guard let self = self else { return }
+            
             let value = snapshot.value as? String ?? ""
             DispatchQueue.main.async {
                 self.profileName.text = value
@@ -39,11 +59,12 @@ class MoreViewController: UIViewController {
         }
     }
     
-    // user Code을 파이어베이스에 받아와서 화면에 출력
+    // 기존 코드와 동일하게 구현
     func myCodeFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { snapshot  in
-            print("\(snapshot)")
+        self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
+            guard let self = self else { return }
+            
             let value = snapshot.value as? String ?? ""
             DispatchQueue.main.async {
                 self.profileCode.text = value
