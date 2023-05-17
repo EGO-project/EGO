@@ -32,17 +32,12 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         newFriendsTable.dataSource = self
         newFriendsTable.delegate = self
-        searchCode()
         nowUser()
     }
     
-    // 검색창
-    func searchCode() {
-        let bounds = UIScreen.main.bounds
-        let width = bounds.size.width //화면 너비
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: width - 28, height: 0))
-        searchBar.placeholder = "EGO 코드로 검색"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchBar)
+    // 친구추가버튼
+    @IBAction func addFriendBtn(_ sender: Any) {
+        
     }
     
     // 파이어 베이스에서 친구코드 추출
@@ -76,7 +71,6 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 카카오톡 공유버튼
     @IBAction func kakaoBtn(_ sender: Any) {
-        
         let templateId = 93508
         let templateArgs = ["frCode": "\(String(describing: myCode))"]
         

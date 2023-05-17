@@ -11,19 +11,27 @@ import FirebaseDatabase
 import KakaoSDKAuth
 import KakaoSDKUser
 
-var nameList: [String] = ["친구1", "친구2", "친구3", "친구4"]
 var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
+
+// 카카오톡 로그인시 현재 사용자 정보 저장 구조체
+struct KakaoData{
+    var kakaoId: Int64 // 카카오톡 아이디
+    var kakaoName: String // 카카오톡 닉네임
+}
 
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // 파이어베이스 주소
     let ref = Database.database().reference()
     
-    // 카카오톡 로그인시 현재 사용자 정보
-    var kakaoId: Int64?
-    var kakaoName: String?
-    var kakaoEmail: String?
+    // KakaoData 구조체 멤버 변수
+    var kakaoData: KakaoData?
     
+    // 테이블뷰 프로퍼티
+    var rowCount: Int?  // 행 갯수
+    var friendName: [String] = []
+    var friendCode: [String] = []
+
     @IBOutlet weak var socialTable: UITableView!
     
     @IBOutlet weak var myTopEgg: UIImageView!
@@ -34,30 +42,34 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         socialTable.delegate = self
         socialTable.dataSource = self
-        
-        nowUser()
+
+        kakaoUser()
     }
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameList.count
+        
+        guard let row = rowCount else {return 10}
+        return row
     }
     
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
-        
-        cell.friendsName.text = nameList[indexPath.row]
-        cell.friendsEgo1.image = UIImage(named: egoList[indexPath.row])
-        cell.friendsEgo2.image = UIImage(named: egoList[indexPath.row])
-        cell.friendsEgo3.image = UIImage(named: egoList[indexPath.row])
-        cell.friendsEgo4.image = UIImage(named: egoList[indexPath.row])
 
-        
+        if indexPath.row < friendCode.count {
+            let friendCode = friendCode[indexPath.row]
+            cell.friendsName.text = friendCode
+            // 이 외에 다른 셀 구성 요소에 friendCode를 활용할 수 있습니다.
+        }
+
         return cell
     }
     
-    
+    // 셀 높이 지정
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 130
+    }
     
     //  segue 연결 후 뷰간 값 전달 하는 법
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -72,32 +84,14 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // vc를 FriendViewController로 다운캐스팅하여 프로퍼티에 접근
             let vc = segue.destination as? FriendViewController
             if let row = sender as? Int {
-                vc?.name = nameList[row]
                 vc?.ego = egoList[row]
             }
         }
     }
     
-    
-    // 셀 높이 지정
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-    }
-    
-    //    파베에서 내 친구코드 가져오기
-    //    func myNameFB() {
-    //        self.ref.child("member").child("2699328344").child("nickname").observeSingleEvent(of: .value) { snapshot  in
-    //            print("\(snapshot)")
-    //            let value = snapshot.value as? String ?? ""
-    //            DispatchQueue.main.async {
-    //                self.myTopName.text = value
-    //            }
-    //        }
-    //    }
-    
     // 현재 사용자 카카오톡 데이터
-    func nowUser() {
-        UserApi.shared.me { user, error in
+    func kakaoUser() {
+        UserApi.shared.me { [self] user, error in
             guard error == nil else {
                 print("카카오톡 정보 가져오지 못함")
                 print(error!)
@@ -105,61 +99,49 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             guard let id = user?.id,
-                  let email = user?.kakaoAccount?.email,
                   let nickname = user?.kakaoAccount?.profile?.nickname else {
                 return
             }
             
-            // 현재 사용자 이름
-            self.myTopName.text = nickname
+            // 카카오톡 데이터 구조체에 저장
+            self.kakaoData = KakaoData(kakaoId: id, kakaoName: nickname)
             
-            // 프로퍼티에 저장
-            self.kakaoId = id
-            self.kakaoName = nickname  // nil일 경우 ""로 초기화
-            self.kakaoEmail = email  // nil일 경우 ""로 초기화
-            
-            // 현재 사용자 친구코드
+            // 현재 사용자 친구코드 파이어베이스에서 가져오기
             self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
-                print("\(snapshot)")
-                let value = snapshot.value as? String ?? ""
-                DispatchQueue.main.async {
-                    self.myTopCode.text = value
+                guard let frcode = snapshot.value as? String else {return}
+                // 내 정보 설정
+                print("현재 카카오톡 사용자 친구코드 : \(frcode)")
+                self.myTopName.text = self.kakaoData?.kakaoName ?? "nil"
+                self.myTopCode.text = frcode
+            }
+            
+            // 친구목록 테이블뷰 행갯수 지정하기
+            self.ref.child("friend").child("\(String(describing: id))").observeSingleEvent(of: .value) { snapshot in
+                let count = snapshot.childrenCount
+                print("테이블뷰 행 갯수 : \(count)")
+                self.rowCount = Int(count)
+            }
+        
+            // 친구코드 목록 친구 이름 배열에 저장하기 ex) 친구코드 목록 배열 : ["@57178", "@19046"]
+            self.ref.child("friend").child("\(String(describing: id))").observeSingleEvent(of: .value) { snapshot in
+                guard snapshot.exists(), let keyValues = snapshot.value as? [String: Any] else {
+                    print("해당 키값을 찾을 수 없습니다.")
+                    return
                 }
+                let codes = Array(keyValues.keys)
+                print("친구코드 목록 배열: \(codes)")
+                
+                self.friendCode = codes
+                print(self.friendCode)
+                
+                DispatchQueue.main.async {
+                    self.socialTable.reloadData()
+                }
+                // 친구코드 통해서 친구 이름 가져와 배열에 저장
+                
+            }
             }
         }
     }
     
-    
-    //    // 파이어베이스 이용
-    //    var ref : DatabaseReference! // ref에 파베주소 넣음
-    //    @IBOutlet weak var firebaseLbl: UILabel! // 가져온 값 확인 레이블
-    //    @IBAction func firebaseBtn(_ sender: UIButton) { // 값 보내기, 가져오기 버튼
-    //        self.ref = Database.database().reference()
-    //
-    //       // 파이어베이스에 값 넣기
-    //        let myNameRef = self.ref.child("myName")
-    //        let myCodeRef = self.ref.child("myCode")
-    //        myNameRef.setValue(self.myTopName.text)
-    //        myCodeRef.setValue(self.myTopCode.text)
-    //
-    //        // 키 값 설정
-    //        let announcement1 = self.ref.child("announcement").child("5").child("title")
-    //        let announcement2 = self.ref.child("announcement").child("5").child("description")
-    //
-    //        // 밸류 설정
-    //        announcement1.setValue("제목")
-    //        announcement2.setValue("내용")
-    //
-    //        // 38 ~ 44 한 줄 로
-    //        self.ref.child("announcement/7").updateChildValues(["title": "제목7", "description": "내용7"])
-    //
-    //        // 파이어베이스 값 가져오기
-    //        ref.child("announcement").child("7").child("title").observeSingleEvent(of: .value) { snapshot in
-    //            print("\(snapshot)")
-    //            let value = snapshot.value as? String ?? ""
-    //            DispatchQueue.main.async {
-    //                self.firebaseLbl.text = value
-    //            }
-    //        }
-    //    }
-}
+

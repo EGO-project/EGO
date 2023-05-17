@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44CE3696AE86B964F3C30D25 /* Pods_EGO_EGOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */; };
-		4C2A01B029E80010007E2CB9 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A01AF29E80010007E2CB9 /* AddFriendsViewController.swift */; };
-		4C2A01B229E8004C007E2CB9 /* AddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A01B129E8004C007E2CB9 /* AddFriendsTableViewCell.swift */; };
+		4C0F43BA2A12798A008F70DE /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0F43B92A12798A008F70DE /* AddFriendViewController.swift */; };
 		4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063EE299B876700F8F3B8 /* SocialViewController.swift */; };
 		4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */; };
 		4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */; };
@@ -71,6 +70,7 @@
 		00186B45197B07E111F8DDED /* Pods_EGO_EGOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO_EGOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC7E208F6BCD2B66A6D8098 /* Pods-EGO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.release.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.release.xcconfig"; sourceTree = "<group>"; };
 		3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C0F43B92A12798A008F70DE /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		4C5063EE299B876700F8F3B8 /* SocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
 		4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSocialViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +191,7 @@
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
+				4C0F43B92A12798A008F70DE /* AddFriendViewController.swift */,
 				4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */,
 				4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */,
 				4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */,
@@ -535,6 +536,7 @@
 				CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */,
 				4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */,
 				CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */,
+				4C0F43BA2A12798A008F70DE /* AddFriendViewController.swift in Sources */,
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */,
 				4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */,
