@@ -31,7 +31,9 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var rowCount: Int?  // 행 갯수
     var friendName: [String] = []
     var friendCode: [String] = []
-
+    var friendNickname: [String] = []
+    
+    
     @IBOutlet weak var socialTable: UITableView!
     
     @IBOutlet weak var myTopEgg: UIImageView!
@@ -42,7 +44,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         socialTable.delegate = self
         socialTable.dataSource = self
-
+        
         kakaoUser()
     }
     
@@ -56,13 +58,13 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
-
+        
         if indexPath.row < friendCode.count {
-            let friendCode = friendCode[indexPath.row]
+            let friendCode = friendNickname[indexPath.row]
             cell.friendsName.text = friendCode
             // 이 외에 다른 셀 구성 요소에 friendCode를 활용할 수 있습니다.
         }
-
+        
         return cell
     }
     
@@ -121,7 +123,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print("테이블뷰 행 갯수 : \(count)")
                 self.rowCount = Int(count)
             }
-        
+            
             // 친구코드 목록 친구 이름 배열에 저장하기 ex) 친구코드 목록 배열 : ["@57178", "@19046"]
             self.ref.child("friend").child("\(String(describing: id))").observeSingleEvent(of: .value) { snapshot in
                 guard snapshot.exists(), let keyValues = snapshot.value as? [String: Any] else {
@@ -129,19 +131,38 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
                 let codes = Array(keyValues.keys)
-                print("친구코드 목록 배열: \(codes)")
-                
                 self.friendCode = codes
-                print(self.friendCode)
+                print("친구코드 목록 배열: \(self.friendCode)")
                 
-                DispatchQueue.main.async {
-                    self.socialTable.reloadData()
+                // 친구코드 목록 배열로 하윗값으로 상위값 조회하여 친구 이름 가져오기
+                // for 루프
+                for code in self.friendCode {
+                    self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
+                        guard let friendNode = snapshot.value as? [String: Any],
+                              let friendId = friendNode.keys.first,
+                              let friendData = friendNode[friendId] as? [String: Any],
+                              let nickname = friendData["nickname"] as? String
+                        else {
+                            print("상위값 가져오기 실패")
+                            return
+                        }
+                        print("개발중1 : \(friendNode)")
+                        print("개발중2 : \(friendId)")
+                        print("개발중3 : \(friendData)")
+                        print("개발중4 : \(nickname)")
+                        
+                        self.friendNickname.append(nickname) // nickname을 friendNickname 배열에 추가합니다.
+                        print("개발중5 : \(self.friendNickname)")
+                        
+                        DispatchQueue.main.async {
+                            self.socialTable.reloadData()
+                        }
+                    }
                 }
-                // 친구코드 통해서 친구 이름 가져와 배열에 저장
-                
-            }
             }
         }
     }
-    
+}
+//  ["@78556", "@19046", "@57178"] => ["MS", "김민석", "황재하"]
+//  ["황재하", "김민석", "MS"]
 
