@@ -10,6 +10,9 @@ import UIKit
 class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
     
     @IBOutlet weak var friendsName: UILabel!
+    
+    // 친구 삭제 버튼
+    
 
     @IBOutlet weak var friendsEgo1: UIImageView!
     @IBOutlet weak var friendsEgo2: UIImageView!

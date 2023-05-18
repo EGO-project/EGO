@@ -109,7 +109,7 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 친구코드 복사 성공메세지
     func copyMSG() {
-        UIPasteboard.general.string = "친구코드 : \(String(describing: myCode))"
+        UIPasteboard.general.string = "\(String(describing: myCode))"
         guard let mycode = UIPasteboard.general.string else {
             return print("값 없음")
         }

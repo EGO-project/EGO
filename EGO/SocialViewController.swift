@@ -45,13 +45,28 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         socialTable.delegate = self
         socialTable.dataSource = self
         
+        setupRefreshControl() // UIRefreshControl 설정
         kakaoUser()
     }
+    
+    
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        socialTable.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshTableView() {
+        kakaoUser()
+    }
+    
+    
+    
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let row = rowCount else {return 10}
+        guard let row = rowCount else {return 0}
         return row
     }
     
@@ -115,6 +130,11 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print("현재 카카오톡 사용자 친구코드 : \(frcode)")
                 self.myTopName.text = self.kakaoData?.kakaoName ?? "nil"
                 self.myTopCode.text = frcode
+                // 내 정보 설정
+                DispatchQueue.main.async {
+                    self.myTopName.text = self.kakaoData?.kakaoName ?? "nil"
+                    self.myTopCode.text = frcode
+                }
             }
             
             // 친구목록 테이블뷰 행갯수 지정하기
@@ -135,8 +155,13 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print("친구코드 목록 배열: \(self.friendCode)")
                 
                 // 친구코드 목록 배열로 하윗값으로 상위값 조회하여 친구 이름 가져오기
+                var updatedFriendNickname: [String] = [] // 업데이트된 친구 닉네임 배열
+                let dispatchGroup = DispatchGroup() // 디스패치 그룹 생성
+                
                 // for 루프
                 for code in self.friendCode {
+                    dispatchGroup.enter() // 디스패치 그룹 진입
+                    
                     self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
                         guard let friendNode = snapshot.value as? [String: Any],
                               let friendId = friendNode.keys.first,
@@ -144,8 +169,12 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                               let nickname = friendData["nickname"] as? String
                         else {
                             print("상위값 가져오기 실패")
+                            dispatchGroup.leave() // 디스패치 그룹 떠남
                             return
                         }
+                        updatedFriendNickname.append(nickname) // 업데이트된 친구 닉네임 배열에 추가
+                        dispatchGroup.leave() // 디스패치 그룹 떠남
+                        
                         print("개발중1 : \(friendNode)")
                         print("개발중2 : \(friendId)")
                         print("개발중3 : \(friendData)")
@@ -158,11 +187,27 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.socialTable.reloadData()
                         }
                     }
+                    dispatchGroup.notify(queue: .main) {
+                        // 친구 닉네임 배열을 업데이트하고 테이블 뷰를 새로고침
+                        self.friendNickname = updatedFriendNickname.sorted { (name1, name2) -> Bool in
+                            if name1.localizedCompare(name2) == .orderedSame { // 가나다 순으로 정렬
+                                return name1 < name2 // 영어는 사전적으로 더 뒤로 가게 함
+                            } else {
+                                return name1.localizedCompare(name2) == .orderedAscending
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.socialTable.reloadData()
+                            self.socialTable.refreshControl?.endRefreshing() // 새로고침 종료
+                        }
+                    }
                 }
             }
         }
     }
 }
+
 //  ["@78556", "@19046", "@57178"] => ["MS", "김민석", "황재하"]
 //  ["황재하", "김민석", "MS"]
 

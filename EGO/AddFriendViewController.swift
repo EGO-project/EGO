@@ -13,7 +13,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 class AddFriendViewController: UIViewController {
-
+    
     // 파이어베이스 주소
     let ref = Database.database().reference()
     
@@ -22,7 +22,7 @@ class AddFriendViewController: UIViewController {
         var friendId: String?
         var friendNickname: String?
     }
-
+    
     // 파이어베이스 구조체 멤버 변수
     var firebaseData: FirebaseData?
     
@@ -36,9 +36,13 @@ class AddFriendViewController: UIViewController {
     
     // 추가할 친구코드 처리 프로퍼티
     @IBOutlet weak var codeBox: UITextField!
+    @IBOutlet weak var addBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        codeBox.layer.cornerRadius = 10
+        addBtn.layer.cornerRadius = 5
+        
     }
     
     // 친구코드 친구 추가 버튼
@@ -46,7 +50,7 @@ class AddFriendViewController: UIViewController {
         
         // 1번 기능 : friend > 현재 사용자 id > @00000 추가
         var friendCode: String = "" // 친구의 친구코드 저장할 프로퍼티
-
+        
         guard let code = codeBox.text else { print("친구코드 없음"); return }
         friendCode = code // 추가할 친구코드
         
@@ -72,27 +76,41 @@ class AddFriendViewController: UIViewController {
             guard let friendNode = snapshot.value as? [String: Any],
                   let friendId = friendNode.keys.first,
                   let friendData = friendNode[friendId] as? [String: Any],
-                  let friendnickname = friendData["nickname"] as? String else { return print("상위값 가져오기 실패")}
+                  let friendnickname = friendData["nickname"] as? String else {
+                // 친구 추가 실패 경고창
+                let alertController = UIAlertController(title: "알림", message: "친구 코드가 올바르지 않습니다.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+                        self.codeBox.text = "" // 텍스트 필드 초기화
+                    })
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                return print("상위값 가져오기 실패")
+            }
             self.firebaseData = FirebaseData()
             self.firebaseData?.friendId = friendId
             self.firebaseData?.friendNickname = friendnickname
             print("Friend Node: \(friendNode)")
             print("Friend ID: \(friendId)")
             print("Friend Nickname: \(friendnickname)")
+            
+            // 파이어베이스에 친구코드 추가
+            guard let mykakaoId = self.kakaoData?.kakaoId,
+                  let friendkakaoId = self.firebaseData?.friendId
+            else {return}
+            self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("favoriteState").setValue("빔");
+            self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("publicState").setValue("빔");
+            self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("state").setValue("빔");
+            self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("memberId").setValue(friendkakaoId)
+            // 친구 추가 성공 경고창
+            let alertController = UIAlertController(title: "알림", message: "친구가 추가되었습니다.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+                    self.codeBox.text = "" // 텍스트 필드 초기화
+                })
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            
         }
-        
-        // 파이어베이스에 친구코드 추가
-        guard let mykakaoId = kakaoData?.kakaoId,
-              let friendkakaoId = firebaseData?.friendId
-        else {return}
-        self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("favoriteState").setValue("빔");
-        self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("publicState").setValue("빔");
-        self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("state").setValue("빔");
-        self.ref.child("friend").child("\(mykakaoId)").child("\(friendCode)").child("memberId").setValue(friendkakaoId)
-        { (error, reference) in
-            guard error == nil else { return }
-        }
-
     }
-
 }
+
+
