@@ -312,15 +312,19 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_사자" translatesAutoresizingMaskIntoConstraints="NO" id="ORl-MA-dPQ">
-                                                    <rect key="frame" x="109" y="35" width="60" height="60"/>
+                                                    <rect key="frame" x="100" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_다람쥐" translatesAutoresizingMaskIntoConstraints="NO" id="ktl-1W-a9n">
-                                                    <rect key="frame" x="186" y="35" width="60" height="60"/>
+                                                    <rect key="frame" x="164" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_코알라" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
-                                                    <rect key="frame" x="263" y="35" width="60" height="60"/>
+                                                    <rect key="frame" x="228" y="35" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_사자" translatesAutoresizingMaskIntoConstraints="NO" id="6j1-PJ-Jgb">
+                                                    <rect key="frame" x="292" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -331,6 +335,7 @@
                                             <outlet property="friendsEgo2" destination="ORl-MA-dPQ" id="rV2-lG-4lP"/>
                                             <outlet property="friendsEgo3" destination="ktl-1W-a9n" id="zX4-tg-aOQ"/>
                                             <outlet property="friendsEgo4" destination="Lmv-hZ-XbR" id="7CP-WB-WIN"/>
+                                            <outlet property="friendsEgo5" destination="6j1-PJ-Jgb" id="RH4-YY-50U"/>
                                             <outlet property="friendsName" destination="Mtm-f4-qkG" id="4uW-OK-ON6"/>
                                         </connections>
                                     </tableViewCell>
@@ -2130,8 +2135,8 @@
         <image name="공유" width="56" height="56"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>

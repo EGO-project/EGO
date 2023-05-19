@@ -85,8 +85,35 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 셀 높이 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
+        return 100 + 10
     }
+    
+    // 친구 삭제 버튼, 스와이프
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // 데이터 소스 배열에서 해당 친구를 삭제합니다.
+            friendNickname.remove(at: indexPath.row)
+            
+            // 테이블 뷰에서 셀을 삭제하기 전에 먼저 행 수를 업데이트합니다.
+            rowCount = friendNickname.count
+            
+            // 파이어베이스에서 해당 친구 데이터를 삭제합니다.
+            guard let userId = kakaoData?.kakaoId else {
+                return
+            }
+            let friendCode = friendCode[indexPath.row]
+            ref.child("friend").child("\(userId)").child("\(friendCode)").removeValue()
+                    
+            // 테이블 뷰에서 해당 셀을 삭제합니다.
+            socialTable.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "친구삭제"
+    }
+    
+    
     
     //  segue 연결 후 뷰간 값 전달 하는 법
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
