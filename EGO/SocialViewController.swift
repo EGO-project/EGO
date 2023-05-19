@@ -49,7 +49,6 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         kakaoUser()
     }
     
-    
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
@@ -59,9 +58,6 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @objc private func refreshTableView() {
         kakaoUser()
     }
-    
-    
-    
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -234,7 +230,3 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 }
-
-//  ["@78556", "@19046", "@57178"] => ["MS", "김민석", "황재하"]
-//  ["황재하", "김민석", "MS"]
-
