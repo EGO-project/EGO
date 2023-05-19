@@ -35,9 +35,23 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         newFriendsTable.dataSource = self
         newFriendsTable.delegate = self
+        
+        setupRefreshControl() // UIRefreshControl 설정
         nowUser()
     }
     
+    // 새로운 친구 테이블 새로고침 기능
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        newFriendsTable.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshTableView() {
+        nowUser()
+    }
+
+
     // 새로운친구 추천 테이블뷰
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = listCnt else { return 0 }
@@ -81,7 +95,7 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
             
             
             // 새로운 친구요청 갯수와 목록 친구 코드 가져오기 : 테이블뷰에 사용
-            self.ref.child("friendRequested").child("\(id)").observeSingleEvent(of: .value) { snapshot  in
+            self.ref.child("friendRequested").child("\(id)").observeSingleEvent(of: .value) { snapshot in
                 guard let value = snapshot.value else {
                     print("값을 가져올 수 없음")
                     return
@@ -96,8 +110,11 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
                 
                 // for 루프
                 var updatedFriendNickname: [String] = [] // 업데이트된 친구 닉네임 배열
-                
+                let dispatchGroup = DispatchGroup() // 디스패치 그룹 생성, 새로고침 기능
+
                 for code in newfriends {
+                    dispatchGroup.enter() // 디스패치 그룹 진입
+
                     self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
                         guard let friendNode = snapshot.value as? [String: Any],
                               let friendId = friendNode.keys.first,
@@ -105,15 +122,18 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
                               let nickname = friendData["nickname"] as? String
                         else {
                             print("상위값 가져오기 실패")
+                            dispatchGroup.leave() // 디스패치 그룹 떠남
                             return
                         }
+                        
+                        updatedFriendNickname.append(nickname) // 업데이트된 친구 닉네임 배열에 추가
+                        dispatchGroup.leave() // 디스패치 그룹 떠남
                         
                         print("개발중1 : \(friendNode)")
                         print("개발중2 : \(friendId)")
                         print("개발중3 : \(friendData)")
                         print("개발중4 : \(nickname)")
                         
-                        updatedFriendNickname.append(nickname) // 업데이트된 친구 닉네임 배열에 추가
                         print(updatedFriendNickname)
                         self.friendRequestNickname.append(nickname) // nickname을 friendNickname 배열에 추가합니다.
                         
@@ -122,9 +142,22 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
                         self.listCnt = Int(listCnt)
                         
                         DispatchQueue.main.async {
-                            self.friendRequests = newfriends
-                            self.friendRequestNickname = updatedFriendNickname
                             self.newFriendsTable.reloadData()
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        // 친구 닉네임 배열을 업데이트하고 테이블 뷰를 새로고침
+                        self.friendRequestNickname = updatedFriendNickname.sorted { (name1, name2) -> Bool in
+                            if name1.localizedCompare(name2) == .orderedSame { // 가나다 순으로 정렬
+                                return name1 < name2 // 영어는 사전적으로 더 뒤로 가게 함
+                            } else {
+                                return name1.localizedCompare(name2) == .orderedAscending
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.newFriendsTable.reloadData()
+                            self.newFriendsTable.refreshControl?.endRefreshing() // 새로고침 종료
                         }
                     }
                 }
