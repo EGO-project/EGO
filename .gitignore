@@ -1,11 +1,8 @@
 .DS_Store
 
 xcuserdata/
-<<<<<<< HEAD
 GoogleService-Info.plist
-=======
 
 Pods/Pods.xcodeproj/xcuserdata/ms.xcuserdatad/xcschemes/xcschememanagement.plist
 
 EGO.xcodeproj/xcuserdata/ms.xcuserdatad/xcschemes/xcschememanagement.plist
->>>>>>> minsuk
