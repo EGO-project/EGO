@@ -71,9 +71,29 @@ class AddFriendViewController: UIViewController {
         
         
         // 친구코드를 파이어베이스 친구추가요청 리스트에 추가하기 ============================================
-        guard let myKakaoId = self.kakaoData?.kakaoId else { return }
 
         // 이전에 저장된 friendCodes 배열을 가져옵니다.
+//        self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
+//            var friendCodes: [String] = []
+//
+//            if let existingFriendCodes = snapshot.value as? [String] {
+//                friendCodes = existingFriendCodes
+//            }
+//
+//            // 중복된 코드와 공백을 제외한 문자열만 friendCodes 배열에 추가합니다.
+//            let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+//            if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
+//                friendCodes.append(trimmedCode)
+//            }
+//
+//            // 업데이트된 friendCodes 배열을 다시 저장합니다.
+//            self.ref.child("friendRequested").child("\(myKakaoId)").setValue(friendCodes)
+//        }
+        
+        
+        // 중복된 코드 저장되지 않도록 개발해야함 ========================================================================================
+        guard let myKakaoId = self.kakaoData?.kakaoId else { return }
+
         self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
             var friendCodes: [String] = []
 
@@ -81,18 +101,41 @@ class AddFriendViewController: UIViewController {
                 friendCodes = existingFriendCodes
             }
 
-            // 중복된 코드와 공백을 제외한 문자열만 friendCodes 배열에 추가합니다.
             let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
             if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
-                friendCodes.append(trimmedCode)
-            }
+                // 고유한 식별자(ID) 생성
+                let friendId = UUID().uuidString
 
-            // 업데이트된 friendCodes 배열을 다시 저장합니다.
-            self.ref.child("friendRequested").child("\(myKakaoId)").setValue(friendCodes)
+                // 새로운 친구 데이터를 생성하여 저장
+                let friendData: [String: Any] = [
+                    "code": trimmedCode
+                    // 다른 필드들도 추가 가능
+                ]
+                self.ref.child("friendRequested").child("\(myKakaoId)").child(friendId).setValue(friendData)
+            }
         }
         
+        // 친구요청리스트 가져오기
+        self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
+            if let friendDataDict = snapshot.value as? [String: Any] {
+                for friendId in friendDataDict.keys {
+                    if let friendData = friendDataDict[friendId] as? [String: Any],
+                       let code = friendData["code"] as? String {
+                        // 파이어베이스에서 가져온 데이터 사용
+                        print("개발중!!! Friend ID: \(friendId), Code: \(code)")
+                    }
+                }
+            }
+        }
 
 
+        
+        
+        
+        
+        
+        
+        
         
         
         // 2번 기능 : friend > 현재 사용자 id > memberId : 23dfjkeaowef 추가

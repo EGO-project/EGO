@@ -32,7 +32,6 @@
 		4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */; };
 		4ECA05F429A4A75500515698 /* Noto_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 4ECA05F329A4A75500515698 /* Noto_Sans */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
-		89A04B052A1B20850004D4A0 /* KakaoTalk_Image_2023-05-22-13-00-54.png in Resources */ = {isa = PBXBuildFile; fileRef = 89A04B042A1B20850004D4A0 /* KakaoTalk_Image_2023-05-22-13-00-54.png */; };
 		89A04B072A1B26F40004D4A0 /* FriedEggViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A04B062A1B26F40004D4A0 /* FriedEggViewController.swift */; };
 		BDF85C924D79BC6693501477 /* Pods_EGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC43AC76CB26ECB14E13C6E /* Pods_EGO.framework */; };
 		CC4803E629DAF2FF006037A9 /* egg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4803E529DAF2FF006037A9 /* egg.swift */; };
@@ -105,7 +104,6 @@
 		7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
 		78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.release.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.release.xcconfig"; sourceTree = "<group>"; };
 		795F58B55B98937046906613 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89A04B042A1B20850004D4A0 /* KakaoTalk_Image_2023-05-22-13-00-54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KakaoTalk_Image_2023-05-22-13-00-54.png"; path = "../../../Downloads/KakaoTalk_Image_2023-05-22-13-00-54.png"; sourceTree = "<group>"; };
 		89A04B062A1B26F40004D4A0 /* FriedEggViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriedEggViewController.swift; sourceTree = "<group>"; };
 		90BBECC1EFB6E3818C35A579 /* Pods-EGO-EGOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.release.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B8B384F5B600D041A9784A76 /* Pods-EGO-EGOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO-EGOUITests.debug.xcconfig"; path = "Target Support Files/Pods-EGO-EGOUITests/Pods-EGO-EGOUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				4E64E0A52980DE0500124F56 /* LaunchScreen.storyboard */,
 				4E64E0A82980DE0500124F56 /* Info.plist */,
 				4E5C328029B8447400E176B5 /* GoogleService-Info.plist */,
-				89A04B042A1B20850004D4A0 /* KakaoTalk_Image_2023-05-22-13-00-54.png */,
 				4E659D3C29A3726200C7A917 /* LoginViewController.swift */,
 				4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */,
 				4E4CCE7F2A111BF200139248 /* FirbaseManager.swift */,
@@ -359,7 +356,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					4E64E0962980DE0400124F56 = {
 						CreatedOnToolsVersion = 14.2;
@@ -399,7 +396,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A04B052A1B20850004D4A0 /* KakaoTalk_Image_2023-05-22-13-00-54.png in Resources */,
 				4E64E0A72980DE0500124F56 /* LaunchScreen.storyboard in Resources */,
 				4ECA05F429A4A75500515698 /* Noto_Sans in Resources */,
 				4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */,
@@ -556,7 +552,6 @@
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */,
 				4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */,
-				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */,

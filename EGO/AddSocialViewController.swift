@@ -55,14 +55,12 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     // 새로운친구 추천 테이블뷰
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = listCnt else { return 0 }
+        
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "addFriendCell", for: indexPath) as! AddSocialTableViewCell
-        
-        
         cell.newName.text = friendRequestNickname[indexPath.row]
         
         return cell
