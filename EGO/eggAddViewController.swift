@@ -5,7 +5,14 @@
 //  Created by 축신효상 on 2023/03/21.
 //
 
-import UIKit
+import Foundation
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
 class eggAddViewController: UIViewController {
     

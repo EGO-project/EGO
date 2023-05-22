@@ -23,7 +23,6 @@ class detailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    // mothlyListdhk 연결한 세그웨이 활용 (detail)
 
     /*
     // MARK: - Navigation

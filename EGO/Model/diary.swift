@@ -7,6 +7,12 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
 class diary {
     var description : String
@@ -38,10 +44,16 @@ class diary {
         }
     
     func save() {
+        
+        UserApi.shared.me { user, error in
+            guard let id = user?.id
+            else{ return }
+            
             let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").childByAutoId()
-            calenderRef.setValue(toAnyObject())
+            let calenderRef = databaseRef.child("calender").child(String(id))
+            calenderRef.setValue(self.toAnyObject())
         }
+    }
     
     func update() {
            guard let ref = ref else { return }

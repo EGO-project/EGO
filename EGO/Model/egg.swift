@@ -7,9 +7,15 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
 class egg {
-   // var calendarId : String
+    // var calendarId : String
     var name : String
     var kind : String
     var state : String
@@ -26,41 +32,47 @@ class egg {
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
-
+        
         //calendarId = snapshotValue["name"] as! String
         name = snapshotValue["name"] as! String
         kind = snapshotValue["kind"] as! String
         state = snapshotValue["state"] as! String
         favoritestate = snapshotValue["favoritestate"] as! Bool
-            
+        
         ref = snapshot.ref
-       } // 데이터베이스에서 가져온 데이터를 사용하여 객체를 초기화하는 역할을 수행
+    } // 데이터베이스에서 가져온 데이터를 사용하여 객체를 초기화하는 역할을 수행
     
     func toAnyObject() -> Any {
-
+        
         return [
-           // "calendarId": calendarId,
+            // "calendarId": calendarId,
             "name": name,
             "kind": kind,
             "state": state,
             "favoritestate": favoritestate
-            ]
-        }
+        ]
+    }
     
     func save() {
-            let databaseRef = Database.database().reference()
-            let eggRef = databaseRef.child("egg").childByAutoId()
-            eggRef.setValue(toAnyObject())
-        }
-    
-    func update() {
-           guard let ref = ref else { return }
-           ref.updateChildValues(toAnyObject() as! [AnyHashable : Any])
-       }
-
-       func delete() {
-           guard let ref = ref else { return }
-           ref.removeValue()
-       }
         
-}
+        UserApi.shared.me { user, error in
+            guard let id = user?.id
+            else{ return }
+            
+            let databaseRef = Database.database().reference()
+            let eggRef = databaseRef.child("egg").child(String(id))
+            eggRef.setValue(self.toAnyObject())
+        }
+    }
+        
+        func update() {
+            guard let ref = ref else { return }
+            ref.updateChildValues(toAnyObject() as! [AnyHashable : Any])
+        }
+        
+        func delete() {
+            guard let ref = ref else { return }
+            ref.removeValue()
+        }
+        
+    }
