@@ -6,28 +6,78 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController {
     // 이전 MoreViewController에서 text 값을 받아오기 위한 변수
     var pNameLbl: String?
     var pCodeLbl: String?
-
+    let ref = Database.database().reference()
+    
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var codeLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        myNameFB()
+        myCodeFB()
+        
+        // 파이어베이스 데이터 변경 감지
+        observeFirebaseChanges()
+        
     }
-    // MoreViewController에서 가져온 값을 각 Label에 적용
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        nameLbl.text = self.pNameLbl
-        codeLbl.text = self.pCodeLbl
+    
+    func observeFirebaseChanges() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        
+        // "member" 경로의 변경 사항을 감시하고 실시간으로 업데이트된 데이터를 받아옴
+        self.ref.child("member").child(safeEmail).observe(.value) { [weak self] snapshot in
+            guard let self = self else { return }
+            
+            if let value = snapshot.value as? [String: Any] {
+                // nickname 값이 변경되었을 경우 Label에 업데이트
+                if let nickname = value["nickname"] as? String {
+                    DispatchQueue.main.async {
+                        self.nameLbl.text = nickname
+                    }
+                }
+                
+                // friendCode 값이 변경되었을 경우 Label에 업데이트
+                if let friendCode = value["friendCode"] as? String {
+                    DispatchQueue.main.async {
+                        self.codeLbl.text = friendCode
+                    }
+                }
+            }
+        }
+    }
+    
+    // 기존 코드와 동일하게 구현
+    func myNameFB() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
+            guard let self = self else { return }
+            
+            let value = snapshot.value as? String ?? ""
+            DispatchQueue.main.async {
+                self.nameLbl.text = value
+            }
+        }
+    }
+    
+    // 기존 코드와 동일하게 구현
+    func myCodeFB() {
+        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
+            guard let self = self else { return }
+            
+            let value = snapshot.value as? String ?? ""
+            DispatchQueue.main.async {
+                self.codeLbl.text = value
+            }
+        }
     }
 }
 
-// 데이터 베이스에서 받아온 프로필을 moreViewController에서 받아오기
-// 회원이 가지고 있는 알을 개수 파악해서 데이터 받아오기
-// 받아온 알에 공개여부를 결정할 수 있는 기능 구현
-// 회원 이름을 수정하고 그 정보를 데이터 베이스에 전송하는 기능
+
+

@@ -7,6 +7,11 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        
+        // 이전에 저장한 알람 시간이 있다면 설정된 시간으로 DatePicker를 초기화합니다.
+        if let alarmTime = UserDefaults.standard.object(forKey: "alarmTime") as? Date {
+            datePicker.date = alarmTime
+        }
     }
     
     @IBOutlet weak var setAlarmSwitch: UISwitch!

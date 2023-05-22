@@ -42,6 +42,7 @@
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
 		CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD129C9D055008A9466 /* mothlyViewController.swift */; };
 		CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */; };
+		FE3C8B8F2A137BFE00CDADDF /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */; };
 		FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */; };
 		FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */; };
 		FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90C38329A23492008B88A2 /* MoreViewController.swift */; };
@@ -113,6 +114,7 @@
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
 		CCC30CD129C9D055008A9466 /* mothlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyViewController.swift; sourceTree = "<group>"; };
 		CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
+		FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
 		FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLblViewController.swift; sourceTree = "<group>"; };
 		FE80442629DAE69000D1C9A5 /* EGO.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EGO.entitlements; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				CC838FA829D304040007E91B /* diaryListTableViewCell.swift */,
 				CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */,
 				CCC30CD129C9D055008A9466 /* mothlyViewController.swift */,
+				FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */,
 				CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */,
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
 				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
@@ -532,6 +535,7 @@
 				4E64E09F2980DE0400124F56 /* ViewController.swift in Sources */,
 				CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */,
 				4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */,
+				FE3C8B8F2A137BFE00CDADDF /* ChangeNicknameViewController.swift in Sources */,
 				4E4CCE802A111BF200139248 /* FirbaseManager.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
 				FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */,
@@ -731,7 +735,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z9S6MZGC9J;
+				DEVELOPMENT_TEAM = WJ3K66N7V7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -769,7 +773,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z9S6MZGC9J;
+				DEVELOPMENT_TEAM = WJ3K66N7V7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
