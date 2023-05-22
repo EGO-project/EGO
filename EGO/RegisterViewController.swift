@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var lblNickNameError: UILabel!
     @IBOutlet weak var lblPasswordError: UILabel!
     @IBOutlet weak var lblPasswordCheckError: UILabel!
-
+    
     @IBOutlet weak var btnRegister: UIButton!
     @IBOutlet weak var btnIdCheck: UIButton!
     
@@ -31,7 +31,7 @@ class RegisterViewController: UIViewController {
         btnRegister.setTitle("회원가입", for: .normal)
         btnRegister.setTitleColor(UIColor(hexCode: "959595"), for: .normal)
         btnRegister.tintColor = UIColor(hexCode: "FFF3C7")
-
+        
         btnIdCheck.tintColor = UIColor(hexCode: "FFC965")
         btnIdCheck.setTitle("중복확인", for: .normal)
         
@@ -42,7 +42,7 @@ class RegisterViewController: UIViewController {
         lblNickNameError.text = ""
         lblPasswordError.text = ""
         lblPasswordCheckError.text = ""
-
+        
         fieldPassword.isSecureTextEntry = true
         fieldPasswordCheck.isSecureTextEntry = true
         // Do any additional setup after loading the view.
@@ -69,6 +69,7 @@ class RegisterViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func register(_ sender: Any) {
         
         guard let email = fieldEmail.text else{
@@ -85,7 +86,7 @@ class RegisterViewController: UIViewController {
         
         guard let password = fieldPassword.text else{
             lblPasswordError.text = "비밀번호를 입력해주세요"
-
+            
             return
         }
         guard let passwordCheck = fieldPasswordCheck.text else{
@@ -96,64 +97,88 @@ class RegisterViewController: UIViewController {
             lblPasswordCheckError.text = "비밀번호가 일치하지 않습니다"
             return
         }
-        if isPasswordValid(String(password)) == false {
-            print(password)
-            print(passwordCheck)
-            lblPasswordError.text = "비밀번호는 영문 대소문자, 숫자, 특수문자를 포함한 8자 이상이어야 합니다"
-            return
+        
+        switch String(password){
+            case " ": lblPasswordError.text = "공백은 사용할 수 없습니다"
+                return
+            case ".": lblPasswordError.text = ".은 사용할 수 없습니다"
+                return
+            case "$": lblPasswordError.text = "$는 사용할 수 없습니다"
+                return
+            case "[": lblPasswordError.text = "[는 사용할 수 없습니다"
+                return
+            case "]": lblPasswordError.text = "]는 사용할 수 없습니다"
+                return
+            case "#": lblPasswordError.text = "#은 사용할 수 없습니다"
+                return
+            case "/": lblPasswordError.text = "/은 사용할 수 없습니다"
+                return
+            default:
+                if !isPasswordValid(String(password)) {
+                    lblPasswordError.text = "영문, 숫자, 특수문자를 포함한 8자 이상입니다."
+                    return
+                } else{
+                    print("비밀번호 유효성 검사 통과")
+                }
         }
-        Auth.auth().createUser(withEmail: email, password: password){
-           authResult, error in
-           guard let user = authResult?.user, error == nil else {
-               print("회원가입 실패: \(error!.localizedDescription)")
-               return
-           }
-           
-           // 인증 토큰 생성
-           user.getIDTokenForcingRefresh(true) { token, error in
-               guard error == nil else {
-                   print("토큰 생성 실패: \(error!.localizedDescription)")
-                   return
-               }
 
+        
+        
+        Auth.auth().createUser(withEmail: email, password: password){
+            authResult, error in
+
+            guard let user = authResult?.user, error == nil else {
+                print("회원가입 실패: \(error!.localizedDescription)")
+                return
+            }
+            
+            
+            // 인증 토큰 생성
+            user.getIDTokenForcingRefresh(true) { token, error in
+                guard error == nil else {
+                    print("토큰 생성 실패: \(error!.localizedDescription)")
+                    return
+                }
+                
                 // 이메일 주소 확인
                 user.sendEmailVerification { (error) in
                     if let error = error {
-                    print("이메일 인증 전송 실패: \(error.localizedDescription)")
-                    return
+                        print("이메일 인증 전송 실패: \(error.localizedDescription)")
+                        return
                     }
                     print("이메일 인증 전송 성공")
                 }
-               
-               // 생성된 토큰 사용
-               let tokenString = token!
-               print("토큰: \(tokenString)")
-               
-               // 파이어베이스 경로 문제로 인해 . 을 -로 치환
-               let safeEmail = email.replacingOccurrences(of: ".", with: "-")
-               FirebaseManager.shared.saveUserDataToFirebase(id: safeEmail, email: safeEmail, nickname: nickname, password: password)
-           }
-       }
+                
+                // 생성된 토큰 사용
+                let tokenString = token!
+                print("토큰: \(tokenString)")
+                
+                // 파이어베이스 경로 문제로 인해 . 을 -로 치환
+                let safeEmail = email.replacingOccurrences(of: ".", with: "-")
+                FirebaseManager.shared.saveUserDataToFirebase(id: safeEmail, email: safeEmail, nickname: nickname, password: password)
+                
+            }
+        }
     }
-
+    
     //비밀번호 유효성 검사
     func isPasswordValid(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[a-z])(?=.*\\d)(?=.*[@!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+        let passwordRegex = "^(?=.*[a-z])(?=.*\\d)(?=.*[@!%*?&])[A-Za-z\\d@$!%*?&]{8,}$" // 영문, 숫자, 특수문자 포함 8자리 이상
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return passwordTest.evaluate(with: password)
     }
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 // MARK - UIColor Extension

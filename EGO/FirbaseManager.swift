@@ -15,8 +15,6 @@ class FirebaseManager {
     
     private init() {}
     
-    
-    
     func login(email: String, passwd: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: passwd) { (user, error) in
             if user != nil {
@@ -113,7 +111,7 @@ class FirebaseManager {
             
             func generateUniqueFriendCode() {
                 let ranInt = Int.random(in: 00000...99999)
-                let friendCode = String(format: "#%05d", ranInt)
+                let friendCode = String(format: "@%05d", ranInt)
                 
                 let query = Database.database().reference().child("member").queryOrdered(byChild: "nickname").queryEqual(toValue: nickname)
                 query.observeSingleEvent(of: .value) { snapshot in
