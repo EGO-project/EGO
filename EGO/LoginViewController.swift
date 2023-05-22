@@ -19,6 +19,8 @@ import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
+    let LoginManager = FirebaseManager.shared
+    
     @IBOutlet weak var btnGoogleLogin: UIButton!
     @IBOutlet weak var btnAppleLogin: UIButton!
     @IBOutlet weak var btnKakaoLogin: UIButton!
@@ -27,7 +29,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnAutoLogin: UIButton!
     
     @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var passwd: UITextField!
+    @IBOutlet weak var password: UITextField!
     
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var bgLoginBox: UIView!
@@ -51,7 +53,7 @@ class LoginViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
-        passwd.isSecureTextEntry = true
+        password.isSecureTextEntry = true
     
     }
     
@@ -74,7 +76,7 @@ class LoginViewController: UIViewController {
             if UserDefaults.standard.bool(forKey: "auto") {
                 // 자동 로그인 활성화
                 if let email = UserDefaults.standard.string(forKey: "id"),
-                   let password = UserDefaults.standard.string(forKey: "passwd") {
+                   let password = UserDefaults.standard.string(forKey: "password") {
                     Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
                         guard let self else { return }
                         if let error {
@@ -105,11 +107,11 @@ class LoginViewController: UIViewController {
             // 자동 로그인 선택 시 로그인 하면서 uid, pwd 저장
             UserDefaults.standard.set(isAutoLogin, forKey: "auto")
             UserDefaults.standard.set(email.text, forKey: "id")
-            UserDefaults.standard.set(passwd.text, forKey: "passwd")
+            UserDefaults.standard.set(password.text, forKey: "password")
         } else {
             UserDefaults.standard.set(false, forKey: "auto")
             UserDefaults.standard.removeObject(forKey: "id")
-            UserDefaults.standard.removeObject(forKey: "passwd")
+            UserDefaults.standard.removeObject(forKey: "password")
         }
     }
     
@@ -127,7 +129,7 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(with: credential) { result, error in
                 guard let uid = result?.user.uid else { return }
                 
-                self?.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
+                FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
                 self?.moveToMainTabBarController()
             }
         }
@@ -157,7 +159,7 @@ class LoginViewController: UIViewController {
                 
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
-                self.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
+                FirebaseManager.shared.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
                 self.moveToMainTabBarController()
             }
         }
@@ -185,6 +187,22 @@ class LoginViewController: UIViewController {
         }
     }
 
+    @IBAction func emailLogin(_ sender: UIButton) {
+        guard let email = email.text, let password = password.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
+            if let error {
+                print("FB : login failed")
+                print(error.localizedDescription)
+                return
+            }
+            
+            print("FB : login success")
+            self.moveToMainTabBarController()
+        }
+    
+    }
+    
     func authenticateFirebase(withEmail email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if let error = error {
@@ -196,52 +214,6 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
-
-    func saveUserDataToFirebase(id: String, email: String, nickname: String) {
-        let databaseRef = Database.database().reference().child("member").child(id)
-        databaseRef.observeSingleEvent(of: .value) { snapshot in
-            guard !snapshot.exists() else {
-                print("이미 존재하는 아이디입니다.")
-                return
-            }
-            
-            func generateUniqueFriendCode() {
-                let ranInt = Int.random(in: 00000...99999)
-                let friendCode = String(format: "#%05d", ranInt)
-                
-                let query = Database.database().reference().child("member").queryOrdered(byChild: "nickname").queryEqual(toValue: nickname)
-                query.observeSingleEvent(of: .value) { snapshot in
-                    var isFriendCodeUnique = true
-                    
-                    for childSnapshot in snapshot.children {
-                        if let child = childSnapshot as? DataSnapshot,
-                           let childValue = child.value as? [String: Any],
-                           let childFriendCode = childValue["friendCode"] as? String {
-                            if childFriendCode == friendCode {
-                                isFriendCodeUnique = false
-                                break
-                            }
-                        }
-                    }
-                    
-                    if isFriendCodeUnique {
-                        let values = ["email": email, "nickname": nickname, "friendCode": friendCode]
-                        databaseRef.updateChildValues(values) { error, _ in
-                            guard error == nil else { return }
-                            print("DB : signup success")
-                        }
-                    } else {
-                        generateUniqueFriendCode()
-                    }
-                }
-            }
-            
-            generateUniqueFriendCode()
-        }
-    }
-
-
     
     //회원가입 화면으로 이동
     @IBAction func register(_ sender: Any) {
