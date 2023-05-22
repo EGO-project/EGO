@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6lg-KU-8D2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -288,7 +288,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tV9-rf-oiB">
-                                <rect key="frame" x="11" y="230" width="392" height="583"/>
+                                <rect key="frame" x="11" y="217" width="392" height="596"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -312,15 +312,19 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_사자" translatesAutoresizingMaskIntoConstraints="NO" id="ORl-MA-dPQ">
-                                                    <rect key="frame" x="109" y="35" width="60" height="60"/>
+                                                    <rect key="frame" x="100" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_다람쥐" translatesAutoresizingMaskIntoConstraints="NO" id="ktl-1W-a9n">
-                                                    <rect key="frame" x="186" y="35" width="60" height="60"/>
+                                                    <rect key="frame" x="164" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
-                                                    <rect key="frame" x="263" y="35" width="60" height="60"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_코알라" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
+                                                    <rect key="frame" x="228" y="35" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_사자" translatesAutoresizingMaskIntoConstraints="NO" id="6j1-PJ-Jgb">
+                                                    <rect key="frame" x="292" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -331,6 +335,7 @@
                                             <outlet property="friendsEgo2" destination="ORl-MA-dPQ" id="rV2-lG-4lP"/>
                                             <outlet property="friendsEgo3" destination="ktl-1W-a9n" id="zX4-tg-aOQ"/>
                                             <outlet property="friendsEgo4" destination="Lmv-hZ-XbR" id="7CP-WB-WIN"/>
+                                            <outlet property="friendsEgo5" destination="6j1-PJ-Jgb" id="RH4-YY-50U"/>
                                             <outlet property="friendsName" destination="Mtm-f4-qkG" id="4uW-OK-ON6"/>
                                         </connections>
                                     </tableViewCell>
@@ -410,7 +415,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zw-cu-BW5">
-                                <rect key="frame" x="29" y="151" width="80" height="70"/>
+                                <rect key="frame" x="29" y="148" width="80" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="공유" title=""/>
@@ -419,7 +424,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btr-SO-f3X">
-                                <rect key="frame" x="157" y="154" width="100" height="65"/>
+                                <rect key="frame" x="157" y="151" width="100" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="카카오" title=""/>
@@ -428,7 +433,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oK-Cl-heW">
-                                <rect key="frame" x="304" y="154" width="80" height="70"/>
+                                <rect key="frame" x="304" y="151" width="80" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="인스타" title=""/>
@@ -437,21 +442,21 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="새로운 친구 요청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9z-FX-GwN">
-                                <rect key="frame" x="22" y="256" width="333" height="21"/>
+                                <rect key="frame" x="22" y="253" width="333" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.79215681550000006" green="0.66274511810000003" blue="0.31372550129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="친구코드 공유하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ege-Aa-A9z">
-                                <rect key="frame" x="22" y="107" width="333" height="21"/>
+                                <rect key="frame" x="22" y="104" width="333" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.79215681550000006" green="0.66274511810000003" blue="0.31372550129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VYX-Ra-LVT">
-                                <rect key="frame" x="10" y="285" width="394" height="512"/>
+                                <rect key="frame" x="10" y="290" width="394" height="533"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -462,8 +467,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새친구 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9C-zl-iSS">
-                                                    <rect key="frame" x="80" y="15" width="302" height="44"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="새친구 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9C-zl-iSS">
+                                                    <rect key="frame" x="80" y="15" width="196" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="4Bl-FA-zC7"/>
                                                         <constraint firstAttribute="width" constant="265" id="8o5-BG-pzC"/>
@@ -479,6 +484,16 @@
                                                         <constraint firstAttribute="width" constant="53" id="nWx-aU-4KU"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
+                                                    <rect key="frame" x="338" y="20" width="56" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.badge.plus" catalog="system" title=" "/>
+                                                    <connections>
+                                                        <action selector="acceptBtn:" destination="ZVK-Dq-B6Z" eventType="touchUpInside" id="H0P-yd-OUX"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="j9C-zl-iSS" secondAttribute="bottom" constant="16" id="9ry-nj-gr1"/>
@@ -501,7 +516,17 @@
                         <viewLayoutGuide key="safeArea" id="Rs7-PN-pWK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="eSo-yo-OeG"/>
+                    <navigationItem key="navigationItem" id="eSo-yo-OeG">
+                        <barButtonItem key="backBarButtonItem" title=" " id="WeM-Fj-CbZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="jF5-I0-aoR">
+                            <imageReference key="image" image="person.crop.circle.badge.plus" catalog="system" symbolScale="large" variableValue="0.0"/>
+                            <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="addFriendBtn:" destination="Hpa-jp-2se" id="FFg-MU-eMZ"/>
+                                <segue destination="gZZ-de-zvJ" kind="show" identifier="addFriend" id="bqW-vL-NQo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="newFriendsTable" destination="VYX-Ra-LVT" id="1kY-M4-IdS"/>
                     </connections>
@@ -509,6 +534,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqB-5h-jZm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1185.5072463768117" y="766.74107142857144"/>
+        </scene>
+        <!--친구코드로 추가-->
+        <scene sceneID="CSz-AF-lXh">
+            <objects>
+                <viewController id="gZZ-de-zvJ" customClass="AddFriendViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cRh-wr-4gB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKa-ge-hm7">
+                                <rect key="frame" x="311" y="98" width="86" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98823529480000005" green="0.91372549530000002" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="친구추가">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addFriendCode:" destination="gZZ-de-zvJ" eventType="touchUpInside" id="cSx-I9-pMm"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="친구 코드를 입력하세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOs-u1-mjm">
+                                <rect key="frame" x="17" y="98" width="286" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98823529480000005" green="0.91372549530000002" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9W5-Mg-lwt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="친구코드로 추가" id="P8T-IP-GHN"/>
+                    <connections>
+                        <outlet property="addBtn" destination="tKa-ge-hm7" id="l3N-pK-4Fm"/>
+                        <outlet property="codeBox" destination="BOs-u1-mjm" id="5xW-dl-zaQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3qD-td-F5y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2060.8695652173915" y="765.40178571428567"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="sg5-QC-gyp">
@@ -2081,17 +2148,19 @@
         <image name="egg_다람쥐" width="200" height="200"/>
         <image name="egg_사자" width="200" height="200"/>
         <image name="egg_수달" width="200" height="200"/>
+        <image name="egg_코알라" width="200" height="200"/>
         <image name="egoBI" width="749" height="1564"/>
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
+        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
         <image name="rectangle" catalog="system" width="128" height="93"/>
         <image name="scribble.variable" catalog="system" width="128" height="119"/>
         <image name="공유" width="56" height="56"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
