@@ -93,7 +93,6 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             
-            
             // 새로운 친구요청 갯수와 목록 친구 코드 가져오기 : 테이블뷰에 사용
             self.ref.child("friendRequested").child("\(id)").observeSingleEvent(of: .value) { snapshot in
                 guard let value = snapshot.value else {

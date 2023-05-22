@@ -70,32 +70,30 @@ class AddFriendViewController: UIViewController {
         kakaoUser()
         
         
-        // 개발중
+        // 친구코드를 파이어베이스 친구추가요청 리스트에 추가하기 ============================================
         guard let myKakaoId = self.kakaoData?.kakaoId else { return }
-        
+
         // 이전에 저장된 friendCodes 배열을 가져옵니다.
         self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
             var friendCodes: [String] = []
-            
+
             if let existingFriendCodes = snapshot.value as? [String] {
                 friendCodes = existingFriendCodes
             }
-            
+
             // 중복된 코드와 공백을 제외한 문자열만 friendCodes 배열에 추가합니다.
             let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
             if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
                 friendCodes.append(trimmedCode)
             }
-            
+
             // 업데이트된 friendCodes 배열을 다시 저장합니다.
             self.ref.child("friendRequested").child("\(myKakaoId)").setValue(friendCodes)
         }
+        
 
 
-
-
-
-
+        
         
         // 2번 기능 : friend > 현재 사용자 id > memberId : 23dfjkeaowef 추가
         // 하윗값으로 상윗값 가져오기 : 친구 이름 알아내서
@@ -129,8 +127,6 @@ class AddFriendViewController: UIViewController {
         }
         
         
-        
-        
         // 친구 추가 성공 경고창
         func addSuccess() {
             let alertController = UIAlertController(title: "알림", message: "친구가 추가되었습니다.", preferredStyle: .alert)
@@ -149,7 +145,6 @@ class AddFriendViewController: UIViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
             return print("상위값 가져오기 실패")
-            
         }
     }
 }
