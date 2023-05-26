@@ -1,40 +1,26 @@
-//
-//  AddFriendViewController.swift
-//  EGO
-//
-//  Created by 황재하 on 5/15/23.
-//
-
 import UIKit
 import Firebase
 import FirebaseDatabase
-
 import KakaoSDKAuth
 import KakaoSDKUser
 
 class AddFriendViewController: UIViewController {
-    
-    // 파이어베이스 주소
     let ref = Database.database().reference()
     
-    // 파이어베이스 구조체
-    struct FirebaseData{
+    struct FirebaseData {
         var friendId: String?
         var friendNickname: String?
+        var myFriendCode: String?
     }
     
-    // 파이어베이스 구조체 멤버 변수
     var firebaseData: FirebaseData?
     
-    // 카카오톡 로그인시 현재 사용자 정보 저장 구조체
-    struct KakaoData{
-        var kakaoId: Int64 // 카카오톡 아이디
+    struct KakaoData {
+        var kakaoId: Int64
     }
     
-    // KakaoData 구조체 멤버 변수
     var kakaoData: KakaoData?
     
-    // 추가할 친구코드 처리 프로퍼티
     @IBOutlet weak var codeBox: UITextField!
     @IBOutlet weak var addBtn: UIButton!
     
@@ -42,154 +28,93 @@ class AddFriendViewController: UIViewController {
         super.viewDidLoad()
         codeBox.layer.cornerRadius = 10
         addBtn.layer.cornerRadius = 5
-        
     }
     
-    // 친구코드 친구 추가 버튼
     @IBAction func addFriendCode(_ sender: Any) {
+        guard let code = codeBox.text else {
+            addFail()
+            return
+        }
         
-        // 1번 기능 : friend > 현재 사용자 id > @00000 추가
-        
-        // 추가할 친구코드
-        guard let code = codeBox.text else { print("친구코드 없음"); addFail(); return }
-        
-        // 현재 사용자 카카오톡 id가져오기
-        func kakaoUser() {
-            UserApi.shared.me { user, error in
-                guard error == nil else {
-                    print("카카오톡 정보 가져오지 못함")
-                    print(error!)
+        UserApi.shared.me { [weak self] user, error in
+            guard let self = self, error == nil, let id = user?.id else {
+                self?.addFail()
+                return
+            }
+            
+            self.kakaoData = KakaoData(kakaoId: id)
+            
+            self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { [weak self] snapshot in
+                guard let self = self,
+                      let friendNode = snapshot.value as? [String: Any],
+                      let friendId = friendNode.keys.first,
+                      let friendData = friendNode[friendId] as? [String: Any],
+                      let friendNickname = friendData["nickname"] as? String else {
+                    self?.addFail()
                     return
                 }
-                guard let id = user?.id else { return }
-                // 구조체 KakaoData에 사용자 카카오톡 id 저장
-                self.kakaoData = KakaoData(kakaoId: id)
-                // print(String(describing: self.kakaoData?.kakaoId))
-            }
-        }
-        kakaoUser()
-        
-        
-        // 친구코드를 파이어베이스 친구추가요청 리스트에 추가하기 ============================================
-
-        // 이전에 저장된 friendCodes 배열을 가져옵니다.
-//        self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
-//            var friendCodes: [String] = []
-//
-//            if let existingFriendCodes = snapshot.value as? [String] {
-//                friendCodes = existingFriendCodes
-//            }
-//
-//            // 중복된 코드와 공백을 제외한 문자열만 friendCodes 배열에 추가합니다.
-//            let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
-//            if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
-//                friendCodes.append(trimmedCode)
-//            }
-//
-//            // 업데이트된 friendCodes 배열을 다시 저장합니다.
-//            self.ref.child("friendRequested").child("\(myKakaoId)").setValue(friendCodes)
-//        }
-        
-        
-        // 중복된 코드 저장되지 않도록 개발해야함 ========================================================================================
-        guard let myKakaoId = self.kakaoData?.kakaoId else { return }
-
-        self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
-            var friendCodes: [String] = []
-
-            if let existingFriendCodes = snapshot.value as? [String] {
-                friendCodes = existingFriendCodes
-            }
-
-            let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
-                // 고유한 식별자(ID) 생성
-                let friendId = UUID().uuidString
-
-                // 새로운 친구 데이터를 생성하여 저장
-                let friendData: [String: Any] = [
-                    "code": trimmedCode
-                    // 다른 필드들도 추가 가능
-                ]
-                self.ref.child("friendRequested").child("\(myKakaoId)").child(friendId).setValue(friendData)
-            }
-        }
-        
-        // 친구요청리스트 가져오기
-        self.ref.child("friendRequested").child("\(myKakaoId)").observeSingleEvent(of: .value) { snapshot in
-            if let friendDataDict = snapshot.value as? [String: Any] {
-                for friendId in friendDataDict.keys {
-                    if let friendData = friendDataDict[friendId] as? [String: Any],
-                       let code = friendData["code"] as? String {
-                        // 파이어베이스에서 가져온 데이터 사용
-                        print("개발중!!! Friend ID: \(friendId), Code: \(code)")
+                
+                self.firebaseData = FirebaseData()
+                self.firebaseData?.friendId = friendId
+                self.firebaseData?.friendNickname = friendNickname
+                
+                self.ref.child("friendRequested").child(friendId).observeSingleEvent(of: .value) { [weak self] snapshot in
+                    guard let self = self else { return }
+                    
+                    var friendCodes: [String] = []
+                    if let existingFriendCodes = snapshot.value as? [String] {
+                        friendCodes = existingFriendCodes
+                    }
+                    
+                    let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    if !trimmedCode.isEmpty && !friendCodes.contains(trimmedCode) {
+                        let friendRequestId = UUID().uuidString
+                        
+                        guard let myKakaoId = self.kakaoData?.kakaoId else {
+                            self.addFail()
+                            return
+                        }
+                        
+                        self.ref.child("member").child("\(myKakaoId)").child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot in
+                            guard let self = self, let value = snapshot.value as? String else {
+                                self?.addFail()
+                                return
+                            }
+                            
+                            let friendData: [String: Any] = [
+                                "frCode": value,
+                                "frId": myKakaoId,
+                                "frOnlyCode" : friendRequestId
+                                // 다른 필드들도 추가 가능
+                            ]
+                            
+                            self.ref.child("friendRequested").child(friendId).child(friendRequestId).setValue(friendData)
+                            self.addSuccess()
+                        }
+                    } else {
+                        self.addFail()
                     }
                 }
             }
         }
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // 2번 기능 : friend > 현재 사용자 id > memberId : 23dfjkeaowef 추가
-        // 하윗값으로 상윗값 가져오기 : 친구 이름 알아내서
-        self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
-            guard let friendNode = snapshot.value as? [String: Any],
-                  let friendId = friendNode.keys.first,
-                  let friendData = friendNode[friendId] as? [String: Any],
-                  let friendnickname = friendData["nickname"] as? String else {
-                // 친구 추가 실패 경고창
-                return addFail()
-            }
-            self.firebaseData = FirebaseData()
-            self.firebaseData?.friendId = friendId
-            self.firebaseData?.friendNickname = friendnickname
-            print("Friend Node: \(friendNode)")
-            print("Friend ID: \(friendId)")
-            print("Friend Nickname: \(friendnickname)")
-            
-            // 파이어베이스에 친구코드 추가
-            guard let mykakaoId = self.kakaoData?.kakaoId,
-                  let friendkakaoId = self.firebaseData?.friendId
-            else {return}
-            self.ref.child("friend").child("\(mykakaoId)").child("\(code)").setValue([
-                "favoriteState": "빔",
-                "memberId": friendkakaoId,
-                "publicState": "빔",
-                "state": "빔"
-            ])
-            // 친구 추가 성공 경고창
-            addSuccess()
-        }
-        
-        
-        // 친구 추가 성공 경고창
-        func addSuccess() {
-            let alertController = UIAlertController(title: "알림", message: "친구가 추가되었습니다.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.codeBox.text = "" // 텍스트 필드 초기화
-            })
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        // 친구 추가 실패 경고창
-        func addFail() {
-            let alertController = UIAlertController(title: "알림", message: "친구 코드가 올바르지 않습니다.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.codeBox.text = "" // 텍스트 필드 초기화
-            })
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-            return print("상위값 가져오기 실패")
-        }
+    }
+    
+    func addSuccess() {
+        let alertController = UIAlertController(title: "알림", message: "친구가 추가되었습니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.codeBox.text = ""
+        })
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func addFail() {
+        let alertController = UIAlertController(title: "알림", message: "친구 코드가 올바르지 않습니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.codeBox.text = ""
+        })
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
-
-

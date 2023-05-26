@@ -61,11 +61,11 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "addFriendCell", for: indexPath) as! AddSocialTableViewCell
-        cell.newName.text = friendRequestNickname[indexPath.row]
+        cell.newName.text = friendRequests[indexPath.row] // 친구 코드를 표시하도록 수정
         
         return cell
     }
-    
+
     
     
     // 파이어 베이스에서 친구코드 추출
@@ -77,30 +77,36 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
                 return
             }
             
-            guard let id = user?.id else {
-                return
-            }
+            guard let id = user?.id else { return }
             
-            // 현재 사용자 친구코드 가져오기
-            self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
-                print("\(snapshot)")
-                let value = snapshot.value as? String ?? ""
-                DispatchQueue.main.async {
-                    self.myCode = value
-                }
-            }
-            
+
             
             // 새로운 친구요청 갯수와 목록 친구 코드 가져오기 : 테이블뷰에 사용
             self.ref.child("friendRequested").child("\(id)").observeSingleEvent(of: .value) { snapshot in
-                guard let value = snapshot.value else {
-                    print("값을 가져올 수 없음")
-                    return
-                }
+                guard snapshot.value is [String: Any] else {
+                        print("값을 가져올 수 없습니다.")
+                        return
+                    }
+
+                    var codeArray: [String] = []
+
+                    for childSnapshot in snapshot.children {
+                        guard let child = childSnapshot as? DataSnapshot,
+                              let friend = child.value as? [String: Any],
+                              let frcode = friend["frCode"] as? String else {
+                            continue
+                        }
+                        codeArray.append(frcode)
+                    }
+
+                    // codeArray를 출력하거나 추출된 코드 값으로 다른 작업을 수행합니다.
+                    print("코드 배열: \(codeArray)")
                 
-                guard let newfriends = value as? [String] else { return }
-                
+                // 추출한 친구 코드 새로운 배열에 저장
+                let newfriends = codeArray
+
                 print("친구요청 리스트 : \(newfriends), \(newfriends.count)")
+                
                 
                 // 친구 요청 리스트를 저장한 후, 테이블 뷰를 새로고침합니다.
                 self.friendRequests = newfriends
@@ -225,10 +231,5 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
-    // 친구추가버튼
-    @IBAction func addFriendBtn(_ sender: Any) {
-    }
-    
 }
 

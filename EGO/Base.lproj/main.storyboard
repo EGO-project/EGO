@@ -490,11 +490,11 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
-                                                    <rect key="frame" x="338" y="20" width="56" height="35"/>
+                                                    <rect key="frame" x="351" y="20" width="43" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.badge.plus" catalog="system" title=" "/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="Group 32" title=" "/>
                                                     <connections>
                                                         <action selector="acceptBtn:" destination="ZVK-Dq-B6Z" eventType="touchUpInside" id="H0P-yd-OUX"/>
                                                     </connections>
@@ -2471,6 +2471,7 @@
         <image name="Ellipse 7" width="102" height="102"/>
         <image name="Ellipse 8" width="60" height="60"/>
         <image name="Group 30" width="30" height="30"/>
+        <image name="Group 32" width="33" height="33"/>
         <image name="Line" width="320" height="1"/>
         <image name="Line 7" width="330" height="1"/>
         <image name="Rectangle 10" width="154" height="53"/>
@@ -2495,8 +2496,8 @@
         <image name="공유" width="56" height="56"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
