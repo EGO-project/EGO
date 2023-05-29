@@ -28,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //파이어베이스 연결
         FirebaseApp.configure()
         
-        
+//        if #available(iOS 13.0, *) {
+//            window?.overrideUserInterfaceStyle = .light // 라이트 모드로 시작하도록 설정
+//        }
         
         // Override point for customization after application launch.
         if #available(iOS 11.0, *) {

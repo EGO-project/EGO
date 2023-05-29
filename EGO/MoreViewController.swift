@@ -46,7 +46,6 @@ class MoreViewController: UIViewController {
         }
     }
     
-    // 기존 코드와 동일하게 구현
     func myNameFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
         self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
@@ -59,7 +58,6 @@ class MoreViewController: UIViewController {
         }
     }
     
-    // 기존 코드와 동일하게 구현
     func myCodeFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
         self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
