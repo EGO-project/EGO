@@ -157,6 +157,10 @@ class RegisterViewController: UIViewController {
                 let safeEmail = email.replacingOccurrences(of: ".", with: "-")
                 FirebaseManager.shared.saveUserDataToFirebase(id: safeEmail, email: safeEmail, nickname: nickname, password: password)
                 
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "Login") 
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: false, completion: nil)
             }
         }
     }

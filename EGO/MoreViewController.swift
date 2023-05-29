@@ -77,4 +77,18 @@ class MoreViewController: UIViewController {
         nextViewController.pNameLbl = profileName?.text
         nextViewController.pCodeLbl = profileCode.text
     }
+    
+    @IBAction func logout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.presentingViewController?.dismiss(animated: true){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "Login")
+                self.present(loginVC, animated: true, completion: nil)
+            }
+        
+        } catch let error {
+            print("로그아웃 에러", error)
+        }
+    }
 }
