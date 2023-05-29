@@ -55,6 +55,7 @@ class SettingViewController: UIViewController, UNUserNotificationCenterDelegate 
     @IBOutlet weak var darkModeButton: UIButton!
     @IBOutlet weak var lightModeButton: UIButton!
     
+    // 다크모드
     @objc func lightModeButtonPressed(_ sender: UIButton) {
         if #available(iOS 13.0, *) {
             guard let window = UIApplication.shared.keyWindow else {
