@@ -319,7 +319,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_수달" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-vE-K7p">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_사자" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-vE-K7p">
                                                     <rect key="frame" x="17" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -331,7 +331,7 @@
                                                     <rect key="frame" x="164" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_코알라" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="egg_다람쥐" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-hZ-XbR">
                                                     <rect key="frame" x="228" y="35" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -497,11 +497,11 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
-                                                    <rect key="frame" x="338" y="20" width="56" height="35"/>
+                                                    <rect key="frame" x="351" y="20" width="43" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.badge.plus" catalog="system" title=" "/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="Group 32" title=" "/>
                                                     <connections>
                                                         <action selector="acceptBtn:" destination="ZVK-Dq-B6Z" eventType="touchUpInside" id="H0P-yd-OUX"/>
                                                     </connections>
@@ -587,7 +587,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qD-td-F5y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060.8695652173915" y="765.40178571428567"/>
+            <point key="canvasLocation" x="1938" y="765"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="sg5-QC-gyp">
@@ -2494,6 +2494,7 @@
         <image name="Ellipse 7" width="102" height="102"/>
         <image name="Ellipse 8" width="60" height="60"/>
         <image name="Group 30" width="30" height="30"/>
+        <image name="Group 32" width="33" height="33"/>
         <image name="Line" width="320" height="1"/>
         <image name="Line 7" width="330" height="1"/>
         <image name="Rectangle 10" width="154" height="53"/>
@@ -2508,8 +2509,6 @@
         <image name="egg300" width="220" height="228"/>
         <image name="egg_다람쥐" width="200" height="200"/>
         <image name="egg_사자" width="200" height="200"/>
-        <image name="egg_수달" width="200" height="200"/>
-        <image name="egg_코알라" width="200" height="200"/>
         <image name="egoBI" width="749" height="1564"/>
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>

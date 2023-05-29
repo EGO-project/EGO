@@ -211,11 +211,11 @@
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
 				CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */,
 				4E646E2A29C2D45B00E68840 /* MainViewController.swift */,
-				FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */,
 				FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */,
+				FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */,
 				4C5063EE299B876700F8F3B8 /* SocialViewController.swift */,
-				FEA4F32029D98DEF00C6647A /* SettingViewController.swift */,
 				4C5063F0299B89A700F8F3B8 /* SocialTableViewCell.swift */,
+				FEA4F32029D98DEF00C6647A /* SettingViewController.swift */,
 				FE90C38B29A23D0D008B88A2 /* NoticeViewController.swift */,
 				FE90C38929A23A01008B88A2 /* ProfileViewController.swift */,
 				FE90C38329A23492008B88A2 /* MoreViewController.swift */,
@@ -356,7 +356,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					4E64E0962980DE0400124F56 = {
 						CreatedOnToolsVersion = 14.2;
@@ -552,7 +552,6 @@
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */,
 				4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */,
-				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */,

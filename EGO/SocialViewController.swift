@@ -70,15 +70,14 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
         
-        if indexPath.row < friendCode.count {
-            let friendCode = friendNickname[indexPath.row]
-            cell.friendsName.text = friendCode
-            // 이 외에 다른 셀 구성 요소에 friendCode를 활용할 수 있습니다.
+        if indexPath.row < friendNickname.count {
+            let friendName = friendNickname[indexPath.row]
+            cell.friendsName.text = friendName
+            // 이 외에 다른 셀 구성 요소에 friendName을 활용할 수 있습니다.
         }
-        
         return cell
     }
-    
+
     // 셀 높이 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100 + 10
