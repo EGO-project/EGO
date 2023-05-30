@@ -46,8 +46,15 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         socialTable.dataSource = self
         
         setupRefreshControl() // UIRefreshControl 설정
+        
+        // 카카오 로그인
         kakaoUser()
+
+        // 개인 이메일 로그인
+        updateUserInfo()
+        
     }
+    
     
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
@@ -127,6 +134,44 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+    
+    
+    
+    
+    
+ 
+    
+    
+    // 개인 이메일 로그인 사용자
+    func updateUserInfo() {
+        if let currentUser = Auth.auth().currentUser {
+            let safeEmail = currentUser.email?.replacingOccurrences(of: ".", with: "-") ?? ""
+            self.ref.child("member").child(safeEmail).observeSingleEvent(of: .value) { [weak self] snapshot  in
+                guard let self = self else { return }
+
+                let value = snapshot.value as? [String: Any] ?? [:]
+                let nickname = value["nickname"] as? String ?? ""
+                let friendCode = value["friendCode"] as? String ?? ""
+
+                print("개인 이메일 로그인 개발중 : \(nickname), \(friendCode)")
+
+                DispatchQueue.main.async {
+                    self.myTopName.text = nickname
+                    self.myTopCode.text = friendCode
+                }
+            }
+        } else {
+            // 사용자가 로그인되어 있지 않은 경우에 대한 처리
+            print("사용자가 로그인되어 있지 않습니다.")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     // 현재 사용자 카카오톡 데이터
     func kakaoUser() {
