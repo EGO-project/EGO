@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -1175,7 +1175,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="라이트 모드"/>
                                 <connections>
-                                    <action selector="lightModeButtonPressed:" destination="Mab-aC-pyN" eventType="touchUpInside" id="e7U-TM-PxY"/>
+                                    <action selector="lightModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="Pqe-rh-Cmc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGX-eJ-uDg">
@@ -1185,7 +1185,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다크 모드"/>
                                 <connections>
-                                    <action selector="darkModeButtonPressed:" destination="Mab-aC-pyN" eventType="touchUpInside" id="sJa-h2-Mjw"/>
+                                    <action selector="darkModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="BeH-dO-sNu"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLG-BC-MqU">
@@ -1232,9 +1232,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="Rsl-ct-GDJ"/>
                     <connections>
-                        <outlet property="darkModeButton" destination="qGX-eJ-uDg" id="fFI-NU-usf"/>
                         <outlet property="datePicker" destination="0lB-Uh-SnR" id="qIv-Id-dqF"/>
-                        <outlet property="lightModeButton" destination="kml-z0-JDH" id="Sl6-hN-Ox9"/>
                         <outlet property="setAlarmSwitch" destination="jw7-6g-ApT" id="ZdH-Kj-vzH"/>
                     </connections>
                 </viewController>
@@ -1802,7 +1800,7 @@
             <objects>
                 <viewController storyboardIdentifier="messageList" id="ccH-7Y-cjx" customClass="messageViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nad-JY-4Rs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-df-09X">
