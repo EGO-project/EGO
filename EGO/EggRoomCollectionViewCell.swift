@@ -1,19 +1,15 @@
 //
-//  EggRoomCollectionViewCell.swift
+//  EggRoomCollectionViewCell2.swift
 //  EGO
 //
-//  Created by bugon cha on 2023/05/27.
+//  Created by bugon cha on 2023/06/03.
 //
 
 import UIKit
 
 class EggRoomCollectionViewCell: UICollectionViewCell {
     
-
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var name: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }
+
