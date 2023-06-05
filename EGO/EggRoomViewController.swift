@@ -7,7 +7,7 @@
 
 import UIKit
 
-let imageNames = ["러그.png", "장식품", "벽장식", "창문", "벽지", "바닥"]
+let imageNames = ["Lug", "장식품", "벽장식", "창문", "벽지", "바닥"]
 
 class EggRoomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -22,13 +22,11 @@ class EggRoomViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EggRoomPDViewController" {
-            if let dest = segue.destination as? EggRoomPDViewController,
-               let cell = sender as? UICollectionViewCell,
-               let indexPath = Collection.indexPath(for: cell) {
-                let imageName = imageNames[indexPath.row]
-                dest.imageName = imageName
-            }
+        guard let dest = segue.destination as? EggRoomPDViewController else { return }
+        
+        if let indexPath = Collection.indexPathsForSelectedItems?.first {
+            let selectedItem = imageNames[indexPath.item]
+            dest.imageName = selectedItem
         }
     }
     

@@ -14,5 +14,6 @@ class EggRoomPDCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 }
