@@ -50,7 +50,7 @@ class eggAddViewController: UIViewController {
         
         let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", favoritestate: false)
         
-        let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainNC")
+        let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBar")
             mainView?.modalPresentationStyle = .fullScreen
         
         if eggName.text!.count == 0 {

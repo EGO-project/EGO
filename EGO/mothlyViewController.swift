@@ -11,17 +11,52 @@ import FSCalendar
 class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     @IBOutlet weak var calendar: FSCalendar!
-    @IBOutlet weak var headerLbl: UIStackView!
     
+    var currentPage: Date?
+    var today: Date = {
+        return Date()
+    }()
+        
+    var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ko_KR")
+        df.dateFormat = "yyyy년 M월"
+        return df
+    }()
+        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+            
+        setCalendarUI()
+    }
     
-    @IBAction func prev(_ sender: Any) {
-       // scrollsCurrentPage(isPrev: true)
+    func scrollCurrentPage(isPrev: Bool) {
+        let cal = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.month = isPrev ? -1 : 1
+            
+        self.currentPage = cal.date(byAdding: dateComponents, to: self.currentPage ?? self.today)
+        self.calendar.setCurrentPage(self.currentPage!, animated: true)
+    }
+    // 달력 넘기는 버튼
+    
+    @IBOutlet weak var headerLabel: UILabel!
+    
+    @IBAction func prev(_ sender: UIButton) {
+       scrollCurrentPage(isPrev: true)
+        print(dateFormatter)
+    }
+    
+    @IBAction func next(_ sender: UIButton) {
+        scrollCurrentPage(isPrev: false)
     }
     
     var selectedDate: Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.currentPage = self.today
         setCalendarUI()
         calendar.delegate = self
 
@@ -50,7 +85,10 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         //self.calendar.appearance.headerTitleFont = UIFont.SpoqaHanSans(type: .Bold, size: 20)
         calendar.appearance.headerTitleColor = UIColor(named: "FFFFFF")?.withAlphaComponent(0.9)
         calendar.appearance.headerTitleAlignment = .center
-        calendar.headerHeight = 100
+        calendar.headerHeight = 0
+        calendar.scope = .month
+        headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
+
         
         // 상단 요일을 한글로 변경
         calendar.calendarWeekdayView.weekdayLabels[0].text = "S"
@@ -70,6 +108,9 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.placeholderType = .none
     }
     
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+            self.headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
+        }
     
     
     // 당일 날짜 이후 선택 불가

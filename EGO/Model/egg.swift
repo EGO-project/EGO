@@ -60,8 +60,11 @@ class egg {
             else{ return }
             
             let databaseRef = Database.database().reference()
-            let eggRef = databaseRef.child("egg").child(String(id))
+            let eggRef = databaseRef.child("egg").child(String(id)).child(self.name)
+            let eggList = databaseRef.child("egglist").child(String(id)).child(self.name)
+            
             eggRef.setValue(self.toAnyObject())
+            eggList.setValue(self.name)
         }
     }
         

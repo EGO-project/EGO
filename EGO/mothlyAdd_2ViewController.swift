@@ -10,6 +10,11 @@ import UIKit
 class mothlyAdd_2ViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var categoryImg: UIImageView!
+    @IBOutlet weak var todayLabel: UILabel!
+    
+    var selectCategory : String = ""
+    
     
     @IBAction func backBut(_ sender: Any) {
         let backAlert = UIAlertController(title:"알림",message: "작성한 내용이 사라집니다. 뒤로 가시겠습니까?",preferredStyle: UIAlertController.Style.alert)
@@ -28,7 +33,7 @@ class mothlyAdd_2ViewController: UIViewController {
         let mothlyList = self.storyboard?.instantiateViewController(withIdentifier: "diaryList")
             mothlyList?.modalPresentationStyle = .fullScreen
         
-        let newDiary = diary(description: textView.text)
+        let newDiary = diary(description: textView.text, category: selectCategory)
         
         if textView.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -43,8 +48,7 @@ class mothlyAdd_2ViewController: UIViewController {
             //확인 버튼 만들기
             let ok = UIAlertAction(title: "확인", style: .default, handler: {
                 action in
-                newDiary.save(); // 내용 저장
-                
+                newDiary.save() // 내용 저장
                 self.present(mothlyList!, animated: true, completion: nil)
             })
             
@@ -59,7 +63,19 @@ class mothlyAdd_2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // 현재 날짜 가져오기
+        let currentDate = Date()
+        // 날짜를 원하는 형식으로 포맷
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let formattedDate = dateFormatter.string(from: currentDate)
+        // todayLabel에 날짜 표시
+        todayLabel.text = formattedDate
+
+        categoryImg.image = UIImage(named: selectCategory)
+        print(selectCategory)
+        print(type(of: selectCategory))
+
         // Do any additional setup after loading the view.
     }
     

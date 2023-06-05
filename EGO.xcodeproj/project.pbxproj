@@ -43,6 +43,7 @@
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
 		CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD129C9D055008A9466 /* mothlyViewController.swift */; };
 		CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */; };
+		CCD6F6FE2A20C39C00F8CBD9 /* changeDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6F6FD2A20C39C00F8CBD9 /* changeDiaryViewController.swift */; };
 		FE3C8B8F2A137BFE00CDADDF /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */; };
 		FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */; };
 		FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */; };
@@ -116,6 +117,7 @@
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
 		CCC30CD129C9D055008A9466 /* mothlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyViewController.swift; sourceTree = "<group>"; };
 		CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
+		CCD6F6FD2A20C39C00F8CBD9 /* changeDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changeDiaryViewController.swift; sourceTree = "<group>"; };
 		FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
 		FE6F2B2029EC1822007DD6AC /* NoticeLblViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLblViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				4E64E09C2980DE0400124F56 /* SceneDelegate.swift */,
 				4E64E09E2980DE0400124F56 /* ViewController.swift */,
 				4E64E0A02980DE0400124F56 /* Main.storyboard */,
+				CCD6F6FD2A20C39C00F8CBD9 /* changeDiaryViewController.swift */,
 				4C0F43B92A12798A008F70DE /* AddFriendViewController.swift */,
 				89A04B062A1B26F40004D4A0 /* FriedEggViewController.swift */,
 				4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */,
@@ -551,6 +554,7 @@
 				4C0F43BA2A12798A008F70DE /* AddFriendViewController.swift in Sources */,
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */,
+				CCD6F6FE2A20C39C00F8CBD9 /* changeDiaryViewController.swift in Sources */,
 				4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */,
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,
 				4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */,
