@@ -15,14 +15,15 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+import AuthenticationServices
+import CryptoKit
 
-
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     let LoginManager = FirebaseManager.shared
     
     @IBOutlet weak var btnGoogleLogin: UIButton!
-    @IBOutlet weak var btnAppleLogin: UIButton!
+    @IBOutlet weak var btnAppleLogin: ASAuthorizationAppleIDButton!
     @IBOutlet weak var btnKakaoLogin: UIButton!
     @IBOutlet weak var btnRegister: UIButton!
     @IBOutlet weak var btnLogin: UIButton!
@@ -34,6 +35,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var bgLoginBox: UIView!
     
+    private var currentNonce: String?
+    
     var isAutoLogin : Bool? = false
     
     override func viewDidLoad() {
@@ -41,7 +44,6 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         btnKakaoLogin.setTitle("", for: .normal)
-        btnAppleLogin.setTitle("", for: .normal)
         btnGoogleLogin.setTitle("", for: .normal)
         btnRegister.setTitle("회원가입", for: .normal)
         btnLogin.setTitle("로그인", for: .normal)
@@ -54,14 +56,16 @@ class LoginViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         password.isSecureTextEntry = true
+        
+        btnAppleLogin.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
     
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if UserDefaults.standard.bool(forKey: "auto") == true{
-//            autoLoginCheck(btnAutoLogin)
-//            autoLogin()
+            autoLoginCheck(btnAutoLogin)
+            autoLogin()
         }
     }
     
@@ -109,7 +113,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(email.text, forKey: "id")
             UserDefaults.standard.set(password.text, forKey: "password")
         } else {
-            UserDefaults.standard.set(false, forKey: "auto")
+            UserDefaults.standard.set(isAutoLogin, forKey: "auto")
             UserDefaults.standard.removeObject(forKey: "id")
             UserDefaults.standard.removeObject(forKey: "password")
         }
@@ -130,6 +134,7 @@ class LoginViewController: UIViewController {
                 guard let uid = result?.user.uid else { return }
                 
                 FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
+                UserDefaults.standard.set(user.profile?.imageURL(withDimension: 100), forKey: "profileImage")
                 self?.moveToMainTabBarController()
             }
         }
@@ -160,6 +165,7 @@ class LoginViewController: UIViewController {
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
                 FirebaseManager.shared.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
+                UserDefaults.standard.set(user?.kakaoAccount?.profileImageNeedsAgreement, forKey: "profileImage")
                 self.moveToMainTabBarController()
             }
         }
@@ -215,10 +221,95 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @objc func handleAppleIdRequest() {
+           let appleIDProvider = ASAuthorizationAppleIDProvider()
+           let request = appleIDProvider.createRequest()
+           request.requestedScopes = [.fullName, .email]
+           
+           // Generate nonce for validation after sign in
+           currentNonce = randomNonceString()
+           request.nonce = sha256(currentNonce!)
+
+           let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+           authorizationController.delegate = self
+           authorizationController.presentationContextProvider = self
+           authorizationController.performRequests()
+       }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let nonce = currentNonce else {
+                fatalError("잘못된 상태: 로그인 콜백이 수신되었지만 로그인 요청이 전송되지 않았습니다.")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("identity 토큰을 가져올 수 없음")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("데이터에서 토큰 문자열을 직렬화할 수 없음: \(appleIDToken.debugDescription)")
+                return
+            }
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if (authResult?.user) != nil {
+                    // 로그인이 성공했으므로 다음 화면으로 이동.
+                    self.moveToMainTabBarController()
+                }
+            }
+        }
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: Array<Character> =
+            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+
+        return result
+    }
+    
+    @available(iOS 13, *)
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashed = SHA256.hash(data: inputData)
+        let hashString = hashed.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+
+        return hashString
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("애플 로그인에 에러 발생: \(error)")
+    }
+    
     //회원가입 화면으로 이동
     @IBAction func register(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let registerVC = storyboard.instantiateViewController(withIdentifier: "RegisterVC")
+        let registerVC = storyboard.instantiateViewController(withIdentifier: "Register")
         self.present(registerVC, animated: true, completion: nil)
     }
     
@@ -228,6 +319,12 @@ class LoginViewController: UIViewController {
         let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBar") as! UITabBarController
         mainTabBarVC.modalPresentationStyle = .fullScreen
         self.present(mainTabBarVC, animated: false, completion: nil)
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
 

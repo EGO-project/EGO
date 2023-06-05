@@ -46,7 +46,6 @@ class MoreViewController: UIViewController {
         }
     }
     
-    // 기존 코드와 동일하게 구현
     func myNameFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
         self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
@@ -59,7 +58,6 @@ class MoreViewController: UIViewController {
         }
     }
     
-    // 기존 코드와 동일하게 구현
     func myCodeFB() {
         let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
         self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
@@ -76,5 +74,19 @@ class MoreViewController: UIViewController {
         guard let nextViewController: ProfileViewController = segue.destination as? ProfileViewController else {return}
         nextViewController.pNameLbl = profileName?.text
         nextViewController.pCodeLbl = profileCode.text
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.presentingViewController?.dismiss(animated: true){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "Login")
+                self.present(loginVC, animated: true, completion: nil)
+            }
+        
+        } catch let error {
+            print("로그아웃 에러", error)
+        }
     }
 }
