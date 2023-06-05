@@ -71,4 +71,18 @@ class FirebaseManager {
         }
     }
     
+    //회원탈퇴
+    func withdrawl(id: String, completion: @escaping (Error?) -> Void) {
+        let databaseRef = Database.database().reference().child("member").child(id)
+        
+        databaseRef.removeValue { (error, _) in //실시간 데이터베이스에서 삭제
+            if let error = error {
+                completion(error)
+            } else {
+                Auth.auth().currentUser?.delete { error in //인증에서 삭제
+                    completion(error)
+                }
+            }
+        }
+    }
 }

@@ -14,6 +14,8 @@
 		4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */; };
 		4CCD70C12A03EA08007C38A9 /* AddSocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */; };
 		4CCD70C72A0413AD007C38A9 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */; };
+		4E2E7AE02A2D79D200A815EB /* WithdrawlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E7ADF2A2D79D200A815EB /* WithdrawlViewController.swift */; };
+		4E2E7AE22A2D814C00A815EB /* DeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */; };
 		4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */; };
 		4E4CCE802A111BF200139248 /* FirbaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4CCE7F2A111BF200139248 /* FirbaseManager.swift */; };
 		4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E5C328029B8447400E176B5 /* GoogleService-Info.plist */; };
@@ -80,6 +82,8 @@
 		4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSocialTableViewCell.swift; sourceTree = "<group>"; };
 		4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E2E7ADF2A2D79D200A815EB /* WithdrawlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawlViewController.swift; sourceTree = "<group>"; };
+		4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteViewController.swift; sourceTree = "<group>"; };
 		4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4E4CCE7F2A111BF200139248 /* FirbaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirbaseManager.swift; sourceTree = "<group>"; };
 		4E5C328029B8447400E176B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -227,8 +231,10 @@
 				4E659D3C29A3726200C7A917 /* LoginViewController.swift */,
 				4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */,
 				4E4CCE7F2A111BF200139248 /* FirbaseManager.swift */,
+				4E2E7ADF2A2D79D200A815EB /* WithdrawlViewController.swift */,
 				4ECA05F529B81DE100515698 /* Model */,
 				4ECA05F629B81DE800515698 /* ViewModel */,
+				4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */,
 			);
 			path = EGO;
 			sourceTree = "<group>";
@@ -541,8 +547,10 @@
 				4E646E2B29C2D45B00E68840 /* MainViewController.swift in Sources */,
 				FE3C8B8F2A137BFE00CDADDF /* ChangeNicknameViewController.swift in Sources */,
 				4E4CCE802A111BF200139248 /* FirbaseManager.swift in Sources */,
+				4E2E7AE02A2D79D200A815EB /* WithdrawlViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
 				FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */,
+				4E2E7AE22A2D814C00A815EB /* DeleteViewController.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
 				CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */,
 				CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */,

@@ -164,7 +164,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
-                FirebaseManager.shared.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
                 UserDefaults.standard.set(user?.kakaoAccount?.profileImageNeedsAgreement, forKey: "profileImage")
                 self.moveToMainTabBarController()
             }
@@ -209,17 +208,22 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     }
     
-    func authenticateFirebase(withEmail email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { _, error in
-            if let error = error {
+    func authenticateFirebase(withEmail email: String, password: String)  {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error {
                 print("FB : signup failed")
                 print(error)
                 Auth.auth().signIn(withEmail: email, password: password, completion: nil)
             } else {
                 print("FB : signup success")
+                // authResult.user를 사용하여 바로 유저 데이터 활용
+                if let user = authResult?.user {
+                    FirebaseManager.shared.saveUserDataToFirebase(id: user.uid, email: email, nickname: user.displayName ?? "")
+                }
             }
         }
     }
+
     
     @objc func handleAppleIdRequest() {
            let appleIDProvider = ASAuthorizationAppleIDProvider()

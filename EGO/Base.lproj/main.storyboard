@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -230,6 +230,9 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="로그아웃"/>
+                                <connections>
+                                    <action selector="logout:" destination="PtJ-JN-gpN" eventType="touchUpInside" id="Lpq-hr-IOQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJn-BS-FbS">
                                 <rect key="frame" x="16" y="503" width="341" height="35"/>
@@ -1316,10 +1319,10 @@
             </objects>
             <point key="canvasLocation" x="5314" y="1538"/>
         </scene>
-        <!--View Controller-->
+        <!--Delete View Controller-->
         <scene sceneID="53a-Zv-jqW">
             <objects>
-                <viewController id="4qK-hA-ULS" sceneMemberID="viewController">
+                <viewController id="4qK-hA-ULS" customClass="DeleteViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kt3-wx-Hha">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1448,7 +1451,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="탈퇴 계속하기"/>
                                 <connections>
-                                    <segue destination="7iO-7H-tdV" kind="show" id="aFF-Nv-3sA"/>
+                                    <action selector="moveToWithdrawl:" destination="4qK-hA-ULS" eventType="touchUpInside" id="x09-Zq-PuG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1461,10 +1464,10 @@
             </objects>
             <point key="canvasLocation" x="6447.6923076923076" y="1537.6777251184833"/>
         </scene>
-        <!--View Controller-->
+        <!--Withdrawl View Controller-->
         <scene sceneID="bWL-uI-LMG">
             <objects>
-                <viewController id="7iO-7H-tdV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Withdrawl" id="7iO-7H-tdV" customClass="WithdrawlViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tkd-cg-a2T">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1529,6 +1532,9 @@
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="계정 삭제하기"/>
+                                <connections>
+                                    <action selector="withdrawlButton:" destination="7iO-7H-tdV" eventType="touchUpInside" id="L59-cs-G5h"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Ellipse 21" translatesAutoresizingMaskIntoConstraints="NO" id="hxa-qe-hg2">
                                 <rect key="frame" x="7" y="640" width="44" height="25"/>
@@ -1802,7 +1808,7 @@
             <objects>
                 <viewController storyboardIdentifier="messageList" id="ccH-7Y-cjx" customClass="messageViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nad-JY-4Rs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-df-09X">
