@@ -22,18 +22,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 앱 시작 시 커스터마이징을 위한 오버라이드 포인트
-        
+
         // 카카오 로그인
         KakaoSDK.initSDK(appKey: "bbfabe81f9909eed954b792cadb0db1d")
-        
+
         // 파이어베이스 설정
         FirebaseApp.configure()
-        
+
         // 이전에 저장된 인터페이스 스타일 값을 가져와서 설정
-        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
-            setInterfaceStyle(storedStyle)
-        }
-        
+            if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+                updateInterfaceStyle(storedStyle)
+            } else {
+                // 저장된 스타일이 없을 경우 기본값 설정
+                updateInterfaceStyle("light")
+            }
+
         // 알림 설정
         if #available(iOS 11.0, *) {
             // 경고, 배지, 사운드를 사용하는 알림 환경 정보 생성 및 사용자 동의 여부 확인
@@ -45,23 +48,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
+
         return true
     }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // 앱이 꺼진 후 다시 켜졌을 때 설정된 모드를 바로 적용
+        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+            updateInterfaceStyle(storedStyle)
+        } else {
+            // 저장된 스타일이 없을 경우 기본값 설정
+            updateInterfaceStyle("light")
+        }
+    }
     
-    internal func setInterfaceStyle(_ style: String) {
+    private func updateInterfaceStyle(_ style: String) {
         if #available(iOS 13.0, *) {
-            switch style {
-            case "light":
-                interfaceStyle = .light
-            case "dark":
-                interfaceStyle = .dark
-            default:
-                interfaceStyle = .unspecified
-            }
-            
-            if let window = window {
-                window.overrideUserInterfaceStyle = interfaceStyle
+            if let tabBarController = window?.rootViewController as? UITabBarController,
+               let settingNavigationController = tabBarController.viewControllers?[2] as? UINavigationController,
+               let settingViewController = settingNavigationController.viewControllers.first as? SettingViewController {
+
+                switch style {
+                case "light":
+                    settingViewController.overrideUserInterfaceStyle = .light
+                case "dark":
+                    settingViewController.overrideUserInterfaceStyle = .dark
+                default:
+                    break
+                }
             }
         }
     }
@@ -157,4 +171,3 @@ extension URL {
         }
     }
 }
-
