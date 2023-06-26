@@ -18,37 +18,66 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
+    var interfaceStyle: UIUserInterfaceStyle = .unspecified
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        //카카오로그인
+        // 앱 시작 시 커스터마이징을 위한 오버라이드 포인트
+
+        // 카카오 로그인
         KakaoSDK.initSDK(appKey: "bbfabe81f9909eed954b792cadb0db1d")
-        
-        //파이어베이스 연결
+
+        // 파이어베이스 설정
         FirebaseApp.configure()
-        
-//        if #available(iOS 13.0, *) {
-//            window?.overrideUserInterfaceStyle = .light // 라이트 모드로 시작하도록 설정
-//        }
-        
-        // Override point for customization after application launch.
+
+        // 이전에 저장된 인터페이스 스타일 값을 가져와서 설정
+            if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+                updateInterfaceStyle(storedStyle)
+            } else {
+                // 저장된 스타일이 없을 경우 기본값 설정
+                updateInterfaceStyle("light")
+            }
+
+        // 알림 설정
         if #available(iOS 11.0, *) {
-            // 경고창 배지 사운드를 사용하는 알림 환경 정보를 생성하고, 사용자 동의여부 창을 실행
-            let notiCenter =  UNUserNotificationCenter.current()
-            notiCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (didAllow, e) in }
-            notiCenter.delegate = self // 이 코드는 사용자가 알림을 클릭하여 들어온 이벤트를 전달받기 위한 델리게이트 패턴구조
-            // 즉, 알림 센터와 관련하여 뭔가 사건이 발생하면 나(앱 델리게이트) 한테 알려줘 이런 의미임
-            /* 클로저 매개변수 설명
-             사용자가 메시지 창의 알림 동의 여부를 true / false
-             오류 발생시 사용하는 오류 발생 타입의 매개변수 e
-             */
+            // 경고, 배지, 사운드를 사용하는 알림 환경 정보 생성 및 사용자 동의 여부 확인
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (didAllow, error) in }
+            notificationCenter.delegate = self // 알림 이벤트를 수신하기 위한 델리게이트 설정
         } else {
-            // 경고창, 배지, 사운드를 사용하는 알림 환경 정보를 생성하고, 이를 애플리케이션에 저장.
-            let setting = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(setting) // 생성된 정보 애플리케이션에 등록
+            // 경고, 배지, 사운드를 사용하는 알림 환경 정보 생성 및 애플리케이션에 등록
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
         }
+
         return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // 앱이 꺼진 후 다시 켜졌을 때 설정된 모드를 바로 적용
+        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+            updateInterfaceStyle(storedStyle)
+        } else {
+            // 저장된 스타일이 없을 경우 기본값 설정
+            updateInterfaceStyle("light")
+        }
+    }
+    
+    private func updateInterfaceStyle(_ style: String) {
+        if #available(iOS 13.0, *) {
+            if let tabBarController = window?.rootViewController as? UITabBarController,
+               let settingNavigationController = tabBarController.viewControllers?[2] as? UINavigationController,
+               let settingViewController = settingNavigationController.viewControllers.first as? SettingViewController {
+
+                switch style {
+                case "light":
+                    settingViewController.overrideUserInterfaceStyle = .light
+                case "dark":
+                    settingViewController.overrideUserInterfaceStyle = .dark
+                default:
+                    break
+                }
+            }
+        }
     }
     
     // MARK: UISceneSession Lifecycle
@@ -67,33 +96,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     //구글로그인
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
+        return GIDSignIn.sharedInstance.handle(url)
     }
     
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        let handled = Auth.auth().canHandle(url)
-//        if handled {
-//            // URL이 Firebase Authentication으로 전달됩니다.
-//            return true
-//        }
-//        // URL이 Firebase Authentication으로 전달되지 않으면 다른 앱에서 열린 것입니다.
-//        return false
-//    }
-//
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
-//            if let verificationID = dynamicLink.url?.valueOf("verificationID") {
-//                let credential = EmailAuthProvider.credential(withVerificationID: verificationID, verificationCode: "")
-//                // Firebase 인증 작업 계속 수행
-//                // ...
-//                return true
-//            }
-//        }
-//        return false
-//    }
-
-
-
+    //    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    //        let handled = Auth.auth().canHandle(url)
+    //        if handled {
+    //            // URL이 Firebase Authentication으로 전달됩니다.
+    //            return true
+    //        }
+    //        // URL이 Firebase Authentication으로 전달되지 않으면 다른 앱에서 열린 것입니다.
+    //        return false
+    //    }
+    //
+    //    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    //        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+    //            if let verificationID = dynamicLink.url?.valueOf("verificationID") {
+    //                let credential = EmailAuthProvider.credential(withVerificationID: verificationID, verificationCode: "")
+    //                // Firebase 인증 작업 계속 수행
+    //                // ...
+    //                return true
+    //            }
+    //        }
+    //        return false
+    //    }
+    
+    
+    
 }
 
 
@@ -142,4 +171,3 @@ extension URL {
         }
     }
 }
-

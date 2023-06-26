@@ -1178,7 +1178,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="라이트 모드"/>
                                 <connections>
-                                    <action selector="lightModeButtonPressed:" destination="Mab-aC-pyN" eventType="touchUpInside" id="e7U-TM-PxY"/>
+                                    <action selector="lightModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="Pqe-rh-Cmc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGX-eJ-uDg">
@@ -1188,7 +1188,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다크 모드"/>
                                 <connections>
-                                    <action selector="darkModeButtonPressed:" destination="Mab-aC-pyN" eventType="touchUpInside" id="sJa-h2-Mjw"/>
+                                    <action selector="darkModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="BeH-dO-sNu"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLG-BC-MqU">
@@ -1235,9 +1235,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="Rsl-ct-GDJ"/>
                     <connections>
-                        <outlet property="darkModeButton" destination="qGX-eJ-uDg" id="fFI-NU-usf"/>
                         <outlet property="datePicker" destination="0lB-Uh-SnR" id="qIv-Id-dqF"/>
-                        <outlet property="lightModeButton" destination="kml-z0-JDH" id="Sl6-hN-Ox9"/>
                         <outlet property="setAlarmSwitch" destination="jw7-6g-ApT" id="ZdH-Kj-vzH"/>
                     </connections>
                 </viewController>
