@@ -154,7 +154,7 @@ class AddSocialTableViewCell: UITableViewCell {
                   let friendOnlycode = friendData["frOnlyCode"] as? String else { print("상윗값 가져오기 실패"); return } // 친구 추가 실패 경고창
             
             self.ref.child("friendRequested").child("\(id)").child("\(friendOnlycode)").removeValue(){ error, _ in
-                guard let error = error else {
+                guard error != nil else {
                     print("데이터 삭제 실패: \(String(describing: error?.localizedDescription))")
                     return
                 }
