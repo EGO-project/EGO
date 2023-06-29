@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -1243,7 +1243,7 @@
         <!--정보-->
         <scene sceneID="LaB-Tu-Piy">
             <objects>
-                <viewController id="iwA-cc-N5S" sceneMemberID="viewController">
+                <viewController id="iwA-cc-N5S" customClass="InformationViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mZV-WW-3Dl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1549,55 +1549,79 @@
             </objects>
             <point key="canvasLocation" x="7484.6153846153848" y="1537.6777251184833"/>
         </scene>
-        <!--View Controller-->
+        <!--이용약관-->
         <scene sceneID="CIK-gg-RYL">
             <objects>
-                <viewController id="Z73-sR-0GO" sceneMemberID="viewController">
+                <viewController id="Z73-sR-0GO" customClass="TermsOfUseViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J37-Ib-nIP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이용약관" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuZ-q5-1cl">
-                                <rect key="frame" x="166" y="117" width="59" height="21"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tmZ-2R-kxy">
+                                <rect key="frame" x="0.0" y="103" width="393" height="617"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbf-4m-ZGz">
+                                        <rect key="frame" x="0.0" y="18" width="393" height="584"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="PCn-vu-Txh"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="aEp-va-hLG"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y5g-LT-zNW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SSN-2h-tWn"/>
+                    <navigationItem key="navigationItem" title="이용약관" id="SSN-2h-tWn"/>
+                    <connections>
+                        <outlet property="scrollView" destination="tmZ-2R-kxy" id="r67-II-n6j"/>
+                        <outlet property="termsOfUseLabel" destination="Lbf-4m-ZGz" id="5e3-HE-NiY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUU-OB-H6I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4882" y="2298"/>
+            <point key="canvasLocation" x="4881.679389312977" y="2297.8873239436621"/>
         </scene>
-        <!--View Controller-->
+        <!--개인정보처리방침-->
         <scene sceneID="mDS-vI-nR2">
             <objects>
-                <viewController id="gSV-jV-7HQ" sceneMemberID="viewController">
+                <viewController id="gSV-jV-7HQ" customClass="PrivacyPolicyViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FTp-bV-YLs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
-                                <rect key="frame" x="136" y="115" width="118" height="21"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-tZ-evw">
+                                <rect key="frame" x="0.0" y="103" width="393" height="660"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
+                                        <rect key="frame" x="0.0" y="8" width="385" height="601"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="afg-TC-2TE"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="EBF-B7-KtL"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fmD-EP-d79"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LQN-te-jgU"/>
+                    <navigationItem key="navigationItem" title="개인정보처리방침" id="LQN-te-jgU"/>
+                    <connections>
+                        <outlet property="privacyLabel" destination="uem-fR-2QH" id="wK3-tB-5Pz"/>
+                        <outlet property="scrollView" destination="uyo-tZ-evw" id="bYC-NB-Grv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdX-XN-Xdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5768" y="2298"/>
+            <point key="canvasLocation" x="5765.6488549618316" y="2297.8873239436621"/>
         </scene>
         <!--Change Nickname View Controller-->
         <scene sceneID="wWA-FA-iSH">
@@ -2476,10 +2500,10 @@
         <image name="Rectangle 3" width="330" height="109"/>
         <image name="Rectangle 9" width="154" height="53"/>
         <image name="appleLogo" width="51" height="50"/>
-        <image name="arrow.backward" catalog="system" width="128" height="95"/>
-        <image name="checkmark.rectangle" catalog="system" width="128" height="93"/>
-        <image name="chevron.left" catalog="system" width="97" height="128"/>
-        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <image name="arrow.backward" catalog="system" width="32" height="32"/>
+        <image name="checkmark.rectangle" catalog="system" width="32" height="32"/>
+        <image name="chevron.left" catalog="system" width="32" height="32"/>
+        <image name="chevron.right" catalog="system" width="32" height="32"/>
         <image name="egg150" width="220" height="228"/>
         <image name="egg300" width="220" height="228"/>
         <image name="egg_다람쥐" width="200" height="200"/>
@@ -2488,14 +2512,14 @@
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
-        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
-        <image name="rectangle" catalog="system" width="128" height="93"/>
-        <image name="scribble.variable" catalog="system" width="128" height="119"/>
+        <image name="person.crop.circle.badge.plus" catalog="system" width="32" height="32"/>
+        <image name="rectangle" catalog="system" width="32" height="32"/>
+        <image name="scribble.variable" catalog="system" width="32" height="32"/>
         <image name="공유" width="56" height="56"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
