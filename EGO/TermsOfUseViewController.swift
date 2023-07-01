@@ -172,6 +172,5 @@ class TermsOfUseViewController: UIViewController {
     제1조(시행일)
     본 약관은 2023.07.19부터 시행됩니다.
 
-
 """
 }
