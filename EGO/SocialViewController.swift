@@ -166,12 +166,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
-    
-    
-    
-    
-    
+
     
     // 현재 사용자 카카오톡 데이터
     func kakaoUser() {

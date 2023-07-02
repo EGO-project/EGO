@@ -52,10 +52,6 @@ class AddSocialTableViewCell: UITableViewCell {
     }
     
     
-    
-    
-    
-    
     // 새로운 친구리스트의 친구 수락 버튼
     var acceptButtonAction: (() -> Void)?
     

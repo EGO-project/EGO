@@ -3,7 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -383,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHO-hB-BNF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.78260869565219" y="766.74107142857144"/>
+            <point key="canvasLocation" x="435" y="765"/>
         </scene>
         <!--Friend View Controller-->
         <scene sceneID="WHT-oF-YUa">
@@ -545,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqB-5h-jZm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1185.5072463768117" y="766.74107142857144"/>
+            <point key="canvasLocation" x="1206" y="765"/>
         </scene>
         <!--친구코드로 추가-->
         <scene sceneID="CSz-AF-lXh">
@@ -1756,7 +1756,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-7l-ZUB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2393.8461538461538" y="1537.6777251184833"/>
+            <point key="canvasLocation" x="3078" y="1538"/>
         </scene>
         <!--more-->
         <scene sceneID="yfi-9B-2Si">
@@ -2497,8 +2497,8 @@
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
