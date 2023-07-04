@@ -16,7 +16,7 @@ target 'EGO' do
 
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
-  /Users/bugoncha/Documents/EGO/EGO/detailViewController.swift  pod 'KakaoSDKUser'
+  pod 'KakaoSDKUser'
 
   pod 'KakaoSDKShare'    # 메시지(카카오링크)
   pod 'KakaoSDKTemplate' # 메시지 템플릿
@@ -27,6 +27,9 @@ target 'EGO' do
   
   #Google
   pod 'GoogleSignIn'
+
+  #Kingfisher
+  pod 'Kingfisher'
 
   # Pods for EGO
 

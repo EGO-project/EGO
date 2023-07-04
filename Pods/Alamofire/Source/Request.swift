@@ -219,7 +219,7 @@ public class Request {
     public var tasks: [URLSessionTask] { $mutableState.tasks }
     /// First `URLSessionTask` created on behalf of the `Request`.
     public var firstTask: URLSessionTask? { tasks.first }
-    /// Last `URLSessionTask` created on behalf of the `Request`.
+    /// Last `URLSessionTask` crated on behalf of the `Request`.
     public var lastTask: URLSessionTask? { tasks.last }
     /// Current `URLSessionTask` created on behalf of the `Request`.
     public var task: URLSessionTask? { lastTask }
@@ -1166,17 +1166,17 @@ public class DataRequest: Request {
     @discardableResult
     public func validate(_ validation: @escaping Validation) -> Self {
         let validator: () -> Void = { [unowned self] in
-            guard error == nil, let response = response else { return }
+            guard self.error == nil, let response = self.response else { return }
 
-            let result = validation(request, response, data)
+            let result = validation(self.request, response, self.data)
 
             if case let .failure(error) = result { self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error))) }
 
-            eventMonitor?.request(self,
-                                  didValidateRequest: request,
-                                  response: response,
-                                  data: data,
-                                  withResult: result)
+            self.eventMonitor?.request(self,
+                                       didValidateRequest: self.request,
+                                       response: response,
+                                       data: self.data,
+                                       withResult: result)
         }
 
         $validators.write { $0.append(validator) }
@@ -1337,18 +1337,18 @@ public final class DataStreamRequest: Request {
     @discardableResult
     public func validate(_ validation: @escaping Validation) -> Self {
         let validator: () -> Void = { [unowned self] in
-            guard error == nil, let response = response else { return }
+            guard self.error == nil, let response = self.response else { return }
 
-            let result = validation(request, response)
+            let result = validation(self.request, response)
 
             if case let .failure(error) = result {
                 self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
             }
 
-            eventMonitor?.request(self,
-                                  didValidateRequest: request,
-                                  response: response,
-                                  withResult: result)
+            self.eventMonitor?.request(self,
+                                       didValidateRequest: self.request,
+                                       response: response,
+                                       withResult: result)
         }
 
         $validators.write { $0.append(validator) }
@@ -1739,19 +1739,19 @@ public class DownloadRequest: Request {
     @discardableResult
     public func validate(_ validation: @escaping Validation) -> Self {
         let validator: () -> Void = { [unowned self] in
-            guard error == nil, let response = response else { return }
+            guard self.error == nil, let response = self.response else { return }
 
-            let result = validation(request, response, fileURL)
+            let result = validation(self.request, response, self.fileURL)
 
             if case let .failure(error) = result {
                 self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
             }
 
-            eventMonitor?.request(self,
-                                  didValidateRequest: request,
-                                  response: response,
-                                  fileURL: fileURL,
-                                  withResult: result)
+            self.eventMonitor?.request(self,
+                                       didValidateRequest: self.request,
+                                       response: response,
+                                       fileURL: self.fileURL,
+                                       withResult: result)
         }
 
         $validators.write { $0.append(validator) }

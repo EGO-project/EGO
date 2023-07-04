@@ -191,6 +191,7 @@ public final class RevocationTrustEvaluator: ServerTrustEvaluating {
     }
 }
 
+#if swift(>=5.5)
 extension ServerTrustEvaluating where Self == RevocationTrustEvaluator {
     /// Provides a default `RevocationTrustEvaluator` instance.
     public static var revocationChecking: RevocationTrustEvaluator { RevocationTrustEvaluator() }
@@ -217,6 +218,7 @@ extension ServerTrustEvaluating where Self == RevocationTrustEvaluator {
                                  options: options)
     }
 }
+#endif
 
 /// Uses the pinned certificates to validate the server trust. The server trust is considered valid if one of the pinned
 /// certificates match one of the server certificates. By validating both the certificate chain and host, certificate
@@ -281,6 +283,7 @@ public final class PinnedCertificatesTrustEvaluator: ServerTrustEvaluating {
     }
 }
 
+#if swift(>=5.5)
 extension ServerTrustEvaluating where Self == PinnedCertificatesTrustEvaluator {
     /// Provides a default `PinnedCertificatesTrustEvaluator` instance.
     public static var pinnedCertificates: PinnedCertificatesTrustEvaluator { PinnedCertificatesTrustEvaluator() }
@@ -308,6 +311,7 @@ extension ServerTrustEvaluating where Self == PinnedCertificatesTrustEvaluator {
                                          validateHost: validateHost)
     }
 }
+#endif
 
 /// Uses the pinned public keys to validate the server trust. The server trust is considered valid if one of the pinned
 /// public keys match one of the server certificate public keys. By validating both the certificate chain and host,
@@ -373,6 +377,7 @@ public final class PublicKeysTrustEvaluator: ServerTrustEvaluating {
     }
 }
 
+#if swift(>=5.5)
 extension ServerTrustEvaluating where Self == PublicKeysTrustEvaluator {
     /// Provides a default `PublicKeysTrustEvaluator` instance.
     public static var publicKeys: PublicKeysTrustEvaluator { PublicKeysTrustEvaluator() }
@@ -396,6 +401,7 @@ extension ServerTrustEvaluating where Self == PublicKeysTrustEvaluator {
         PublicKeysTrustEvaluator(keys: keys, performDefaultValidation: performDefaultValidation, validateHost: validateHost)
     }
 }
+#endif
 
 /// Uses the provided evaluators to validate the server trust. The trust is only considered valid if all of the
 /// evaluators consider it valid.
@@ -414,6 +420,7 @@ public final class CompositeTrustEvaluator: ServerTrustEvaluating {
     }
 }
 
+#if swift(>=5.5)
 extension ServerTrustEvaluating where Self == CompositeTrustEvaluator {
     /// Creates a `CompositeTrustEvaluator` from the provided evaluators.
     ///
@@ -422,6 +429,7 @@ extension ServerTrustEvaluating where Self == CompositeTrustEvaluator {
         CompositeTrustEvaluator(evaluators: evaluators)
     }
 }
+#endif
 
 /// Disables all evaluation which in turn will always consider any server trust as valid.
 ///
@@ -596,9 +604,9 @@ extension AlamofireExtension where ExtendedType == SecTrust {
         certificates.af.publicKeys
     }
 
+    #if swift(>=5.5.1) // Xcode 13.1 / 2021 SDKs.
     /// The `SecCertificate`s contained in `self`.
     public var certificates: [SecCertificate] {
-        #if swift(>=5.5.1) // Xcode 13.1 / 2021 SDKs.
         if #available(iOS 15, macOS 12, tvOS 15, watchOS 8, *) {
             return (SecTrustCopyCertificateChain(type) as? [SecCertificate]) ?? []
         } else {
@@ -606,12 +614,15 @@ extension AlamofireExtension where ExtendedType == SecTrust {
                 SecTrustGetCertificateAtIndex(type, index)
             }
         }
-        #else
+    }
+    #else
+    /// The `SecCertificate`s contained in `self`.
+    public var certificates: [SecCertificate] {
         (0..<SecTrustGetCertificateCount(type)).compactMap { index in
             SecTrustGetCertificateAtIndex(type, index)
         }
-        #endif
     }
+    #endif
 
     /// The `Data` values for all certificates contained in `self`.
     public var certificateData: [Data] {
@@ -704,11 +715,15 @@ extension AlamofireExtension where ExtendedType == SecCertificate {
 
         guard let createdTrust = trust, trustCreationStatus == errSecSuccess else { return nil }
 
+        #if swift(>=5.3.1) // SecTrustCopyKey not visible in Xcode <= 12.1, despite being a 2020 API.
         if #available(iOS 14, macOS 11, tvOS 14, watchOS 7, *) {
             return SecTrustCopyKey(createdTrust)
         } else {
             return SecTrustCopyPublicKey(createdTrust)
         }
+        #else
+        return SecTrustCopyPublicKey(createdTrust)
+        #endif
     }
 }
 

@@ -95,6 +95,7 @@ public struct GoogleXSSIPreprocessor: DataPreprocessor {
     }
 }
 
+#if swift(>=5.5)
 extension DataPreprocessor where Self == PassthroughPreprocessor {
     /// Provides a `PassthroughPreprocessor` instance.
     public static var passthrough: PassthroughPreprocessor { PassthroughPreprocessor() }
@@ -104,6 +105,7 @@ extension DataPreprocessor where Self == GoogleXSSIPreprocessor {
     /// Provides a `GoogleXSSIPreprocessor` instance.
     public static var googleXSSI: GoogleXSSIPreprocessor { GoogleXSSIPreprocessor() }
 }
+#endif
 
 extension ResponseSerializer {
     /// Default `DataPreprocessor`. `PassthroughPreprocessor` by default.
@@ -473,10 +475,12 @@ public struct URLResponseSerializer: DownloadResponseSerializerProtocol {
     }
 }
 
+#if swift(>=5.5)
 extension DownloadResponseSerializerProtocol where Self == URLResponseSerializer {
     /// Provides a `URLResponseSerializer` instance.
     public static var url: URLResponseSerializer { URLResponseSerializer() }
 }
+#endif
 
 extension DownloadRequest {
     /// Adds a handler using a `URLResponseSerializer` to be called once the request is finished.
@@ -534,6 +538,7 @@ public final class DataResponseSerializer: ResponseSerializer {
     }
 }
 
+#if swift(>=5.5)
 extension ResponseSerializer where Self == DataResponseSerializer {
     /// Provides a default `DataResponseSerializer` instance.
     public static var data: DataResponseSerializer { DataResponseSerializer() }
@@ -554,6 +559,7 @@ extension ResponseSerializer where Self == DataResponseSerializer {
                                emptyRequestMethods: emptyRequestMethods)
     }
 }
+#endif
 
 extension DataRequest {
     /// Adds a handler using a `DataResponseSerializer` to be called once the request has finished.
@@ -666,6 +672,7 @@ public final class StringResponseSerializer: ResponseSerializer {
     }
 }
 
+#if swift(>=5.5)
 extension ResponseSerializer where Self == StringResponseSerializer {
     /// Provides a default `StringResponseSerializer` instance.
     public static var string: StringResponseSerializer { StringResponseSerializer() }
@@ -690,6 +697,7 @@ extension ResponseSerializer where Self == StringResponseSerializer {
                                  emptyRequestMethods: emptyRequestMethods)
     }
 }
+#endif
 
 extension DataRequest {
     /// Adds a handler using a `StringResponseSerializer` to be called once the request has finished.
@@ -963,6 +971,7 @@ public final class DecodableResponseSerializer<T: Decodable>: ResponseSerializer
     }
 }
 
+#if swift(>=5.5)
 extension ResponseSerializer {
     /// Creates a `DecodableResponseSerializer` using the values provided.
     ///
@@ -985,6 +994,7 @@ extension ResponseSerializer {
                                        emptyRequestMethods: emptyRequestMethods)
     }
 }
+#endif
 
 extension DataRequest {
     /// Adds a handler using a `DecodableResponseSerializer` to be called once the request has finished.
@@ -1108,6 +1118,7 @@ public struct StringStreamSerializer: DataStreamSerializer {
     }
 }
 
+#if swift(>=5.5)
 extension DataStreamSerializer {
     /// Creates a `DecodableStreamSerializer` instance with the provided `DataDecoder` and `DataPreprocessor`.
     ///
@@ -1132,6 +1143,7 @@ extension DataStreamSerializer where Self == StringStreamSerializer {
     /// Provides a `StringStreamSerializer` instance.
     public static var string: StringStreamSerializer { StringStreamSerializer() }
 }
+#endif
 
 extension DataStreamRequest {
     /// Adds a `StreamHandler` which performs no parsing on incoming `Data`.
@@ -1172,7 +1184,7 @@ extension DataStreamRequest {
                                                                  on queue: DispatchQueue = .main,
                                                                  stream: @escaping Handler<Serializer.SerializedObject, AFError>) -> Self {
         let parser = { [unowned self] (data: Data) in
-            serializationQueue.async {
+            self.serializationQueue.async {
                 // Start work on serialization queue.
                 let result = Result { try serializer.serialize(data) }
                     .mapError { $0.asAFError(or: .responseSerializationFailed(reason: .customSerializationFailed(error: $0))) }
@@ -1212,7 +1224,7 @@ extension DataStreamRequest {
     public func responseStreamString(on queue: DispatchQueue = .main,
                                      stream: @escaping Handler<String, Never>) -> Self {
         let parser = { [unowned self] (data: Data) in
-            serializationQueue.async {
+            self.serializationQueue.async {
                 // Start work on serialization queue.
                 let string = String(decoding: data, as: UTF8.self)
                 // End work on serialization queue.
