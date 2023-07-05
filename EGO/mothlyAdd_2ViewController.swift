@@ -15,14 +15,32 @@ class mothlyAdd_2ViewController: UIViewController {
     
     var selectCategory : String = ""
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // 현재 날짜 가져오기
+        let currentDate = Date()
+        // 날짜를 원하는 형식으로 포맷
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let formattedDate = dateFormatter.string(from: currentDate)
+        // todayLabel에 날짜 표시
+        todayLabel.text = formattedDate
+
+        categoryImg.image = UIImage(named: "\(selectCategory).png")
+        print(selectCategory)
+        print(type(of: selectCategory))
+
+    }
+    
     
     @IBAction func backBut(_ sender: Any) {
         let backAlert = UIAlertController(title:"알림",message: "작성한 내용이 사라집니다. 뒤로 가시겠습니까?",preferredStyle: UIAlertController.Style.alert)
         let bCancle = UIAlertAction(title: "취소", style: .default, handler: nil)
-        
+
         let bOk = UIAlertAction(title: "확인", style: .default, handler: {
             action in self.dismiss(animated: true); })
-        
+
         backAlert.addAction(bOk)
         backAlert.addAction(bCancle)
         present(backAlert,animated: true,completion: nil)
@@ -58,36 +76,5 @@ class mothlyAdd_2ViewController: UIViewController {
             present(alert,animated: true,completion: nil)
         }
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // 현재 날짜 가져오기
-        let currentDate = Date()
-        // 날짜를 원하는 형식으로 포맷
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let formattedDate = dateFormatter.string(from: currentDate)
-        // todayLabel에 날짜 표시
-        todayLabel.text = formattedDate
-
-        categoryImg.image = UIImage(named: selectCategory)
-        print(selectCategory)
-        print(type(of: selectCategory))
-
-        // Do any additional setup after loading the view.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

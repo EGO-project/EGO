@@ -61,7 +61,12 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "addFriendCell", for: indexPath) as! AddSocialTableViewCell
-        cell.newName.text = friendRequests[indexPath.row] // 친구 코드를 표시하도록 수정
+        
+        if friendRequests.isEmpty {
+            cell.newName.text = "새친구가 없습니다."
+        } else {
+            cell.newName.text = friendRequests[indexPath.row] // 친구 코드를 표시하도록 수정
+        }
         
         return cell
     }
@@ -80,13 +85,28 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
             guard let id = user?.id else { return }
             
 
+                // 내 친구코드 저장하기 친구코드 복붙용
+                self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value){ snapshot in
+                    guard let frcode = snapshot.value as? String else { print("친구코드 못가져옴"); return}
+                    self.myCode = frcode
+                }
+            
+
             
             // 새로운 친구요청 갯수와 목록 친구 코드 가져오기 : 테이블뷰에 사용
             self.ref.child("friendRequested").child("\(id)").observeSingleEvent(of: .value) { snapshot in
                 guard snapshot.value is [String: Any] else {
-                        print("값을 가져올 수 없습니다.")
-                        return
+                    print("값을 가져올 수 없거나 새친구가 없습니다.")
+                    self.friendRequestNickname = ["새친구가 없습니다."]
+                    self.friendRequests = [] // 새로운 친구 요청이 없으므로 배열을 빈 배열로 초기화합니다.
+                    self.listCnt = 1 // 새친구가 없는 경우에도 "새친구가 없습니다." 라는 문구가 표시되도록 행의 갯수를 1로 설정합니다.
+                    
+                    DispatchQueue.main.async {
+                        self.newFriendsTable.reloadData()
                     }
+                    
+                    return
+                }
 
                     var codeArray: [String] = []
 
@@ -213,6 +233,10 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
     
     // 친구코드 복사 성공메세지
     func copyMSG() {
+        
+        
+  
+        
         UIPasteboard.general.string = "\(String(describing: myCode))"
         guard let mycode = UIPasteboard.general.string else {
             return print("값 없음")
@@ -232,4 +256,3 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         present(alert, animated: true, completion: nil)
     }
 }
-

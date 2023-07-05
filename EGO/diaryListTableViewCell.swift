@@ -12,5 +12,4 @@ class diaryListTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var categoryImg: UIImageView!
-    
 }

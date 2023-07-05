@@ -12,6 +12,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    func windowScene(_ windowScene: UIWindowScene, didConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+            // Scene이 연결되었을 때 다크 모드 및 라이트 모드 설정
+            if let window = self.window {
+                window.overrideUserInterfaceStyle = .light
+            }
+        }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

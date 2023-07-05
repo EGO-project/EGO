@@ -11,7 +11,6 @@ class mothlyAdd_1ViewController: UIViewController {
     
     
     @IBOutlet weak var todayLabel: UILabel!
-    
     @IBOutlet weak var categoryLabel: UILabel!
     
     var diaryCategory: String = ""
@@ -58,29 +57,25 @@ class mothlyAdd_1ViewController: UIViewController {
     }
     
     
-    @IBAction func backBut(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true)
-    }
-    
-    
     @IBAction func next(_ sender: Any) {
         
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "add_2")
         nextView?.modalPresentationStyle = .fullScreen
-        
+
         if diaryCategory == "" {
             let alert = UIAlertController(title:"경고",message: "카테고리를 선택하세요.",preferredStyle: UIAlertController.Style.alert)
-            
+
             let ok = UIAlertAction(title: "확인", style: .destructive, handler: nil)
-            
+
             alert.addAction(ok)
             present(alert,animated: true,completion: nil)
         } else {
             guard let nextVC = nextView as? mothlyAdd_2ViewController else { return }
-            nextVC.selectCategory = diaryCategory
+                nextVC.selectCategory = diaryCategory
                 self.present(nextVC, animated: true, completion: nil)
-            
         }
+
+        
     }
 
     override func viewDidLoad() {
@@ -98,17 +93,5 @@ class mothlyAdd_1ViewController: UIViewController {
         //Label에 날짜 표시
         todayLabel.text = formattedDate
     }
-        
-        
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
         
 }

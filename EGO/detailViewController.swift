@@ -15,25 +15,6 @@ class detailViewController: UIViewController {
     
     var selectDiary : diary!
     
-   
-    @IBAction func deBackBut(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
-    @IBAction func change(_ sender: Any) {
-        
-        performSegue(withIdentifier: "change", sender: nil)
-    }
-    
-    // segue 실행 전 전달하려는 데이터 set
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is changeDiaryViewController {
-            guard let vc = segue.destination as? changeDiaryViewController else { return }
-            if let selectDiary{ vc.changeDiary = selectDiary} else { print("실패") }
-        }
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,19 +31,15 @@ class detailViewController: UIViewController {
             detailCategory.image = img
         }
         else {print("nil")}
-
-        // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "change" { // segue 식별자에 따라 분기 처리
+                if let changeVC = segue.destination as? changeDiaryViewController {
+                    changeVC.changeDiary = selectDiary // 데이터 전달
+                } else {
+                    print("데이터 전달 실패")
+                }
+            }
+        }
     }
-    */
-
-}

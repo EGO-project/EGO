@@ -17,10 +17,9 @@ class changeDiaryViewController: UIViewController {
     
     @IBAction func changeOk(_ sender: Any) {
         
-        let detail = self.storyboard?.instantiateViewController(withIdentifier: "detail")
-            detail?.modalPresentationStyle = .fullScreen
+        guard let detail = self.storyboard?.instantiateViewController(identifier: "detail") as? detailViewController else { return }
         
-        //let changeDiary = diary(description: changeText.text ?? "", category: String)
+        let changeDiary = diary(description: changeText.text ?? "", category: changeDiary.category)
         
         if changeText.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -35,9 +34,10 @@ class changeDiaryViewController: UIViewController {
             //확인 버튼 만들기
             let ok = UIAlertAction(title: "확인", style: .default, handler: {
                 action in
-                
-                self.changeDiary.update(); // 내용 저장
-                self.present(detail!, animated: true, completion: nil)
+                self.changeDiary.description = self.changeText.text // 내용 수정
+                self.changeDiary.update() // 내용 저장
+                detail.selectDiary = changeDiary // 데이터 전달
+                self.navigationController?.popViewController(animated: true) // 이전 화면으로 돌아가기
             })
             
             alert.addAction(ok)
@@ -49,29 +49,17 @@ class changeDiaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         print(changeDiary)
         
         changeText.text = changeDiary.description
-                
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = dateFormatter.string(from: changeDiary.date)
         cDate.text = dateString
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+        
 }

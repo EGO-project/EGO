@@ -23,7 +23,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           diaryListView.delegate = self
 
       }
-      
+    // 파이어베이스에 저장된 diary정보 가져오기
     func fetchData() {
         UserApi.shared.me { user, error in
             guard let id = user?.id else {
@@ -43,7 +43,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                         self.diaryList.append(diary)
                     }
                 } else {
-                    print("데이터 스냅샷을 가져올 수 없습니다.")
+                    print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
                 }
               
                 self.diaryListView.reloadData()
@@ -81,7 +81,6 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           if segue.identifier == "detail" { // segue 식별자에 따라 분기 처리
               if let indexPath = diaryListView.indexPathForSelectedRow {
                   let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
-                  
                   if let detailVC = segue.destination as? detailViewController {
                       detailVC.selectDiary = selectedDiary // 데이터 전달
                   } else {

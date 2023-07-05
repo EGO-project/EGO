@@ -15,7 +15,7 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class egg {
-    // var calendarId : String
+
     var name : String
     var kind : String
     var state : String
@@ -23,7 +23,6 @@ class egg {
     var ref: DatabaseReference?
     
     init(name: String, kind: String, state: String, favoritestate: Bool) {
-        //self.calendarId = calendarId
         self.name = name
         self.kind = kind
         self.state = state
