@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -1607,10 +1607,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-tZ-evw">
-                                <rect key="frame" x="0.0" y="103" width="393" height="617"/>
+                                <rect key="frame" x="0.0" y="103" width="111" height="617"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
-                                        <rect key="frame" x="0.0" y="0.0" width="385" height="19.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="111" height="19.333333333333332"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="385" id="P7z-08-ulj"/>
                                         </constraints>
@@ -1623,7 +1623,7 @@
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="leading" secondItem="uyo-tZ-evw" secondAttribute="leading" id="DCP-cy-eYC"/>
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="top" secondItem="uyo-tZ-evw" secondAttribute="top" id="GUK-Zt-Msu"/>
                                     <constraint firstAttribute="bottom" secondItem="uem-fR-2QH" secondAttribute="bottom" constant="488.66666666666663" id="hfo-f7-rRN"/>
-                                    <constraint firstItem="uem-fR-2QH" firstAttribute="width" secondItem="uyo-tZ-evw" secondAttribute="width" multiplier="0.979644" id="m7u-4u-Ed4"/>
+                                    <constraint firstItem="uem-fR-2QH" firstAttribute="width" secondItem="uyo-tZ-evw" secondAttribute="width" id="m7u-4u-Ed4"/>
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="trailing" secondItem="uyo-tZ-evw" secondAttribute="trailingMargin" id="vzH-dj-hv2"/>
                                 </constraints>
                             </scrollView>
