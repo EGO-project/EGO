@@ -10,6 +10,7 @@ import Firebase
 
 class ProfileViewController: UIViewController {
     // 이전 MoreViewController에서 text 값을 받아오기 위한 변수
+    @IBOutlet weak var profile: UIImageView!
     var pNameLbl: String?
     var pCodeLbl: String?
     let ref = Database.database().reference()
@@ -24,6 +25,9 @@ class ProfileViewController: UIViewController {
         
         // 파이어베이스 데이터 변경 감지
         observeFirebaseChanges()
+        
+        // UserDefaults에서 프로필 이미지 로드
+        loadProfileImageFromDefaults()
         
     }
     
@@ -77,6 +81,34 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
+    func loadImageURLFromDefaults() -> String? {
+        let defaults = UserDefaults.standard
+        guard let profile = defaults.string(forKey: "profileImage") else {
+            print("Failed to load image from UserDefaults.")
+            return nil
+        }
+        
+        print(profile)
+        
+        return profile
+    }
+    
+    func loadProfileImageFromDefaults() {
+        guard let urlString = loadImageURLFromDefaults() else {
+            print("Failed to load image from UserDefaults.")
+            return
+        }
+                
+        guard let imageURL = URL(string: urlString) else {
+            print("Failed to convert string to URL.")
+            return
+        }
+        profile.kf.setImage(with: imageURL)
+        print(urlString)
+    }
+
+    
 }
 
 

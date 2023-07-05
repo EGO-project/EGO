@@ -228,10 +228,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+<<<<<<< HEAD
 		<key>KakaoSDKUser.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>21</integer>
+=======
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+>>>>>>> 6da5bd80a4fc17b37ab0a8c5a429b2819debe61b
 		</dict>
 		<key>Pods-EGO-EGOUITests.xcscheme</key>
 		<dict>

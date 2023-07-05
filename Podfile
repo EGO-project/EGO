@@ -28,6 +28,9 @@ target 'EGO' do
   #Google
   pod 'GoogleSignIn'
 
+  #Kingfisher
+  pod 'Kingfisher'
+
   # Pods for EGO
 
   target 'EGOTests' do

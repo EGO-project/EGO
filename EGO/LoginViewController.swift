@@ -18,6 +18,8 @@ import FirebaseDatabase
 import AuthenticationServices
 import CryptoKit
 
+import Kingfisher
+
 class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     let LoginManager = FirebaseManager.shared
@@ -58,7 +60,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         password.isSecureTextEntry = true
         
         btnAppleLogin.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-    
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -134,7 +136,12 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 guard let uid = result?.user.uid else { return }
                 
                 FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
-                UserDefaults.standard.set(user.profile?.imageURL(withDimension: 100), forKey: "profileImage")
+                
+                let profileImageURL = user.profile?.imageURL(withDimension: 100)
+                // 저장
+                print("Saving profile image URL: \(profileImageURL)")
+                UserDefaults.standard.set(profileImageURL?.absoluteString, forKey: "profileImage")
+                
                 self?.moveToMainTabBarController()
             }
         }
@@ -164,7 +171,18 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
+<<<<<<< HEAD
                 UserDefaults.standard.set(user?.kakaoAccount?.profileImageNeedsAgreement, forKey: "profileImage")
+=======
+                
+                guard let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl else { return }
+                UserDefaults.standard.set(profileImageUrl.absoluteString, forKey: "profileImage")
+                
+                // UIImage 뷰 또는 UIImageView에 Kingfisher를 사용하여 이미지 로드
+                let imageView: UIImageView = UIImageView()
+                imageView.kf.setImage(with: profileImageUrl)
+                
+>>>>>>> 6da5bd80a4fc17b37ab0a8c5a429b2819debe61b
                 self.moveToMainTabBarController()
             }
         }
@@ -191,7 +209,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             }
         }
     }
-
+    
     @IBAction func emailLogin(_ sender: UIButton) {
         guard let email = email.text, let password = password.text else { return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -205,7 +223,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             print("FB : login success")
             self.moveToMainTabBarController()
         }
-    
+        
     }
     
     func authenticateFirebase(withEmail email: String, password: String)  {
@@ -225,20 +243,21 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     }
 
     
+    
     @objc func handleAppleIdRequest() {
-           let appleIDProvider = ASAuthorizationAppleIDProvider()
-           let request = appleIDProvider.createRequest()
-           request.requestedScopes = [.fullName, .email]
-           
-           // Generate nonce for validation after sign in
-           currentNonce = randomNonceString()
-           request.nonce = sha256(currentNonce!)
-
-           let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-           authorizationController.delegate = self
-           authorizationController.presentationContextProvider = self
-           authorizationController.performRequests()
-       }
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        // Generate nonce for validation after sign in
+        currentNonce = randomNonceString()
+        request.nonce = sha256(currentNonce!)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
@@ -266,10 +285,10 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: Array<Character> =
-            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
         var result = ""
         var remainingLength = length
-
+        
         while remainingLength > 0 {
             let randoms: [UInt8] = (0 ..< 16).map { _ in
                 var random: UInt8 = 0
@@ -279,19 +298,19 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 }
                 return random
             }
-
+            
             randoms.forEach { random in
                 if remainingLength == 0 {
                     return
                 }
-
+                
                 if random < charset.count {
                     result.append(charset[Int(random)])
                     remainingLength -= 1
                 }
             }
         }
-
+        
         return result
     }
     
@@ -302,10 +321,10 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         let hashString = hashed.compactMap {
             return String(format: "%02x", $0)
         }.joined()
-
+        
         return hashString
     }
-
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("애플 로그인에 에러 발생: \(error)")
     }
