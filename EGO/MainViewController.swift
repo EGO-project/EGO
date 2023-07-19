@@ -5,23 +5,35 @@
 //  Created by 김민석 on 2023/03/16.
 //
 
+//import UIKit
+//import Firebase
+//import KakaoSDKUser
+
 import UIKit
-import Firebase
+import KakaoSDKShare
+import KakaoSDKTemplate
+import KakaoSDKCommon
+import SafariServices
+
+import KakaoSDKAuth
 import KakaoSDKUser
+import Firebase
+import FirebaseDatabase
 
 class MainViewController: UIViewController, UIScrollViewDelegate {
     
     
-    @IBOutlet weak var eggName: UILabel!
+    //    @IBOutlet weak var eggName: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var eggList : [egg] = []
-//    var images : [UIImage] = [] // 이미지 배열 선언
-    var images = [UIImage]()
+    var eggnames : [String] = []
+    var images : [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fetchData()
     }
     
     // 파이어베이스에 저장된 egg정보 가져오기
@@ -36,19 +48,25 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             let eggRef = databaseRef.child("egg").child(String(id))
             
             eggRef.observeSingleEvent(of: .value) { snapshot  in
-                self.eggList.removeAll() // 배열 초기화
+                self.eggnames.removeAll()
                 self.images.removeAll() // 이미지 배열 초기화
                 
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let egg = egg(snapshot: childSnapshot)
-                        self.eggList.append(egg)
                         
-                        if let image = UIImage(named: egg.kind) {
+                        if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
                             self.images.append(image)
                         } else {
                             print("이미지를 찾을 수 없습니다.")
                         }
+                        
+                        if let name : String? = egg.name{
+                            self.eggnames.append(name!)
+                        } else {
+                            print("알 이름을 찾을 수 없습니다.")
+                        }
+                        
                     }
                     
                     self.addContentScrollView()
@@ -59,23 +77,43 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-
+    
+    
+    
     
     //이미지를 담은 배열을 순회하며 이미지뷰를 생성. 이미지뷰의 위치와 크기를 설정, 할당. scrollView의 contentSize를 설정
     private func addContentScrollView() {
         for i in 0..<images.count {
+            
             let imageView = UIImageView()
+            let eggNameLabel = UILabel()
             let xPos = scrollView.frame.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPos, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
+            // 알 이름
+            eggNameLabel.frame = CGRect(x: xPos, y: 0, width: scrollView.bounds.width, height: 60)
+            eggNameLabel.text = eggnames[i]
+            eggNameLabel.font = UIFont.systemFont(ofSize: 20)
+            eggNameLabel.textAlignment = .center
+            scrollView.addSubview(eggNameLabel)
+            
+            // 알 이미지
+            imageView.frame = CGRect(x: xPos, y: 80, width: scrollView.bounds.width, height: 250)
             imageView.image = images[i]
             scrollView.addSubview(imageView)
+            
             scrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
+            
+            let monthlyAdd2VC = mothlyAdd_2ViewController()
+            monthlyAdd2VC.eggId = eggnames[i]
+            
+            print(eggnames[i])
+            
         }
     }
     
     //pageControl의 페이지 수를 이미지 배열의 크기로 설정
     func setPageControl() {
         pageControl.numberOfPages = images.count
+        
     }
     
     //현재 페이지를 pageControl의 currentPage 속성에 설정
@@ -88,6 +126,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         let value = scrollView.contentOffset.x / scrollView.frame.size.width
         setPageControlSelectedPage(currentPage: Int(round(value)))
     }
+    
     
 }
 

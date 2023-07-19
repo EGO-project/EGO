@@ -23,22 +23,22 @@ class eggAddViewController: UIViewController {
     @IBOutlet weak var eggImg: UIImageView!
     
     @IBAction func but1(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_다람쥐.png")
+        eggImg.image = UIImage(named:  "다람쥐_1단계.png")
         selectName = "다람쥐"
     }
     
     @IBAction func but2(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_사자.png")
+        eggImg.image = UIImage(named:  "사자_1단계.png")
         selectName = "사자"
     }
     
     @IBAction func but3(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_수달.png")
+        eggImg.image = UIImage(named:  "수달_1단계.png")
         selectName = "수달"
     }
     
     @IBAction func but4(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_코알라.png")
+        eggImg.image = UIImage(named:  "코알라_1단계.png")
         selectName = "코알라"
     }
     

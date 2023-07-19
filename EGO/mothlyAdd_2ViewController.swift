@@ -14,6 +14,7 @@ class mothlyAdd_2ViewController: UIViewController {
     @IBOutlet weak var todayLabel: UILabel!
     
     var selectCategory : String = ""
+    var eggId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +31,17 @@ class mothlyAdd_2ViewController: UIViewController {
         categoryImg.image = UIImage(named: "\(selectCategory).png")
         print(selectCategory)
         print(type(of: selectCategory))
+        
+        print(eggId)
 
     }
     
     
     @IBAction func backBut(_ sender: Any) {
-        let backAlert = UIAlertController(title:"알림",message: "작성한 내용이 사라집니다. 뒤로 가시겠습니까?",preferredStyle: UIAlertController.Style.alert)
-        let bCancle = UIAlertAction(title: "취소", style: .default, handler: nil)
+        let backAlert = UIAlertController(title:"알림",message: "이전으로 돌아가면 지금까지 작성한 글이 모두 사라져요 !",preferredStyle: UIAlertController.Style.alert)
+        let bCancle = UIAlertAction(title: "계속 작성", style: .default, handler: nil)
 
-        let bOk = UIAlertAction(title: "확인", style: .default, handler: {
+        let bOk = UIAlertAction(title: "뒤로가기", style: .default, handler: {
             action in self.dismiss(animated: true); })
 
         backAlert.addAction(bOk)
@@ -51,7 +54,7 @@ class mothlyAdd_2ViewController: UIViewController {
         let mothlyList = self.storyboard?.instantiateViewController(withIdentifier: "diaryList")
             mothlyList?.modalPresentationStyle = .fullScreen
         
-        let newDiary = diary(description: textView.text, category: selectCategory)
+        let newDiary = diary(eggId: eggId!, description: textView.text, category: selectCategory)
         
         if textView.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)

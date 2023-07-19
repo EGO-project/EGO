@@ -19,7 +19,7 @@ class changeDiaryViewController: UIViewController {
         
         guard let detail = self.storyboard?.instantiateViewController(identifier: "detail") as? detailViewController else { return }
         
-        let changeDiary = diary(description: changeText.text ?? "", category: changeDiary.category)
+        let changeDiary = diary(eggId: changeDiary.eggId, description: changeText.text ?? "", category: changeDiary.category)
         
         if changeText.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -57,7 +57,7 @@ class changeDiaryViewController: UIViewController {
         changeText.text = changeDiary.description
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy.MM.dd"
         let dateString = dateFormatter.string(from: changeDiary.date)
         cDate.text = dateString
     }
