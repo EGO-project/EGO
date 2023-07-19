@@ -19,9 +19,11 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     var eggList : [egg] = []
 //    var images : [UIImage] = [] // 이미지 배열 선언
     var images = [UIImage]()
+    var diaryList: [diary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("\(diaryList.count)")
     }
     
     // 파이어베이스에 저장된 egg정보 가져오기
@@ -33,16 +35,21 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             }
             
             let databaseRef = Database.database().reference()
+            let calenderRef = databaseRef.child("calender").child(String(id))
             let eggRef = databaseRef.child("egg").child(String(id))
             
             eggRef.observeSingleEvent(of: .value) { snapshot  in
                 self.eggList.removeAll() // 배열 초기화
                 self.images.removeAll() // 이미지 배열 초기화
+                self.diaryList.removeAll() // 배열 초기화
                 
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let egg = egg(snapshot: childSnapshot)
                         self.eggList.append(egg)
+                        
+                        let diary = diary(snapshot: childSnapshot)
+                        self.diaryList.append(diary)
                         
                         if let image = UIImage(named: egg.kind) {
                             self.images.append(image)
@@ -53,6 +60,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                     
                     self.addContentScrollView()
                     self.setPageControl()
+                    print("다이어리 리스트 : \(self.diaryList.count)")
                 } else {
                     print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
                 }

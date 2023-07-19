@@ -171,9 +171,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password)
-<<<<<<< HEAD
-                UserDefaults.standard.set(user?.kakaoAccount?.profileImageNeedsAgreement, forKey: "profileImage")
-=======
                 
                 guard let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl else { return }
                 UserDefaults.standard.set(profileImageUrl.absoluteString, forKey: "profileImage")
@@ -182,7 +179,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 let imageView: UIImageView = UIImageView()
                 imageView.kf.setImage(with: profileImageUrl)
                 
->>>>>>> 6da5bd80a4fc17b37ab0a8c5a429b2819debe61b
                 self.moveToMainTabBarController()
             }
         }

@@ -63,9 +63,9 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           cell.contentLabel?.text = diary.description
           
           let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+          dateFormatter.dateFormat = "yyyy.MM.dd"
           let dateString = dateFormatter.string(from: diary.date)
-          cell.dateLabel?.text = "\(diary.date)"
+          cell.dateLabel?.text = dateString
           
           cell.categoryImg.image = UIImage(named: "\(diary.category).png")
           

@@ -23,7 +23,7 @@ class detailViewController: UIViewController {
             detailText.text = selectDiary.description
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: selectDiary.date)
             detailDate.text = dateString
             
