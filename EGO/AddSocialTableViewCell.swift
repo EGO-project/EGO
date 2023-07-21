@@ -1,83 +1,45 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-import KakaoSDKAuth
-import KakaoSDKUser
-
 
 class AddSocialTableViewCell: UITableViewCell {
-    
-    
     
     @IBOutlet weak var newImage: UIImageView!
     @IBOutlet weak var newName: UILabel!
     
-    // 파이어베이스 주소
+    // Firebase reference
     let ref = Database.database().reference()
     
-    // 파이어베이스 구조체
-    struct FirebaseData{
+    // Firebase data structure
+    struct FirebaseData {
         var friendId: String?
         var friendNickname: String?
     }
     
-    // 파이어베이스 구조체 멤버 변수
+    // Firebase data struct member variable
     var firebaseData: FirebaseData?
     
-    // 카카오톡 로그인시 현재 사용자 정보 저장 구조체
-    struct KakaoData{
-        var kakaoId: Int64 // 카카오톡 아이디
-    }
-    
-    // KakaoData 구조체 멤버 변수
-    var kakaoData: KakaoData?
-    
-    // 현재 사용자 카카오톡 id가져오기
-    func kakaoUser() {
-        UserApi.shared.me { user, error in
-            guard error == nil else {
-                print("카카오톡 정보 가져오지 못함")
-                print(error!)
-                return
-            }
-            guard let id = user?.id else {
-                print("사용자 카카오톡 id 없음")
-                return
-            }
-            
-            // 구조체 KakaoData에 사용자 카카오톡 id 저장
-            self.kakaoData = KakaoData(kakaoId: id)
-            print("사용자 카카오톡 id: \(self.kakaoData?.kakaoId ?? 0)")
-        }
-    }
-    
-    
-    
-    
-    
-    
-    // 새로운 친구리스트의 친구 수락 버튼
+    // Accept button action closure
     var acceptButtonAction: (() -> Void)?
     
+    var refreshTableView: (() -> Void)?
+    
     @IBAction func acceptBtn(_ sender: UIButton) {
-        // 사용자 카카오 데이터 가져오기
-        self.kakaoUser()
-        
-        // 추가할 친구 코드
+        // Friend code to be added
         guard let code = newName.text else {
-            print("친구코드 없음")
+            print("Friend code not found")
             return
         }
-        print("새로운 친구 코드: \(code)")
+        print("New friend code: \(code)")
         
-        // 친구 이름으로 친구의 친구 코드 알아오기 : 하위값으로 상윗값 가져오기
+        // Retrieve friend's friend code using their name: querying child values
         self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
             guard let friendNode = snapshot.value as? [String: Any],
                   let friendId = friendNode.keys.first,
                   let friendData = friendNode[friendId] as? [String: Any],
                   let friendcode = friendData["friendCode"] as? String else {
-                // 친구 추가 실패 경고창
-                print("상윗값 가져오기 실패")
+                // Show failure alert for friend addition
+                print("Failed to retrieve friend's friend code")
                 return
             }
             
@@ -85,41 +47,47 @@ class AddSocialTableViewCell: UITableViewCell {
             self.firebaseData?.friendId = friendId
             self.firebaseData?.friendNickname = friendcode
             
-            // 파이어베이스에 친구코드 추가
-            guard let mykakaoId = self.kakaoData?.kakaoId,
-                  let friendkakaoId = self.firebaseData?.friendId else {
-                print("카카오 데이터 또는 Firebase 데이터가 nil입니다.")
+            // Add friend code to Firebase
+            guard let friendId = self.firebaseData?.friendId else {
+                print("Friend ID is nil")
                 return
             }
-            self.ref.child("friend").child("\(mykakaoId)").child("\(code)").setValue([
-                "favoriteState": "빔",
-                "memberId": friendkakaoId,
-                "publicState": "빔",
-                "state": "빔"
-            ])
             
-            // 친구 추가 완료 처리
+            guard let userId = Auth.auth().currentUser?.uid else {
+                // User is not logged in
+                print("User is not logged in.")
+                return
+            }
+            self.ref.child("friend").child(userId).child("\(friendId)").setValue([
+               "favoriteState": "0",
+               "code": friendcode,
+               "publicState": "0",
+               "state": "0"
+           ])
+            
+            // Show friend added alert
             self.showFriendAddedAlert()
             
-            // 추가된 친구 파이어베이스에서 삭제
+            // Remove added friend from Firebase
             self.firebaseUpdate()
-
+            
+            // Refresh the table view
+            self.refreshTableView?()
         }
     }
     
     private func showFriendAddedAlert() {
-        let alertController = UIAlertController(title: "친구 추가 완료", message: "친구가 추가되었습니다.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+        let alertController = UIAlertController(title: "Friend Added", message: "The friend has been added.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             self.acceptButtonAction?()
         }
         
         alertController.addAction(okAction)
         
         guard let viewController = self.parentViewController() else {
-            print("경고창을 표시할 뷰 컨트롤러를 찾을 수 없습니다.")
+            print("Could not find the view controller to display the alert.")
             return
         }
-        
         
         DispatchQueue.main.async {
             viewController.present(alertController, animated: true, completion: nil)
@@ -136,31 +104,27 @@ class AddSocialTableViewCell: UITableViewCell {
         }
         return nil
     }
-
-    // 추가된 친구 데이테 파이어베이스에서 삭제 함수
+    
+    // Function to remove the added friend data from Firebase
     func firebaseUpdate() {
-        kakaoUser()
-        guard let id = kakaoData?.kakaoId else { print("카카오 id값을 가져오는데 실패하였습니다."); return }
+        // Friend code to be removed
+        guard let code = newName.text else {
+            print("Friend code not found")
+            return
+        }
+        print("Friend code to be removed: \(code)")
         
-        // 삭제할 친구 코드
-        guard let code = newName.text else { print("친구코드 없음"); return }
-        print("삭제될 친구 코드: \(code)")
-        
-        // 친구 코드로 친구의 친구고유코드 알아오기 : 하위값으로 상윗값 가져오기
-        self.ref.child("friendRequested").child("\(id)").queryOrdered(byChild: "frCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
-            guard let friendNode = snapshot.value as? [String: Any],
-                  let friendId = friendNode.keys.first,
-                  let friendData = friendNode[friendId] as? [String: Any],
-                  let friendOnlycode = friendData["frOnlyCode"] as? String else { print("상윗값 가져오기 실패"); return } // 친구 추가 실패 경고창
+        // Retrieve friend's unique friend code using the friend code: querying child values
+        self.ref.child("friendRequested").queryOrdered(byChild: "frCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
             
-            self.ref.child("friendRequested").child("\(id)").child("\(friendOnlycode)").removeValue(){ error, _ in
-                guard error != nil else {
-                    print("데이터 삭제 실패: \(String(describing: error?.localizedDescription))")
-                    return
+            snapshot.ref.removeValue() { error, _ in
+                if let error = error {
+                    print("Failed to remove data: \(error.localizedDescription)")
+                } else {
+                    print("Data removed successfully")
+                    self.refreshTableView?()
                 }
-                print("데이터 삭제 성공")
             }
-            
         }
     }
 }

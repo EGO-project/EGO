@@ -170,7 +170,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 }
                 
                 let password = "\(id)"
-                self.authenticateFirebase(withEmail: email, password: password)
+                self.authenticateFirebase(withEmail: email, password: password, nickname: nickname)
                 
                 guard let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl else { return }
                 UserDefaults.standard.set(profileImageUrl.absoluteString, forKey: "profileImage")
@@ -222,21 +222,34 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         
     }
     
-    func authenticateFirebase(withEmail email: String, password: String)  {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let error {
-                print("FB : signup failed")
-                print(error)
-                Auth.auth().signIn(withEmail: email, password: password, completion: nil)
-            } else {
-                print("FB : signup success")
-                // authResult.user를 사용하여 바로 유저 데이터 활용
-                if let user = authResult?.user {
-                    FirebaseManager.shared.saveUserDataToFirebase(id: user.uid, email: email, nickname: user.displayName ?? "")
+    func authenticateFirebase(withEmail email: String, password: String, nickname: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                // 로그인에 실패한 경우
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        if let errorCode: Int? = (error as NSError).code, errorCode == AuthErrorCode.emailAlreadyInUse.rawValue {
+                            print("FB: signup failed - Email already in use")
+                        } else {
+                            print("FB: signup failed")
+                            print(error)
+                        }
+                    } else {
+                        print("FB: signup success")
+                        if let user = authResult?.user {
+                            FirebaseManager.shared.saveUserDataToFirebase(id: user.uid, email: email, nickname: nickname ?? "")
+                            self.moveToMainTabBarController()
+                        }
+                    }
                 }
+            } else {
+                print("FB: login success")
+                self.moveToMainTabBarController()
             }
         }
     }
+
+
     
     
     @objc func handleAppleIdRequest() {

@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333336"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -506,7 +506,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Group 32" title=" "/>
                                                     <connections>
-                                                        <action selector="acceptBtn:" destination="ZVK-Dq-B6Z" eventType="touchUpInside" id="H0P-yd-OUX"/>
+                                                        <action selector="acceptBtn:" destination="ZVK-Dq-B6Z" eventType="touchUpInside" id="sYU-uN-VQc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -537,7 +537,6 @@
                             <imageReference key="image" image="person.crop.circle.badge.plus" catalog="system" symbolScale="large" variableValue="0.0"/>
                             <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="addFriendBtn:" destination="Hpa-jp-2se" id="FFg-MU-eMZ"/>
                                 <segue destination="gZZ-de-zvJ" kind="show" identifier="addFriend" id="bqW-vL-NQo"/>
                             </connections>
                         </barButtonItem>
@@ -2595,8 +2594,8 @@
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="친구추가버튼" width="28" height="28"/>
         <image name="친구추가버튼" width="28" height="28"/>
+        <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
