@@ -10,28 +10,36 @@ import UIKit
 class detailViewController: UIViewController {
     
     @IBOutlet weak var detailDate: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailCategory: UIImageView!
     
-    @IBOutlet weak var detailText: UITextView!
-    
-   
-    @IBAction func deBackBut(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
+    var selectDiary : diary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let selectDiary {
+            
+            detailText.text = selectDiary.description
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            let dateString = dateFormatter.string(from: selectDiary.date)
+            detailDate.text = dateString
+            
+            let img = UIImage(named: selectDiary.category)
+            detailCategory.image = img
+        }
+        else {print("nil")}
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "change" { // segue 식별자에 따라 분기 처리
+                if let changeVC = segue.destination as? changeDiaryViewController {
+                    changeVC.changeDiary = selectDiary // 데이터 전달
+                } else {
+                    print("데이터 전달 실패")
+                }
+            }
+        }
     }
-    */
-
-}

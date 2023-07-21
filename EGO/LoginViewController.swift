@@ -248,8 +248,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             }
         }
     }
-
-
     
     
     @objc func handleAppleIdRequest() {

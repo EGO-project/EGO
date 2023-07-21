@@ -15,11 +15,7 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class eggAddViewController: UIViewController {
-    
-    @IBAction func backBut(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
+
     var selectName: String?
     
     @IBOutlet weak var eggName: UITextField!
@@ -27,22 +23,22 @@ class eggAddViewController: UIViewController {
     @IBOutlet weak var eggImg: UIImageView!
     
     @IBAction func but1(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_다람쥐.png")
+        eggImg.image = UIImage(named:  "다람쥐_1단계.png")
         selectName = "다람쥐"
     }
     
     @IBAction func but2(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_사자.png")
+        eggImg.image = UIImage(named:  "사자_1단계.png")
         selectName = "사자"
     }
     
     @IBAction func but3(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_수달.png")
+        eggImg.image = UIImage(named:  "수달_1단계.png")
         selectName = "수달"
     }
     
     @IBAction func but4(_ sender: Any) {
-        eggImg.image = UIImage(named:  "egg_코알라.png")
+        eggImg.image = UIImage(named:  "코알라_1단계.png")
         selectName = "코알라"
     }
     
@@ -50,7 +46,7 @@ class eggAddViewController: UIViewController {
         
         let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", favoritestate: false)
         
-        let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainNC")
+        let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBar")
             mainView?.modalPresentationStyle = .fullScreen
         
         if eggName.text!.count == 0 {
@@ -91,18 +87,5 @@ class eggAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // Do any additional setup after loading the view.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
 }
