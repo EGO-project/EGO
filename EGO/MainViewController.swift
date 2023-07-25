@@ -29,7 +29,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     var eggnames : [String] = []
     var images : [UIImage] = []
-
+    
     var eggList : [egg] = []
     var diaryList: [diary] = []
     
@@ -38,6 +38,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         self.fetchData()
         print("\(diaryList.count)")
     }
+    
     
     // 파이어베이스에 저장된 egg정보 가져오기
     func fetchData() {
@@ -61,33 +62,36 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                         let egg = egg(snapshot: childSnapshot)
                         
                         if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
-                        let diary = diary(snapshot: childSnapshot)
-                        self.diaryList.append(diary)
-                        
-                        if let image = UIImage(named: egg.kind) {
-                            self.images.append(image)
-                        } else {
-                            print("이미지를 찾을 수 없습니다.")
+                            let diary = diary(snapshot: childSnapshot)
+                            self.diaryList.append(diary)
+                            
+                            if let image = UIImage(named: egg.kind) {
+                                self.images.append(image)
+                            } else {
+                                print("이미지를 찾을 수 없습니다.")
+                            }
+                            
+                            if let name : String? = egg.name{
+                                self.eggnames.append(name!)
+                            } else {
+                                print("알 이름을 찾을 수 없습니다.")
+                            }
+                            
                         }
                         
-                        if let name : String? = egg.name{
-                            self.eggnames.append(name!)
-                        } else {
-                            print("알 이름을 찾을 수 없습니다.")
-                        }
-                        
+                        self.addContentScrollView()
+                        self.setPageControl()
+                        print("다이어리 리스트 : \(self.diaryList.count)")
                     }
-                    
-                    self.addContentScrollView()
-                    self.setPageControl()
-                    print("다이어리 리스트 : \(self.diaryList.count)")
-                } else {
+                }
+                else {
                     print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
                 }
             }
         }
+        
+        
     }
-    
     
     
     
@@ -139,4 +143,5 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     
 }
+
 

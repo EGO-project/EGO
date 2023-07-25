@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,19 +28,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNq-8E-JFJ" customClass="FSCalendar">
-                                <rect key="frame" x="16" y="222" width="343" height="330"/>
+                                <rect key="frame" x="16" y="196" width="343" height="356"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-Jb-4oD">
-                                <rect key="frame" x="244.33333333333334" y="591" width="53.666666666666657" height="34.333333333333371"/>
+                                <rect key="frame" x="210.33333333333334" y="592" width="87.666666666666657" height="72"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="글추가" title=" "/>
+                                <buttonConfiguration key="configuration" style="plain" image="글추가" title=" "/>
                                 <connections>
                                     <segue destination="QSD-DF-o6g" kind="show" id="nr0-ZU-Lxi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-ta-Vlt">
-                                <rect key="frame" x="89.666666666666657" y="591" width="72.666666666666657" height="34.333333333333371"/>
+                                <rect key="frame" x="70" y="611" width="72.666666666666686" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="글 목록"/>
                                 <connections>
@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                <rect key="frame" x="37.666666666666657" y="190" width="300" height="24"/>
+                                <rect key="frame" x="37.666666666666657" y="164" width="300" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                         <rect key="frame" x="0.0" y="0.0" width="12.666666666666666" height="24"/>
@@ -67,7 +67,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifd-YM-jN9">
-                                        <rect key="frame" x="292.66666666666669" y="0.0" width="12.666666666666686" height="24"/>
+                                        <rect key="frame" x="287.33333333333331" y="0.0" width="12.666666666666686" height="24"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="chevron.right" catalog="system"/>
                                         <connections>
@@ -76,14 +76,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <!-- <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-ta-Vlt">
-                                <rect key="frame" x="70" y="611" width="129" height="34.333333333333371"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="리스트로 (임시)"/>
-                                <connections>
-                                    <segue destination="Fup-nI-FgM" kind="show" id="Kka-ss-AIW"/>
-                                </connections>
-                            </button> -->
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vJt-qd-ATy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -121,7 +113,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDR-Xf-V3J">
                                 <rect key="frame" x="305" y="567" width="40" height="39"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="알추가"/>
+                                <state key="normal" image="알추가"/>
                                 <connections>
                                     <segue destination="Dlv-pl-UwM" kind="show" identifier="eggAdd" id="T6M-Qz-Wb4"/>
                                 </connections>
@@ -156,12 +148,12 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="skd-N2-kUf">
-                        <barButtonItem key="leftBarButtonItem" image="후라이샵" id="Gcg-KV-kcj">
+                        <barButtonItem key="leftBarButtonItem" image="후라이샵" id="Gcg-KV-kcj">
                             <connections>
                                 <segue destination="nd5-JN-k24" kind="show" id="9OS-Tj-cPf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="알림" id="QNm-L3-wPt">
+                        <barButtonItem key="rightBarButtonItem" image="확인" id="QNm-L3-wPt">
                             <connections>
                                 <segue destination="ccH-7Y-cjx" kind="showDetail" id="Zz9-4n-Kq3"/>
                             </connections>
@@ -1804,7 +1796,7 @@
                     <tabBarItem key="tabBarItem" title="more" id="ujK-HC-MuJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sHc-QM-kuf">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98320811990000001" green="0.95538932089999995" blue="0.7921308279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
@@ -1821,10 +1813,10 @@
         <scene sceneID="5gb-U4-9ef">
             <objects>
                 <navigationController storyboardIdentifier="MainNC" automaticallyAdjustsScrollViewInsets="NO" id="ajb-nB-nRg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
+                    <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfF-OA-VVJ">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1841,7 +1833,7 @@
             <objects>
                 <viewController storyboardIdentifier="messageList" id="ccH-7Y-cjx" customClass="messageViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nad-JY-4Rs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-df-09X">
@@ -2164,9 +2156,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="알 이름" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z9d-y6-YZh">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="알 이름" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z9d-y6-YZh">
                                 <rect key="frame" x="90" y="153" width="210" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -2176,7 +2167,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="다람쥐" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iM-AZ-rMl">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="다람쥐"/>
+                                        <state key="normal" image="다람쥐"/>
                                         <connections>
                                             <action selector="but1:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="0de-JY-EKX"/>
                                         </connections>
@@ -2184,7 +2175,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="사자" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTY-Ni-1ft">
                                         <rect key="frame" x="80" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="사자"/>
+                                        <state key="normal" image="사자"/>
                                         <connections>
                                             <action selector="but2:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="ahR-5h-d0Y"/>
                                         </connections>
@@ -2192,7 +2183,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="수달" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-lv-pwA">
                                         <rect key="frame" x="160" y="0.0" width="51" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="수달"/>
+                                        <state key="normal" image="수달"/>
                                         <connections>
                                             <action selector="but3:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="h0B-Xa-DIk"/>
                                         </connections>
@@ -2200,7 +2191,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="코알라" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzS-vb-1dc">
                                         <rect key="frame" x="241" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="코알라"/>
+                                        <state key="normal" image="코알라"/>
                                         <connections>
                                             <action selector="but4:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="ih9-Hk-ltN"/>
                                         </connections>
@@ -2222,7 +2213,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uwu-TO-KFV">
-                        <barButtonItem key="rightBarButtonItem" image="확인" id="SDU-Cv-VV2">
+                        <barButtonItem key="rightBarButtonItem" image="확인" id="SDU-Cv-VV2">
                             <connections>
                                 <action selector="save:" destination="Dlv-pl-UwM" id="i5P-pw-5R0"/>
                             </connections>
@@ -2246,7 +2237,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehk-8X-w2c">
-                                <rect key="frame" x="28" y="202" width="307" height="20"/>
+                                <rect key="frame" x="28" y="205" width="307" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2262,15 +2253,15 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYx-te-Cne">
-                                <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                 <items>
                                     <navigationItem id="Cg5-FD-0Nd">
-                                        <barButtonItem key="leftBarButtonItem" image="뒤로" id="Ir4-cx-JDV">
+                                        <barButtonItem key="leftBarButtonItem" image="뒤로" id="Ir4-cx-JDV">
                                             <connections>
                                                 <action selector="backBut:" destination="Fwn-rB-rm0" id="EsO-Oh-MZH"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" image="확인" id="lIM-wu-C88">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="확인" id="lIM-wu-C88">
                                             <connections>
                                                 <action selector="saveBut:" destination="Fwn-rB-rm0" id="o82-dY-c4R"/>
                                             </connections>
@@ -2279,7 +2270,7 @@
                                 </items>
                             </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xMp-CL-542">
-                                <rect key="frame" x="141" y="114" width="81" height="80"/>
+                                <rect key="frame" x="141" y="117" width="81" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="H6o-3b-eK0"/>
                                 </constraints>
@@ -2328,22 +2319,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aZg-hi-rC1">
-                                <rect key="frame" x="72.666666666666686" y="132" width="230" height="507"/>
+                                <rect key="frame" x="72.666666666666686" y="135" width="230" height="504"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPt-su-j4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="36.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="230" height="33.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhW-6Y-L6W">
-                                        <rect key="frame" x="0.0" y="51.666666666666664" width="230" height="25.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="48.666666666666657" width="230" height="25.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uM9-SF-Blv">
-                                        <rect key="frame" x="0.0" y="92" width="230" height="415"/>
+                                        <rect key="frame" x="0.0" y="89" width="230" height="415"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sCN-gc-Qy4">
                                                 <rect key="frame" x="0.0" y="0.0" width="230" height="100"/>
@@ -2480,7 +2471,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="S5b-IY-iQB">
-                        <barButtonItem key="rightBarButtonItem" image="확인" id="r0n-e6-4vu">
+                        <barButtonItem key="rightBarButtonItem" image="확인" id="r0n-e6-4vu">
                             <connections>
                                 <action selector="next:" destination="QSD-DF-o6g" id="zKx-Wk-Fvs"/>
                             </connections>
@@ -2631,7 +2622,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg4-7E-rid">
                                 <rect key="frame" x="236" y="181" width="112" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="수정" title=" "/>
+                                <buttonConfiguration key="configuration" style="plain" image="수정" title=" "/>
                                 <connections>
                                     <segue destination="mTp-QZ-07x" kind="show" identifier="change" id="TWJ-TB-dPH"/>
                                 </connections>
@@ -2711,7 +2702,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-Wn-HNX">
                                 <rect key="frame" x="236" y="181" width="112" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="확인" title=" "/>
+                                <buttonConfiguration key="configuration" style="plain" image="확인" title=" "/>
                                 <connections>
                                     <action selector="changeOk:" destination="mTp-QZ-07x" eventType="touchUpInside" id="NRJ-Fg-NDO"/>
                                     <action selector="editButton:" destination="ZmN-ar-NJw" eventType="touchUpInside" id="9pF-Ul-uNh"/>
@@ -2770,7 +2761,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="WPi-gx-EHU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="za2-Sk-n4E">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98431372640000003" green="0.9529411793" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2861,10 +2852,10 @@
         <scene sceneID="Pbz-oz-xFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T8Q-4g-YKY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="달력" id="HJ0-lb-LIo"/>
+                    <tabBarItem key="tabBarItem" title="" image="달력" id="HJ0-lb-LIo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEV-jb-Hfi">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2882,7 +2873,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qjy-zf-mqg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l3c-X2-kbX">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2929,23 +2920,35 @@
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
         <image name="rectangle" catalog="system" width="128" height="93"/>
         <image name="scribble.variable" catalog="system" width="128" height="119"/>
-        <image name="공부" width="50.5" height="50"/>
+        <image name="공부" width="101" height="100"/>
         <image name="공유" width="56" height="56"/>
+        <image name="글추가" width="59" height="58"/>
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
-        <image name="디저트" width="50.5" height="50"/>
-        <image name="문화생활" width="50.5" height="50"/>
-        <image name="쇼핑" width="50.5" height="50"/>
-        <image name="식당" width="54.5" height="54"/>
+        <image name="달력" width="75" height="75"/>
+        <image name="다람쥐" width="50" height="50"/>
+        <image name="뒤로" width="17" height="29"/>
+        <image name="디저트" width="101" height="100"/>
+        <image name="문화생활" width="101" height="100"/>
+        <image name="사자" width="50" height="50"/>
+        <image name="쇼핑" width="101" height="100"/>
+        <image name="수달" width="50" height="50"/>
+        <image name="수정" width="66" height="25"/>
+        <image name="식당" width="109" height="108"/>
         <image name="알림" width="62" height="61"/>
-        <image name="여행" width="50.5" height="50"/>
-        <image name="운동" width="50.5" height="50"/>
+        <image name="알추가" width="40" height="39"/>
+        <image name="여행" width="101" height="100"/>
+        <image name="운동" width="101" height="100"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="일상" width="50.5" height="50"/>
+        <image name="일상" width="101" height="100"/>
         <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
+        <image name="코알라" width="50" height="50"/>
+        <image name="홈" width="77" height="77"/>
+        <image name="확인" width="51" height="34"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
         <image name="후라이" width="69" height="68"/>
+        <image name="후라이샵" width="69" height="68"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
