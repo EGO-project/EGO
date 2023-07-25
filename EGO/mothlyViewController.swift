@@ -7,11 +7,14 @@
 
 import UIKit
 import FSCalendar
+import KakaoSDKUser
+import Firebase
 
 class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     @IBOutlet weak var calendar: FSCalendar!
     
+    var diaryList: [diary] = []
     var currentPage: Date?
     var today: Date = {
         return Date()
@@ -55,11 +58,11 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchData()
         self.currentPage = self.today
         setCalendarUI()
         calendar.delegate = self
-
+        calendar.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -102,7 +105,6 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .systemYellow
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .systemYellow
         
-
         
         // 달에 유효하지않은 날짜 지우기
         calendar.placeholderType = .none
@@ -117,5 +119,45 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     func maximumDate(for calendar: FSCalendar) -> Date {
         return Date()
     }
-
+  
+    func fetchData() {
+        UserApi.shared.me { user, error in
+            guard let id = user?.id else {
+                print("사용자 ID를 가져올 수 없습니다.")
+                return
+            }
+            
+            let databaseRef = Database.database().reference()
+            let calenderRef = databaseRef.child("calender").child(String(id))
+          
+            calenderRef.observeSingleEvent(of: .value) { snapshot  in
+                self.diaryList.removeAll() // 배열 초기화
+              
+                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    for childSnapshot in dataSnapshot {
+                        let diary = diary(snapshot: childSnapshot)
+                        self.diaryList.append(diary)
+                    }
+                } else {
+                    print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
+                }
+              
+                self.calendar.reloadData()
+            }
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        let matchingDiary = diaryList.first { dateFormatter.string(from: $0.date) == dateString }
+        if let diary = matchingDiary {
+//            calendar.appearance.
+            return UIImage(named: "\(diary.category).png")
+        }
+        
+        return nil
+    }
 }
