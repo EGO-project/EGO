@@ -142,6 +142,8 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
+  - SnapKit (5.6.0)
+  - Then (3.0.0)
 
 DEPENDENCIES:
   - Firebase
@@ -157,6 +159,8 @@ DEPENDENCIES:
   - KakaoSDKTemplate
   - KakaoSDKUser
   - Kingfisher
+  - SnapKit
+  - Then
 
 SPEC REPOS:
   trunk:
@@ -188,6 +192,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SnapKit
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
@@ -218,7 +224,9 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: f233a9ca9ab44b6c4316e30b752a8dc53ac53e60
+PODFILE CHECKSUM: bdb6b8b41c5da76ba4e9d2a016516f5ccaaec8af
 
 COCOAPODS: 1.12.0
