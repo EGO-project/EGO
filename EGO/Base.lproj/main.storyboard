@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                        <rect key="frame" x="0.0" y="16" width="345.66666666666669" height="34.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="16.000000000000004" width="345.66666666666669" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                                 <rect key="frame" x="0.0" y="0.0" width="36.666666666666664" height="34.333333333333336"/>
@@ -1147,50 +1147,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="화면 모드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQA-Sc-yAG">
-                                <rect key="frame" x="44" y="333" width="93" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="화면 잠금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2o-dq-k2N">
-                                <rect key="frame" x="44" y="530" width="75" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jw7-6g-ApT">
                                 <rect key="frame" x="285" y="255" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="switchChange:" destination="Mab-aC-pyN" eventType="valueChanged" id="2Gc-Tw-qFo"/>
                                 </connections>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kml-z0-JDH">
-                                <rect key="frame" x="40" y="390" width="102" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="라이트 모드"/>
-                                <connections>
-                                    <action selector="lightModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="Pqe-rh-Cmc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGX-eJ-uDg">
-                                <rect key="frame" x="40" y="438" width="88" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="다크 모드"/>
-                                <connections>
-                                    <action selector="darkModeButtonTapped:" destination="Mab-aC-pyN" eventType="touchUpInside" id="BeH-dO-sNu"/>
-                                </connections>
-                            </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLG-BC-MqU">
-                                <rect key="frame" x="285" y="530" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="지정된 시간 알람" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVm-OP-Ny8">
                                 <rect key="frame" x="44" y="260" width="112" height="21"/>
@@ -1210,10 +1172,6 @@
                                 <rect key="frame" x="31" y="295" width="329" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line 7" translatesAutoresizingMaskIntoConstraints="NO" id="zVg-i2-TUw">
-                                <rect key="frame" x="31" y="486" width="329" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2c-dt-cIR">
                                 <rect key="frame" x="31" y="212" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1226,6 +1184,17 @@
                                     <action selector="alarmSettings:" destination="Mab-aC-pyN" eventType="touchUpInside" id="iGi-aX-9gn"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="화면 잠금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2o-dq-k2N">
+                                <rect key="frame" x="44" y="336" width="75" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLG-BC-MqU">
+                                <rect key="frame" x="285" y="336" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QSs-cZ-Z7g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1607,10 +1576,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-tZ-evw">
-                                <rect key="frame" x="0.0" y="103" width="111" height="617"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="617"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
-                                        <rect key="frame" x="0.0" y="0.0" width="111" height="19.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="385" height="19.333333333333332"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="385" id="P7z-08-ulj"/>
                                         </constraints>
@@ -1622,8 +1591,7 @@
                                 <constraints>
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="leading" secondItem="uyo-tZ-evw" secondAttribute="leading" id="DCP-cy-eYC"/>
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="top" secondItem="uyo-tZ-evw" secondAttribute="top" id="GUK-Zt-Msu"/>
-                                    <constraint firstAttribute="bottom" secondItem="uem-fR-2QH" secondAttribute="bottom" constant="488.66666666666663" id="hfo-f7-rRN"/>
-                                    <constraint firstItem="uem-fR-2QH" firstAttribute="width" secondItem="uyo-tZ-evw" secondAttribute="width" id="m7u-4u-Ed4"/>
+                                    <constraint firstAttribute="bottom" secondItem="uem-fR-2QH" secondAttribute="bottom" constant="488.67000000000002" id="hfo-f7-rRN"/>
                                     <constraint firstItem="uem-fR-2QH" firstAttribute="trailing" secondItem="uyo-tZ-evw" secondAttribute="trailingMargin" id="vzH-dj-hv2"/>
                                 </constraints>
                             </scrollView>
@@ -2524,10 +2492,10 @@
         <image name="Rectangle 3" width="330" height="109"/>
         <image name="Rectangle 9" width="154" height="53"/>
         <image name="appleLogo" width="51" height="50"/>
-        <image name="arrow.backward" catalog="system" width="32" height="32"/>
-        <image name="checkmark.rectangle" catalog="system" width="32" height="32"/>
-        <image name="chevron.left" catalog="system" width="32" height="32"/>
-        <image name="chevron.right" catalog="system" width="32" height="32"/>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
+        <image name="checkmark.rectangle" catalog="system" width="128" height="93"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="egg150" width="220" height="228"/>
         <image name="egg300" width="220" height="228"/>
         <image name="egg_다람쥐" width="200" height="200"/>
@@ -2536,9 +2504,9 @@
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
-        <image name="person.crop.circle.badge.plus" catalog="system" width="32" height="32"/>
-        <image name="rectangle" catalog="system" width="32" height="32"/>
-        <image name="scribble.variable" catalog="system" width="32" height="32"/>
+        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
+        <image name="rectangle" catalog="system" width="128" height="93"/>
+        <image name="scribble.variable" catalog="system" width="128" height="119"/>
         <image name="공유" width="56" height="56"/>
         <image name="알림" width="62" height="61"/>
         <image name="인스타" width="56" height="56"/>
