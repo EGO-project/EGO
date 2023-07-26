@@ -13,20 +13,20 @@ class SettingViewController: UIViewController {
             datePicker.date = alarmTime
         }
         
-        // 이전에 저장한 인터페이스 스타일 값이 있다면 설정된 스타일로 인터페이스를 업데이트합니다.
-        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
-            updateInterfaceStyle(storedStyle)
-        }
+//        // 이전에 저장한 인터페이스 스타일 값이 있다면 설정된 스타일로 인터페이스를 업데이트합니다.
+//        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+//            updateInterfaceStyle(storedStyle)
+//        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // 뷰가 나타날 때마다 인터페이스 스타일을 업데이트합니다.
-        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
-            updateInterfaceStyle(storedStyle)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        // 뷰가 나타날 때마다 인터페이스 스타일을 업데이트합니다.
+//        if let storedStyle = UserDefaults.standard.string(forKey: "interfaceStyle") {
+//            updateInterfaceStyle(storedStyle)
+//        }
+//    }
     
     @IBOutlet weak var setAlarmSwitch: UISwitch!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -39,36 +39,36 @@ class SettingViewController: UIViewController {
         }
     }
     
-    @IBAction func lightModeButtonTapped(_ sender: UIButton) {
-        updateInterfaceStyle("light")
-        UserDefaults.standard.set("light", forKey: "interfaceStyle")
-    }
-    
-    @IBAction func darkModeButtonTapped(_ sender: UIButton) {
-        updateInterfaceStyle("dark")
-        UserDefaults.standard.set("dark", forKey: "interfaceStyle")
-    }
-    
-    public func updateInterfaceStyle(_ style: String) {
-        if #available(iOS 13.0, *) {
-            switch style {
-            case "light":
-                updateInterfaceStyle(.light)
-            case "dark":
-                updateInterfaceStyle(.dark)
-            default:
-                break
-            }
-        }
-    }
-    
-    private func updateInterfaceStyle(_ style: UIUserInterfaceStyle) {
-        if #available(iOS 13.0, *) {
-            UIApplication.shared.windows.forEach { window in
-                window.overrideUserInterfaceStyle = style
-            }
-        }
-    }
+//    @IBAction func lightModeButtonTapped(_ sender: UIButton) {
+//        updateInterfaceStyle("light")
+//        UserDefaults.standard.set("light", forKey: "interfaceStyle")
+//    }
+//    
+//    @IBAction func darkModeButtonTapped(_ sender: UIButton) {
+//        updateInterfaceStyle("dark")
+//        UserDefaults.standard.set("dark", forKey: "interfaceStyle")
+//    }
+//    
+//    public func updateInterfaceStyle(_ style: String) {
+//        if #available(iOS 13.0, *) {
+//            switch style {
+//            case "light":
+//                updateInterfaceStyle(.light)
+//            case "dark":
+//                updateInterfaceStyle(.dark)
+//            default:
+//                break
+//            }
+//        }
+//    }
+//    
+//    private func updateInterfaceStyle(_ style: UIUserInterfaceStyle) {
+//        if #available(iOS 13.0, *) {
+//            UIApplication.shared.windows.forEach { window in
+//                window.overrideUserInterfaceStyle = style
+//            }
+//        }
+//    }
     
     @IBAction func alarmTime(_ sender: Any) {
         let selectedDate = (sender as! UIDatePicker).date
