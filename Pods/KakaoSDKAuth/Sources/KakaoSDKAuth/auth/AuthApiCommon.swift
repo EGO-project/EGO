@@ -17,9 +17,11 @@ import Alamofire
 import KakaoSDKCommon
 import UIKit
 
+@available(iOS 13.0, *)
 @available(iOSApplicationExtension, unavailable)
 public let AUTH_API = AuthApiCommon.shared
 
+@available(iOS 13.0, *)
 @available(iOSApplicationExtension, unavailable)
 public class AuthApiCommon {
     
@@ -34,11 +36,11 @@ public class AuthApiCommon {
     func initSession() {
         let interceptor = Interceptor(adapter: AuthRequestAdapter(), retrier: AuthRequestRetrier())
         let authApiSessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.default
-        authApiSessionConfiguration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        authApiSessionConfiguration.tlsMinimumSupportedProtocolVersion = .TLSv12
         API.addSession(type: .AuthApi, session: Session(configuration: authApiSessionConfiguration, interceptor: interceptor))
         
         let rxAuthApiSessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.default
-        rxAuthApiSessionConfiguration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        rxAuthApiSessionConfiguration.tlsMinimumSupportedProtocolVersion = .TLSv12
         API.addSession(type: .RxAuthApi, session: Session(configuration: rxAuthApiSessionConfiguration, interceptor: AuthRequestAdapter()))
         
         SdkLog.d(">>>> \(API.sessions)")

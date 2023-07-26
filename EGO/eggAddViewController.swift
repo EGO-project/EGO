@@ -7,12 +7,12 @@
 
 import Foundation
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+//import FirebaseAuth
+//import FirebaseDatabase
 
-import KakaoSDKAuth
-import KakaoSDKUser
-import KakaoSDKCommon
+//import KakaoSDKAuth
+//import KakaoSDKUser
+//import KakaoSDKCommon
 
 class eggAddViewController: UIViewController {
 

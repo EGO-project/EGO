@@ -67,7 +67,25 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           let dateString = dateFormatter.string(from: diary.date)
           cell.dateLabel?.text = dateString
           
-//          cell.categoryImg.image = UIImage(named: "\(diary.category).png")
+          if let imgUrl = URL(string: diary.photoURL) {
+              // 이미지 URL을 이용하여 이미지 데이터를 불러옴
+              if let imageData = try? Data(contentsOf: imgUrl) {
+                  // 이미지 데이터를 UIImage로 변환
+                  if let image = UIImage(data: imageData) {
+                      // 이미지를 cell의 photoImg에 할당
+                      cell.photoImg.image = image
+                  } else {
+                      // UIImage로 변환할 수 없는 경우, 혹은 이미지가 nil인 경우
+                      print("Failed to convert data to UIImage")
+                  }
+              } else {
+                  // 이미지 데이터를 불러오지 못한 경우
+                  print("Failed to load image data from URL")
+              }
+          } else {
+              // 유효하지 않은 이미지 URL인 경우
+              print("Invalid URL: \(diary.photoURL)")
+          }
           
           return cell
       }

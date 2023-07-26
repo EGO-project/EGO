@@ -16,6 +16,7 @@ import Foundation
 import KakaoSDKCommon
 
 /// 카카오 로그인 인증서버로 API 요청을 담당하는 클래스입니다.
+@available(iOS 13.0, *)
 final public class AuthApi {
     
     /// 간편하게 API를 호출할 수 있도록 제공되는 공용 싱글톤 객체입니다.
@@ -170,6 +171,7 @@ final public class AuthApi {
 }
 
 
+@available(iOS 13.0, *)
 extension AuthApi {
     /// :nodoc:
     public func certToken(code: String,

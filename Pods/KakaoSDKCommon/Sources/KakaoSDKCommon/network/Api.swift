@@ -17,6 +17,7 @@ import UIKit
 import Alamofire
 
 /// :nodoc:
+@available(iOS 13.0, *)
 public let API = Api.shared
 
 /// :nodoc:
@@ -34,6 +35,7 @@ public enum SessionType {
 //}
 
 /// :nodoc:
+@available(iOS 13.0, *)
 public class Api {
     public static let shared = Api()
     
@@ -48,14 +50,15 @@ public class Api {
 }
 
 /// :nodoc:
-extension Api {    
+@available(iOS 13.0, *)
+extension Api {
     private func initSession() {
         let apiSessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.default
-        apiSessionConfiguration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        apiSessionConfiguration.tlsMinimumSupportedProtocolVersion = .TLSv12
         addSession(type: .Api, session:Session(configuration: apiSessionConfiguration, interceptor: ApiRequestAdapter()))
         
         let authSessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.default
-        authSessionConfiguration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        authSessionConfiguration.tlsMinimumSupportedProtocolVersion = .TLSv12
         addSession(type: .Auth, session:Session(configuration: authSessionConfiguration, interceptor: ApiRequestAdapter()))
     }
     
@@ -73,6 +76,7 @@ extension Api {
 }
 
 /// :nodoc:
+@available(iOS 13.0, *)
 extension Api {
     public func getSdkError(error: Error) -> SdkError? {
         if let aferror = error as? AFError {

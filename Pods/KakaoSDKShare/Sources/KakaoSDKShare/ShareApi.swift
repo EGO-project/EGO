@@ -15,7 +15,6 @@
 import Foundation
 import UIKit
 
-import Alamofire
 import KakaoSDKCommon
 import KakaoSDKTemplate
 
@@ -135,6 +134,7 @@ extension ShareApi {
 }
 
 
+@available(iOS 13.0, *)
 extension ShareApi {
     // MARK: Fields
     
