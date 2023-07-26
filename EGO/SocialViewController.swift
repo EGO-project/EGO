@@ -67,16 +67,40 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // 셀 생성
-    // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
 
-        if indexPath.row < friendNickname.count {
-            let friendName = friendNickname[indexPath.row]
-            cell.friend = friendName
+        // Retrieve friend's name and eggs from the database
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return cell
         }
+        
+        let friendId = friendCode[indexPath.row]
+        ref.child("friend").child(userId).child(friendId).observeSingleEvent(of: .value) { snapshot in
+            guard let friendData = snapshot.value as? [String: Any],
+                  let nickname = friendData["nickname"] as? String,
+                  let eggs = friendData["eggs"] as? [String]
+            else {
+                print("Failed to retrieve friend data")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.friend = nickname
+                // Assuming the friendsEgo images are named with the friend's name
+                cell.friendsEgo1.image = UIImage(named: "\(eggs[0])")
+                cell.friendsEgo2.image = UIImage(named: "\(eggs[1])")
+                cell.friendsEgo3.image = UIImage(named: "\(eggs[2])")
+                cell.friendsEgo4.image = UIImage(named: "\(eggs[3])")
+                cell.friendsEgo5.image = UIImage(named: "\(eggs[4])")
+            }
+        }
+        
         return cell
     }
+
 
 
     // 셀 높이 지정
@@ -94,11 +118,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             rowCount = friendNickname.count
             
             // 파이어베이스에서 해당 친구 데이터를 삭제합니다.
-            guard let userId = Auth.auth().currentUser?.uid else {
-                return
-            }
-            let friendCode = friendCode[indexPath.row]
-            ref.child("friend").child("\(userId)").child("\(friendCode)").removeValue()
+            deleteFriend()
                     
             // 테이블 뷰에서 해당 셀을 삭제합니다.
             socialTable.deleteRows(at: [indexPath], with: .fade)
@@ -108,6 +128,35 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "친구삭제"
     }
+    
+    func deleteFriend() {
+        // Friend code to be removed
+        let code = self.friendCode
+        print("Friend code to be removed: \(code)")
+        
+        // Retrieve friend's unique friend code using the friend code: querying child values
+        self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
+            guard let friendNode = snapshot.value as? [String: Any],
+                  let friendId = friendNode.keys.first else {
+                // Show failure alert for friend removal
+                print("Failed to retrieve friend's friend code")
+                return
+            }
+            
+            guard let userId = Auth.auth().currentUser?.uid else {
+                // User is not logged in
+                print("User is not logged in.")
+                return
+            }
+            
+            // Remove friend from Firebase
+            self.ref.child("friend").child(userId).child(friendId).removeValue()
+            
+            // Remove user from friend's friend list
+            self.ref.child("friend").child(friendId).child(userId).removeValue()
+        }
+    }
+
     
     
     
@@ -209,4 +258,6 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
+    
+    
 }

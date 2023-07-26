@@ -32,6 +32,8 @@ class AddSocialTableViewCell: UITableViewCell {
         }
         print("New friend code: \(code)")
         
+        let userCode = self.ref.child("member").child(Auth.auth().currentUser!.uid).child("friendCode").description()
+        
         // Retrieve friend's friend code using their name: querying child values
         self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
             guard let friendNode = snapshot.value as? [String: Any],
@@ -61,6 +63,14 @@ class AddSocialTableViewCell: UITableViewCell {
             self.ref.child("friend").child(userId).child("\(friendId)").setValue([
                "favoriteState": "0",
                "code": friendcode,
+               "publicState": "0",
+               "state": "0"
+           ])
+            
+            // Add user to friend's friend list
+            self.ref.child("friend").child(friendId).child("\(userId)").setValue([
+               "favoriteState": "0",
+               "code": userCode,
                "publicState": "0",
                "state": "0"
            ])
