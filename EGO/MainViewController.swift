@@ -60,31 +60,28 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let egg = egg(snapshot: childSnapshot)
+                        let diary = diary(snapshot: childSnapshot)
+                        self.diaryList.append(diary)
                         
                         if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
-                            let diary = diary(snapshot: childSnapshot)
-                            self.diaryList.append(diary)
-                            
-                            if let image = UIImage(named: egg.kind) {
-                                self.images.append(image)
-                            } else {
-                                print("이미지를 찾을 수 없습니다.")
-                            }
-                            
-                            if let name : String? = egg.name{
-                                self.eggnames.append(name!)
-                            } else {
-                                print("알 이름을 찾을 수 없습니다.")
-                            }
+                            self.images.append(image)
+                        } else {
+                            print("이미지를 찾을 수 없습니다.")
                             
                         }
                         
-                        self.addContentScrollView()
-                        self.setPageControl()
-                        print("다이어리 리스트 : \(self.diaryList.count)")
+                        if let name : String? = egg.name{
+                            self.eggnames.append(name!)
+                        } else {
+                            print("알 이름을 찾을 수 없습니다.")
+                        }
+                        
                     }
-                }
-                else {
+                    
+                    self.addContentScrollView()
+                    self.setPageControl()
+                    print("다이어리 리스트 : \(self.diaryList.count)")
+                }else {
                     print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
                 }
             }
@@ -96,7 +93,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     
     //이미지를 담은 배열을 순회하며 이미지뷰를 생성. 이미지뷰의 위치와 크기를 설정, 할당. scrollView의 contentSize를 설정
-    private func addContentScrollView() {
+    func addContentScrollView() {
         for i in 0..<images.count {
             
             let imageView = UIImageView()
@@ -116,10 +113,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             
             scrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
             
-            let monthlyAdd2VC = mothlyAdd_2ViewController()
-            monthlyAdd2VC.eggId = eggnames[i]
-            
-            print(eggnames[i])
             
         }
     }

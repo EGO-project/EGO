@@ -25,14 +25,10 @@ extension UIApplication {
             baseVC = base
         }
         else {
-            if #available(iOS 13, *) {
-                baseVC = (UIApplication.shared.connectedScenes
-                            .compactMap { $0 as? UIWindowScene }
-                            .flatMap { $0.windows }
-                            .first { $0.isKeyWindow })?.rootViewController
-            }
-            else {
-                baseVC = UIApplication.shared.keyWindow?.rootViewController
+            if #available(iOS 13.0, *) {
+                baseVC = UIApplication.sdkKeyWindow()?.rootViewController
+            } else {
+                // Fallback on earlier versions
             }
         }
         
@@ -46,5 +42,15 @@ extension UIApplication {
             return getMostTopViewController(base: presented)
         }
         return baseVC
+    }
+    
+    @available(iOS 13.0, *)
+    @available(iOSApplicationExtension, unavailable)
+    public class func sdkKeyWindow() -> UIWindow?
+    {
+        return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .last { $0.isKeyWindow }
     }
 }

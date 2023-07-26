@@ -30,6 +30,10 @@ target 'EGO' do
 
   #Kingfisher
   pod 'Kingfisher'
+  
+  #갤러리
+  pod 'Then'
+  pod 'SnapKit'
 
   # Pods for EGO
 
