@@ -30,8 +30,12 @@ class ChangeNicknameViewController: UIViewController {
     // Firebase에서 데이터 가져와 TextField에 설정
     func fetchFirebaseData() {
         // 데이터베이스의 "nickNameRef" 경로에서 데이터 가져오기
-        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        self.databaseRef.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { snapshot  in
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        self.databaseRef.child("member").child(userId).child("nickname").observeSingleEvent(of: .value) { snapshot  in
             if let value = snapshot.value as? String {
                 // 가져온 값이 있을 경우 TextField에 설정
                 self.nickNameCh.text = value
@@ -43,8 +47,12 @@ class ChangeNicknameViewController: UIViewController {
         guard let text = nickNameCh.text else { return }
         
         // Firebase Realtime Database의 "nickname" 경로에 값 업데이트
-        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        let nicknameRef = databaseRef.child("member").child(safeEmail).child("nickname")
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        let nicknameRef = databaseRef.child("member").child(userId).child("nickname")
         nicknameRef.setValue(text) { error, _ in
             if let error = error {
                 print("Failed to update nickname:", error.localizedDescription)
