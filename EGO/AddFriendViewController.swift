@@ -52,39 +52,58 @@ class AddFriendViewController: UIViewController {
                     return
                 }
                 
-                self.firebaseData = FirebaseData()
-                self.firebaseData?.friendId = friendId
-                self.firebaseData?.friendNickname = friendNickname
-                
-                self.ref.child("friendRequested").child(friendId).observeSingleEvent(of: .value) { [weak self] snapshot, _ in
-                    guard let self = self else { return }
+                // Check if friend is already added
+                self.ref.child("friend").child(myUserId).observeSingleEvent(of: .value) { snapshot in
+                    print(myUserId)
+                    print(friendId)
+                    print(snapshot)
                     
-                    var friendRequestData: [String: Any] = [:]
-                    if let existingFriendRequestData = snapshot.value as? [String: Any] {
-                        friendRequestData = existingFriendRequestData
+                    for child in snapshot.children {
+                        let snap = child as! DataSnapshot
+                        if snap.key == friendId {
+                            self.friendAlreadyAdded()
+                            return
+                        }
+                    
+                        
                     }
                     
-                    let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+                    // Continue with friend request
+                    self.firebaseData = FirebaseData()
+                    self.firebaseData?.friendId = friendId
+                    self.firebaseData?.friendNickname = friendNickname
                     
-                    if !trimmedCode.isEmpty && friendRequestData[myUserId] == nil {
-                        let friendRequestId = UUID().uuidString
+                    self.ref.child("friendRequested").child(friendId).observeSingleEvent(of: .value) { [weak self] snapshot, _ in
+                        guard let self = self else { return }
                         
-                        friendRequestData[friendRequestId] = [
-                            "frCode": myUserCode,
-                            "frId": myUserId,
-                            "frOnlyCode": friendRequestId
-                            // 다른 필드들도 추가 가능
-                        ]
+                        var friendRequestData: [String: Any] = [:]
+                        if let existingFriendRequestData = snapshot.value as? [String: Any] {
+                            friendRequestData = existingFriendRequestData
+                        }
                         
-                        self.ref.child("friendRequested").child(friendId).setValue(friendRequestData)
-                        self.addSuccess()
-                    } else {
-                        self.addFail()
+                        let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        if !trimmedCode.isEmpty && friendRequestData[myUserId] == nil {
+                            let friendRequestId = UUID().uuidString
+                            
+                            friendRequestData[friendRequestId] = [
+                                "frCode": myUserCode,
+                                "frId": myUserId,
+                                "frOnlyCode": friendRequestId
+                                // 다른 필드들도 추가 가능
+                            ]
+                            
+                            self.ref.child("friendRequested").child(friendId).setValue(friendRequestData)
+                            self.addSuccess()
+                        } else {
+                            self.addFail()
+                        }
                     }
                 }
             }
         }
     }
+
 
 
     func addSuccess() {
@@ -104,4 +123,14 @@ class AddFriendViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    func friendAlreadyAdded() {
+        let alertController = UIAlertController(title: "알림", message: "이미 친구로 추가된 사용자입니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.codeBox.text = ""
+        })
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
 }
