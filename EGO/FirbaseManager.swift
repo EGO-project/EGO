@@ -85,4 +85,38 @@ class FirebaseManager {
             }
         }
     }
+    
+    func saveProfileImageToFirebase(id: String, image: UIImage, completion: @escaping (Error?) -> Void) {
+        let databaseRef = Database.database().reference().child("member").child(id).child("profileImage")
+        
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+            completion(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Image conversion to Data failed."]))
+            return
+        }
+        
+        let base64String = imageData.base64EncodedString(options: .lineLength64Characters)
+        
+        databaseRef.setValue(base64String) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func fetchProfileImageFromFirebase(id: String, completion: @escaping (UIImage?) -> Void) {
+        let databaseRef = Database.database().reference().child("member").child(id).child("profileImage")
+        
+        databaseRef.observeSingleEvent(of: .value) { snapshot in
+            if let base64String = snapshot.value as? String {
+                if let imageData = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters) {
+                    let retrievedImage = UIImage(data: imageData)
+                    completion(retrievedImage)
+                } else {
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+
 }

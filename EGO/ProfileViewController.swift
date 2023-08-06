@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     var pNameLbl: String?
     var pCodeLbl: String?
     let ref = Database.database().reference()
+    let firebaseManager = FirebaseManager.shared
     
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var codeLbl: UILabel!
@@ -26,9 +27,10 @@ class ProfileViewController: UIViewController {
         // 파이어베이스 데이터 변경 감지
         observeFirebaseChanges()
         
-        // UserDefaults에서 프로필 이미지 로드
-        loadProfileImageFromDefaults()
-        
+        guard let id = Auth.auth().currentUser?.uid else { return }
+        self.firebaseManager.fetchProfileImageFromFirebase(id: id) { image in
+            self.profile.image = image
+        }
     }
     
     func observeFirebaseChanges() {
@@ -81,34 +83,6 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
-    func loadImageURLFromDefaults() -> String? {
-        let defaults = UserDefaults.standard
-        guard let profile = defaults.string(forKey: "profileImage") else {
-            print("Failed to load image from UserDefaults.")
-            return nil
-        }
-        
-        print(profile)
-        
-        return profile
-    }
-    
-    func loadProfileImageFromDefaults() {
-        guard let urlString = loadImageURLFromDefaults() else {
-            print("Failed to load image from UserDefaults.")
-            return
-        }
-                
-        guard let imageURL = URL(string: urlString) else {
-            print("Failed to convert string to URL.")
-            return
-        }
-        profile.kf.setImage(with: imageURL)
-        print(urlString)
-    }
-
-    
 }
 
 

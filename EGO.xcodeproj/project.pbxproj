@@ -31,6 +31,8 @@
 		4E64E0BE2980DE0500124F56 /* EGOUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */; };
 		4E659D3D29A3726200C7A917 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E659D3C29A3726200C7A917 /* LoginViewController.swift */; };
 		4E659D3F29A3773300C7A917 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E659D3E29A3773300C7A917 /* LocalAuthentication.framework */; };
+		4E794C0F2A7FFED5007F1CAB /* SecondPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E794C0E2A7FFED5007F1CAB /* SecondPasswordViewController.swift */; };
+		4E794C112A800A10007F1CAB /* SetSecondPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E794C102A800A10007F1CAB /* SetSecondPasswordViewController.swift */; };
 		4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */; };
 		4ECA05F429A4A75500515698 /* Noto_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 4ECA05F329A4A75500515698 /* Noto_Sans */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
@@ -113,6 +115,8 @@
 		4E64E0BD2980DE0500124F56 /* EGOUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGOUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4E659D3C29A3726200C7A917 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4E659D3E29A3773300C7A917 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		4E794C0E2A7FFED5007F1CAB /* SecondPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPasswordViewController.swift; sourceTree = "<group>"; };
+		4E794C102A800A10007F1CAB /* SetSecondPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSecondPasswordViewController.swift; sourceTree = "<group>"; };
 		4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		4ECA05F329A4A75500515698 /* Noto_Sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Noto_Sans; sourceTree = "<group>"; };
 		7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				4ECA05F629B81DE800515698 /* ViewModel */,
 				4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */,
 				FE5ABCCC2A4DC3060095D0E8 /* PrivacyPolicyViewController.swift */,
+				4E794C0E2A7FFED5007F1CAB /* SecondPasswordViewController.swift */,
+				4E794C102A800A10007F1CAB /* SetSecondPasswordViewController.swift */,
 			);
 			path = EGO;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				4E4CCE802A111BF200139248 /* FirbaseManager.swift in Sources */,
 				4E2E7AE02A2D79D200A815EB /* WithdrawlViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
+				4E794C0F2A7FFED5007F1CAB /* SecondPasswordViewController.swift in Sources */,
 				FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */,
 				4E2E7AE22A2D814C00A815EB /* DeleteViewController.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
@@ -611,6 +618,7 @@
 				89E7A0C22A21DDFA00798B8A /* EggRoomPDViewController.swift in Sources */,
 				4E64E09D2980DE0400124F56 /* SceneDelegate.swift in Sources */,
 				FE6F2B2129EC1822007DD6AC /* NoticeLblViewController.swift in Sources */,
+				4E794C112A800A10007F1CAB /* SetSecondPasswordViewController.swift in Sources */,
 				4CCD70C72A0413AD007C38A9 /* FriendViewController.swift in Sources */,
 				4C5063EF299B876700F8F3B8 /* SocialViewController.swift in Sources */,
 				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,

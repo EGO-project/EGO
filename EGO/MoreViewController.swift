@@ -11,6 +11,8 @@ class MoreViewController: UIViewController {
     @IBOutlet weak var profileCode: UILabel!
     @IBOutlet weak var logOut: UIButton!
     
+    let firebaseManager = FirebaseManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +21,11 @@ class MoreViewController: UIViewController {
         
         // 파이어베이스 데이터 변경 감지
         observeFirebaseChanges()
+        
+        guard let id = Auth.auth().currentUser?.uid else { return }
+        self.firebaseManager.fetchProfileImageFromFirebase(id: id) { image in
+            self.profileImg.image = image
+        }
     }
     
     func observeFirebaseChanges() {

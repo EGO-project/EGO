@@ -41,6 +41,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     var isAutoLogin : Bool? = false
     
+    let imageView: UIImageView = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -72,11 +74,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     }
     
     //Auto login
-    func autoLogin(){
+    func autoLogin() {
         if Auth.auth().currentUser != nil {
             // 사용자가 로그인한 상태
-            // 메인 화면으로 이동
-            self.moveToMainTabBarController()
+            // 2차 비밀번호 확인
+            checkForSecondPasswordAndNavigate()
         } else {
             // 사용자가 로그인하지 않은 상태
             if UserDefaults.standard.bool(forKey: "auto") {
@@ -84,18 +86,38 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 if let email = UserDefaults.standard.string(forKey: "id"),
                    let password = UserDefaults.standard.string(forKey: "password") {
                     Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                        guard let self else { return }
+                        guard let self = self else { return }
                         if let error {
                             print("자동 로그인 실패: \(error.localizedDescription)")
                         } else {
                             print("자동 로그인 성공")
-                            self.moveToMainTabBarController()
+                            // 2차 비밀번호 확인
+                            self.checkForSecondPasswordAndNavigate()
                         }
                     }
                 }
             }
         }
     }
+    
+    func checkForSecondPasswordAndNavigate() {
+        if UserDefaults.standard.bool(forKey: "secondPasswordEnabled") {
+            // 2차 비밀번호 입력창으로 이동
+            // 여기에서는 예시로 함수만 호출하였습니다. 실제로는 2차 비밀번호 입력 화면으로 이동하는 코드를 작성해야 합니다.
+            navigateToSecondPasswordInput()
+        } else {
+            // 메인 화면으로 이동
+            moveToMainTabBarController()
+        }
+    }
+    
+    func navigateToSecondPasswordInput() {
+        let secondPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondPasswordViewController")
+        self.present(secondPasswordVC, animated: true, completion: nil)
+        
+    }
+    
+    
     
     //Auto login check
     @IBAction func autoLoginCheck(_ sender: UIButton) {
@@ -132,15 +154,20 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             guard error == nil, let user = result?.user, let idToken = user.idToken?.tokenString, let email = user.profile?.email, let nickname = user.profile?.name else { return }
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-            Auth.auth().signIn(with: credential) { result, error in
+            Auth.auth().signIn(with: credential) { [self] result, error in
                 guard let uid = result?.user.uid else { return }
                 
-                FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
+                self?.LoginManager.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
                 
-                let profileImageURL = user.profile?.imageURL(withDimension: 100)
-                // 저장
-                print("Saving profile image URL: \(profileImageURL)")
-                UserDefaults.standard.set(profileImageURL?.absoluteString, forKey: "profileImage")
+                self?.imageView.kf.setImage(with: user.profile?.imageURL(withDimension: 100))
+                
+                if let image = self?.imageView.image {
+                    self?.LoginManager.saveProfileImageToFirebase(id: uid, image: image){ error in
+                        if let error {
+                            print("Error saving profile image: \(error.localizedDescription)")
+                        }
+                    }
+                }
                 
                 self?.moveToMainTabBarController()
             }
@@ -172,12 +199,19 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 let password = "\(id)"
                 self.authenticateFirebase(withEmail: email, password: password, nickname: nickname)
                 
-                guard let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl else { return }
-                UserDefaults.standard.set(profileImageUrl.absoluteString, forKey: "profileImage")
                 
-                // UIImage 뷰 또는 UIImageView에 Kingfisher를 사용하여 이미지 로드
-                let imageView: UIImageView = UIImageView()
-                imageView.kf.setImage(with: profileImageUrl)
+                
+                if let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl {
+                    self.imageView.kf.setImage(with: profileImageUrl)
+                    if let image = self.imageView.image {
+                        guard let id = Auth.auth().currentUser?.uid else {return}
+                        self.LoginManager.saveProfileImageToFirebase(id: id, image: image){ error in
+                            if let error {
+                                print("Error saving profile image: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                }
                 
                 self.moveToMainTabBarController()
             }

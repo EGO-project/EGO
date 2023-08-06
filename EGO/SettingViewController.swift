@@ -19,6 +19,15 @@ class SettingViewController: UIViewController {
 //        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let secondPasswordEnabled = UserDefaults.standard.value(forKey: "secondPasswordEnabled") as? Bool {
+            setAlarmSwitch.isOn = secondPasswordEnabled
+        }
+    }
+
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //
@@ -125,6 +134,15 @@ class SettingViewController: UIViewController {
                 }
             }
         }
+    }
+    @IBAction func didChangeSecondPasswordSwitch(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "secondPasswordEnabled")
+        if sender.isOn {
+            let setSecondPasswordVC = SetSecondPasswordViewController()
+            setSecondPasswordVC.modalPresentationStyle = .fullScreen
+            present(setSecondPasswordVC, animated: true, completion: nil)
+        }
+    
     }
 }
 
