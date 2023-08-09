@@ -14,8 +14,9 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class diary {
+class diary: Equatable{
     //    var eggId : String
+    var id: String // 추가
     var description : String
     var date : Date
     var category : String
@@ -23,17 +24,28 @@ class diary {
     var ref: DatabaseReference?
     //Firebase Realtime Database에서 데이터의 참조를 나타내는 DatabaseReference 객체를 가져온다는 의미, 데이터베이스 내 특정 위치를 가리키는 포인터 역할
     
-    init( description: String, category: String, photoURL:String) {
+    init(description: String, category: String, photoURL:String) {
         //        self.eggId = eggId
         self.description = description
         date = Date()
         self.category = category
         self.photoURL = photoURL
+        
+        self.id = UUID().uuidString // id 초기화
+        self.ref = nil // ref 초기화
+    }
+    
+    // Equatable 프로토콜을 준수하기 위한 == 연산자 함수 구현
+    static func ==(lhs: diary, rhs: diary) -> Bool {
+       return lhs.description == rhs.description &&
+              lhs.date == rhs.date &&
+              lhs.category == rhs.category &&
+              lhs.photoURL == rhs.photoURL
     }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as? [String: AnyObject]
-        
+        id = snapshot.key
         ////        eggId = snapshotValue["eggId"] as! String
         //        category = snapshotValue["category"] as! String
         //        description = snapshotValue["description"] as! String
@@ -87,24 +99,25 @@ class diary {
         
         return [
             //                "eggId": eggId,
+            "id": id, // 추가된 부분
             "description": description,
             "date": dateString,
-            "categoty": category,
+            "category": category,
             "photoURL": photoURL
         ]
     }
     
     func save() {
-        
-        UserApi.shared.me { user, error in
-            guard let id = user?.id
-            else{ return }
             
-            let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").child(String(id)).childByAutoId()
-            calenderRef.setValue(self.toAnyObject())
+            UserApi.shared.me { user, error in
+                guard let id = user?.id
+                else{ return }
+                
+                let databaseRef = Database.database().reference()
+                let calenderRef = databaseRef.child("calender").child(String(id)).childByAutoId()
+                calenderRef.setValue(self.toAnyObject())
+            }
         }
-    }
     
     func update() {
         guard let ref = ref else { return }
@@ -112,8 +125,17 @@ class diary {
     }
     
     func delete() {
-        guard let ref = ref else { return }
-        ref.removeValue()
-    }
+           guard let ref = ref else {
+               print("Firebase 디렉터리 참조를 찾을 수 없습니다. 삭제할 수 없음.")
+               return
+           }
+           ref.removeValue { error, _ in
+               if let error = error {
+                   print("Firebase에서 diary 삭제 실패: \(error.localizedDescription)")
+               } else {
+                   print("Firebase에서 diary 삭제 성공")
+               }
+           }
+       }
 }
 

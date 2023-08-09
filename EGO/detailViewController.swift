@@ -10,7 +10,7 @@ import UIKit
 class detailViewController: UIViewController {
     
     @IBOutlet weak var detailDate: UILabel!
-    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailText: UILabel!
     @IBOutlet weak var detailCategory: UIImageView!
     
     var selectDiary : diary!

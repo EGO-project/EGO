@@ -154,7 +154,6 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         let matchingDiary = diaryList.first { dateFormatter.string(from: $0.date) == dateString }
         if let diary = matchingDiary {
-//            calendar.appearance.
             return UIImage(named: "\(diary.category).png")
         }
         
