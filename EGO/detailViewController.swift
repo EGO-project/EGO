@@ -11,7 +11,7 @@ import Photos
 class detailViewController: UIViewController {
     
     @IBOutlet weak var detailDate: UILabel!
-    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailText: UILabel!
     @IBOutlet weak var detailCategory: UIImageView!
     @IBOutlet weak var detailImg: UIImageView!
     

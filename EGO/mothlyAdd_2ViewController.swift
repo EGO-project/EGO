@@ -105,7 +105,7 @@ class mothlyAdd_2ViewController: UIViewController {
         let monthly = self.storyboard?.instantiateViewController(identifier: "monthly")
         monthly?.modalPresentationStyle = .fullScreen
         
-        let newDiary = diary(eggId : saveId, description: textView.text, category: selectCategory, photo: selectPhoto)
+        let newDiary = diary(description: textView.text, category: selectCategory, photoURL: selectPhoto)
         
         if textView.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)

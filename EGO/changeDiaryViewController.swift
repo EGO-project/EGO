@@ -57,7 +57,7 @@ class changeDiaryViewController: UIViewController {
         
         guard let detail = self.storyboard?.instantiateViewController(identifier: "detail") as? detailViewController else { return }
         
-        let changeDiary = diary(eggId: changeDiary.eggId, description: changeText.text ?? "", category: changeDiary.category, photo: changeDiary.photo)
+        let changeDiary = diary(description: changeText.text ?? "", category: changeDiary.category, photoURL: changeDiary.photo)
         
         if changeText.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
