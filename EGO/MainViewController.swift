@@ -5,10 +5,6 @@
 //  Created by 김민석 on 2023/03/16.
 //
 
-//import UIKit
-//import Firebase
-//import KakaoSDKUser
-
 import UIKit
 import KakaoSDKShare
 import KakaoSDKTemplate
@@ -23,22 +19,44 @@ import FirebaseDatabase
 class MainViewController: UIViewController, UIScrollViewDelegate {
     
     
-    //    @IBOutlet weak var eggName: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     
     var eggnames : [String] = []
     var images : [UIImage] = []
+    var idData : String = ""
     
     var eggList : [egg] = []
-    var diaryList: [diary] = []
+    //    var diaryList: [diary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchData()
-        print("\(diaryList.count)")
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print(eggnames)
+        print(idData)
+        print("in willAppear")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print(idData)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        self.updateCurrentImageId()
+        print(eggnames)
+        print(idData)
+        print(type(of: idData))
+        
+        NotificationCenter.default.post(
+                    name: NSNotification.Name("EggIdNotification"),
+                    object: nil,
+                    userInfo: ["id" : idData]
+                )
+    }
     
     // 파이어베이스에 저장된 egg정보 가져오기
     func fetchData() {
@@ -49,25 +67,24 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             }
             
             let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").child(String(id))
+            //            let calenderRef = databaseRef.child("calender").child(String(id))
             let eggRef = databaseRef.child("egg").child(String(id))
             
             eggRef.observeSingleEvent(of: .value) { snapshot  in
                 self.eggnames.removeAll()
                 self.images.removeAll() // 이미지 배열 초기화
-                self.diaryList.removeAll() // 배열 초기화
+                //                self.diaryList.removeAll() // 배열 초기화
                 
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let egg = egg(snapshot: childSnapshot)
-                        let diary = diary(snapshot: childSnapshot)
-                        self.diaryList.append(diary)
+                        //                        let diary = diary(snapshot: childSnapshot)
+                        //                        self.diaryList.append(diary)
                         
                         if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
                             self.images.append(image)
                         } else {
                             print("이미지를 찾을 수 없습니다.")
-                            
                         }
                         
                         if let name : String? = egg.name{
@@ -80,17 +97,22 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                     
                     self.addContentScrollView()
                     self.setPageControl()
-                    print("다이어리 리스트 : \(self.diaryList.count)")
+                    //                    print("다이어리 리스트 : \(self.diaryList.count)")
                 }else {
                     print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
                 }
             }
         }
-        
-        
     }
     
-    
+    // 현재 화면에 보이는 이미지의 ID 값을 업데이트하는 메서드
+        func updateCurrentImageId() {
+            let visibleIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+            
+            if visibleIndex < eggnames.count {
+                idData = eggnames[visibleIndex]
+            }
+        }
     
     //이미지를 담은 배열을 순회하며 이미지뷰를 생성. 이미지뷰의 위치와 크기를 설정, 할당. scrollView의 contentSize를 설정
     func addContentScrollView() {
@@ -111,8 +133,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             imageView.image = images[i]
             scrollView.addSubview(imageView)
             
-            scrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
             
+            scrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
             
         }
     }
@@ -130,11 +152,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     //현재 페이지를 업데이트
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let value = scrollView.contentOffset.x / scrollView.frame.size.width
         setPageControlSelectedPage(currentPage: Int(round(value)))
     }
-    
-    
 }
-
 

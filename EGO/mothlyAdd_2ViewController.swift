@@ -8,16 +8,22 @@
 import UIKit
 import AVFoundation
 import Photos
+import PhotosUI
 
 class mothlyAdd_2ViewController: UIViewController {
     
+    
+    @IBAction func but(_ sender: Any) {
+        
+    }
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var categoryImg: UIImageView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var selectImage: UIImageView!
     
     var selectCategory : String = ""
-    //    var eggId: String?
+    var saveId: String = ""
+    var selectPhoto :  String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +41,13 @@ class mothlyAdd_2ViewController: UIViewController {
         print(selectCategory)
         print(type(of: selectCategory))
         
+        self.selectImage.backgroundColor = UIColor(hexCode: "FFC965")
         
+        print("viewdidload - \(saveId)")
+        print("method called on thread: \(Thread.current)")
     }
     
+    @available(iOS 14.0, *)
     @IBAction func imagePicker(_ sender: Any) {
         
         let imagePicker = UIImagePickerController()
@@ -53,116 +63,106 @@ class mothlyAdd_2ViewController: UIViewController {
             }
         })
         
-        let galleryAction = UIAlertAction(title: "갤러리", style: .default, handler: { action in
-            authPhotoLibrary(self) {
-                // .photoLibrary - Deprecated: Use PHPickerViewController instead. (iOS 14 버전 이상 지원)
-                imagePicker.sourceType = .photoLibrary
-                self.present(imagePicker, animated: true, completion: nil)
+        let galleryAction = UIAlertAction(title: "갤러리", style: .default) { [weak self] action in
+            authPhotoLibrary(self!) {
+                var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+                configuration.filter = .images // 이미지만 선택 가능하도록 설정
+                
+                let picker = PHPickerViewController(configuration: configuration)
+                picker.delegate = self
+                
+                self?.present(picker, animated: true, completion: nil)
             }
-        })
-    
-    let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-    
-    actionSheet.addAction(cameraAction)
-    actionSheet.addAction(galleryAction)
-    actionSheet.addAction(cancelAction)
-    
-    // 갤러리 또는 카메라 선택 액션시트 표시
-    present(actionSheet, animated: true, completion: nil)
-}
-
-
-@IBAction func backBut(_ sender: Any) {
-    let backAlert = UIAlertController(title:"알림",message: "이전으로 돌아가면 지금까지 작성한 글이 모두 사라져요 !",preferredStyle: UIAlertController.Style.alert)
-    let bCancle = UIAlertAction(title: "계속 작성", style: .default, handler: nil)
-    
-    let bOk = UIAlertAction(title: "뒤로가기", style: .default, handler: {
-        action in self.dismiss(animated: true); })
-    
-    backAlert.addAction(bOk)
-    backAlert.addAction(bCancle)
-    present(backAlert,animated: true,completion: nil)
-}
-
-@IBAction func saveBut(_ sender: Any) {
-    
-    let mothlyList = self.storyboard?.instantiateViewController(withIdentifier: "diaryList")
-    mothlyList?.modalPresentationStyle = .fullScreen
-    
-    let newDiary = diary(description: textView.text, category: selectCategory, photoURL: "")
-    
-    if textView.text.count == 0 {
-        let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
-        //확인 버튼 만들기
-        let ok = UIAlertAction(title: "확인", style: .destructive, handler: nil)
-        //확인 버튼 경고창에 추가하기
-        alert.addAction(ok)
-        present(alert,animated: true,completion: nil)
-    } else {
-        let alert = UIAlertController(title:"알림",message: "내용을 저장하시겠습니까?",preferredStyle: UIAlertController.Style.alert)
-        let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
-        //확인 버튼 만들기
-        let ok = UIAlertAction(title: "확인", style: .default, handler: { action in
-            
-            if let selectImage = self.selectImage.image,
-               let imagePath = self.saveImageToDocumentsDirectory(selectImage) {
-                // FileManager를 사용하여 이미지 저장 후, 이미지의 경로를 얻음
-                newDiary.photoURL = imagePath.absoluteString // 이미지 경로를 diary의 photoURL에 할당
-            }
-            newDiary.save() // 내용 저장
-            self.present(mothlyList!, animated: true, completion: nil)
-        })
-        
-        alert.addAction(ok)
-        alert.addAction(cancle)
-        //확인 버튼 경고창에 추가하기
-        present(alert,animated: true,completion: nil)
-    }
-}
-
-//이미지를 FileManager를 사용하여 저장하는 함수
-func saveImageToDocumentsDirectory(_ image: UIImage) -> URL? {
-    // 파일 시스템에서 Documents 디렉토리 경로 가져오기
-    guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-        print("Documents 디렉토리를 찾을 수 없습니다.")
-        return nil
-    }
-    
-    // 파일명 생성 (랜덤 UUID를 사용하거나, 다른 방식으로 파일명을 지정할 수 있습니다)
-    let imageName = "\(UUID().uuidString).jpg"
-    
-    // 이미지를 저장할 파일 경로 생성
-    let imagePath = documentsDirectory.appendingPathComponent(imageName)
-    
-    // 이미지 데이터를 파일로 저장
-    do {
-        if let imageData = image.jpegData(compressionQuality: 1) {
-            try imageData.write(to: imagePath)
-            print("이미지 저장 성공: \(imagePath)")
-            return imagePath
-        } else {
-            print("이미지 데이터를 얻을 수 없습니다.")
-            return nil
         }
-    } catch {
-        print("이미지 저장 실패: \(error)")
-        return nil
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(galleryAction)
+        actionSheet.addAction(cancelAction)
+        
+        // 갤러리 또는 카메라 선택 액션시트 표시
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func backBut(_ sender: Any) {
+        let backAlert = UIAlertController(title:"알림",message: "이전으로 돌아가면 지금까지 작성한 글이 모두 사라져요 !",preferredStyle: UIAlertController.Style.alert)
+        let bCancle = UIAlertAction(title: "계속 작성", style: .default, handler: nil)
+        
+        let bOk = UIAlertAction(title: "뒤로가기", style: .default, handler: {
+            action in self.dismiss(animated: true); })
+        
+        backAlert.addAction(bOk)
+        backAlert.addAction(bCancle)
+        present(backAlert,animated: true,completion: nil)
+    }
+    
+    @IBAction func saveBut(_ sender: Any) {
+        
+        guard let diaryList = self.storyboard?.instantiateViewController(identifier: "diaryList") as? mothlyListViewController else { return }
+        
+        let monthly = self.storyboard?.instantiateViewController(identifier: "monthly")
+        monthly?.modalPresentationStyle = .fullScreen
+        
+        let newDiary = diary(eggId : saveId, description: textView.text, category: selectCategory, photo: selectPhoto)
+        
+        if textView.text.count == 0 {
+            let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
+            //확인 버튼 만들기
+            let ok = UIAlertAction(title: "확인", style: .destructive, handler: nil)
+            //확인 버튼 경고창에 추가하기
+            alert.addAction(ok)
+            present(alert,animated: true,completion: nil)
+        } else {
+            let alert = UIAlertController(title:"알림",message: "내용을 저장하시겠습니까?",preferredStyle: UIAlertController.Style.alert)
+            let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
+            //확인 버튼 만들기
+            let ok = UIAlertAction(title: "확인", style: .default, handler: { action in
+                
+                diaryList.selectedEggId = self.saveId
+                newDiary.save() // 내용 저장
+                
+                self.presentBothViewControllers()
+                
+            })
+            
+            
+            alert.addAction(ok)
+            alert.addAction(cancle)
+            //확인 버튼 경고창에 추가하기
+            present(alert,animated: true,completion: nil)
+        }
+    }
+    
+    func presentBothViewControllers() {
+        guard let monthlyVC = self.storyboard?.instantiateViewController(identifier: "monthly") as? mothlyViewController,
+              let diaryListVC = self.storyboard?.instantiateViewController(identifier: "diaryList") as? mothlyListViewController else {
+            return
+        }
+        
+        let navigationController = UINavigationController(rootViewController: monthlyVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        diaryListVC.selectedEggId = self.saveId
+        navigationController.pushViewController(diaryListVC, animated: false)
+        
+        self.present(navigationController, animated: true, completion: nil)
     }
 }
-}
-
 
 // 사진 불러오기
-extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         // 이미지 선택 또는 촬영이 완료되면 호출되는 메서드
         
         if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectImage.image = img // 선택한 이미지를 뷰에 표시
-            
-            // 이미지 선택 또는 촬영 후 갤러리 또는 카메라 화면 닫기
-            picker.dismiss(animated: true, completion: nil)
         }
+        
+        // 이미지 선택 또는 촬영 후 갤러리 또는 카메라 화면 닫기
+        picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -170,5 +170,37 @@ extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigati
         
         // 이미지 선택 또는 촬영을 취소하면 갤러리 또는 카메라 화면 닫기
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    @available(iOS 14.0, *)
+    // 사진 선택이 끝났을때 들어오는 함수
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let identifiers = results.compactMap(\.assetIdentifier)
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        
+        // asset - 메타데이터 들어있음
+        fetchResult.enumerateObjects { asset, index, pointer in
+            print(asset)
+            self.selectPhoto = asset.localIdentifier
+            print(self.selectPhoto)
+        }
+        
+        let itemProvider = results.first?.itemProvider
+        
+        // UIImage로 추출
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (image, error) in
+                DispatchQueue.main.async { // Ensure UI updates are done on the main thread
+                    guard let image = image as? UIImage else { return }
+                    self?.selectImage.image = image // Update the selectImage with the extracted UIImage
+                }
+            }
+            
+        }
+        
+        // 갤러리뷰 닫기
+        picker.dismiss(animated: true, completion: nil)
+        
     }
 }
