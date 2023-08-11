@@ -29,10 +29,14 @@ class MoreViewController: UIViewController {
     }
     
     func observeFirebaseChanges() {
-        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
         
         // "member" 경로의 변경 사항을 감시하고 실시간으로 업데이트된 데이터를 받아옴
-        self.ref.child("member").child(safeEmail).observe(.value) { [weak self] snapshot in
+        self.ref.child("member").child(userId).observe(.value) { [weak self] snapshot in
             guard let self = self else { return }
             
             if let value = snapshot.value as? [String: Any] {
@@ -54,8 +58,12 @@ class MoreViewController: UIViewController {
     }
     
     func myNameFB() {
-        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        self.ref.child("member").child(safeEmail).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        self.ref.child("member").child(userId).child("nickname").observeSingleEvent(of: .value) { [weak self] snapshot  in
             guard let self = self else { return }
             
             let value = snapshot.value as? String ?? ""
@@ -66,8 +74,12 @@ class MoreViewController: UIViewController {
     }
     
     func myCodeFB() {
-        let safeEmail = (Auth.auth().currentUser?.email)!.replacingOccurrences(of: ".", with: "-")
-        self.ref.child("member").child(safeEmail).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        self.ref.child("member").child(userId).child("friendCode").observeSingleEvent(of: .value) { [weak self] snapshot  in
             guard let self = self else { return }
             
             let value = snapshot.value as? String ?? ""

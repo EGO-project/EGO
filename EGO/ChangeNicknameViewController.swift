@@ -53,8 +53,12 @@ class ChangeNicknameViewController: UIViewController, UIImagePickerControllerDel
         guard let text = nickNameCh.text else { return }
         
         // Firebase Realtime Database의 "nickname" 경로에 값 업데이트
-        guard let email = Auth.auth().currentUser?.email else { return }
-        let nicknameRef = databaseRef.child("member").child(email).child("nickname")
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        let nicknameRef = databaseRef.child("member").child(userId).child("nickname")
         nicknameRef.setValue(text) { error, _ in
             if let error = error {
                 print("Failed to update nickname:", error.localizedDescription)
