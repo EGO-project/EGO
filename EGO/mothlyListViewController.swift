@@ -8,21 +8,28 @@
 import UIKit
 import Firebase
 import KakaoSDKUser
+import Photos
 
 class mothlyListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var diaryListView: UITableView!
     
     var diaryList: [diary] = []
+    var selectedDate : Date = Date()
+    var selectedEggId : String = ""
       
       override func viewDidLoad() {
           super.viewDidLoad()
-          fetchData()
           
           diaryListView.dataSource = self
           diaryListView.delegate = self
-
+          
       }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        print(selectedEggId)
+    }
     // 파이어베이스에 저장된 diary정보 가져오기
     func fetchData() {
         UserApi.shared.me { user, error in
@@ -40,13 +47,21 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        self.diaryList.append(diary)
+                        if diary.eggId == self.selectedEggId {
+                            self.diaryList.append(diary)
+                        }
                     }
                 } else {
                     print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
                 }
               
                 self.diaryListView.reloadData()
+                
+                if let index = self.diaryList.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: self.selectedDate) }) {
+                           let indexPath = IndexPath(row: index, section: 0)
+                           self.diaryListView.scrollToRow(at: indexPath, at: .top, animated: false)
+                       }
+                
             }
         }
     }
@@ -67,25 +82,10 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           let dateString = dateFormatter.string(from: diary.date)
           cell.dateLabel?.text = dateString
           
-          if let imgUrl = URL(string: diary.photoURL) {
-              // 이미지 URL을 이용하여 이미지 데이터를 불러옴
-              if let imageData = try? Data(contentsOf: imgUrl) {
-                  // 이미지 데이터를 UIImage로 변환
-                  if let image = UIImage(data: imageData) {
-                      // 이미지를 cell의 photoImg에 할당
-                      cell.photoImg.image = image
-                  } else {
-                      // UIImage로 변환할 수 없는 경우, 혹은 이미지가 nil인 경우
-                      print("Failed to convert data to UIImage")
-                  }
-              } else {
-                  // 이미지 데이터를 불러오지 못한 경우
-                  print("Failed to load image data from URL")
-              }
-          } else {
-              // 유효하지 않은 이미지 URL인 경우
-              print("Invalid URL: \(diary.photoURL)")
-          }
+          cell.categoryImg.image = UIImage(named: diary.category)
+
+          loadImageWithLocalIdentifier(diary.photo, forCell: cell)
+          cell.photoImg.backgroundColor = UIColor(hexCode: "FFC965")
           
           return cell
       }
@@ -94,6 +94,28 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
           performSegue(withIdentifier: "detail", sender: nil)
           
       }
+    
+    func loadImageWithLocalIdentifier(_ localIdentifier: String, forCell cell: diaryListTableViewCell) {
+        // localIdentifier를 사용하여 이미지의 PHAsset을 가져옵니다.
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil)
+        
+        // 가져온 PHAsset 객체에서 이미지를 로드합니다.
+        if let asset = fetchResult.firstObject {
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true // 동기적으로 이미지 로드
+            
+            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: options) { (image, info) in
+                if let image = image {
+                    // 이미지가 성공적으로 로드된 경우, image를 사용합니다.
+                    DispatchQueue.main.async {
+                        // UI 업데이트는 메인 스레드에서 수행되어야 합니다.
+                        cell.photoImg.image = image
+                    }
+                }
+            }
+        }
+    }
+
       
       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
           if segue.identifier == "detail" { // segue 식별자에 따라 분기 처리

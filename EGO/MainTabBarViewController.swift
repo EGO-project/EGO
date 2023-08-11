@@ -8,7 +8,6 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
-    
     // Swipe Gesture Recognizer!!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,6 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
         
-        // Do any additional setup after loading the view.
     }
     
     
@@ -81,6 +79,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
             self.view.isUserInteractionEnabled = true
         })
     }
+    
 }
 
 

@@ -60,11 +60,11 @@ private func photoAuth(isCamera: Bool, viewController: UIViewController, complet
 
 // 설정 앱 열기
 private func openSettings(action: UIAlertAction) -> Void {
-    
+
     guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
         return
     }
-    
+
     if UIApplication.shared.canOpenURL(settingsUrl) {
         UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
             print("Settings opened: \(success)") // Prints true

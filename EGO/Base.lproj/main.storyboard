@@ -22,7 +22,7 @@
         <!--Mothly View Controller-->
         <scene sceneID="eyD-sj-6qw">
             <objects>
-                <viewController storyboardIdentifier="mothly" id="Evz-0D-39f" customClass="mothlyViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="monthly" id="Evz-0D-39f" customClass="mothlyViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W9s-rk-eZA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,16 +36,13 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="글추가" title=" "/>
                                 <connections>
-                                    <segue destination="QSD-DF-o6g" kind="show" id="nr0-ZU-Lxi"/>
+                                    <segue destination="QSD-DF-o6g" kind="show" identifier="add1" id="nr0-ZU-Lxi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zge-ta-Vlt">
                                 <rect key="frame" x="70" y="611" width="72.666666666666686" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="글 목록"/>
-                                <connections>
-                                    <segue destination="Fup-nI-FgM" kind="show" id="Kka-ss-AIW"/>
-                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
                                 <rect key="frame" x="37.666666666666657" y="164" width="300" height="24"/>
@@ -100,12 +97,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4U-q2-qfc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2304.3478260869565" y="1539.5089285714284"/>
+            <point key="canvasLocation" x="-2306" y="1531"/>
         </scene>
         <!--main-->
         <scene sceneID="sIS-Jd-kEc">
             <objects>
-                <viewController title="main" id="Ckg-S0-OLE" customClass="MainViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" title="main" id="Ckg-S0-OLE" customClass="MainViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fgB-Tk-mRX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +113,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="알추가"/>
                                 <connections>
-                                    <segue destination="Dlv-pl-UwM" kind="show" identifier="eggAdd" id="T6M-Qz-Wb4"/>
+                                    <segue destination="Dlv-pl-UwM" kind="show" id="ssV-4G-3y0"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izl-bZ-quf">
@@ -156,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gp9-6c-EWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2304.8000000000002" y="766.99507389162568"/>
+            <point key="canvasLocation" x="-2220" y="767.73399014778329"/>
         </scene>
         <!--more-->
         <scene sceneID="PuY-iY-C0M">
@@ -2209,20 +2206,6 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhq-F2-Nvu">
                                 <rect key="frame" x="-16" y="47" width="357" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="HdI-cD-dk4">
-                                        <barButtonItem key="leftBarButtonItem" title="취소" id="28q-8c-KGb">
-                                            <connections>
-                                                <action selector="backBut:" destination="Dlv-pl-UwM" id="IWx-J4-Hye"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="저장" id="3SF-Q4-aRp">
-                                            <connections>
-                                                <action selector="save:" destination="Dlv-pl-UwM" id="Uog-sY-nQl"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
                             </navigationBar>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="알 이름" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z9d-y6-YZh">
                                 <rect key="frame" x="90" y="153" width="210" height="34"/>
@@ -2281,9 +2264,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uwu-TO-KFV">
-                        <barButtonItem key="rightBarButtonItem" image="확인" id="SDU-Cv-VV2">
+                        <barButtonItem key="rightBarButtonItem" title=" " image="확인" id="yIA-7h-bkE">
                             <connections>
-                                <action selector="save:" destination="Dlv-pl-UwM" id="i5P-pw-5R0"/>
+                                <action selector="save:" destination="Dlv-pl-UwM" id="c4O-Ld-Rhd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2558,11 +2541,11 @@
             <objects>
                 <viewController storyboardIdentifier="diaryList" id="Fup-nI-FgM" customClass="mothlyListViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eY4-Cb-bAl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="diaryList" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6Dd-ad-adI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="dairy1" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="diaryCell" rowHeight="291" id="PiJ-uf-ndK" customClass="diaryListTableViewCell" customModule="EGO" customModuleProvider="target">
@@ -2576,13 +2559,13 @@
                                                     <rect key="frame" x="20" y="83" width="344" height="178"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3yU-GL-0ze">
-                                                            <rect key="frame" x="0.0" y="0.0" width="161" height="178"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="170" height="178"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="161" id="QQI-iC-2X6"/>
+                                                                <constraint firstAttribute="width" constant="170" id="QQI-iC-2X6"/>
                                                             </constraints>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAD-Hb-FnO">
-                                                            <rect key="frame" x="161" y="0.0" width="183" height="178"/>
+                                                            <rect key="frame" x="170" y="0.0" width="174" height="178"/>
                                                             <color key="backgroundColor" red="0.98431372640000003" green="0.91764706370000004" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="178" id="sPM-Sh-oNr"/>
@@ -2604,15 +2587,15 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내용" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSU-Pq-bHm">
-                                                    <rect key="frame" x="189" y="118.99999999999999" width="167" height="20.333333333333329"/>
+                                                    <rect key="frame" x="196" y="118.99999999999999" width="160" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsZ-ai-xIk">
-                                                    <rect key="frame" x="189" y="83" width="167" height="37"/>
+                                                    <rect key="frame" x="196" y="83" width="160" height="37"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="167" id="NUc-za-tM1"/>
+                                                        <constraint firstAttribute="width" constant="160" id="NUc-za-tM1"/>
                                                         <constraint firstAttribute="height" constant="37" id="xeD-m1-rTc"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2661,14 +2644,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hO-Yt-3f6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3090.4000000000001" y="2245.5665024630543"/>
+            <point key="canvasLocation" x="-2305" y="2249"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="dbd-BC-jHb">
             <objects>
                 <viewController storyboardIdentifier="detail" id="ZmN-ar-NJw" customClass="detailViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="asd-6B-xxi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YxL-A6-C8k">
@@ -2736,19 +2719,20 @@
                     <connections>
                         <outlet property="detailCategory" destination="1MJ-XS-MDT" id="LIa-rU-AeX"/>
                         <outlet property="detailDate" destination="VC3-CB-Z3O" id="VPE-RD-i5Z"/>
+                        <outlet property="detailImg" destination="YxL-A6-C8k" id="khg-Eu-hjf"/>
                         <outlet property="detailText" destination="CDN-pM-311" id="hH4-24-qTS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Dm-bh-cLL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2220" y="2248.5221674876848"/>
+            <point key="canvasLocation" x="-3130" y="2249"/>
         </scene>
         <!--Change Diary View Controller-->
         <scene sceneID="e2F-Hp-vc4">
             <objects>
                 <viewController id="mTp-QZ-07x" customClass="changeDiaryViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qka-Cc-03S">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tng-qt-dAi">
@@ -2813,12 +2797,14 @@
                     <navigationItem key="navigationItem" id="s4V-Il-XOb"/>
                     <connections>
                         <outlet property="cDate" destination="JS5-eR-OPt" id="9FM-1P-NJA"/>
+                        <outlet property="changeCategory" destination="mG9-UU-Hly" id="V3c-rl-6Dh"/>
+                        <outlet property="changeImg" destination="tng-qt-dAi" id="lS6-By-c1H"/>
                         <outlet property="changeText" destination="G81-3h-kcj" id="jeQ-Qc-hpZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AUC-gV-66O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1394.4000000000001" y="2248.5221674876848"/>
+            <point key="canvasLocation" x="-4001" y="2249"/>
         </scene>
         <!--friend-->
         <scene sceneID="3gK-pr-2wy">
@@ -2918,7 +2904,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Pbz-oz-xFd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T8Q-4g-YKY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="monthlyNC" automaticallyAdjustsScrollViewInsets="NO" id="T8Q-4g-YKY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="달력" id="HJ0-lb-LIo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEV-jb-Hfi">
@@ -2928,6 +2914,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="Evz-0D-39f" kind="relationship" relationship="rootViewController" id="Q3X-f1-GRw"/>
+                        <segue destination="Qjy-zf-mqg" kind="show" id="MeX-hp-joT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZY-Eo-1Pp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2937,20 +2924,21 @@
         <!--Navigation Controller-->
         <scene sceneID="XPh-ob-Ihu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qjy-zf-mqg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="diaryList0" automaticallyAdjustsScrollViewInsets="NO" id="Qjy-zf-mqg" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="SI0-Dx-6zn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l3c-X2-kbX">
-                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Fup-nI-FgM" kind="relationship" relationship="rootViewController" id="hym-ok-tkm"/>
+                        <segue destination="Fup-nI-FgM" kind="relationship" relationship="rootViewController" id="Dsw-Uf-S8S"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqb-vl-y0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4000.0000000000005" y="2245.9821428571427"/>
+            <point key="canvasLocation" x="-1394" y="2249"/>
         </scene>
         <!--Set Second Password View Controller-->
         <scene sceneID="RN3-vL-TOl">
@@ -3142,9 +3130,6 @@
             <point key="canvasLocation" x="1345" y="-731"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Kka-ss-AIW"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Egg" width="68" height="68"/>
         <image name="Ellipse 19" width="27" height="27"/>
@@ -3201,9 +3186,9 @@
         <image name="카카오" width="56" height="56"/>
         <image name="코알라" width="50" height="50"/>
         <image name="홈" width="77" height="77"/>
-        <image name="확인" width="51" height="34"/>
         <image name="화살표 1" width="25" height="25"/>
         <image name="화살표 2" width="26" height="25"/>
+        <image name="확인" width="51" height="34"/>
         <image name="후라이" width="69" height="68"/>
         <image name="후라이샵" width="69" height="68"/>
         <systemColor name="labelColor">

@@ -13,6 +13,7 @@ class mothlyAdd_1ViewController: UIViewController {
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
+    var idName : String = ""
     var diaryCategory: String = ""
     
     
@@ -72,6 +73,7 @@ class mothlyAdd_1ViewController: UIViewController {
         } else {
             guard let nextVC = nextView as? mothlyAdd_2ViewController else { return }
                 nextVC.selectCategory = diaryCategory
+                nextVC.saveId = idName
                 self.present(nextVC, animated: true, completion: nil)
         }
 
@@ -92,6 +94,8 @@ class mothlyAdd_1ViewController: UIViewController {
                         
         //Label에 날짜 표시
         todayLabel.text = formattedDate
-    }
         
+        print("add1 \(idName)")
+    }
+
 }

@@ -49,6 +49,8 @@
 		CC838FA529D2FEED0007E91B /* diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FA429D2FEED0007E91B /* diary.swift */; };
 		CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FA829D304040007E91B /* diaryListTableViewCell.swift */; };
 		CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FAA29D319C30007E91B /* detailViewController.swift */; };
+		CC8E906E2A80D73E007B6049 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E906D2A80D73E007B6049 /* PhotoService.swift */; };
+		CC8E90702A82EAD2007B6049 /* AlbumInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E906F2A82EAD2007B6049 /* AlbumInfo.swift */; };
 		CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */; };
 		CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */; };
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
@@ -136,6 +138,8 @@
 		CC838FA429D2FEED0007E91B /* diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diary.swift; sourceTree = "<group>"; };
 		CC838FA829D304040007E91B /* diaryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaryListTableViewCell.swift; sourceTree = "<group>"; };
 		CC838FAA29D319C30007E91B /* detailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailViewController.swift; sourceTree = "<group>"; };
+		CC8E906D2A80D73E007B6049 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		CC8E906F2A82EAD2007B6049 /* AlbumInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfo.swift; sourceTree = "<group>"; };
 		CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_1ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_2ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				CC081F182A7135F70008BF6E /* Auth.swift */,
+				CC8E906D2A80D73E007B6049 /* PhotoService.swift */,
+				CC8E906F2A82EAD2007B6049 /* AlbumInfo.swift */,
 			);
 			path = photo;
 			sourceTree = "<group>";
@@ -599,12 +605,14 @@
 				4E2E7AE02A2D79D200A815EB /* WithdrawlViewController.swift in Sources */,
 				FE90C38429A23492008B88A2 /* MoreViewController.swift in Sources */,
 				4E794C0F2A7FFED5007F1CAB /* SecondPasswordViewController.swift in Sources */,
+				CC8E906E2A80D73E007B6049 /* PhotoService.swift in Sources */,
 				FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */,
 				4E2E7AE22A2D814C00A815EB /* DeleteViewController.swift in Sources */,
 				FE90C38C29A23D0D008B88A2 /* NoticeViewController.swift in Sources */,
 				CC838FA929D304040007E91B /* diaryListTableViewCell.swift in Sources */,
 				CCC30CD229C9D055008A9466 /* mothlyViewController.swift in Sources */,
 				4E64E09B2980DE0400124F56 /* AppDelegate.swift in Sources */,
+				CC8E90702A82EAD2007B6049 /* AlbumInfo.swift in Sources */,
 				CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */,
 				4C0F43BA2A12798A008F70DE /* AddFriendViewController.swift in Sources */,
 				4C5063F1299B89A700F8F3B8 /* SocialTableViewCell.swift in Sources */,

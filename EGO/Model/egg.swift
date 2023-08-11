@@ -32,7 +32,6 @@ class egg {
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         
-        //calendarId = snapshotValue["name"] as! String
         name = snapshotValue["name"] as! String
         kind = snapshotValue["kind"] as! String
         state = snapshotValue["state"] as! String
