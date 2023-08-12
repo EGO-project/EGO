@@ -2,7 +2,7 @@
 //  ChangePasswordViewController.swift
 //  EGO
 //
-//  Created by 박기태 on 2023/08/07.
+//  Created by 박기태 on 2023/08/12.
 //
 
 import UIKit
@@ -88,4 +88,3 @@ class ChangePasswordViewController: UIViewController {
         }
     }
 }
-

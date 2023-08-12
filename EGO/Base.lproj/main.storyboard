@@ -1757,7 +1757,7 @@
         <!--비밀번호 번경-->
         <scene sceneID="oeg-kS-9gM">
             <objects>
-                <viewController id="0hP-Mh-zp8" sceneMemberID="viewController">
+                <viewController id="0hP-Mh-zp8" customClass="ChangePasswordViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8ig-OO-Zw5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1815,12 +1815,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="확인"/>
+                                <connections>
+                                    <action selector="changePasswordButtonTapped:" destination="0hP-Mh-zp8" eventType="touchUpInside" id="w1k-Ab-yxm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cTS-wI-J1S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="비밀번호 번경" id="bse-su-YTT"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="mNN-L8-FZh" id="jrV-Fw-CfH"/>
+                        <outlet property="currentPasswordTextField" destination="APX-ZH-aTV" id="bvr-g6-5tA"/>
+                        <outlet property="newPasswordTextField" destination="c0W-Sf-dfB" id="2R5-3Z-Q8j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7f-Xb-fCY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
