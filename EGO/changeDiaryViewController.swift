@@ -23,7 +23,7 @@ class changeDiaryViewController: UIViewController {
         changeText.text = changeDiary.description
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: changeDiary.date)
         cDate.text = dateString
         

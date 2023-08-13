@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ho3-qK-n9h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6bu-5F-gbn">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNq-8E-JFJ" customClass="FSCalendar">
-                                <rect key="frame" x="16" y="193" width="343" height="359"/>
+                                <rect key="frame" x="16" y="196" width="343" height="356"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-Jb-4oD">
@@ -45,7 +45,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="글 목록"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                <rect key="frame" x="37.666666666666657" y="161" width="300" height="24"/>
+                                <rect key="frame" x="37.666666666666657" y="164" width="300" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                         <rect key="frame" x="0.0" y="0.0" width="12.666666666666666" height="24"/>
@@ -1638,7 +1638,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmZ-2R-kxy">
-                                <rect key="frame" x="0.0" y="91" width="55.666666666666664" height="589"/>
+                                <rect key="frame" x="0.0" y="94" width="55.666666666666664" height="586"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbf-4m-ZGz">
                                         <rect key="frame" x="0.0" y="0.0" width="55.666666666666664" height="19.333333333333332"/>
@@ -1687,7 +1687,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-tZ-evw">
-                                <rect key="frame" x="0.0" y="91" width="375" height="589"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="586"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
                                         <rect key="frame" x="0.0" y="0.0" width="385" height="19.333333333333332"/>
@@ -1729,7 +1729,7 @@
         <!--Change Nickname View Controller-->
         <scene sceneID="wWA-FA-iSH">
             <objects>
-                <viewController id="6bu-5F-gbn" customClass="ChangeNicknameViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangeNicknameVC" id="6bu-5F-gbn" customClass="ChangeNicknameViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FC0-E2-il0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1769,7 +1769,7 @@
                                 <state key="normal" image="Group 30"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Group 30"/>
                                 <connections>
-                                    <action selector="changeProfileImage:" destination="6bu-5F-gbn" eventType="touchUpInside" id="bZ3-Uc-xz0"/>
+                                    <action selector="changeProfileImage:" destination="6bu-5F-gbn" eventType="touchUpInside" id="031-c3-Urc"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line 7" translatesAutoresizingMaskIntoConstraints="NO" id="jBi-dd-Mvm">
@@ -1950,7 +1950,7 @@
                                 <state key="normal" image="Group 30"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Group 30"/>
                                 <connections>
-                                    <segue destination="6bu-5F-gbn" kind="show" id="Dk2-iN-4hD"/>
+                                    <segue destination="6bu-5F-gbn" kind="show" id="grA-QJ-D0w"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line 7" translatesAutoresizingMaskIntoConstraints="NO" id="sNm-Md-iMl">
@@ -1983,7 +1983,7 @@
                     <tabBarItem key="tabBarItem" title="more" id="ujK-HC-MuJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sHc-QM-kuf">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98320811990000001" green="0.95538932089999995" blue="0.7921308279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
@@ -2003,7 +2003,7 @@
                     <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfF-OA-VVJ">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2020,11 +2020,11 @@
             <objects>
                 <viewController storyboardIdentifier="messageList" id="ccH-7Y-cjx" customClass="messageViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nad-JY-4Rs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-df-09X">
-                                <rect key="frame" x="0.0" y="47" width="375" height="708"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -2319,7 +2319,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-Sx-X05">
-                                <rect key="frame" x="87.666666666666686" y="225" width="200" height="250"/>
+                                <rect key="frame" x="87.666666666666686" y="228" width="200" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="64r-Zc-qH3"/>
                                     <constraint firstAttribute="height" constant="250" id="J71-YQ-hpw"/>
@@ -2500,22 +2500,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aZg-hi-rC1">
-                                <rect key="frame" x="72.666666666666686" y="132" width="230" height="507"/>
+                                <rect key="frame" x="72.666666666666686" y="135" width="230" height="504"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPt-su-j4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="36.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="230" height="33.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhW-6Y-L6W">
-                                        <rect key="frame" x="0.0" y="51.666666666666664" width="230" height="25.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="48.666666666666657" width="230" height="25.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uM9-SF-Blv">
-                                        <rect key="frame" x="0.0" y="92" width="230" height="415"/>
+                                        <rect key="frame" x="0.0" y="89" width="230" height="415"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sCN-gc-Qy4">
                                                 <rect key="frame" x="0.0" y="0.0" width="230" height="100"/>
@@ -2952,7 +2952,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="WPi-gx-EHU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="za2-Sk-n4E">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98431372640000003" green="0.9529411793" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3046,7 +3046,7 @@
                     <tabBarItem key="tabBarItem" title="" image="달력" id="HJ0-lb-LIo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEV-jb-Hfi">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3066,7 +3066,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="SI0-Dx-6zn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l3c-X2-kbX">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3304,8 +3304,8 @@
         <image name="공유" width="56" height="56"/>
         <image name="글추가" width="59" height="58"/>
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
-        <image name="다람쥐" width="50" height="50"/>
         <image name="달력" width="75" height="75"/>
+        <image name="다람쥐" width="50" height="50"/>
         <image name="뒤로" width="17" height="29"/>
         <image name="디저트" width="101" height="100"/>
         <image name="문화생활" width="101" height="100"/>
