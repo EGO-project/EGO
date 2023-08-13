@@ -58,6 +58,7 @@
 		CCC30CD429C9D08B008A9466 /* eggAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */; };
 		FE3C8B8F2A137BFE00CDADDF /* ChangeNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */; };
 		FE43BDB629CF3C4900523881 /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */; };
+		FE5407DE2A8799BA00D7F3A3 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5407DD2A8799BA00D7F3A3 /* ChangePasswordViewController.swift */; };
 		FE5ABCC92A4D9C450095D0E8 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ABCC82A4D9C450095D0E8 /* TermsOfUseViewController.swift */; };
 		FE5ABCCB2A4D9D470095D0E8 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ABCCA2A4D9D470095D0E8 /* InformationViewController.swift */; };
 		FE5ABCCD2A4DC3060095D0E8 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5ABCCC2A4DC3060095D0E8 /* PrivacyPolicyViewController.swift */; };
@@ -147,6 +148,7 @@
 		CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eggAddViewController.swift; sourceTree = "<group>"; };
 		FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameViewController.swift; sourceTree = "<group>"; };
 		FE43BDB529CF3C4900523881 /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
+		FE5407DD2A8799BA00D7F3A3 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		FE5ABCC82A4D9C450095D0E8 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		FE5ABCCA2A4D9D470095D0E8 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		FE5ABCCC2A4DC3060095D0E8 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				FE5ABCCC2A4DC3060095D0E8 /* PrivacyPolicyViewController.swift */,
 				4E794C0E2A7FFED5007F1CAB /* SecondPasswordViewController.swift */,
 				4E794C102A800A10007F1CAB /* SetSecondPasswordViewController.swift */,
+				FE5407DD2A8799BA00D7F3A3 /* ChangePasswordViewController.swift */,
 			);
 			path = EGO;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,
 				FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */,
 				89E68A1D2A2B311F00B2E941 /* EggRoomCollectionViewCell.swift in Sources */,
+				FE5407DE2A8799BA00D7F3A3 /* ChangePasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ho3-qK-n9h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ho3-qK-n9h">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNq-8E-JFJ" customClass="FSCalendar">
-                                <rect key="frame" x="16" y="193" width="343" height="359"/>
+                                <rect key="frame" x="16" y="196" width="343" height="356"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-Jb-4oD">
@@ -45,7 +45,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="글 목록"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-15-eDD">
-                                <rect key="frame" x="37.666666666666657" y="161" width="300" height="24"/>
+                                <rect key="frame" x="37.666666666666657" y="164" width="300" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjR-zT-vps">
                                         <rect key="frame" x="0.0" y="0.0" width="12.666666666666666" height="24"/>
@@ -196,10 +196,10 @@
                                     <segue destination="iwA-cc-N5S" kind="show" id="pUX-FY-jXU"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
                                 <rect key="frame" x="304" y="337" width="43" height="39"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="9gv-jr-Cgs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="9gv-jr-Cgs">
                                 <rect key="frame" x="304" y="388" width="43" height="40"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 6" translatesAutoresizingMaskIntoConstraints="NO" id="pVo-Pl-Pju">
@@ -235,7 +235,7 @@
                                     <segue destination="R6H-Sv-fE1" kind="show" id="Yr4-wv-uv8"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="cik-GL-KL2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="cik-GL-KL2">
                                 <rect key="frame" x="304" y="437" width="43" height="43"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ve7-hX-UTn">
@@ -293,21 +293,21 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="EGO" id="I0b-WZ-4Bo">
+                    <navigationItem key="navigationItem" id="I0b-WZ-4Bo">
                         <barButtonItem key="leftBarButtonItem" image="후라이" landscapeImage="후라이" largeContentSizeImage="후라이" style="plain" id="75P-dA-Tiu">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="S2p-td-h5g">
                                 <rect key="frame" x="16" y="0.0" width="93" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="후라이" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Egg" title=""/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="알림" landscapeImage="알림" largeContentSizeImage="후라이" style="plain" id="ccq-X2-bJw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ccq-X2-bJw">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="apR-Al-m7e">
                                 <rect key="frame" x="266" y="0.0" width="93" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="알림" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="알림" title=""/>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1638,7 +1638,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmZ-2R-kxy">
-                                <rect key="frame" x="0.0" y="91" width="55.666666666666664" height="589"/>
+                                <rect key="frame" x="0.0" y="94" width="55.666666666666664" height="586"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbf-4m-ZGz">
                                         <rect key="frame" x="0.0" y="0.0" width="55.666666666666664" height="19.333333333333332"/>
@@ -1687,7 +1687,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-tZ-evw">
-                                <rect key="frame" x="0.0" y="91" width="375" height="589"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="586"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보처리방침" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uem-fR-2QH">
                                         <rect key="frame" x="0.0" y="0.0" width="385" height="19.333333333333332"/>
@@ -1776,30 +1776,20 @@
                                 <rect key="frame" x="23" y="260" width="329" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRW-8p-zdV">
-                                <rect key="frame" x="115" y="470" width="146" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRW-8p-zdV">
+                                <rect key="frame" x="46" y="403" width="293" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="비밀번호 변경하기"/>
+                                <buttonConfiguration key="configuration" style="plain" title="비밀번호 변경"/>
                                 <connections>
                                     <segue destination="0hP-Mh-zp8" kind="show" id="PAd-Sd-No3"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md8-Wp-9BR">
-                                <rect key="frame" x="64" y="415" width="290" height="23"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line 7" translatesAutoresizingMaskIntoConstraints="NO" id="oSz-j0-Gpp">
+                                <rect key="frame" x="30" y="374" width="329" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYc-ll-muj">
-                                <rect key="frame" x="64" y="386" width="59" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bPr-CQ-UgJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1817,7 +1807,7 @@
         <!--비밀번호 번경-->
         <scene sceneID="oeg-kS-9gM">
             <objects>
-                <viewController id="0hP-Mh-zp8" sceneMemberID="viewController">
+                <viewController id="0hP-Mh-zp8" customClass="ChangePasswordViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8ig-OO-Zw5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1875,12 +1865,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="확인"/>
+                                <connections>
+                                    <action selector="changePasswordButtonTapped:" destination="0hP-Mh-zp8" eventType="touchUpInside" id="ZLv-38-3iZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cTS-wI-J1S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="비밀번호 번경" id="bse-su-YTT"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="mNN-L8-FZh" id="GWn-OE-9xS"/>
+                        <outlet property="currentPasswordTextField" destination="APX-ZH-aTV" id="6Vu-T7-IDt"/>
+                        <outlet property="newPasswordTextField" destination="c0W-Sf-dfB" id="zzh-EB-3rq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7f-Xb-fCY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1983,7 +1981,7 @@
                     <tabBarItem key="tabBarItem" title="more" id="ujK-HC-MuJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sHc-QM-kuf">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98320811990000001" green="0.95538932089999995" blue="0.7921308279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
@@ -2003,7 +2001,7 @@
                     <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfF-OA-VVJ">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2020,11 +2018,11 @@
             <objects>
                 <viewController storyboardIdentifier="messageList" id="ccH-7Y-cjx" customClass="messageViewController" customModule="EGO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nad-JY-4Rs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bgp-df-09X">
-                                <rect key="frame" x="0.0" y="47" width="375" height="708"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="802"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -2319,7 +2317,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-Sx-X05">
-                                <rect key="frame" x="87.666666666666686" y="225" width="200" height="250"/>
+                                <rect key="frame" x="87.666666666666686" y="228" width="200" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="64r-Zc-qH3"/>
                                     <constraint firstAttribute="height" constant="250" id="J71-YQ-hpw"/>
@@ -2500,22 +2498,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aZg-hi-rC1">
-                                <rect key="frame" x="72.666666666666686" y="132" width="230" height="507"/>
+                                <rect key="frame" x="72.666666666666686" y="135" width="230" height="504"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPt-su-j4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="36.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="230" height="33.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhW-6Y-L6W">
-                                        <rect key="frame" x="0.0" y="51.666666666666664" width="230" height="25.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="48.666666666666657" width="230" height="25.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uM9-SF-Blv">
-                                        <rect key="frame" x="0.0" y="92" width="230" height="415"/>
+                                        <rect key="frame" x="0.0" y="89" width="230" height="415"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sCN-gc-Qy4">
                                                 <rect key="frame" x="0.0" y="0.0" width="230" height="100"/>
@@ -2952,7 +2950,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="WPi-gx-EHU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="za2-Sk-n4E">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98431372640000003" green="0.9529411793" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3046,7 +3044,7 @@
                     <tabBarItem key="tabBarItem" title="" image="달력" id="HJ0-lb-LIo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEV-jb-Hfi">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3066,7 +3064,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="SI0-Dx-6zn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l3c-X2-kbX">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3314,7 +3312,7 @@
         <image name="수달" width="50" height="50"/>
         <image name="수정" width="66" height="25"/>
         <image name="식당" width="109" height="108"/>
-        <image name="알림" width="62" height="61"/>
+        <image name="알림" width="62" height="61"/>
         <image name="알추가" width="40" height="39"/>
         <image name="여행" width="101" height="100"/>
         <image name="운동" width="101" height="100"/>
@@ -3324,9 +3322,9 @@
         <image name="카카오" width="56" height="56"/>
         <image name="코알라" width="50" height="50"/>
         <image name="홈" width="77" height="77"/>
-        <image name="화살표 1" width="25" height="25"/>
-        <image name="화살표 2" width="26" height="25"/>
+        <image name="화살표 1" width="11" height="19"/>
         <image name="확인" width="51" height="34"/>
+        <image name="화살표 2" width="26" height="25"/>
         <image name="후라이" width="69" height="68"/>
         <image name="후라이샵" width="69" height="68"/>
         <systemColor name="labelColor">
