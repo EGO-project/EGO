@@ -25,6 +25,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendName: [String] = []
     var friendCode: [String] = []
     var friendNickname: [String] = []
+    var userEggs: [egg] = []
     
     
     @IBOutlet weak var socialTable: UITableView!
@@ -39,8 +40,6 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         socialTable.dataSource = self
         
         setupRefreshControl() // UIRefreshControl 설정
-        
-        configureUserData()
         
     }
     
@@ -61,45 +60,22 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let row = rowCount else {return 0}
-        return row
+        return friendNickname.count
     }
+
     
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
 
-        // Retrieve friend's name and eggs from the database
-        guard let userId = Auth.auth().currentUser?.uid else {
-            // User is not logged in
-            print("User is not logged in.")
-            return cell
+        // Use the friend property of the cell to automatically update the cell's UI
+        if indexPath.row < friendNickname.count {
+            cell.friend = friendNickname[indexPath.row]
         }
-        
-        let friendId = friendCode[indexPath.row]
-        ref.child("friend").child(userId).child(friendId).observeSingleEvent(of: .value) { snapshot in
-            guard let friendData = snapshot.value as? [String: Any],
-                  let nickname = friendData["nickname"] as? String,
-                  let eggs = friendData["eggs"] as? [String]
-            else {
-                print("Failed to retrieve friend data")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                cell.friend = nickname
-                // Assuming the friendsEgo images are named with the friend's name
-                cell.friendsEgo1.image = UIImage(named: "\(eggs[0])")
-                cell.friendsEgo2.image = UIImage(named: "\(eggs[1])")
-                cell.friendsEgo3.image = UIImage(named: "\(eggs[2])")
-                cell.friendsEgo4.image = UIImage(named: "\(eggs[3])")
-                cell.friendsEgo5.image = UIImage(named: "\(eggs[4])")
-            }
-        }
-        
+
         return cell
     }
+
 
 
 
@@ -187,6 +163,20 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         
+        // Retrieve egg data for the user
+        
+        fetchEggData(for: userId) { eggs in
+            self.userEggs = eggs
+            // 여기서 필요한 UI 업데이트를 수행할 수 있습니다.
+            // 예: 사용자의 top egg 이미지 및 정보 업데이트
+            if let topEgg = eggs.first {
+                DispatchQueue.main.async {
+                    self.myTopEgg.image = UIImage(named:"수달_1단계")  // 예제 코드, 실제 이미지 이름이 다를 수 있습니다.
+                    // 기타 필요한 UI 업데이트 코드를 여기에 추가합니다.
+                }
+            }
+        }
+        
         // Retrieve user data from Firebase
         ref.child("member").child(userId).observeSingleEvent(of: .value) { [weak self] snapshot in
             guard let self = self else { return }
@@ -202,6 +192,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.myTopCode.text = friendCode
             }
             
+            
             // Retrieve friend data from Firebase
             self.ref.child("friend").child(userId).observeSingleEvent(of: .value) { snapshot in
                 guard let friendData = snapshot.value as? [String: Any] else {
@@ -209,29 +200,32 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
                 
-                let friendCodes = Array(friendData.keys)
+                let friendUId = Array(friendData.keys)
                 
                 // Retrieve friend names using friend codes
                 var updatedFriendNickname: [String] = []
                 let dispatchGroup = DispatchGroup()
                 
-                for code in friendCodes {
+                for uId in friendUId {
                     dispatchGroup.enter()
+                    print("friendUID: \(uId)")
                     
-                    self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
-                        guard let friendNode = snapshot.value as? [String: Any],
-                              let friendId = friendNode.keys.first,
-                              let friendData = friendNode[friendId] as? [String: Any],
+                    
+                    self.ref.child("member").child(uId).observeSingleEvent(of: .value) { snapshot in
+                        guard let friendData = snapshot.value as? [String: Any],
                               let nickname = friendData["nickname"] as? String
                         else {
                             print("Failed to retrieve friend data")
                             dispatchGroup.leave()
                             return
                         }
+                    
+                        
                         
                         updatedFriendNickname.append(nickname)
                         dispatchGroup.leave()
-                        
+                        self.friendNickname = []
+
                         self.friendNickname.append(nickname)
                         
                         DispatchQueue.main.async {
@@ -257,7 +251,24 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
-
     
-    
+    func fetchEggData(for userId: String, completion: @escaping ([egg]) -> Void) {
+        let databaseRef = Database.database().reference()
+        let userEggRef = databaseRef.child("egg").child(userId)
+        
+        userEggRef.observeSingleEvent(of: .value) { snapshot in
+            var eggArray: [egg] = []
+            
+            // 각 알의 스냅샷을 반복하면서 'egg' 객체로 변환
+            for childSnapshot in snapshot.children {
+                if let childSnapshot = childSnapshot as? DataSnapshot {
+                    let eggData = egg(snapshot: childSnapshot)
+                    eggArray.append(eggData)
+                }
+            }
+            
+            // 모든 알 데이터를 가져온 후 완료 핸들러를 호출
+            completion(eggArray)
+        }
+    }
 }
