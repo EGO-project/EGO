@@ -44,7 +44,7 @@ class eggAddViewController: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         
-        let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", favoritestate: false)
+        let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", eggState: false, favoritestate: false)
         
         let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBar")
             mainView?.modalPresentationStyle = .fullScreen

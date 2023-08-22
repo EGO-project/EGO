@@ -430,15 +430,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="친구이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPJ-00-ko3">
-                                <rect key="frame" x="124" y="180" width="167" height="24"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="8fd-vH-XOD">
+                                <rect key="frame" x="76" y="603" width="240" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="pageIndicatorTintColor" systemColor="systemYellowColor"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemOrangeColor"/>
+                                <connections>
+                                    <action selector="pageControlValueChanged:" destination="yxn-fM-p0h" eventType="valueChanged" id="y9o-jH-g1g"/>
+                                </connections>
+                            </pageControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j19-x6-366">
+                                <rect key="frame" x="95.666666666666657" y="290" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-xY-bCK">
+                                <rect key="frame" x="174" y="190" width="43" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scribble.variable" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-JM-2AP">
-                                <rect key="frame" x="64" y="303.66666666666674" width="287" height="287"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIn-Pi-Dya">
+                                <rect key="frame" x="308" y="488" width="51" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -447,13 +460,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="pef-Ep-Q8O"/>
                     <connections>
-                        <outlet property="friendEgo" destination="oLb-JM-2AP" id="fog-VT-4xj"/>
-                        <outlet property="friendName" destination="KPJ-00-ko3" id="fg6-Bi-BLC"/>
+                        <outlet property="diaryImage" destination="WIn-Pi-Dya" id="pDm-oT-NJF"/>
+                        <outlet property="eggImage" destination="j19-x6-366" id="nO5-Fo-Svm"/>
+                        <outlet property="eggName" destination="ogN-xY-bCK" id="JA6-Lq-JFP"/>
+                        <outlet property="pageControl" destination="8fd-vH-XOD" id="ylw-fa-RWS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hr-U5-MQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434" y="1531"/>
+            <point key="canvasLocation" x="432.82442748091603" y="1530.9859154929579"/>
         </scene>
         <!--Add Social View Controller-->
         <scene sceneID="Ed8-Kj-IcH">
@@ -672,7 +687,7 @@
                                 <rect key="frame" x="70" y="514" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="appleLogo"/>
+                                <buttonConfiguration key="configuration" style="plain" image="appleLogo" title=" "/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i0A-Ng-hPZ">
                                 <rect key="frame" x="270" y="514" width="50" height="50"/>
@@ -910,7 +925,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="kakao_login_medium_narrow"/>
-                                <buttonConfiguration key="configuration" style="plain" image="kakaoLogo"/>
+                                <buttonConfiguration key="configuration" style="plain" image="kakaoLogo" title=" "/>
                                 <connections>
                                     <action selector="kakaoLogin:" destination="AyV-hu-94U" eventType="touchUpInside" id="zQm-Ch-tf8"/>
                                 </connections>
@@ -919,13 +934,13 @@
                                 <rect key="frame" x="70" y="695" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="appleLogo"/>
+                                <buttonConfiguration key="configuration" style="plain" image="appleLogo" title=" "/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPW-mY-05m">
                                 <rect key="frame" x="270" y="695" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="googleLogo"/>
+                                <buttonConfiguration key="configuration" style="plain" image="googleLogo" title=" "/>
                                 <connections>
                                     <action selector="googleSignInSender:" destination="AyV-hu-94U" eventType="touchUpInside" id="mux-Hd-Ieb"/>
                                 </connections>
@@ -3398,8 +3413,7 @@
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
         <image name="rectangle" catalog="system" width="128" height="93"/>
-        <image name="scribble.variable" catalog="system" width="128" height="119"/>
-        <image name="공부" width="101" height="100"/>
+        <image name="공부" width="50.5" height="50"/>
         <image name="공유" width="56" height="56"/>
         <image name="글추가" width="59" height="58"/>
         <image name="기본프로필 1" width="94" height="94"/>
@@ -3441,6 +3455,12 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

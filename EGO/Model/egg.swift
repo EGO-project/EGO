@@ -14,18 +14,20 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class egg {
+class egg: CustomStringConvertible {
     
     var name : String
     var kind : String
     var state : String
+    var eggState : Bool
     var favoritestate: Bool
     var ref: DatabaseReference?
     
-    init(name: String, kind: String, state: String, favoritestate: Bool) {
+    init(name: String, kind: String, state: String, eggState:Bool, favoritestate: Bool) {
         self.name = name
         self.kind = kind
         self.state = state
+        self.eggState = eggState
         self.favoritestate = favoritestate
     }
     
@@ -36,6 +38,7 @@ class egg {
             name = snapshotValue["name"] as? String ?? ""
             kind = snapshotValue["kind"] as? String ?? ""
             state = snapshotValue["state"] as? String ?? ""
+            eggState = snapshotValue["eggState"] as? Bool ?? false
             favoritestate = snapshotValue["favoritestate"] as? Bool ?? false
         } else {
             // 데이터베이스에서 올바른 형식의 데이터를 가져오지 못한 경우에 대한 예외 처리
@@ -43,6 +46,7 @@ class egg {
             name = ""
             kind = ""
             state = ""
+            eggState = false
             favoritestate = false
         }
         
@@ -58,6 +62,7 @@ class egg {
             "name": name,
             "kind": kind,
             "state": state,
+            "eggState": eggState,
             "favoritestate": favoritestate
         ]
     }
@@ -84,4 +89,8 @@ class egg {
         guard let ref = ref else { return }
         ref.removeValue()
     }
+    
+    var description: String {
+            return "Egg(name: \(name), kind: \(kind), state: \(state), eggState: \(eggState), favoritestate: \(favoritestate))"
+        }
 }

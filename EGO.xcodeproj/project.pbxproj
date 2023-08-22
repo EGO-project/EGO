@@ -14,6 +14,8 @@
 		4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70BE2A03E988007C38A9 /* AddSocialViewController.swift */; };
 		4CCD70C12A03EA08007C38A9 /* AddSocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */; };
 		4CCD70C72A0413AD007C38A9 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */; };
+		4E1C719B2A8E022500F5563A /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C719A2A8E022500F5563A /* Member.swift */; };
+		4E1C719D2A8E033900F5563A /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C719C2A8E033900F5563A /* Friend.swift */; };
 		4E2E7AE02A2D79D200A815EB /* WithdrawlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E7ADF2A2D79D200A815EB /* WithdrawlViewController.swift */; };
 		4E2E7AE22A2D814C00A815EB /* DeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */; };
 		4E365FB329E7DBDE00853FB7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */; };
@@ -97,6 +99,8 @@
 		4CCD70C02A03EA08007C38A9 /* AddSocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSocialTableViewCell.swift; sourceTree = "<group>"; };
 		4CCD70C62A0413AD007C38A9 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		4D96226400818A9BF6D597DD /* Pods-EGOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.debug.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E1C719A2A8E022500F5563A /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		4E1C719C2A8E033900F5563A /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		4E2E7ADF2A2D79D200A815EB /* WithdrawlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawlViewController.swift; sourceTree = "<group>"; };
 		4E2E7AE12A2D814C00A815EB /* DeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteViewController.swift; sourceTree = "<group>"; };
 		4E365FB229E7DBDE00853FB7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 			children = (
 				CC4803E529DAF2FF006037A9 /* egg.swift */,
 				CC838FA429D2FEED0007E91B /* diary.swift */,
+				4E1C719A2A8E022500F5563A /* Member.swift */,
+				4E1C719C2A8E033900F5563A /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -635,7 +641,9 @@
 				CC838FA529D2FEED0007E91B /* diary.swift in Sources */,
 				FEA4F32129D98DEF00C6647A /* SettingViewController.swift in Sources */,
 				89E68A1D2A2B311F00B2E941 /* EggRoomCollectionViewCell.swift in Sources */,
+				4E1C719D2A8E033900F5563A /* Friend.swift in Sources */,
 				FE5407DE2A8799BA00D7F3A3 /* ChangePasswordViewController.swift in Sources */,
+				4E1C719B2A8E022500F5563A /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
