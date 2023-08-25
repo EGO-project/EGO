@@ -19,15 +19,39 @@ class detailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        barStyle()
+        
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.alignment = .left // 수평 정렬
+//        paragraphStyle.lineBreakMode = .byTruncatingTail // 줄바꿈 모드 설정
+//
+//        let attributedText = NSAttributedString(string: selectDiary.description, attributes: [
+//            .paragraphStyle: paragraphStyle,
+//            .baselineOffset: NSNumber(value: 0) // 기본 값은 0 (기준선)
+//        ])
+//
+//        detailText.attributedText = attributedText
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let selectDiary {
             
-            detailText.text = selectDiary.description
+//            detailText.text = selectDiary.description
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .left // 수평 정렬
+            paragraphStyle.lineBreakMode = .byTruncatingTail // 줄바꿈 모드 설정
+
+            // 수정된 부분: baselineOffset을 음수 값으로 설정하여 텍스트를 위로 올립니다.
+            let baselineOffset: CGFloat = -detailText.font.ascender // 기본 값은 0 (기준선)
+            let attributedText = NSAttributedString(string: selectDiary.description, attributes: [
+                .paragraphStyle: paragraphStyle,
+                .baselineOffset: NSNumber(value: Float(baselineOffset))
+            ])
+
+            detailText.attributedText = attributedText
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.dateFormat = "yyyy.MM.dd"
             let dateString = dateFormatter.string(from: selectDiary.date)
             detailDate.text = dateString
             
@@ -37,7 +61,20 @@ class detailViewController: UIViewController {
             
         }
         else {print("nil")}
+    }
+    
+    func barStyle(){
+            if let leftImage = UIImage(named: "뒤로") {
+                let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
+                let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
+                navigationItem.leftBarButtonItem = leftItem
             }
+        }
+        
+        @objc private func leftButAction(){
+            self.navigationController?.popViewController(animated: true)
+        }
+
     
     func loadPhtoWithLocalIdentifier(_ localIdentifier: String) {
         // localIdentifier를 사용하여 이미지의 PHAsset을 가져옵니다.

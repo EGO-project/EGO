@@ -22,6 +22,33 @@ class eggAddViewController: UIViewController {
     
     @IBOutlet weak var eggImg: UIImageView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.barStyle()
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+    }
+    
+    func barStyle(){
+        if let leftImage = UIImage(named: "뒤로") {
+            let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
+            let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
+            navigationItem.leftBarButtonItem = leftItem
+        }
+        
+        if let rightImage = UIImage(named: "확인") {
+            let buttonImage = rightImage.withRenderingMode(.alwaysOriginal)
+            let rightItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(save))
+            navigationItem.rightBarButtonItem = rightItem
+        }
+    }
+    
+    @objc private func leftButAction(){
+        navigationController?.popViewController(animated: true)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     @IBAction func but1(_ sender: Any) {
         eggImg.image = UIImage(named:  "다람쥐_1단계.png")
         selectName = "다람쥐"
@@ -42,7 +69,7 @@ class eggAddViewController: UIViewController {
         selectName = "코알라"
     }
     
-    @IBAction func save(_ sender: Any) {
+    @objc func save(_ sender: Any) {
         
         let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", favoritestate: false)
         
@@ -79,13 +106,5 @@ class eggAddViewController: UIViewController {
             present(alert,animated: true,completion: nil)
             
         }
-        
-
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
 }

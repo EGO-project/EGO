@@ -54,7 +54,6 @@ class egg {
     func toAnyObject() -> Any {
         
         return [
-            // "calendarId": calendarId,
             "name": name,
             "kind": kind,
             "state": state,

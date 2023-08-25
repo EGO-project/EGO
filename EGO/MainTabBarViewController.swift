@@ -8,10 +8,13 @@
 import UIKit
 
 class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
+    
+    var idData = ""
+    
     // Swipe Gesture Recognizer!!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         delegate = self
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
@@ -21,7 +24,28 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleEggIdNotification(_:)),
+            name: NSNotification.Name("EggIdNotification"),
+            object: nil
+        )
+        
+    }
+    
+    @objc public func handleEggIdNotification(_ notification: Notification) {
+        if let receivedId = notification.userInfo?["id"] as? String {
+            print("전달 받은 데이터 : \(receivedId)")
+            self.idData = receivedId
+        } else {
+            print("전달 받은 데이터가 유효하지 않습니다.")
+        }
+        print("test")
     }
     
     

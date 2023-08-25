@@ -16,11 +16,11 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     var diaryList: [diary] = []
     var selectedDate : Date = Date()
     var selectedEggId : String = ""
+    var selectDiary : diary!
     
     
     @IBOutlet weak var EditButton: UIBarButtonItem!
     var doneButton: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,40 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         diaryListView.allowsSelectionDuringEditing = false
         diaryListView.allowsMultipleSelectionDuringEditing = true
         
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.isNavigationBarHidden = false
+        
+        navigationController?.navigationBar.backgroundColor = UIColor.clear
+        navigationController?.navigationBar.isTranslucent = true
+        
         
         self.doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTap))
         
+        if let leftImage = UIImage(named: "뒤로") {
+            let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
+            let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
+            navigationItem.leftBarButtonItem = leftItem
+        }
+        
     }
+    
+    @objc private func leftButAction(){
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "monthly") as? mothlyViewController else { return }
+        
+        if var viewControllers = self.navigationController?.viewControllers {
+            viewControllers.removeLast()
+            viewControllers.append(nextVC)
+            self.navigationController?.setViewControllers(viewControllers, animated: false)
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        print(selectedEggId)
+    }
+    
     // 파이어베이스에 저장된 diary정보 가져오기
     func fetchData() {
         UserApi.shared.me { user, error in
@@ -54,7 +84,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        if diary.id == self.selectedEggId {
+                        if diary.eggId == self.selectedEggId {
                             self.diaryList.append(diary)
                         }
                     }
@@ -63,6 +93,12 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 }
                 
                 self.diaryListView.reloadData()
+                
+                // 클릭 시점부터 글 띄우기
+                if let index = self.diaryList.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: self.selectedDate) }) {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    self.diaryListView.scrollToRow(at: indexPath, at: .top, animated: false)
+                }
                 
             }
         }
@@ -90,39 +126,28 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
             cell.accessoryType = .none
         }
         
-        if let imgUrl = URL(string: diary.photoURL) {
-            // 이미지 URL을 이용하여 이미지 데이터를 불러옴
-            if let imageData = try? Data(contentsOf: imgUrl) {
-                // 이미지 데이터를 UIImage로 변환
-                if let image = UIImage(data: imageData) {
-                    // 이미지를 cell의 photoImg에 할당
-                    cell.photoImg.image = image
-                } else {
-                    // UIImage로 변환할 수 없는 경우, 혹은 이미지가 nil인 경우
-                    print("Failed to convert data to UIImage")
-                }
-            } else {
-                // 이미지 데이터를 불러오지 못한 경우
-                print("Failed to load image data from URL")
-            }
-        } else {
-            // 유효하지 않은 이미지 URL인 경우
-            print("Invalid URL: \(diary.photoURL)")
-        }
-        cell.selectionStyle = .default
+        loadImage(diary.photo, forCell: cell)
+        cell.photoImg.backgroundColor = UIColor(hexCode: "FFC965")
+        
         return cell
     }
     
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detail" { // segue 식별자에 따라 분기 처리
-            if let indexPath = diaryListView.indexPathForSelectedRow {
-                let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
-                if let detailVC = segue.destination as? detailViewController {
-                    detailVC.selectDiary = selectedDiary // 데이터 전달
-                } else {
-                    print("데이터 전달 실패")
+    func loadImage(_ localIdentifier: String, forCell cell: diaryListTableViewCell) {
+        // localIdentifier를 사용하여 이미지의 PHAsset을 가져옵니다.
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil)
+        
+        // 가져온 PHAsset 객체에서 이미지를 로드합니다.
+        if let asset = fetchResult.firstObject {
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true // 동기적으로 이미지 로드
+            
+            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: options) { (image, info) in
+                if let image = image {
+                    // 이미지가 성공적으로 로드된 경우, image를 사용합니다.
+                    DispatchQueue.main.async {
+                        // UI 업데이트는 메인 스레드에서 수행되어야 합니다.
+                        cell.photoImg.image = image
+                    }
                 }
             }
         }
@@ -180,16 +205,25 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        selectDiary = diaryList[indexPath.row]
+
+        // 세그웨이를 실행하고 데이터를 전달합니다.
+//        performSegue(withIdentifier: "detail", sender: selectDiary)
+        
         if !tableView.isEditing {
             tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: "detail", sender: indexPath)
+            
+            // 선택된 셀의 데이터를 가져옵니다.
+                    
+            
         } else {
             // 선택된 셀의 체크마크 상태를 업데이트합니다.
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if tableView.isEditing {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -212,5 +246,12 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail" {
+            if let destinationVC = segue.destination as? detailViewController {
+                destinationVC.selectDiary = selectDiary
+            }
+        }
+    }
 }

@@ -15,48 +15,45 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class diary: Equatable{
-    //    var eggId : String
+    var eggId : String
     var id: String // 추가
     var description : String
     var date : Date
     var category : String
     var photo : String
-    var photoURL : String
     var ref: DatabaseReference?
     //Firebase Realtime Database에서 데이터의 참조를 나타내는 DatabaseReference 객체를 가져온다는 의미, 데이터베이스 내 특정 위치를 가리키는 포인터 역할
     
-    init(description: String, category: String, photoURL:String) {
-        //        self.eggId = eggId
+    init(eggId: String, description: String, category: String, photo:String) {
+        self.eggId = eggId
         self.description = description
         date = Date()
         self.category = category
-        self.photo = photoURL
+        self.photo = photo
         
         self.id = UUID().uuidString // id 초기화
         self.ref = nil // ref 초기화
-        self.photoURL = photoURL
+        self.photo = photo
     
     }
     
     // Equatable 프로토콜을 준수하기 위한 == 연산자 함수 구현
     static func ==(lhs: diary, rhs: diary) -> Bool {
         return lhs.description == rhs.description &&
+        lhs.eggId == rhs.eggId &&
         lhs.date == rhs.date &&
         lhs.category == rhs.category &&
-        lhs.photo == rhs.photo &&
-        lhs.photoURL == rhs.photoURL
-    
+        lhs.photo == rhs.photo
     }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as? [String: AnyObject]
         id = snapshot.key
-        ////        eggId = snapshotValue["eggId"] as! String
+        
+        eggId = snapshotValue?["eggId"] as? String ?? "No eggId"
         description = snapshotValue?["description"] as? String ?? "No description"
         category = snapshotValue?["category"] as? String ?? "No category"
         photo = snapshotValue?["photo"] as? String ?? "No photo"
-        photoURL = snapshotValue?["photoURL"] as? String ?? "No photoURL"
-        
         
         
         
@@ -86,12 +83,12 @@ class diary: Equatable{
         let dateString = dateFormatter.string(from: date) // Date를 String으로 변환
         
         return [
-            //                "eggId": eggId,
+            "eggId": eggId,
             "id": id, // 추가된 부분
             "description": description,
             "date": dateString,
             "category": category,
-            "photoURL": photoURL
+            "photo": photo
         ]
     }
     

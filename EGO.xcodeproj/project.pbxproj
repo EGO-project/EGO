@@ -51,6 +51,8 @@
 		CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC838FAA29D319C30007E91B /* detailViewController.swift */; };
 		CC8E906E2A80D73E007B6049 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E906D2A80D73E007B6049 /* PhotoService.swift */; };
 		CC8E90702A82EAD2007B6049 /* AlbumInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E906F2A82EAD2007B6049 /* AlbumInfo.swift */; };
+		CC9582AF2A98A84E00236115 /* UhBeemysen in Resources */ = {isa = PBXBuildFile; fileRef = CC9582AC2A98A84D00236115 /* UhBeemysen */; };
+		CC9582B22A98A8E400236115 /* Pretendard in Resources */ = {isa = PBXBuildFile; fileRef = CC9582B12A98A8E400236115 /* Pretendard */; };
 		CCC30CCC29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */; };
 		CCC30CCE29C9D008008A9466 /* mothlyAdd_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */; };
 		CCC30CD029C9D038008A9466 /* mothlyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */; };
@@ -140,6 +142,9 @@
 		CC838FAA29D319C30007E91B /* detailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailViewController.swift; sourceTree = "<group>"; };
 		CC8E906D2A80D73E007B6049 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		CC8E906F2A82EAD2007B6049 /* AlbumInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfo.swift; sourceTree = "<group>"; };
+		CC9582AC2A98A84D00236115 /* UhBeemysen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UhBeemysen; path = ../../../Downloads/UhBeemysen; sourceTree = "<group>"; };
+		CC9582B12A98A8E400236115 /* Pretendard */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Pretendard; path = "../../../Downloads/Pretendard-1/public/static/Pretendard"; sourceTree = "<group>"; };
+		CC9582B32A98A93900236115 /* Cafe24SsurroundAir-v1.1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cafe24SsurroundAir-v1.1.ttf"; path = "../../../Downloads/Cafe24SsurroundAir-v1.1/Cafe24SsurroundAir-v1.1.ttf"; sourceTree = "<group>"; };
 		CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_1ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCD29C9D008008A9466 /* mothlyAdd_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyAdd_2ViewController.swift; sourceTree = "<group>"; };
 		CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mothlyListViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +304,9 @@
 		4ECA05F229A4A73000515698 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CC9582B32A98A93900236115 /* Cafe24SsurroundAir-v1.1.ttf */,
+				CC9582B12A98A8E400236115 /* Pretendard */,
+				CC9582AC2A98A84D00236115 /* UhBeemysen */,
 				4ECA05F329A4A75500515698 /* Noto_Sans */,
 			);
 			path = Fonts;
@@ -452,8 +460,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC9582B22A98A8E400236115 /* Pretendard in Resources */,
 				4E64E0A72980DE0500124F56 /* LaunchScreen.storyboard in Resources */,
 				4ECA05F429A4A75500515698 /* Noto_Sans in Resources */,
+				CC9582AF2A98A84E00236115 /* UhBeemysen in Resources */,
 				4E5C328129B8447400E176B5 /* GoogleService-Info.plist in Resources */,
 				4E64E0A42980DE0500124F56 /* Assets.xcassets in Resources */,
 				4E64E0A22980DE0400124F56 /* Main.storyboard in Resources */,
@@ -811,7 +821,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WJ3K66N7V7;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";
@@ -849,7 +859,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WJ3K66N7V7;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EGO/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID 사용";

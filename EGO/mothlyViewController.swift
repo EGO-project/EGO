@@ -10,17 +10,15 @@ import FSCalendar
 import KakaoSDKUser
 import Firebase
 
-class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance{
     
     @IBOutlet weak var calendar: FSCalendar!
     
     var idName : String = ""
     var diaryList: [diary] = []
     var currentPage: Date?
-    var today: Date = {
-        return Date()
-    }()
-    
+    var today: Date = { return Date()}()
+        
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "ko_KR")
@@ -31,27 +29,17 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setCalendarUI()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleEggIdNotification(_:)),
-            name: NSNotification.Name("EggIdNotification"),
-            object: nil
-        )
-        print(idName)
-    }
-    
-    @objc public func handleEggIdNotification(_ notification: Notification) {
-        print("시작")
-        if let receivedId = notification.userInfo?["id"] as? String {
-            print("전달 받은 데이터 : \(receivedId)")
-            self.idName = receivedId
-            // 원하는 로직 수행
-        } else {
-            print("전달 받은 데이터가 유효하지 않습니다.")
-        }
-        print("test")
-        print("test2")
+        if let mainTabBarController = self.tabBarController as? MainTabBarViewController {
+                    idName = mainTabBarController.idData
+                    print("Received idData monthly: \(idName)")
+                    
+                    // 데이터를 받은 후에 화면을 갱신하거나 필요한 로직
+                    fetchData()
+                    setCalendarUI()
+                }
+        
+        print("viewWillAppear2  \(idName)")
+
     }
     
     func scrollCurrentPage(isPrev: Bool) {
@@ -61,8 +49,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         self.currentPage = cal.date(byAdding: dateComponents, to: self.currentPage ?? self.today)
         self.calendar.setCurrentPage(self.currentPage!, animated: true)
-    }
-    // 달력 넘기는 버튼
+    } // 달력 넘기는 버튼
     
     @IBOutlet weak var headerLabel: UILabel!
     
@@ -87,6 +74,11 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         // Do any additional setup after loading the view.
         
         print("mothl7yl : \(idName)")
+        
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.isNavigationBarHidden = true
+
+        
     }
     
     // 캘린더 디자인
@@ -185,17 +177,23 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-            guard let diaryList = self.storyboard?.instantiateViewController(identifier: "diaryList") as? mothlyListViewController else { return }
-            
-        let dateFormatter = DateFormatter()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let diaryList = storyboard.instantiateViewController(withIdentifier: "diaryList") as? mothlyListViewController {
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: date)
-        
-        diaryList.selectedDate = dateFormatter.date(from: dateString) ?? Date()
-        diaryList.selectedEggId = idName
             
-            self.present(diaryList, animated: true, completion: nil)
+            diaryList.selectedDate = dateFormatter.date(from: dateString) ?? Date()
+            diaryList.selectedEggId = idName
+            
+            
+            var viewControllers = self.navigationController?.viewControllers
+            viewControllers?.removeLast()
+            viewControllers?.append(diaryList)
+            self.navigationController?.setViewControllers(viewControllers ?? [], animated: false)
+            
         }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "add1" {
@@ -203,9 +201,5 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
                 destinationVC.idName = idName
             }
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
     }
 }

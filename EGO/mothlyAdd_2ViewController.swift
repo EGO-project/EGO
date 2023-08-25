@@ -11,15 +11,13 @@ import Photos
 import PhotosUI
 
 class mothlyAdd_2ViewController: UIViewController {
-    
-    
-    @IBAction func but(_ sender: Any) {
-        
-    }
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var categoryImg: UIImageView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var selectImage: UIImageView!
+    
+    @IBOutlet weak var photoBut: UIButton!
     
     var selectCategory : String = ""
     var saveId: String = ""
@@ -27,6 +25,7 @@ class mothlyAdd_2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        barStyle()
         
         // 현재 날짜 가져오기
         let currentDate = Date()
@@ -45,6 +44,20 @@ class mothlyAdd_2ViewController: UIViewController {
         
         print("viewdidload - \(saveId)")
         print("method called on thread: \(Thread.current)")
+    }
+    
+    func barStyle(){
+        if let leftImage = UIImage(named: "뒤로") {
+            let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
+            let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(backAction))
+            navigationItem.leftBarButtonItem = leftItem
+        }
+        
+        if let rightImage = UIImage(named: "확인") {
+            let buttonImage = rightImage.withRenderingMode(.alwaysOriginal)
+            let rightItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(saveAction))
+            navigationItem.rightBarButtonItem = rightItem
+        }
     }
     
     @available(iOS 14.0, *)
@@ -83,29 +96,29 @@ class mothlyAdd_2ViewController: UIViewController {
         
         // 갤러리 또는 카메라 선택 액션시트 표시
         present(actionSheet, animated: true, completion: nil)
+        
     }
     
     
-    @IBAction func backBut(_ sender: Any) {
+    @objc func backAction(_ sender: Any) {
         let backAlert = UIAlertController(title:"알림",message: "이전으로 돌아가면 지금까지 작성한 글이 모두 사라져요 !",preferredStyle: UIAlertController.Style.alert)
         let bCancle = UIAlertAction(title: "계속 작성", style: .default, handler: nil)
         
         let bOk = UIAlertAction(title: "뒤로가기", style: .default, handler: {
-            action in self.dismiss(animated: true); })
+            action in
+            self.navigationController?.popViewController(animated: true)
+        })
         
         backAlert.addAction(bOk)
         backAlert.addAction(bCancle)
         present(backAlert,animated: true,completion: nil)
     }
     
-    @IBAction func saveBut(_ sender: Any) {
+    @objc func saveAction(_ sender: Any) {
         
         guard let diaryList = self.storyboard?.instantiateViewController(identifier: "diaryList") as? mothlyListViewController else { return }
         
-        let monthly = self.storyboard?.instantiateViewController(identifier: "monthly")
-        monthly?.modalPresentationStyle = .fullScreen
-        
-        let newDiary = diary(description: textView.text, category: selectCategory, photoURL: selectPhoto)
+        let newDiary = diary(eggId : saveId, description: textView.text, category: selectCategory, photo: selectPhoto)
         
         if textView.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -119,35 +132,21 @@ class mothlyAdd_2ViewController: UIViewController {
             let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
             //확인 버튼 만들기
             let ok = UIAlertAction(title: "확인", style: .default, handler: { action in
-                
-                diaryList.selectedEggId = self.saveId
                 newDiary.save() // 내용 저장
                 
-                self.presentBothViewControllers()
+                if var viewControllers = self.navigationController?.viewControllers {
+                    viewControllers.removeLast()
+                    viewControllers.append(diaryList)
+                    self.navigationController?.setViewControllers(viewControllers, animated: true)
+                }
                 
             })
-            
             
             alert.addAction(ok)
             alert.addAction(cancle)
             //확인 버튼 경고창에 추가하기
             present(alert,animated: true,completion: nil)
         }
-    }
-    
-    func presentBothViewControllers() {
-        guard let monthlyVC = self.storyboard?.instantiateViewController(identifier: "monthly") as? mothlyViewController,
-              let diaryListVC = self.storyboard?.instantiateViewController(identifier: "diaryList") as? mothlyListViewController else {
-            return
-        }
-        
-        let navigationController = UINavigationController(rootViewController: monthlyVC)
-        navigationController.modalPresentationStyle = .fullScreen
-        
-        diaryListVC.selectedEggId = self.saveId
-        navigationController.pushViewController(diaryListVC, animated: false)
-        
-        self.present(navigationController, animated: true, completion: nil)
     }
 }
 
@@ -163,6 +162,7 @@ extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigati
         
         // 이미지 선택 또는 촬영 후 갤러리 또는 카메라 화면 닫기
         picker.dismiss(animated: true, completion: nil)
+        photoBut.tintColor = UIColor.clear
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -201,6 +201,7 @@ extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigati
         
         // 갤러리뷰 닫기
         picker.dismiss(animated: true, completion: nil)
+        photoBut.tintColor = UIColor.clear
         
     }
 }
