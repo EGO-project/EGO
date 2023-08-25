@@ -179,10 +179,19 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.rightBarButtonItem = self.EditButton
     }
     
+    
+    func showDetailViewController(at indexPath: IndexPath) {
+        let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewControllerID") as! detailViewController
+        detailVC.selectDiary = selectedDiary // 데이터 전달
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
             tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: "detail", sender: indexPath)
+            showDetailViewController(at: indexPath)
         } else {
             // 선택된 셀의 체크마크 상태를 업데이트합니다.
             let cell = tableView.cellForRow(at: indexPath)
