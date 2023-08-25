@@ -54,7 +54,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        if diary.id == self.selectedEggId {
+                        if diary.eggId == self.selectedEggId {
                             self.diaryList.append(diary)
                         }
                     }

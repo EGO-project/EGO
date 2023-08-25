@@ -15,28 +15,34 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class egg {
-
+    
     var name : String
     var kind : String
     var state : String
     var favoritestate: Bool
+    var eggState: Bool
+    var eggnote: Int  //해당 알의 글 수
     var ref: DatabaseReference?
     
-    init(name: String, kind: String, state: String, favoritestate: Bool) {
+    init(name: String, kind: String, state: String, favoritestate: Bool, eggState: Bool, eggnote: Int) {
         self.name = name
         self.kind = kind
         self.state = state
         self.favoritestate = favoritestate
+        self.eggState = eggState
+        self.eggnote = eggnote
     }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as? [String: AnyObject]
         
         if let snapshotValue = snapshotValue {
+            eggState = snapshotValue["eggState"] as? Bool ?? false
             name = snapshotValue["name"] as? String ?? ""
             kind = snapshotValue["kind"] as? String ?? ""
             state = snapshotValue["state"] as? String ?? ""
             favoritestate = snapshotValue["favoritestate"] as? Bool ?? false
+            eggnote = snapshotValue["eggnote"] as? Int ?? 0
         } else {
             // 데이터베이스에서 올바른 형식의 데이터를 가져오지 못한 경우에 대한 예외 처리
             // 예를 들어, 데이터베이스 구조가 변경되었을 수 있으므로 유효성 검사를 수행하는 것이 좋습니다.
@@ -44,6 +50,8 @@ class egg {
             kind = ""
             state = ""
             favoritestate = false
+            eggState = true
+            eggnote = 0
         }
         
         ref = snapshot.ref
@@ -58,7 +66,9 @@ class egg {
             "name": name,
             "kind": kind,
             "state": state,
-            "favoritestate": favoritestate
+            "favoritestate": favoritestate,
+            "eggState": eggState,
+            "eggnote": eggnote
         ]
     }
     
@@ -86,5 +96,4 @@ class egg {
             guard let ref = ref else { return }
             ref.removeValue()
         }
-        
     }

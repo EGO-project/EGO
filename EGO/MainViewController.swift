@@ -25,6 +25,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     var eggnames : [String] = []
     var images : [UIImage] = []
     var idData : String = ""
+    var eggStatus: String = ""
     
     var eggList : [egg] = []
     //    var diaryList: [diary] = []
@@ -52,10 +53,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         print(type(of: idData))
         
         NotificationCenter.default.post(
-                    name: NSNotification.Name("EggIdNotification"),
-                    object: nil,
-                    userInfo: ["id" : idData]
-                )
+            name: NSNotification.Name("EggIdNotification"),
+            object: nil,
+            userInfo: ["id" : idData]
+        )
     }
     
     // 파이어베이스에 저장된 egg정보 가져오기
@@ -92,12 +93,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                         } else {
                             print("알 이름을 찾을 수 없습니다.")
                         }
-                        
                     }
                     
                     self.addContentScrollView()
                     self.setPageControl()
-                    //                    print("다이어리 리스트 : \(self.diaryList.count)")
                 }else {
                     print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
                 }
@@ -106,13 +105,13 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // 현재 화면에 보이는 이미지의 ID 값을 업데이트하는 메서드
-        func updateCurrentImageId() {
-            let visibleIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-            
-            if visibleIndex < eggnames.count {
-                idData = eggnames[visibleIndex]
-            }
+    func updateCurrentImageId() {
+        let visibleIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        
+        if visibleIndex < eggnames.count {
+            idData = eggnames[visibleIndex]
         }
+    }
     
     //이미지를 담은 배열을 순회하며 이미지뷰를 생성. 이미지뷰의 위치와 크기를 설정, 할당. scrollView의 contentSize를 설정
     func addContentScrollView() {

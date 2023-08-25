@@ -36,6 +36,7 @@
 		4E7A0DA429DBCA970009A67C /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7A0DA329DBCA970009A67C /* MainTabBarViewController.swift */; };
 		4ECA05F429A4A75500515698 /* Noto_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 4ECA05F329A4A75500515698 /* Noto_Sans */; };
 		762A21A393C24A6FCCEACEE7 /* Pods_EGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795F58B55B98937046906613 /* Pods_EGOTests.framework */; };
+		891F8B4C2A8DDA880000B823 /* CategoryOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891F8B4B2A8DDA880000B823 /* CategoryOptionCell.swift */; };
 		89991DA62A611A61000D5DB0 /* monthlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89991DA52A611A61000D5DB0 /* monthlyViewCell.swift */; };
 		89A04B072A1B26F40004D4A0 /* FriedEggViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A04B062A1B26F40004D4A0 /* FriedEggViewController.swift */; };
 		89B1C8062A2206E90094F4E1 /* EggRoomPDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1C8052A2206E90094F4E1 /* EggRoomPDCollectionViewCell.swift */; };
@@ -124,6 +125,7 @@
 		7708021F62708C02CB04E190 /* Pods-EGO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGO.debug.xcconfig"; path = "Target Support Files/Pods-EGO/Pods-EGO.debug.xcconfig"; sourceTree = "<group>"; };
 		78D79C22AA0E255FF6E40E97 /* Pods-EGOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGOTests.release.xcconfig"; path = "Target Support Files/Pods-EGOTests/Pods-EGOTests.release.xcconfig"; sourceTree = "<group>"; };
 		795F58B55B98937046906613 /* Pods_EGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		891F8B4B2A8DDA880000B823 /* CategoryOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOptionCell.swift; sourceTree = "<group>"; };
 		89991DA52A611A61000D5DB0 /* monthlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monthlyViewCell.swift; sourceTree = "<group>"; };
 		89A04B062A1B26F40004D4A0 /* FriedEggViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriedEggViewController.swift; sourceTree = "<group>"; };
 		89B1C8052A2206E90094F4E1 /* EggRoomPDCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggRoomPDCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				CCC30CD329C9D08B008A9466 /* eggAddViewController.swift */,
 				CCC30CD129C9D055008A9466 /* mothlyViewController.swift */,
 				89991DA52A611A61000D5DB0 /* monthlyViewCell.swift */,
+				891F8B4B2A8DDA880000B823 /* CategoryOptionCell.swift */,
 				FE3C8B8E2A137BFE00CDADDF /* ChangeNicknameViewController.swift */,
 				CCC30CCF29C9D038008A9466 /* mothlyListViewController.swift */,
 				CCC30CCB29C9CFDB008A9466 /* mothlyAdd_1ViewController.swift */,
@@ -589,6 +592,7 @@
 				CC838FAB29D319C30007E91B /* detailViewController.swift in Sources */,
 				4E659D3D29A3726200C7A917 /* LoginViewController.swift in Sources */,
 				89A04B072A1B26F40004D4A0 /* FriedEggViewController.swift in Sources */,
+				891F8B4C2A8DDA880000B823 /* CategoryOptionCell.swift in Sources */,
 				4CCD70C12A03EA08007C38A9 /* AddSocialTableViewCell.swift in Sources */,
 				FE5ABCC92A4D9C450095D0E8 /* TermsOfUseViewController.swift in Sources */,
 				4CCD70BF2A03E988007C38A9 /* AddSocialViewController.swift in Sources */,

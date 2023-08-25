@@ -17,6 +17,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     var idName : String = ""
     var diaryList: [diary] = []
     var currentPage: Date?
+    var selectedEggId : String = ""
     var today: Date = {
         return Date()
     }()
@@ -127,7 +128,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .systemYellow
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .systemYellow
-        
+
         
         // 달에 유효하지않은 날짜 지우기
         calendar.placeholderType = .none
@@ -153,13 +154,15 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
             let databaseRef = Database.database().reference()
             let calenderRef = databaseRef.child("calender").child(String(id))
             
-            calenderRef.observeSingleEvent(of: .value) { snapshot  in
+            calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
                 self.diaryList.removeAll() // 배열 초기화
                 
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        self.diaryList.append(diary)
+                        if diary.eggId == self.selectedEggId {
+                            self.diaryList.append(diary)
+                        }
                     }
                 } else {
                     print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
@@ -208,4 +211,6 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
 }
