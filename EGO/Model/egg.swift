@@ -15,7 +15,7 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class egg {
-    // var calendarId : String
+
     var name : String
     var kind : String
     var state : String
@@ -23,7 +23,6 @@ class egg {
     var ref: DatabaseReference?
     
     init(name: String, kind: String, state: String, favoritestate: Bool) {
-        //self.calendarId = calendarId
         self.name = name
         self.kind = kind
         self.state = state
@@ -31,21 +30,30 @@ class egg {
     }
     
     init(snapshot: DataSnapshot) {
-        let snapshotValue = snapshot.value as! [String: AnyObject]
+        let snapshotValue = snapshot.value as? [String: AnyObject]
         
-        //calendarId = snapshotValue["name"] as! String
-        name = snapshotValue["name"] as! String
-        kind = snapshotValue["kind"] as! String
-        state = snapshotValue["state"] as! String
-        favoritestate = snapshotValue["favoritestate"] as! Bool
+        if let snapshotValue = snapshotValue {
+            name = snapshotValue["name"] as? String ?? ""
+            kind = snapshotValue["kind"] as? String ?? ""
+            state = snapshotValue["state"] as? String ?? ""
+            favoritestate = snapshotValue["favoritestate"] as? Bool ?? false
+        } else {
+            // 데이터베이스에서 올바른 형식의 데이터를 가져오지 못한 경우에 대한 예외 처리
+            // 예를 들어, 데이터베이스 구조가 변경되었을 수 있으므로 유효성 검사를 수행하는 것이 좋습니다.
+            name = ""
+            kind = ""
+            state = ""
+            favoritestate = false
+        }
         
         ref = snapshot.ref
-    } // 데이터베이스에서 가져온 데이터를 사용하여 객체를 초기화하는 역할을 수행
+    }
+
+
     
     func toAnyObject() -> Any {
         
         return [
-            // "calendarId": calendarId,
             "name": name,
             "kind": kind,
             "state": state,

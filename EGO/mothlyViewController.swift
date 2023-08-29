@@ -7,15 +7,17 @@
 
 import UIKit
 import FSCalendar
+import KakaoSDKUser
+import Firebase
 
-class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance{
     
     @IBOutlet weak var calendar: FSCalendar!
     
+    var idName : String = ""
+    var diaryList: [diary] = []
     var currentPage: Date?
-    var today: Date = {
-        return Date()
-    }()
+    var today: Date = { return Date()}()
         
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -23,27 +25,36 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         df.dateFormat = "yyyy년 M월"
         return df
     }()
-        
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            
-        setCalendarUI()
+        
+        if let mainTabBarController = self.tabBarController as? MainTabBarViewController {
+                    idName = mainTabBarController.idData
+                    print("Received idData monthly: \(idName)")
+                    
+                    // 데이터를 받은 후에 화면을 갱신하거나 필요한 로직
+                    fetchData()
+                    setCalendarUI()
+                }
+        
+        print("viewWillAppear2  \(idName)")
+
     }
     
     func scrollCurrentPage(isPrev: Bool) {
         let cal = Calendar.current
         var dateComponents = DateComponents()
         dateComponents.month = isPrev ? -1 : 1
-            
+        
         self.currentPage = cal.date(byAdding: dateComponents, to: self.currentPage ?? self.today)
         self.calendar.setCurrentPage(self.currentPage!, animated: true)
-    }
-    // 달력 넘기는 버튼
+    } // 달력 넘기는 버튼
     
     @IBOutlet weak var headerLabel: UILabel!
     
     @IBAction func prev(_ sender: UIButton) {
-       scrollCurrentPage(isPrev: true)
+        scrollCurrentPage(isPrev: true)
         print(dateFormatter)
     }
     
@@ -55,12 +66,19 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchData()
         self.currentPage = self.today
         setCalendarUI()
         calendar.delegate = self
-
+        calendar.dataSource = self
         // Do any additional setup after loading the view.
+        
+        print("mothl7yl : \(idName)")
+        
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.isNavigationBarHidden = true
+
+        
     }
     
     // 캘린더 디자인
@@ -71,10 +89,10 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         // calendar locale > 한국으로 설정
         calendar.locale = Locale(identifier: "ko_KR")
-
+        
         
         // 양옆 년도, 월 지우기
-       calendar.appearance.headerMinimumDissolvedAlpha = 0
+        calendar.appearance.headerMinimumDissolvedAlpha = 0
         
         // 요일 글자 색
         calendar.appearance.weekdayTextColor = UIColor(named: "000000")?.withAlphaComponent(0.2)
@@ -88,7 +106,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.headerHeight = 0
         calendar.scope = .month
         headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
-
+        
         
         // 상단 요일을 한글로 변경
         calendar.calendarWeekdayView.weekdayLabels[0].text = "S"
@@ -102,30 +120,86 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.calendarWeekdayView.weekdayLabels[0].textColor = .systemYellow
         calendar.calendarWeekdayView.weekdayLabels[6].textColor = .systemYellow
         
-
         
         // 달에 유효하지않은 날짜 지우기
         calendar.placeholderType = .none
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-            self.headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
-        }
+        self.headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
+    }
     
     
     // 당일 날짜 이후 선택 불가
     func maximumDate(for calendar: FSCalendar) -> Date {
         return Date()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func fetchData() {
+        UserApi.shared.me { user, error in
+            guard let id = user?.id else {
+                print("사용자 ID를 가져올 수 없습니다.")
+                return
+            }
+            
+            let databaseRef = Database.database().reference()
+            let calenderRef = databaseRef.child("calender").child(String(id))
+            
+            calenderRef.observeSingleEvent(of: .value) { snapshot  in
+                self.diaryList.removeAll() // 배열 초기화
+                
+                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    for childSnapshot in dataSnapshot {
+                        let diary = diary(snapshot: childSnapshot)
+                        self.diaryList.append(diary)
+                    }
+                } else {
+                    print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
+                }
+                
+                self.calendar.reloadData()
+            }
+        }
     }
-    */
-
+    
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        let matchingDiary = diaryList.first { dateFormatter.string(from: $0.date) == dateString }
+        
+        if let diary = matchingDiary {
+            return UIImage(named: "\(diary.category).png")
+        }
+        
+        return nil
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let diaryList = storyboard.instantiateViewController(withIdentifier: "diaryList") as? mothlyListViewController {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: date)
+            
+            diaryList.selectedDate = dateFormatter.date(from: dateString) ?? Date()
+            diaryList.selectedEggId = idName
+            
+            
+            var viewControllers = self.navigationController?.viewControllers
+            viewControllers?.removeLast()
+            viewControllers?.append(diaryList)
+            self.navigationController?.setViewControllers(viewControllers ?? [], animated: false)
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "add1" {
+            if let destinationVC = segue.destination as? mothlyAdd_1ViewController {
+                destinationVC.idName = idName
+            }
+        }
+    }
 }

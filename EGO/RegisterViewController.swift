@@ -153,9 +153,7 @@ class RegisterViewController: UIViewController {
                 let tokenString = token!
                 print("토큰: \(tokenString)")
                 
-                // 파이어베이스 경로 문제로 인해 . 을 -로 치환
-                let safeEmail = email.replacingOccurrences(of: ".", with: "-")
-                FirebaseManager.shared.saveUserDataToFirebase(id: safeEmail, email: safeEmail, nickname: nickname, password: password)
+                FirebaseManager.shared.saveUserDataToFirebase(id: Auth.auth().currentUser!.uid, email: email, nickname: nickname, password: password)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let loginVC = storyboard.instantiateViewController(withIdentifier: "Login") 

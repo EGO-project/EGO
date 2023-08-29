@@ -14,18 +14,11 @@ import KakaoSDKUser
 var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
 
 // 카카오톡 로그인시 현재 사용자 정보 저장 구조체
-struct KakaoData{
-    var kakaoId: Int64 // 카카오톡 아이디
-    var kakaoName: String // 카카오톡 닉네임
-}
-
 class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // 파이어베이스 주소
     let ref = Database.database().reference()
-    
-    // KakaoData 구조체 멤버 변수
-    var kakaoData: KakaoData?
+
     
     // 테이블뷰 프로퍼티
     var rowCount: Int?  // 행 갯수
@@ -46,8 +39,15 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         socialTable.dataSource = self
         
         setupRefreshControl() // UIRefreshControl 설정
-        kakaoUser()
+        
+        configureUserData()
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureUserData()
+    }
+    
     
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
@@ -56,7 +56,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc private func refreshTableView() {
-        kakaoUser()
+        configureUserData()
     }
     
     // 섹션 내 행 갯수 지정
@@ -69,14 +69,39 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
-        
-        if indexPath.row < friendNickname.count {
-            let friendName = friendNickname[indexPath.row]
-            cell.friendsName.text = friendName
-            // 이 외에 다른 셀 구성 요소에 friendName을 활용할 수 있습니다.
+
+        // Retrieve friend's name and eggs from the database
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return cell
         }
+        
+        let friendId = friendCode[indexPath.row]
+        ref.child("friend").child(userId).child(friendId).observeSingleEvent(of: .value) { snapshot in
+            guard let friendData = snapshot.value as? [String: Any],
+                  let nickname = friendData["nickname"] as? String,
+                  let eggs = friendData["eggs"] as? [String]
+            else {
+                print("Failed to retrieve friend data")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.friend = nickname
+                // Assuming the friendsEgo images are named with the friend's name
+                cell.friendsEgo1.image = UIImage(named: "\(eggs[0])")
+                cell.friendsEgo2.image = UIImage(named: "\(eggs[1])")
+                cell.friendsEgo3.image = UIImage(named: "\(eggs[2])")
+                cell.friendsEgo4.image = UIImage(named: "\(eggs[3])")
+                cell.friendsEgo5.image = UIImage(named: "\(eggs[4])")
+            }
+        }
+        
         return cell
     }
+
+
 
     // 셀 높이 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,11 +118,7 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             rowCount = friendNickname.count
             
             // 파이어베이스에서 해당 친구 데이터를 삭제합니다.
-            guard let userId = kakaoData?.kakaoId else {
-                return
-            }
-            let friendCode = friendCode[indexPath.row]
-            ref.child("friend").child("\(userId)").child("\(friendCode)").removeValue()
+            deleteFriend()
                     
             // 테이블 뷰에서 해당 셀을 삭제합니다.
             socialTable.deleteRows(at: [indexPath], with: .fade)
@@ -107,6 +128,35 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "친구삭제"
     }
+    
+    func deleteFriend() {
+        // Friend code to be removed
+        let code = self.friendCode
+        print("Friend code to be removed: \(code)")
+        
+        // Retrieve friend's unique friend code using the friend code: querying child values
+        self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
+            guard let friendNode = snapshot.value as? [String: Any],
+                  let friendId = friendNode.keys.first else {
+                // Show failure alert for friend removal
+                print("Failed to retrieve friend's friend code")
+                return
+            }
+            
+            guard let userId = Auth.auth().currentUser?.uid else {
+                // User is not logged in
+                print("User is not logged in.")
+                return
+            }
+            
+            // Remove friend from Firebase
+            self.ref.child("friend").child(userId).child(friendId).removeValue()
+            
+            // Remove user from friend's friend list
+            self.ref.child("friend").child(friendId).child(userId).removeValue()
+        }
+    }
+
     
     
     
@@ -128,61 +178,45 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    // 현재 사용자 카카오톡 데이터
-    func kakaoUser() {
-        UserApi.shared.me { [self] user, error in
-            guard error == nil else {
-                print("카카오톡 정보 가져오지 못함")
-                print(error!)
-                return
+    func configureUserData() {
+        // Retrieve data from Firebase instead of Kakao login
+        
+        guard let userId = Auth.auth().currentUser?.uid else {
+            // User is not logged in
+            print("User is not logged in.")
+            return
+        }
+        
+        // Retrieve user data from Firebase
+        ref.child("member").child(userId).observeSingleEvent(of: .value) { [weak self] snapshot in
+            guard let self = self else { return }
+            
+            // Parse user data
+            let userData = snapshot.value as? [String: Any]
+            let nickname = userData?["nickname"] as? String ?? ""
+            let friendCode = userData?["friendCode"] as? String ?? ""
+            
+            // Update UI with retrieved data
+            DispatchQueue.main.async {
+                self.myTopName.text = nickname
+                self.myTopCode.text = friendCode
             }
             
-            guard let id = user?.id,
-                  let nickname = user?.kakaoAccount?.profile?.nickname else {
-                return
-            }
-            
-            // 카카오톡 데이터 구조체에 저장
-            self.kakaoData = KakaoData(kakaoId: id, kakaoName: nickname)
-            
-            // 현재 사용자 친구코드 파이어베이스에서 가져오기
-            self.ref.child("member").child("\(id)").child("friendCode").observeSingleEvent(of: .value) { snapshot  in
-                guard let frcode = snapshot.value as? String else {return}
-                // 내 정보 설정
-                print("현재 카카오톡 사용자 친구코드 : \(frcode)")
-                self.myTopName.text = self.kakaoData?.kakaoName ?? "nil"
-                self.myTopCode.text = frcode
-                // 내 정보 설정
-                DispatchQueue.main.async {
-                    self.myTopName.text = self.kakaoData?.kakaoName ?? "nil"
-                    self.myTopCode.text = frcode
-                }
-            }
-            
-            // 친구목록 테이블뷰 행갯수 지정하기
-            self.ref.child("friend").child("\(String(describing: id))").observeSingleEvent(of: .value) { snapshot in
-                let count = snapshot.childrenCount
-                print("테이블뷰 행 갯수 : \(count)")
-                self.rowCount = Int(count)
-            }
-            
-            // 친구코드 목록 친구 이름 배열에 저장하기 ex) 친구코드 목록 배열 : ["@57178", "@19046"]
-            self.ref.child("friend").child("\(String(describing: id))").observeSingleEvent(of: .value) { snapshot in
-                guard snapshot.exists(), let keyValues = snapshot.value as? [String: Any] else {
-                    print("해당 키값을 찾을 수 없습니다.")
+            // Retrieve friend data from Firebase
+            self.ref.child("friend").child(userId).observeSingleEvent(of: .value) { snapshot in
+                guard let friendData = snapshot.value as? [String: Any] else {
+                    print("No friend data found.")
                     return
                 }
-                let codes = Array(keyValues.keys)
-                self.friendCode = codes
-                print("친구코드 목록 배열: \(self.friendCode)")
                 
-                // 친구코드 목록 배열로 하윗값으로 상위값 조회하여 친구 이름 가져오기
-                var updatedFriendNickname: [String] = [] // 업데이트된 친구 닉네임 배열
-                let dispatchGroup = DispatchGroup() // 디스패치 그룹 생성
+                let friendCodes = Array(friendData.keys)
                 
-                // for 루프
-                for code in self.friendCode {
-                    dispatchGroup.enter() // 디스패치 그룹 진입
+                // Retrieve friend names using friend codes
+                var updatedFriendNickname: [String] = []
+                let dispatchGroup = DispatchGroup()
+                
+                for code in friendCodes {
+                    dispatchGroup.enter()
                     
                     self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
                         guard let friendNode = snapshot.value as? [String: Any],
@@ -190,42 +224,40 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
                               let friendData = friendNode[friendId] as? [String: Any],
                               let nickname = friendData["nickname"] as? String
                         else {
-                            print("상위값 가져오기 실패")
-                            dispatchGroup.leave() // 디스패치 그룹 떠남
+                            print("Failed to retrieve friend data")
+                            dispatchGroup.leave()
                             return
                         }
-                        updatedFriendNickname.append(nickname) // 업데이트된 친구 닉네임 배열에 추가
-                        dispatchGroup.leave() // 디스패치 그룹 떠남
                         
-                        print("개발중1 : \(friendNode)")
-                        print("개발중2 : \(friendId)")
-                        print("개발중3 : \(friendData)")
-                        print("개발중4 : \(nickname)")
+                        updatedFriendNickname.append(nickname)
+                        dispatchGroup.leave()
                         
-                        self.friendNickname.append(nickname) // nickname을 friendNickname 배열에 추가합니다.
-                        print("개발중5 : \(self.friendNickname)")
+                        self.friendNickname.append(nickname)
                         
                         DispatchQueue.main.async {
                             self.socialTable.reloadData()
                         }
                     }
-                    dispatchGroup.notify(queue: .main) {
-                        // 친구 닉네임 배열을 업데이트하고 테이블 뷰를 새로고침
-                        self.friendNickname = updatedFriendNickname.sorted { (name1, name2) -> Bool in
-                            if name1.localizedCompare(name2) == .orderedSame { // 가나다 순으로 정렬
-                                return name1 < name2 // 영어는 사전적으로 더 뒤로 가게 함
-                            } else {
-                                return name1.localizedCompare(name2) == .orderedAscending
-                            }
+                }
+                
+                dispatchGroup.notify(queue: .main) {
+                    self.friendNickname = updatedFriendNickname.sorted { (name1, name2) -> Bool in
+                        if name1.localizedCompare(name2) == .orderedSame {
+                            return name1 < name2
+                        } else {
+                            return name1.localizedCompare(name2) == .orderedAscending
                         }
-                        
-                        DispatchQueue.main.async {
-                            self.socialTable.reloadData()
-                            self.socialTable.refreshControl?.endRefreshing() // 새로고침 종료
-                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.socialTable.reloadData()
+                        self.socialTable.refreshControl?.endRefreshing()
                     }
                 }
             }
         }
     }
+
+    
+    
 }

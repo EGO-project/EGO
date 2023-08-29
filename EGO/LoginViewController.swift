@@ -18,6 +18,8 @@ import FirebaseDatabase
 import AuthenticationServices
 import CryptoKit
 
+import Kingfisher
+
 class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     let LoginManager = FirebaseManager.shared
@@ -39,6 +41,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     
     var isAutoLogin : Bool? = false
     
+    let imageView: UIImageView = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -58,7 +62,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         password.isSecureTextEntry = true
         
         btnAppleLogin.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-    
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,11 +74,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     }
     
     //Auto login
-    func autoLogin(){
+    func autoLogin() {
         if Auth.auth().currentUser != nil {
             // 사용자가 로그인한 상태
-            // 메인 화면으로 이동
-            self.moveToMainTabBarController()
+            // 2차 비밀번호 확인
+            checkForSecondPasswordAndNavigate()
         } else {
             // 사용자가 로그인하지 않은 상태
             if UserDefaults.standard.bool(forKey: "auto") {
@@ -82,18 +86,38 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 if let email = UserDefaults.standard.string(forKey: "id"),
                    let password = UserDefaults.standard.string(forKey: "password") {
                     Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                        guard let self else { return }
+                        guard let self = self else { return }
                         if let error {
                             print("자동 로그인 실패: \(error.localizedDescription)")
                         } else {
                             print("자동 로그인 성공")
-                            self.moveToMainTabBarController()
+                            // 2차 비밀번호 확인
+                            self.checkForSecondPasswordAndNavigate()
                         }
                     }
                 }
             }
         }
     }
+    
+    func checkForSecondPasswordAndNavigate() {
+        if UserDefaults.standard.bool(forKey: "secondPasswordEnabled") {
+            // 2차 비밀번호 입력창으로 이동
+            // 여기에서는 예시로 함수만 호출하였습니다. 실제로는 2차 비밀번호 입력 화면으로 이동하는 코드를 작성해야 합니다.
+            navigateToSecondPasswordInput()
+        } else {
+            // 메인 화면으로 이동
+            moveToMainTabBarController()
+        }
+    }
+    
+    func navigateToSecondPasswordInput() {
+        let secondPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondPasswordViewController")
+        self.present(secondPasswordVC, animated: true, completion: nil)
+        
+    }
+    
+    
     
     //Auto login check
     @IBAction func autoLoginCheck(_ sender: UIButton) {
@@ -130,11 +154,21 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             guard error == nil, let user = result?.user, let idToken = user.idToken?.tokenString, let email = user.profile?.email, let nickname = user.profile?.name else { return }
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-            Auth.auth().signIn(with: credential) { result, error in
+            Auth.auth().signIn(with: credential) { [self] result, error in
                 guard let uid = result?.user.uid else { return }
                 
-                FirebaseManager.shared.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
-                UserDefaults.standard.set(user.profile?.imageURL(withDimension: 100), forKey: "profileImage")
+                self?.LoginManager.saveUserDataToFirebase(id: uid, email: email, nickname: nickname)
+                
+                self?.imageView.kf.setImage(with: user.profile?.imageURL(withDimension: 100))
+                
+                if let image = self?.imageView.image {
+                    self?.LoginManager.saveProfileImageToFirebase(id: uid, image: image){ error in
+                        if let error {
+                            print("Error saving profile image: \(error.localizedDescription)")
+                        }
+                    }
+                }
+                
                 self?.moveToMainTabBarController()
             }
         }
@@ -163,9 +197,22 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 }
                 
                 let password = "\(id)"
-                self.authenticateFirebase(withEmail: email, password: password)
-                FirebaseManager.shared.saveUserDataToFirebase(id: "\(id)", email: email, nickname: nickname)
-                UserDefaults.standard.set(user?.kakaoAccount?.profileImageNeedsAgreement, forKey: "profileImage")
+                self.authenticateFirebase(withEmail: email, password: password, nickname: nickname)
+                
+                
+                
+                if let profileImageUrl = user?.kakaoAccount?.profile?.thumbnailImageUrl {
+                    self.imageView.kf.setImage(with: profileImageUrl)
+                    if let image = self.imageView.image {
+                        guard let id = Auth.auth().currentUser?.uid else {return}
+                        self.LoginManager.saveProfileImageToFirebase(id: id, image: image){ error in
+                            if let error {
+                                print("Error saving profile image: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                }
+                
                 self.moveToMainTabBarController()
             }
         }
@@ -192,7 +239,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             }
         }
     }
-
+    
     @IBAction func emailLogin(_ sender: UIButton) {
         guard let email = email.text, let password = password.text else { return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -206,35 +253,51 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             print("FB : login success")
             self.moveToMainTabBarController()
         }
-    
+        
     }
     
-    func authenticateFirebase(withEmail email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { _, error in
+    func authenticateFirebase(withEmail email: String, password: String, nickname: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("FB : signup failed")
-                print(error)
-                Auth.auth().signIn(withEmail: email, password: password, completion: nil)
+                // 로그인에 실패한 경우
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        if let errorCode: Int? = (error as NSError).code, errorCode == AuthErrorCode.emailAlreadyInUse.rawValue {
+                            print("FB: signup failed - Email already in use")
+                        } else {
+                            print("FB: signup failed")
+                            print(error)
+                        }
+                    } else {
+                        print("FB: signup success")
+                        if let user = authResult?.user {
+                            FirebaseManager.shared.saveUserDataToFirebase(id: user.uid, email: email, nickname: nickname ?? "")
+                            self.moveToMainTabBarController()
+                        }
+                    }
+                }
             } else {
-                print("FB : signup success")
+                print("FB: login success")
+                self.moveToMainTabBarController()
             }
         }
     }
     
+    
     @objc func handleAppleIdRequest() {
-           let appleIDProvider = ASAuthorizationAppleIDProvider()
-           let request = appleIDProvider.createRequest()
-           request.requestedScopes = [.fullName, .email]
-           
-           // Generate nonce for validation after sign in
-           currentNonce = randomNonceString()
-           request.nonce = sha256(currentNonce!)
-
-           let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-           authorizationController.delegate = self
-           authorizationController.presentationContextProvider = self
-           authorizationController.performRequests()
-       }
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        // Generate nonce for validation after sign in
+        currentNonce = randomNonceString()
+        request.nonce = sha256(currentNonce!)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
@@ -262,10 +325,10 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: Array<Character> =
-            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
         var result = ""
         var remainingLength = length
-
+        
         while remainingLength > 0 {
             let randoms: [UInt8] = (0 ..< 16).map { _ in
                 var random: UInt8 = 0
@@ -275,19 +338,19 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
                 }
                 return random
             }
-
+            
             randoms.forEach { random in
                 if remainingLength == 0 {
                     return
                 }
-
+                
                 if random < charset.count {
                     result.append(charset[Int(random)])
                     remainingLength -= 1
                 }
             }
         }
-
+        
         return result
     }
     
@@ -298,10 +361,10 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         let hashString = hashed.compactMap {
             return String(format: "%02x", $0)
         }.joined()
-
+        
         return hashString
     }
-
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("애플 로그인에 에러 발생: \(error)")
     }
