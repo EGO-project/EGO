@@ -23,7 +23,6 @@ class mothlyAdd_1ViewController: UIViewController {
     @IBOutlet weak var but6: UIButton!
     @IBOutlet weak var but7: UIButton!
     @IBOutlet weak var but8: UIButton!
-    var selectedButton: UIButton?
     
     
     override func viewDidLoad() {
@@ -86,7 +85,17 @@ class mothlyAdd_1ViewController: UIViewController {
     // 버튼 탭 이벤트 핸들러
     @IBAction func buttonTapped(_ sender: UIButton) {
         
-        switch selectedButton {
+        // 선택된 카테고리에만 테두리 생성
+        for button in [but1, but2, but3, but4, but5, but6, but7, but8] {
+            button?.layer.backgroundColor = UIColor.clear.cgColor
+        }
+
+        sender.layer.cornerRadius = 50
+        sender.layer.borderWidth = 11
+        sender.layer.borderColor = UIColor.white.cgColor
+        sender.layer.backgroundColor = UIColor(hexCode: "FFC965").cgColor
+        
+        switch sender {
         case but1:
             diaryCategory = "일상"
         case but2:

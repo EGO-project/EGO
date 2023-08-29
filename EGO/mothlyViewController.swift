@@ -13,33 +13,24 @@ import Firebase
 class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance{
     
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var yearLbl: UILabel!
     
     var idName : String = ""
     var diaryList: [diary] = []
     var currentPage: Date?
     var today: Date = { return Date()}()
-        
+    
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.locale = Locale(identifier: "ko_KR")
-        df.dateFormat = "yyyy년 M월"
+        df.dateFormat = "MM.dd"
         return df
     }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let mainTabBarController = self.tabBarController as? MainTabBarViewController {
-                    idName = mainTabBarController.idData
-                    print("Received idData monthly: \(idName)")
-                    
-                    // 데이터를 받은 후에 화면을 갱신하거나 필요한 로직
-                    fetchData()
-                    setCalendarUI()
-                }
-        
         print("viewWillAppear2  \(idName)")
-
+        
     }
     
     func scrollCurrentPage(isPrev: Bool) {
@@ -68,7 +59,6 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         super.viewDidLoad()
         fetchData()
         self.currentPage = self.today
-        setCalendarUI()
         calendar.delegate = self
         calendar.dataSource = self
         // Do any additional setup after loading the view.
@@ -77,8 +67,19 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         tabBarController?.tabBar.isHidden = false
         navigationController?.isNavigationBarHidden = true
-
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let mainTabBarController = self.tabBarController as? MainTabBarViewController {
+            idName = mainTabBarController.idData
+            print("Received idData monthly: \(idName)")
+            
+            // 데이터를 받은 후에 화면을 갱신하거나 필요한 로직
+            fetchData()
+            setCalendarUI()
+        }
     }
     
     // 캘린더 디자인
@@ -96,7 +97,8 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         // 요일 글자 색
         calendar.appearance.weekdayTextColor = UIColor(named: "000000")?.withAlphaComponent(0.2)
-        calendar.appearance.titleWeekendColor = .systemYellow
+        calendar.appearance.titleWeekendColor = UIColor(hexCode: "FEC965")
+        
         
         // Header dateFormat, 년도, 월 폰트(사이즈)와 색, 가운데 정렬, 헤더 높이
         calendar.appearance.headerDateFormat = "MM. dd"
@@ -106,6 +108,9 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.headerHeight = 0
         calendar.scope = .month
         headerLabel.text = self.dateFormatter.string(from: calendar.currentPage)
+        yearLbl.text = String(Calendar.current.component(.year, from: today))
+        
+        calendar.appearance.titleFont = UIFont(name: "NotoSans", size: 25)
         
         
         // 상단 요일을 한글로 변경
@@ -117,9 +122,20 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         calendar.calendarWeekdayView.weekdayLabels[5].text = "F"
         calendar.calendarWeekdayView.weekdayLabels[6].text = "S"
         
-        calendar.calendarWeekdayView.weekdayLabels[0].textColor = .systemYellow
-        calendar.calendarWeekdayView.weekdayLabels[6].textColor = .systemYellow
+        calendar.calendarWeekdayView.weekdayLabels[0].textColor = UIColor(hexCode: "FEC965")
+        calendar.calendarWeekdayView.weekdayLabels[6].textColor = UIColor(hexCode: "FEC965")
         
+        // 요일 타이틀 아래쪽에 구분선 추가
+        let bottomSeparatorView = UIView()
+        bottomSeparatorView.backgroundColor = UIColor.lightGray
+        calendar.addSubview(bottomSeparatorView)
+        bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomSeparatorView.leadingAnchor.constraint(equalTo: calendar.leadingAnchor),
+            bottomSeparatorView.trailingAnchor.constraint(equalTo: calendar.trailingAnchor),
+            bottomSeparatorView.bottomAnchor.constraint(equalTo: calendar.daysContainer.topAnchor),
+            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
         
         // 달에 유효하지않은 날짜 지우기
         calendar.placeholderType = .none
@@ -145,13 +161,16 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
             let databaseRef = Database.database().reference()
             let calenderRef = databaseRef.child("calender").child(String(id))
             
-            calenderRef.observeSingleEvent(of: .value) { snapshot  in
+            calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
                 self.diaryList.removeAll() // 배열 초기화
                 
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
                         self.diaryList.append(diary)
+                        if diary.eggId == self.idName{
+                            self.diaryList.append(diary)
+                        }
                     }
                 } else {
                     print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
@@ -169,8 +188,18 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
         
         let matchingDiary = diaryList.first { dateFormatter.string(from: $0.date) == dateString }
         
-        if let diary = matchingDiary {
-            return UIImage(named: "\(diary.category).png")
+        // 알 이름 조건 추가
+        if let diary = matchingDiary, diary.eggId == idName {
+            var image = UIImage(named: "\(diary.category).png")
+            
+            // 이미지 크기 조절 (예: 가로 30포인트, 세로 30포인트)
+            let imageSize = CGSize(width: 75, height: 75) // 원하는 크기로 설정
+            UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
+            image?.draw(in: CGRect(origin: .zero, size: imageSize))
+            image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return image
         }
         
         return nil
