@@ -16,15 +16,14 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     var diaryList: [diary] = []
     var selectedDate : Date = Date()
     var selectedEggId : String = ""
-    var selectDiary : diary!
     
     
     @IBOutlet weak var EditButton: UIBarButtonItem!
     var doneButton: UIBarButtonItem!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         
         diaryListView.dataSource = self
         diaryListView.delegate = self
@@ -39,7 +38,6 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         navigationController?.navigationBar.backgroundColor = UIColor.clear
         navigationController?.navigationBar.isTranslucent = true
         
-        
         self.doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTap))
         
         if let leftImage = UIImage(named: "뒤로") {
@@ -47,7 +45,6 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
             let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
             navigationItem.leftBarButtonItem = leftItem
         }
-        
     }
     
     @objc private func leftButAction(){
@@ -63,8 +60,8 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchData()
-        print(selectedEggId)
     }
     
     // 파이어베이스에 저장된 diary정보 가져오기
@@ -93,8 +90,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 }
                 
                 self.diaryListView.reloadData()
-                
-                // 클릭 시점부터 글 띄우기
+                // 클릭 날짜부터 글 띄우기
                 if let index = self.diaryList.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: self.selectedDate) }) {
                     let indexPath = IndexPath(row: index, section: 0)
                     self.diaryListView.scrollToRow(at: indexPath, at: .top, animated: false)
@@ -119,12 +115,15 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         dateFormatter.dateFormat = "yyyy.MM.dd"
         let dateString = dateFormatter.string(from: diary.date)
         cell.dateLabel?.text = dateString
+        
         cell.accessoryType = diaryListView.indexPathsForSelectedRows?.contains(indexPath) ?? false ? .checkmark : .none
         if tableView.isEditing {
             cell.accessoryType = tableView.indexPathsForSelectedRows?.contains(indexPath) ?? false ? .checkmark : .none
         } else {
             cell.accessoryType = .none
         }
+        
+        cell.categoryImg.image = UIImage(named: diary.category)
         
         loadImage(diary.photo, forCell: cell)
         cell.photoImg.backgroundColor = UIColor(hexCode: "FFC965")
@@ -204,19 +203,19 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.rightBarButtonItem = self.EditButton
     }
     
+    
+        func showDetailViewController(at indexPath: IndexPath) {
+            let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
+            let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "detail") as! detailViewController
+            detailVC.selectDiary = selectedDiary // 데이터 전달
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        selectDiary = diaryList[indexPath.row]
-
-        // 세그웨이를 실행하고 데이터를 전달합니다.
-//        performSegue(withIdentifier: "detail", sender: selectDiary)
-        
         if !tableView.isEditing {
             tableView.deselectRow(at: indexPath, animated: true)
-            
-            // 선택된 셀의 데이터를 가져옵니다.
-                    
-            
+            showDetailViewController(at: indexPath)
         } else {
             // 선택된 셀의 체크마크 상태를 업데이트합니다.
             let cell = tableView.cellForRow(at: indexPath)
@@ -247,11 +246,4 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detail" {
-            if let destinationVC = segue.destination as? detailViewController {
-                destinationVC.selectDiary = selectDiary
-            }
-        }
-    }
 }

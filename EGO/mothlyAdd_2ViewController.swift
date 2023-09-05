@@ -43,7 +43,6 @@ class mothlyAdd_2ViewController: UIViewController {
         self.selectImage.backgroundColor = UIColor(hexCode: "FFC965")
         
         print("viewdidload - \(saveId)")
-        print("method called on thread: \(Thread.current)")
     }
     
     func barStyle(){
@@ -132,6 +131,7 @@ class mothlyAdd_2ViewController: UIViewController {
             let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
             //확인 버튼 만들기
             let ok = UIAlertAction(title: "확인", style: .default, handler: { action in
+                diaryList.selectedEggId = self.saveId
                 newDiary.save() // 내용 저장
                 
                 if var viewControllers = self.navigationController?.viewControllers {
@@ -204,4 +204,6 @@ extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigati
         photoBut.tintColor = UIColor.clear
         
     }
+    
+    
 }

@@ -32,13 +32,15 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         self.fetchData()
         self.barStyle()
         
+        scrollView.delegate = self
+        scrollView.isScrollEnabled = true
+        scrollView.isPagingEnabled = true
+        
         print("view did load : \(idData)")
         
     }
     
     func barStyle(){
-//        let tabBarImg = UIImage(named: "홈")?.withRenderingMode(.alwaysOriginal)
-//        tabBarItem.image = tabBarImg
         
         let image = UIImage(named: "타이틀")
         navigationItem.titleView = UIImageView(image: image)
@@ -179,22 +181,28 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    //pageControl의 페이지 수를 이미지 배열의 크기로 설정
-    func setPageControl() {
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
+        let xOffset = scrollView.frame.size.width * CGFloat(sender.currentPage)
+        scrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
+    }
+
+    
+    func setPageControl(){
         pageControl.numberOfPages = images.count
         pageControl.pageIndicatorTintColor = UIColor(hexCode: "FDF2C5") // 모든
         pageControl.currentPageIndicatorTintColor = UIColor(hexCode: "FFC965") // 해당
+        pageControl.currentPage = 0
     }
     
     //현재 페이지를 pageControl의 currentPage 속성에 설정
-    func setPageControlSelectedPage(currentPage: Int) {
+    func selectedPage(currentPage: Int) {
         pageControl.currentPage = currentPage
     }
     
     //현재 페이지를 업데이트
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let value = scrollView.contentOffset.x / scrollView.frame.size.width
-        setPageControlSelectedPage(currentPage: Int(round(value)))
+        selectedPage(currentPage: Int(round(value)))
     }
     
 }
