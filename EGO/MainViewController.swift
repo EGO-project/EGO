@@ -24,6 +24,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     var eggnames : [String] = []
     var images : [UIImage] = []
     var idData : String = ""
+    var eggStatus: String = ""
     
     var eggList : [egg] = []
     
@@ -87,8 +88,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             object: nil,
             userInfo: ["id" : idData]
         )
-        
-        print("/")
     }
     
     // 파이어베이스에 저장된 egg정보 가져오기
@@ -121,7 +120,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                         } else {
                             print("알 이름을 찾을 수 없습니다.")
                         }
-                        
                     }
                     
                     self.addContentScrollView()

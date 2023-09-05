@@ -18,7 +18,10 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     var idName : String = ""
     var diaryList: [diary] = []
     var currentPage: Date?
-    var today: Date = { return Date()}()
+    var selectedEggId : String = ""
+    var today: Date = {
+        return Date()
+    }()
     
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -167,8 +170,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        self.diaryList.append(diary)
-                        if diary.eggId == self.idName{
+                        if diary.eggId == self.selectedEggId {
                             self.diaryList.append(diary)
                         }
                     }
@@ -231,4 +233,10 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
             }
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
 }

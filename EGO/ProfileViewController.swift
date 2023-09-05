@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import KakaoSDKUser
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // 이전 MoreViewController에서 text 값을 받아오기 위한 변수
     @IBOutlet weak var profile: UIImageView!
     var pNameLbl: String?
@@ -16,14 +17,22 @@ class ProfileViewController: UIViewController {
     let ref = Database.database().reference()
     let firebaseManager = FirebaseManager.shared
     
+    var eggnames : [String] = []
+    var eggstates : [Bool] = []
+    
+    @IBOutlet weak var CategoryOption: UITableView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var codeLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        
         myNameFB()
         myCodeFB()
         
+        CategoryOption.delegate = self
+        CategoryOption.dataSource = self
         // 파이어베이스 데이터 변경 감지
         observeFirebaseChanges()
         
@@ -95,7 +104,93 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
+    // 파이어베이스에 저장된 egg정보 가져오기
+    func fetchData() {
+        UserApi.shared.me { user, error in
+            guard let id = user?.id else {
+                print("사용자 ID를 가져올 수 없습니다.")
+                return
+            }
+            
+            let databaseRef = Database.database().reference()
+            let eggRef = databaseRef.child("egg").child(String(id))
+            
+            eggRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
+                self.eggnames.removeAll()
+                self.eggstates.removeAll()
+                
+                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    for childSnapshot in dataSnapshot {
+                        let egg = egg(snapshot: childSnapshot)
+                        
+                        if let name : String? = egg.name{
+                            self.eggnames.append(name!)
+                        } else {
+                            print("알 이름을 찾을 수 없습니다.")
+                        }
+                        
+                        if let eggState : Bool? = egg.eggState{
+                            self.eggstates.append(eggState!)
+                        } else {
+                            print("알 공개 여부를 알 수 없습니다.")
+                        }
+                    }
+                }else {
+                    print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
+                }
+                self.CategoryOption.reloadData()
+                print(self.eggstates)
+            }
+        }
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return eggnames.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell", for: indexPath) as! CategoryOptionCell
+        
+        cell.categoryTitle.text = eggnames[indexPath.row]
+        cell.categoryOption.isOn = eggstates[indexPath.row]
+        return cell
+    }
+    
+    
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        // 스위치가 있는 셀의 indexPath를 가져옵니다.
+        guard let cell = sender.superview?.superview as? CategoryOptionCell,
+              let indexPath = CategoryOption.indexPath(for: cell) else {
+            print("셀의 indexPath를 가져올 수 없습니다.")
+            return
+        }
+        
+        // 선택한 행에 해당하는 eggState 값을 업데이트하고 Firebase에 저장합니다.
+        let selectedEggState = sender.isOn
+        eggstates[indexPath.row] = selectedEggState
+        saveEggStateAtIndexPath(indexPath)
+    }
+
+    func saveEggStateAtIndexPath(_ indexPath: IndexPath) {
+        UserApi.shared.me { [self] user, error in
+            guard let id = user?.id else {
+                print("사용자 ID를 가져올 수 없습니다.")
+                return
+            }
+
+            let eggName = self.eggnames[indexPath.row]
+            let eggState = eggstates[indexPath.row]
+            
+            let databaseRef = Database.database().reference()
+            let eggRef = databaseRef.child("egg").child(String(id)).child(eggName)
+            
+            // Firebase에 eggState 값을 업데이트합니다.
+            eggRef.updateChildValues(["eggState": eggState])
+        }
+    }
+
 }
-
-
-

@@ -204,13 +204,13 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-        func showDetailViewController(at indexPath: IndexPath) {
-            let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
-            let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "detail") as! detailViewController
-            detailVC.selectDiary = selectedDiary // 데이터 전달
-            self.navigationController?.pushViewController(detailVC, animated: true)
-        }
-    
+    func showDetailViewController(at indexPath: IndexPath) {
+        let selectedDiary = diaryList[indexPath.row] // 선택한 셀의 데이터
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewControllerID") as! detailViewController
+        detailVC.selectDiary = selectedDiary // 데이터 전달
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {

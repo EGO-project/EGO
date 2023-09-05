@@ -21,39 +21,42 @@ class diary: Equatable{
     var date : Date
     var category : String
     var photo : String
+    var photoURL : String
     var ref: DatabaseReference?
     //Firebase Realtime Database에서 데이터의 참조를 나타내는 DatabaseReference 객체를 가져온다는 의미, 데이터베이스 내 특정 위치를 가리키는 포인터 역할
     
-    init(eggId: String, description: String, category: String, photo:String) {
+    init(eggId: String, description: String, category: String, photoURL:String) {
         self.eggId = eggId
         self.description = description
         date = Date()
         self.category = category
-        self.photo = photo
+        self.photo = photoURL
         
         self.id = UUID().uuidString // id 초기화
         self.ref = nil // ref 초기화
-        self.photo = photo
-    
+        self.photoURL = photoURL
+        
     }
     
     // Equatable 프로토콜을 준수하기 위한 == 연산자 함수 구현
     static func ==(lhs: diary, rhs: diary) -> Bool {
         return lhs.description == rhs.description &&
-        lhs.eggId == rhs.eggId &&
         lhs.date == rhs.date &&
         lhs.category == rhs.category &&
-        lhs.photo == rhs.photo
+        lhs.photo == rhs.photo &&
+        lhs.photoURL == rhs.photoURL
+        
     }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as? [String: AnyObject]
         id = snapshot.key
-        
-        eggId = snapshotValue?["eggId"] as? String ?? "No eggId"
+        eggId = snapshotValue?["eggId"] as? String ?? ""
         description = snapshotValue?["description"] as? String ?? "No description"
         category = snapshotValue?["category"] as? String ?? "No category"
         photo = snapshotValue?["photo"] as? String ?? "No photo"
+        photoURL = snapshotValue?["photoURL"] as? String ?? "No photoURL"
+        
         
         
         
@@ -84,23 +87,48 @@ class diary: Equatable{
         
         return [
             "eggId": eggId,
-            "id": id, // 추가된 부분
             "description": description,
             "date": dateString,
             "category": category,
-            "photo": photo
+            "photoURL": photoURL
         ]
     }
     
     func save() {
-        
         UserApi.shared.me { user, error in
-            guard let id = user?.id
-            else{ return }
+            guard let id = user?.id else { return }
+            
+            // eggId가 유효한지 확인합니다.
+            guard !self.eggId.isEmpty,
+                  self.eggId.rangeOfCharacter(from: CharacterSet(charactersIn: ".#$[]")) == nil else {
+                print("Invalid eggID")
+                return
+            }
             
             let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").child(String(id)).childByAutoId()
-            calenderRef.setValue(self.toAnyObject())
+            
+            // 해당하는 eggName에 대한 eggnote 수 증가
+            let eggsRef = databaseRef.child("egg").child(String(id)).child(self.eggId).child("eggnote") //주소
+            let eggstat = databaseRef.child("egg").child(String(id)).child(self.eggId)
+            eggsRef.setValue(ServerValue.increment(1)) // eggnote에 값을 1증가
+            eggsRef.observe(.value, with: { (snapshot) in
+                print(snapshot.value as Any)
+                if let snapshotValue = snapshot.value as? Int {
+                    if snapshotValue == 1 {
+                        // eggstat 경로 업데이트
+                        eggstat.updateChildValues(["state": "1단계"])
+                    } else if snapshotValue == 2 {
+                        eggstat.updateChildValues(["state": "2단계"])
+                    } else {
+                        eggstat.updateChildValues(["state": "10단계"])
+                    }
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+            
+            let calenderRef = databaseRef.child("calender").child(String(id)).childByAutoId() // 글의 id 자동 생성
+            calenderRef.setValue(self.toAnyObject()) // 글 저장
         }
     }
     
@@ -123,4 +151,3 @@ class diary: Equatable{
         }
     }
 }
-

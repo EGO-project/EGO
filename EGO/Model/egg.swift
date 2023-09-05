@@ -14,32 +14,37 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class egg: CustomStringConvertible {
+class egg {
     
     var name : String
     var kind : String
     var state : String
     var eggState : Bool
     var favoritestate: Bool
+    var eggnote: Int  //해당 알의 글 수
     var ref: DatabaseReference?
     
-    init(name: String, kind: String, state: String, eggState:Bool, favoritestate: Bool) {
+    init(name: String, kind: String, state: String, favoritestate: Bool, eggState: Bool, eggnote: Int) {
         self.name = name
         self.kind = kind
         self.state = state
         self.eggState = eggState
         self.favoritestate = favoritestate
+        self.eggState = eggState
+        self.eggnote = eggnote
     }
     
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as? [String: AnyObject]
         
         if let snapshotValue = snapshotValue {
+            eggState = snapshotValue["eggState"] as? Bool ?? false
             name = snapshotValue["name"] as? String ?? ""
             kind = snapshotValue["kind"] as? String ?? ""
             state = snapshotValue["state"] as? String ?? ""
             eggState = snapshotValue["eggState"] as? Bool ?? false
             favoritestate = snapshotValue["favoritestate"] as? Bool ?? false
+            eggnote = snapshotValue["eggnote"] as? Int ?? 0
         } else {
             // 데이터베이스에서 올바른 형식의 데이터를 가져오지 못한 경우에 대한 예외 처리
             // 예를 들어, 데이터베이스 구조가 변경되었을 수 있으므로 유효성 검사를 수행하는 것이 좋습니다.
@@ -48,6 +53,8 @@ class egg: CustomStringConvertible {
             state = ""
             eggState = false
             favoritestate = false
+            eggState = true
+            eggnote = 0
         }
         
         ref = snapshot.ref
@@ -58,11 +65,13 @@ class egg: CustomStringConvertible {
     func toAnyObject() -> Any {
         
         return [
+            // "calendarId": calendarId,
             "name": name,
             "kind": kind,
             "state": state,
+            "favoritestate": favoritestate,
             "eggState": eggState,
-            "favoritestate": favoritestate
+            "eggnote": eggnote
         ]
     }
     
@@ -78,7 +87,6 @@ class egg: CustomStringConvertible {
         eggList.setValue(self.name)
     }
     
-    
     func update() {
         guard let ref = ref else { return }
         ref.updateChildValues(toAnyObject() as! [AnyHashable : Any])
@@ -89,7 +97,8 @@ class egg: CustomStringConvertible {
         ref.removeValue()
     }
     
+    
     var description: String {
-            return "Egg(name: \(name), kind: \(kind), state: \(state), eggState: \(eggState), favoritestate: \(favoritestate))"
-        }
+        return "Egg(name: \(name), kind: \(kind), state: \(state), eggState: \(eggState), favoritestate: \(favoritestate))"
+    }
 }
