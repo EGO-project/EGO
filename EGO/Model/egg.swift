@@ -14,18 +14,20 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class egg {
-
+class egg: CustomStringConvertible {
+    
     var name : String
     var kind : String
     var state : String
+    var eggState : Bool
     var favoritestate: Bool
     var ref: DatabaseReference?
     
-    init(name: String, kind: String, state: String, favoritestate: Bool) {
+    init(name: String, kind: String, state: String, eggState:Bool, favoritestate: Bool) {
         self.name = name
         self.kind = kind
         self.state = state
+        self.eggState = eggState
         self.favoritestate = favoritestate
     }
     
@@ -36,6 +38,7 @@ class egg {
             name = snapshotValue["name"] as? String ?? ""
             kind = snapshotValue["kind"] as? String ?? ""
             state = snapshotValue["state"] as? String ?? ""
+            eggState = snapshotValue["eggState"] as? Bool ?? false
             favoritestate = snapshotValue["favoritestate"] as? Bool ?? false
         } else {
             // 데이터베이스에서 올바른 형식의 데이터를 가져오지 못한 경우에 대한 예외 처리
@@ -43,13 +46,14 @@ class egg {
             name = ""
             kind = ""
             state = ""
+            eggState = false
             favoritestate = false
         }
         
         ref = snapshot.ref
     }
-
-
+    
+    
     
     func toAnyObject() -> Any {
         
@@ -57,33 +61,35 @@ class egg {
             "name": name,
             "kind": kind,
             "state": state,
+            "eggState": eggState,
             "favoritestate": favoritestate
         ]
     }
     
     func save() {
         
-        UserApi.shared.me { user, error in
-            guard let id = user?.id
-            else{ return }
-            
-            let databaseRef = Database.database().reference()
-            let eggRef = databaseRef.child("egg").child(String(id)).child(self.name)
-            let eggList = databaseRef.child("egglist").child(String(id)).child(self.name)
-            
-            eggRef.setValue(self.toAnyObject())
-            eggList.setValue(self.name)
-        }
+        guard let uid = Auth.auth().currentUser?.uid else { return print("알 저장 실패")}
+        
+        let databaseRef = Database.database().reference()
+        let eggRef = databaseRef.child("egg").child(uid).child(self.name)
+        let eggList = databaseRef.child("egglist").child(uid).child(self.name)
+        
+        eggRef.setValue(self.toAnyObject())
+        eggList.setValue(self.name)
     }
-        
-        func update() {
-            guard let ref = ref else { return }
-            ref.updateChildValues(toAnyObject() as! [AnyHashable : Any])
-        }
-        
-        func delete() {
-            guard let ref = ref else { return }
-            ref.removeValue()
-        }
-        
+    
+    
+    func update() {
+        guard let ref = ref else { return }
+        ref.updateChildValues(toAnyObject() as! [AnyHashable : Any])
     }
+    
+    func delete() {
+        guard let ref = ref else { return }
+        ref.removeValue()
+    }
+    
+    var description: String {
+            return "Egg(name: \(name), kind: \(kind), state: \(state), eggState: \(eggState), favoritestate: \(favoritestate))"
+        }
+}

@@ -2,14 +2,11 @@
 //  SocialViewController.swift
 //  EGO
 //
-//  Created by 황재하 on 2/14/23.
+//  Created by 김민석 on 2/14/23.
 //
 import UIKit
 import Firebase
 import FirebaseDatabase
-
-import KakaoSDKAuth
-import KakaoSDKUser
 
 var egoList : [String] = ["egg_다람쥐.png", "egg_사자.png", "egg_수달.png", "egg_코알라.png"]
 
@@ -18,13 +15,13 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 파이어베이스 주소
     let ref = Database.database().reference()
-
+    
+    var userId: String?
     
     // 테이블뷰 프로퍼티
     var rowCount: Int?  // 행 갯수
-    var friendName: [String] = []
-    var friendCode: [String] = []
-    var friendNickname: [String] = []
+    var friendList: [Friend] = []
+    var userEggs: [egg] = []
     
     
     @IBOutlet weak var socialTable: UITableView!
@@ -40,11 +37,10 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         setupRefreshControl() // UIRefreshControl 설정
         
-        configureUserData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureUserData()
     }
     
@@ -61,48 +57,36 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 섹션 내 행 갯수 지정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let row = rowCount else {return 0}
-        return row
+        return friendList.count
     }
     
     // 셀 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "socialCell", for: indexPath) as! SocialTableViewCell
-
-        // Retrieve friend's name and eggs from the database
-        guard let userId = Auth.auth().currentUser?.uid else {
-            // User is not logged in
-            print("User is not logged in.")
-            return cell
-        }
         
-        let friendId = friendCode[indexPath.row]
-        ref.child("friend").child(userId).child(friendId).observeSingleEvent(of: .value) { snapshot in
-            guard let friendData = snapshot.value as? [String: Any],
-                  let nickname = friendData["nickname"] as? String,
-                  let eggs = friendData["eggs"] as? [String]
-            else {
-                print("Failed to retrieve friend data")
-                return
+        if indexPath.row < friendList.count {
+            let currentFriend = friendList[indexPath.row]
+            
+            fetchMemberData(for: currentFriend.id ?? "") { member in
+                cell.friendName = member.nickname
             }
             
-            DispatchQueue.main.async {
-                cell.friend = nickname
-                // Assuming the friendsEgo images are named with the friend's name
-                cell.friendsEgo1.image = UIImage(named: "\(eggs[0])")
-                cell.friendsEgo2.image = UIImage(named: "\(eggs[1])")
-                cell.friendsEgo3.image = UIImage(named: "\(eggs[2])")
-                cell.friendsEgo4.image = UIImage(named: "\(eggs[3])")
-                cell.friendsEgo5.image = UIImage(named: "\(eggs[4])")
+            // 친구의 알 데이터도 가져옵니다.
+            fetchEggData(for: currentFriend.id ?? "") { eggs in
+                cell.friendEggs = eggs
             }
         }
+        
+        cell.eggTapHandler = { [weak self] selectedEgg in
+            let friendInfo = (id: self?.friendList[indexPath.row].id, selectedEgg: selectedEgg)
+            self?.performSegue(withIdentifier: "showDetail", sender: friendInfo)
+        }
+
+        
         
         return cell
     }
-
-
-
+    
     // 셀 높이 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100 + 10
@@ -111,17 +95,15 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 친구 삭제 버튼, 스와이프
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // 데이터 소스 배열에서 해당 친구를 삭제합니다.
-            friendNickname.remove(at: indexPath.row)
-            
-            // 테이블 뷰에서 셀을 삭제하기 전에 먼저 행 수를 업데이트합니다.
-            rowCount = friendNickname.count
-            
-            // 파이어베이스에서 해당 친구 데이터를 삭제합니다.
-            deleteFriend()
-                    
-            // 테이블 뷰에서 해당 셀을 삭제합니다.
-            socialTable.deleteRows(at: [indexPath], with: .fade)
+            let friendToDelete = friendList[indexPath.row]
+            deleteFriend(withId: friendToDelete.id) { success in
+                if success {
+                    self.friendList.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } else {
+                    // TODO: 실패한 경우 사용자에게 알림
+                }
+            }
         }
     }
     
@@ -129,36 +111,37 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return "친구삭제"
     }
     
-    func deleteFriend() {
-        // Friend code to be removed
-        let code = self.friendCode
-        print("Friend code to be removed: \(code)")
+    func deleteFriend(withId friendId: String?, completion: @escaping (Bool) -> Void) {
+        guard let friendId = friendId else {
+            completion(false)
+            return
+        }
         
-        // Retrieve friend's unique friend code using the friend code: querying child values
-        self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: "\(code)").observeSingleEvent(of: .value) { snapshot in
-            guard let friendNode = snapshot.value as? [String: Any],
-                  let friendId = friendNode.keys.first else {
-                // Show failure alert for friend removal
-                print("Failed to retrieve friend's friend code")
+        guard let currentUserId = userId else {
+            print("User ID not available.")
+            completion(false)
+            return
+        }
+        
+        // Remove friend from Firebase
+        self.ref.child("friend").child(currentUserId).child(friendId).removeValue { error, _ in
+            if let error = error {
+                print("Error deleting friend: \(error.localizedDescription)")
+                completion(false)
                 return
             }
-            
-            guard let userId = Auth.auth().currentUser?.uid else {
-                // User is not logged in
-                print("User is not logged in.")
-                return
-            }
-            
-            // Remove friend from Firebase
-            self.ref.child("friend").child(userId).child(friendId).removeValue()
             
             // Remove user from friend's friend list
-            self.ref.child("friend").child(friendId).child(userId).removeValue()
+            self.ref.child("friend").child(friendId).child(currentUserId).removeValue { error, _ in
+                if let error = error {
+                    print("Error deleting user from friend's list: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                completion(true)
+            }
         }
     }
-
-    
-    
     
     //  segue 연결 후 뷰간 값 전달 하는 법
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -168,96 +151,114 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // performSegue()가 실행되기 전에 수행되는 함수, 실질적으로 다음 뷰로 값을 전달해준다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" { // segue가 showDetail이면 실행
-            
-            // vc를 FriendViewController로 다운캐스팅하여 프로퍼티에 접근
-            let vc = segue.destination as? FriendViewController
-            if let row = sender as? Int {
-                vc?.ego = egoList[row]
-            }
-        }
-    }
-    
-    func configureUserData() {
-        // Retrieve data from Firebase instead of Kakao login
-        
-        guard let userId = Auth.auth().currentUser?.uid else {
-            // User is not logged in
-            print("User is not logged in.")
-            return
-        }
-        
-        // Retrieve user data from Firebase
-        ref.child("member").child(userId).observeSingleEvent(of: .value) { [weak self] snapshot in
-            guard let self = self else { return }
-            
-            // Parse user data
-            let userData = snapshot.value as? [String: Any]
-            let nickname = userData?["nickname"] as? String ?? ""
-            let friendCode = userData?["friendCode"] as? String ?? ""
-            
-            // Update UI with retrieved data
-            DispatchQueue.main.async {
-                self.myTopName.text = nickname
-                self.myTopCode.text = friendCode
-            }
-            
-            // Retrieve friend data from Firebase
-            self.ref.child("friend").child(userId).observeSingleEvent(of: .value) { snapshot in
-                guard let friendData = snapshot.value as? [String: Any] else {
-                    print("No friend data found.")
-                    return
-                }
+        if segue.identifier == "showDetail" {
+            if let friendInfo = sender as? (id: String?, selectedEgg: egg) {
+                let vc = segue.destination as? FriendViewController
                 
-                let friendCodes = Array(friendData.keys)
-                
-                // Retrieve friend names using friend codes
-                var updatedFriendNickname: [String] = []
-                let dispatchGroup = DispatchGroup()
-                
-                for code in friendCodes {
-                    dispatchGroup.enter()
-                    
-                    self.ref.child("member").queryOrdered(byChild: "friendCode").queryEqual(toValue: code).observeSingleEvent(of: .value) { snapshot in
-                        guard let friendNode = snapshot.value as? [String: Any],
-                              let friendId = friendNode.keys.first,
-                              let friendData = friendNode[friendId] as? [String: Any],
-                              let nickname = friendData["nickname"] as? String
-                        else {
-                            print("Failed to retrieve friend data")
-                            dispatchGroup.leave()
-                            return
-                        }
-                        
-                        updatedFriendNickname.append(nickname)
-                        dispatchGroup.leave()
-                        
-                        self.friendNickname.append(nickname)
-                        
-                        DispatchQueue.main.async {
-                            self.socialTable.reloadData()
-                        }
-                    }
-                }
-                
-                dispatchGroup.notify(queue: .main) {
-                    self.friendNickname = updatedFriendNickname.sorted { (name1, name2) -> Bool in
-                        if name1.localizedCompare(name2) == .orderedSame {
-                            return name1 < name2
-                        } else {
-                            return name1.localizedCompare(name2) == .orderedAscending
-                        }
-                    }
+                fetchEggData(for: friendInfo.id ?? "") { eggs in
+                    vc?.allEggs = eggs
+                    vc?.selectedEgg = friendInfo.selectedEgg
                     
                     DispatchQueue.main.async {
-                        self.socialTable.reloadData()
-                        self.socialTable.refreshControl?.endRefreshing()
+                        vc?.setupEggData()
+                        vc?.setupPageControl()
                     }
+                    
+                    print(eggs)
+                    print(friendInfo.selectedEgg)
+                    // 만약 FriendViewController에서 UI 업데이트가 필요하다면,
+                    // 해당 ViewController에 메서드를 추가하여 호출할 수 있습니다.
+                    // 이 경우, viewDidLoad를 직접 호출하는 것을 피하십시오.
                 }
             }
         }
     }
 
+
+    
+    func configureUserData() {
+        // Check if the user is logged in
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            print("User is not logged in.")
+            return
+        }
+        
+        userId = currentUserId // 사용자 ID 저장
+        
+        fetchMemberData(for: userId!){ member in
+            DispatchQueue.main.async {
+                self.myTopName.text = member.nickname
+                self.myTopCode.text = member.friendCode
+            }
+        }
+        
+        // Fetch user's eggs
+        fetchEggData(for: userId!) { eggs in
+            self.userEggs = eggs
+            
+            // Update user's top egg (if it exists)
+            if let topEgg = eggs.first {
+                DispatchQueue.main.async {
+                    // Assuming that the kind and state together make the image name
+                    self.myTopEgg.image = UIImage(named: topEgg.kind + "_" + topEgg.state)
+                    // You might also want to update other properties if needed
+                }
+            }
+        }
+        
+        // Fetch user's friend list
+        fetchFriendData(for: userId!) { friends in
+            self.friendList = friends
+            print(self.friendList)
+            DispatchQueue.main.async {
+                self.socialTable.reloadData()
+            }
+        }
+    }
+    
+    func fetchEggData(for userId: String, completion: @escaping ([egg]) -> Void) {
+        let userEggRef = ref.child("egg").child(userId)
+        userEggRef.observeSingleEvent(of: .value) { snapshot in
+            var eggs: [egg] = []
+            for childSnapshot in snapshot.children {
+                if let child = childSnapshot as? DataSnapshot {
+                    let eggData = egg(snapshot: child)
+                    if eggData.eggState {
+                        eggs.append(eggData)
+                    }
+                }
+            }
+            completion(eggs)
+            
+        }
+    }
     
     
+    func fetchFriendData(for userId: String, completion: @escaping ([Friend]) -> Void) {
+        let userFriendRef = ref.child("friend").child(userId)
+        userFriendRef.observeSingleEvent(of: .value) { snapshot in
+            var friends: [Friend] = []
+            for childSnapshot in snapshot.children {
+                if let child = childSnapshot as? DataSnapshot,
+                   let friendDict = child.value as? [String: Any] {
+                    let idValue = child.key
+                    let friendData = Friend(id: idValue,
+                                            code: friendDict["code"] as? String,
+                                            favoriteState: friendDict["favoriteState"] as? String,
+                                            publicState: friendDict["publicState"] as? String,
+                                            state: friendDict["state"] as? String)
+                    friends.append(friendData)
+                }
+            }
+            completion(friends)
+        }
+    }
+    
+    func fetchMemberData(for userId: String, completion: @escaping (Member) -> Void) {
+        let memberRef = ref.child("member").child(userId)
+        memberRef.observeSingleEvent(of: .value) { snapshot in
+            let memberData = Member(snapshot: snapshot)
+            completion(memberData)
+        }
+    }
 }

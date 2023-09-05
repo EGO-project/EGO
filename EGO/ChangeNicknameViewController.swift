@@ -40,8 +40,8 @@ class ChangeNicknameViewController: UIViewController, UIImagePickerControllerDel
     // Firebase에서 데이터 가져와 TextField에 설정
     func fetchFirebaseData() {
         // 데이터베이스의 "nickNameRef" 경로에서 데이터 가져오기
-        guard let email = Auth.auth().currentUser?.email else { return }
-        self.databaseRef.child("member").child(email).child("nickname").observeSingleEvent(of: .value) { snapshot  in
+        guard let uId = Auth.auth().currentUser?.uid else { return }
+        self.databaseRef.child("member").child(uId).child("nickname").observeSingleEvent(of: .value) { snapshot  in
             if let value = snapshot.value as? String {
                 // 가져온 값이 있을 경우 TextField에 설정
                 self.nickNameCh.text = value

@@ -2,34 +2,71 @@
 //  FriendViewController.swift
 //  EGO
 //
-//  Created by 황재하 on 5/5/23.
+//  Created by 김민석 on 5/5/23.
 //
 
 import UIKit
 
 class FriendViewController: UIViewController {
 
-    // 전 뷰의 값을 전달받을 프로퍼티 생성
-    var name: String?
-    var ego: String?
+    // Outlets
+    @IBOutlet weak var eggName: UILabel!
+    @IBOutlet weak var eggImage: UIImageView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var diaryImage: UIImageView!
     
-    // 프로퍼티의 값이 들어감 오브젝트들
-    @IBOutlet weak var friendName: UILabel!
-    @IBOutlet weak var friendEgo: UIImageView!
-    
+    var selectedEgg: egg?
+    var allEggs: [egg]? // This should be set from the previous view
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateData()
-        // Do any additional setup after loading the view.
+        
+        setupEggData()
+        setupPageControl()
+        
+//        print(selectedEgg)
+//        print(allEggs)
     }
     
-    // 받아온 값을 오브젝트에 저장하는 함수
-    func updateData() {
-        if let name = self.name, let ego = self.ego{
-                   let ego = UIImage(named: "\(ego).png")
-                   friendEgo.image = ego
-                   friendName.text = name
-               }
+    func setupEggData() {
+        guard let selectedEgg = selectedEgg else { return }
+        eggName.text = selectedEgg.name
+        eggName.sizeToFit()
+        
+        eggImage.image = UIImage(named: selectedEgg.kind + "_" + selectedEgg.state)
+        
+    }
+    
+    func setupPageControl() {
+        guard let allEggs = allEggs else { return }
+        pageControl.numberOfPages = allEggs.count
+        
+        if let selectedIndex = allEggs.firstIndex(where: { $0.name == selectedEgg?.name }) {
+            pageControl.currentPage = selectedIndex
+        }
+    }
+    
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
+        updateEgg(for: sender.currentPage)
+    }
+
+    func updateEgg(for pageIndex: Int) {
+        guard let allEggs = allEggs, allEggs.indices.contains(pageIndex) else { return }
+
+        let selectedEgg = allEggs[pageIndex]
+        
+        UIView.transition(with: eggImage, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.eggImage.image = UIImage(named: selectedEgg.kind + "_" + selectedEgg.state)
+        }, completion: nil)
+        
+        // 이름 변경을 위한 간단한 fade 애니메이션
+        UIView.transition(with: eggName, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            self.eggName.text = selectedEgg.name
+        }, completion: nil)
+        
+        eggName.sizeToFit()
     }
 
 }
+
+
