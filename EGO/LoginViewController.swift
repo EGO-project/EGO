@@ -35,6 +35,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     @IBOutlet weak var password: UITextField!
     
     @IBOutlet weak var lblLogin: UILabel!
+    @IBOutlet weak var lblRegister: UIButton!
     @IBOutlet weak var bgLoginBox: UIView!
     
     private var currentNonce: String?
@@ -49,8 +50,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         
         btnKakaoLogin.setTitle("", for: .normal)
         btnGoogleLogin.setTitle("", for: .normal)
-        btnRegister.setTitle("회원가입", for: .normal)
-        btnLogin.setTitle("로그인", for: .normal)
         
         
         lblLogin.text = "로그인"

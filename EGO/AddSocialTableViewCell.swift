@@ -6,6 +6,8 @@ class AddSocialTableViewCell: UITableViewCell {
     
     @IBOutlet weak var newImage: UIImageView!
     @IBOutlet weak var newName: UILabel!
+    @IBOutlet weak var btnAccept: UIButton!
+    
     
     // Firebase reference
     let ref = Database.database().reference()

@@ -35,6 +35,7 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         newFriendsTable.dataSource = self
         newFriendsTable.delegate = self
+    
         
         setupRefreshControl() // UIRefreshControl 설정
         nowUser()
@@ -65,6 +66,8 @@ class AddSocialViewController: UIViewController, UITableViewDataSource, UITableV
         cell.refreshTableView = {
             tableView.reloadData()
         }
+        
+        cell.btnAccept.setTitle("", for: .normal)
         
         if friendRequests.isEmpty {
             cell.newName.text = "새친구가 없습니다."
