@@ -170,7 +170,7 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
                 if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                     for childSnapshot in dataSnapshot {
                         let diary = diary(snapshot: childSnapshot)
-                        if diary.eggId == self.selectedEggId {
+                        if diary.eggId == self.idName {
                             self.diaryList.append(diary)
                         }
                     }
