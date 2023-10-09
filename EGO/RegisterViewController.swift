@@ -49,26 +49,30 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func IDDuplicateCheck(_ sender: Any) {
-        guard let email = fieldEmail.text else{
-            lblEmailError.text = "*이메일을 입력해주세요"
-            lblEmailError.textColor = UIColor.red
-            return
-        }
-        // 파이어베이스 경로 문제로 인해 . 을 -로 치환
-        let safeEmail = email.replacingOccurrences(of: ".", with: "-")
-        FirebaseManager.shared.checkDuplicateID(id: safeEmail) { (isDuplicate) in
-            if isDuplicate {
-                self.lblEmailError.text = "*이미 존재하는 아이디입니다"
-                self.lblEmailError.textColor = UIColor.red
-                return
-            }
-            else {
-                self.lblEmailError.text = "*사용 가능한 아이디입니다"
-                self.lblEmailError.textColor = UIColor.green
-                return
-            }
-        }
-    }
+           guard let email = fieldEmail.text else{
+               lblEmailError.text = "*이메일을 입력해주세요"
+               lblEmailError.textColor = UIColor.red
+               return
+           }
+           guard email.contains("@") else {
+               lblEmailError.text = "*이메일 형식이 올바르지 않습니다"
+               lblEmailError.textColor = UIColor.red
+               return
+           }
+           // 파이어베이스 경로 문제로 인해 . 을 -로 치환
+           FirebaseManager.shared.checkDuplicateID(id: email) { (isDuplicate) in
+               if isDuplicate {
+                   self.lblEmailError.text = "*이미 존재하는 아이디입니다"
+                   self.lblEmailError.textColor = UIColor.red
+                   return
+               }
+               else {
+                   self.lblEmailError.text = "*사용 가능한 아이디입니다"
+                   self.lblEmailError.textColor = UIColor.green
+                   return
+               }
+           }
+       }
     
     @IBAction func register(_ sender: Any) {
         
