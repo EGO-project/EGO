@@ -36,7 +36,7 @@ class changeDiaryViewController: UIViewController {
         
         changeCategory.image = UIImage(named: changeDiary.category)
         
-        photo(changeDiary.photo)
+        photo(changeDiary.photoURL)
     }
     
     func barStyle(){
@@ -116,7 +116,7 @@ class changeDiaryViewController: UIViewController {
         
         guard let detail = self.storyboard?.instantiateViewController(identifier: "detail") as? detailViewController else { return }
         
-        let changeDiary = diary(eggId: changeDiary.eggId, description: changeText.text ?? "", category: changeDiary.category, photoURL: changeDiary.photo)
+        let changeDiary = diary(eggId: changeDiary.eggId, description: changeText.text ?? "", category: changeDiary.category, photoURL: changeDiary.photoURL)
         
         if changeText.text.count == 0 {
             let alert = UIAlertController(title:"경고",message: "내용을 입력하세요.",preferredStyle: UIAlertController.Style.alert)
@@ -133,7 +133,7 @@ class changeDiaryViewController: UIViewController {
                 action in
                 self.changeDiary.description = self.changeText.text // 내용 수정
                 if self.changePhoto != ""{
-                    self.changeDiary.photo = self.changePhoto
+                    self.changeDiary.photoURL = self.changePhoto
                 }
                 self.changeDiary.update() // 내용 저장
                 self.navigationController?.popViewController(animated: true) // 이전 화면으로 돌아가기

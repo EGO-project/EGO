@@ -66,37 +66,32 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
     
     // 파이어베이스에 저장된 diary정보 가져오기
     func fetchData() {
-        UserApi.shared.me { user, error in
-            guard let id = user?.id else {
-                print("사용자 ID를 가져올 수 없습니다.")
-                return
-            }
+        guard let uid = Auth.auth().currentUser?.uid else { return print("글 저장 실패")}
+        
+        let databaseRef = Database.database().reference()
+        let calenderRef = databaseRef.child("calender").child(uid)
+        
+        calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
+            self.diaryList.removeAll() // 배열 초기화
             
-            let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").child(String(id))
-            
-            calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
-                self.diaryList.removeAll() // 배열 초기화
-                
-                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                    for childSnapshot in dataSnapshot {
-                        let diary = diary(snapshot: childSnapshot)
-                        if diary.eggId == self.selectedEggId {
-                            self.diaryList.append(diary)
-                        }
+            if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for childSnapshot in dataSnapshot {
+                    let diary = diary(snapshot: childSnapshot)
+                    if diary.eggId == self.selectedEggId {
+                        self.diaryList.append(diary)
                     }
-                } else {
-                    print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
                 }
-                
-                self.diaryListView.reloadData()
-                // 클릭 날짜부터 글 띄우기
-                if let index = self.diaryList.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: self.selectedDate) }) {
-                    let indexPath = IndexPath(row: index, section: 0)
-                    self.diaryListView.scrollToRow(at: indexPath, at: .top, animated: false)
-                }
-                
+            } else {
+                print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
             }
+            
+            self.diaryListView.reloadData()
+            // 클릭 날짜부터 글 띄우기
+            if let index = self.diaryList.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: self.selectedDate) }) {
+                let indexPath = IndexPath(row: index, section: 0)
+                self.diaryListView.scrollToRow(at: indexPath, at: .top, animated: false)
+            }
+            
         }
     }
     
@@ -125,7 +120,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         
         cell.categoryImg.image = UIImage(named: diary.category)
         
-        loadImage(diary.photo, forCell: cell)
+        loadImage(diary.photoURL, forCell: cell)
         cell.photoImg.backgroundColor = UIColor(hexCode: "FFC965")
         
         return cell
@@ -172,25 +167,20 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
                 let diaryToRemove = diaryList[indexPath.row]
                 
                 // 선택한 셀의 데이터를 Firebase에서 삭제
-                UserApi.shared.me { user, error in
-                    guard let id = user?.id else {
-                        print("사용자 ID를 가져올 수 없습니다.")
-                        return
-                    }
-                    
-                    let databaseRef = Database.database().reference()
-                    let calenderRef = databaseRef.child("calender").child(String(id))
-                    
-                    calenderRef.child(diaryToRemove.id).removeValue { (error, _) in
-                        if let error = error {
-                            print("Firebase에서 삭제 실패: \(error.localizedDescription)")
-                        } else {
-                            // 셀 삭제 성공시 데이터 소스에서 먼저 삭제
-                            self.diaryList.remove(at: indexPath.row)
-                            
-                            // 선택한 셀을 삭제합니다. (테이블 뷰에서)
-                            self.diaryListView.deleteRows(at: [indexPath], with: .fade)
-                        }
+                guard let uid = Auth.auth().currentUser?.uid else { return print("글 저장 실패")}
+                
+                let databaseRef = Database.database().reference()
+                let calenderRef = databaseRef.child("calender").child(uid)
+                
+                calenderRef.child(diaryToRemove.id).removeValue { (error, _) in
+                    if let error = error {
+                        print("Firebase에서 삭제 실패: \(error.localizedDescription)")
+                    } else {
+                        // 셀 삭제 성공시 데이터 소스에서 먼저 삭제
+                        self.diaryList.remove(at: indexPath.row)
+                        
+                        // 선택한 셀을 삭제합니다. (테이블 뷰에서)
+                        self.diaryListView.deleteRows(at: [indexPath], with: .fade)
                     }
                 }
             }
@@ -210,7 +200,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         detailVC.selectDiary = selectedDiary // 데이터 전달
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
