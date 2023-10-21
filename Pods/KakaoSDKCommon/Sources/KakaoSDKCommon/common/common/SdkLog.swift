@@ -14,7 +14,7 @@
 
 import Foundation
 
-/// :nodoc: 로그레벨입니다.
+@_documentation(visibility: private)
 /// - verbose: Log type verbose
 /// - info: Log type info
 /// - debug: Log type debug
@@ -28,7 +28,8 @@ public enum LogEvent: String {
     case e = "[‼️]" // error
 }
 
-/// :nodoc: 로그레벨입니다.
+@_documentation(visibility: private)
+/// 로그레벨입니다.
 public enum LogLevel : Int {
     case v = 0
     case d = 1
@@ -37,27 +38,17 @@ public enum LogLevel : Int {
     case e = 4
 }
 
-/// :nodoc: SdkLog 클래스 입니다.
+@_documentation(visibility: private)
+/// SdkLog 클래스 입니다.
 open class SdkLog {
     public static let shared = SdkLog()
     
     public let maxLogs = 10
     
-    var _debugLogs = [String]()
-    public var debugLogs : [String] {
+    var _debugLogs : [(Date, String)]
+    public var debugLogs : [(Date, String)] {
         get {
             return _debugLogs
-        }
-    }
-    
-    public var debugLog : String {
-        get {
-            if let appVersion = Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String {
-                return "\("==== sdk version: \(KakaoSDK.shared.sdkVersion())\n")\("==== app version: \(appVersion)\n\n\n")\(_debugLogs.joined(separator: "\n"))"
-            }
-            else {
-                return _debugLogs.joined(separator: "\n")
-            }
         }
     }
     
@@ -65,8 +56,13 @@ open class SdkLog {
     public let releaseLogLevel : LogLevel
     
     public init(developLogLevel : LogLevel = LogLevel.v, releaseLogLevel: LogLevel = LogLevel.i) {
+        _debugLogs = [(Date, String)]()
         self.developLoglevel = developLogLevel
+#if DEBUG
+        self.releaseLogLevel = LogLevel.v
+#else
         self.releaseLogLevel = releaseLogLevel
+#endif
     }
 
     class var dateFormatter: DateFormatter {
@@ -95,10 +91,14 @@ open class SdkLog {
     }
     
     class func sdkprint(_ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function, logEvent:LogEvent = LogEvent.e, printLogLevel: LogLevel = LogLevel.e) {
+        
+        let currentTime = Date()
+        
         // Only allowing in DEBUG mode
         #if DEBUG
+        let debugLog = "\(currentTime.toString()) \(logEvent.rawValue)[\(SdkLog.sourceFileName(filePath: filename)) \(line):\(column)] -> \(object)"
         if (printLogLevel.rawValue >= SdkLog.shared.developLoglevel.rawValue) {
-            Swift.print("\(Date().toString()) \(logEvent.rawValue)[\(SdkLog.sourceFileName(filePath: filename)) \(line):\(column)] -> \(object)")
+            Swift.print(debugLog)
         }
         #endif
         
@@ -108,7 +108,8 @@ open class SdkLog {
                     SdkLog.shared._debugLogs.removeFirst()
                 }
                 
-                SdkLog.shared._debugLogs.append("\(Date().toSimpleString()) \(logEvent.rawValue) -> \(object)")
+                let simpleDebugLog = "\(currentTime.toSimpleString()) \(logEvent.rawValue) -> \(object)"
+                SdkLog.shared._debugLogs.append((currentTime, simpleDebugLog))
             }
         }
     }
@@ -134,7 +135,7 @@ open class SdkLog {
     }
 }
 
-///:nodoc:
+@_documentation(visibility: private)
 extension Date {
     public func toString() -> String {
         return SdkLog.dateFormatter.string(from: self as Date)

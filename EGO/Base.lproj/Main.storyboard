@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7iO-7H-tdV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -662,7 +662,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
-                                                    <rect key="frame" x="337" y="18" width="57" height="38"/>
+                                                    <rect key="frame" x="337" y="15.333333333333332" width="57" height="43.333333333333343"/>
                                                     <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Group 32"/>
@@ -922,13 +922,13 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGQ-4T-Kw7">
-                                <rect key="frame" x="160" y="690" width="73" height="27"/>
+                                <rect key="frame" x="150" y="690" width="93.333333333333314" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="fW3-h6-uuL"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="회원가입">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="1"/>
+                                    <fontDescription key="titleFontDescription" name="NotoSans-Regular" family="Noto Sans" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="register:" destination="AyV-hu-94U" eventType="touchUpInside" id="sZ8-cf-NC1"/>
@@ -940,6 +940,7 @@
                         <color key="tintColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="CGQ-4T-Kw7" firstAttribute="top" secondItem="U2h-82-4xb" secondAttribute="bottom" constant="35" id="4da-KC-Po6"/>
+                            <constraint firstItem="CGQ-4T-Kw7" firstAttribute="centerX" secondItem="U2h-82-4xb" secondAttribute="centerX" id="8XZ-BS-ip5"/>
                             <constraint firstItem="aYY-cz-DXT" firstAttribute="bottom" secondItem="CGQ-4T-Kw7" secondAttribute="bottom" constant="101" id="CKN-V0-6E9"/>
                             <constraint firstItem="aYY-cz-DXT" firstAttribute="trailing" secondItem="GJo-xN-hbV" secondAttribute="trailing" constant="30" id="ClX-DE-6Wu"/>
                             <constraint firstItem="aYY-cz-DXT" firstAttribute="trailing" secondItem="5d3-Oj-KJj" secondAttribute="trailing" constant="32" id="Ddg-dH-0xf"/>
@@ -952,11 +953,9 @@
                             <constraint firstItem="vnf-aB-7oa" firstAttribute="leading" secondItem="Cte-A8-3gw" secondAttribute="leading" constant="126" id="UzE-yo-2y3"/>
                             <constraint firstItem="U2h-82-4xb" firstAttribute="top" secondItem="5d3-Oj-KJj" secondAttribute="bottom" constant="75" id="Vn4-Zs-d8r"/>
                             <constraint firstItem="sIe-Ur-O3W" firstAttribute="top" secondItem="vnf-aB-7oa" secondAttribute="bottom" constant="26" id="Xar-Xc-8Cr"/>
-                            <constraint firstItem="CGQ-4T-Kw7" firstAttribute="leading" secondItem="aYY-cz-DXT" secondAttribute="leading" constant="160" id="ZY3-RF-Yt8"/>
                             <constraint firstItem="aYY-cz-DXT" firstAttribute="trailing" secondItem="sIe-Ur-O3W" secondAttribute="trailing" constant="170" id="fsE-Jc-J0k"/>
                             <constraint firstAttribute="trailing" secondItem="vnf-aB-7oa" secondAttribute="trailing" constant="126" id="uoW-ya-ela"/>
                             <constraint firstItem="GJo-xN-hbV" firstAttribute="top" secondItem="sIe-Ur-O3W" secondAttribute="bottom" constant="17" id="yXJ-mh-BbZ"/>
-                            <constraint firstItem="aYY-cz-DXT" firstAttribute="trailing" secondItem="CGQ-4T-Kw7" secondAttribute="trailing" constant="160" id="ytc-zk-hSF"/>
                             <constraint firstAttribute="trailing" secondItem="U2h-82-4xb" secondAttribute="trailing" constant="20" id="zZq-Sm-gba"/>
                         </constraints>
                     </view>
@@ -1144,6 +1143,7 @@
                                         <state key="normal" title="Button" image="kakao_login_medium_narrow"/>
                                         <buttonConfiguration key="configuration" style="plain" image="kakaoLogo" title=" "/>
                                         <connections>
+                                            <action selector="kakaoLogin:" destination="kDm-nW-Cht" eventType="touchUpInside" id="7u4-52-bjt"/>
                                             <action selector="kakaoLogin:" destination="AyV-hu-94U" eventType="touchUpInside" id="zQm-Ch-tf8"/>
                                         </connections>
                                     </button>
@@ -1152,6 +1152,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="googleLogo" title=" "/>
                                         <connections>
+                                            <action selector="googleSignInSender:" destination="kDm-nW-Cht" eventType="touchUpInside" id="V5T-cO-rYI"/>
                                             <action selector="googleSignInSender:" destination="AyV-hu-94U" eventType="touchUpInside" id="mux-Hd-Ieb"/>
                                         </connections>
                                     </button>
@@ -1195,6 +1196,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K1t-BP-YPL"/>
                     <connections>
+                        <outlet property="btnAppleLogin" destination="OXP-V7-M7n" id="9cr-6K-9xV"/>
                         <outlet property="btnIdCheck" destination="U5A-GV-WYB" id="TPH-3e-3Ak"/>
                         <outlet property="btnRegister" destination="hqT-dN-i5o" id="hvu-uW-8e5"/>
                         <outlet property="fieldEmail" destination="WmY-24-kBU" id="wA0-wA-8pi"/>
@@ -1447,10 +1449,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="Zqj-d5-oLd" customClass="NoticeTableViewCell" customModule="EGO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zqj-d5-oLd" id="vdD-v3-uJm">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2385,20 +2387,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ece-4P-6pH">
-                                        <rect key="frame" x="0.0" y="50" width="353" height="42.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="353" height="43.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ece-4P-6pH" id="w5A-Lo-hw6">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무슨무슨알" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydk-iQ-i7O">
-                                                    <rect key="frame" x="20" y="11.000000000000002" width="74" height="20.666666666666671"/>
+                                                    <rect key="frame" x="20" y="10.999999999999998" width="74" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kai-hx-vi9">
-                                                    <rect key="frame" x="294" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="294" y="6.3333333333333321" width="51" height="30.999999999999996"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="EUe-4k-fTU"/>
                                                         <constraint firstAttribute="width" constant="49" id="yoi-Wh-PCg"/>
@@ -3581,13 +3583,13 @@
         <image name="코알라" width="50" height="50"/>
         <image name="탈퇴 아이콘 1" width="160" height="160"/>
         <image name="홈" width="77" height="77"/>
-        <image name="화살표 1" width="128" height="128"/>
         <image name="화살표 1" width="11" height="19"/>
+        <image name="화살표 1" width="128" height="128"/>
         <image name="화살표 2" width="128" height="128"/>
         <image name="확인" width="51" height="34"/>
         <image name="후라이" width="69" height="68"/>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

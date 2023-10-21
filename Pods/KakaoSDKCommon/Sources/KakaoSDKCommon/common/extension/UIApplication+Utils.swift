@@ -15,7 +15,8 @@
 import Foundation
 import UIKit
 
-///:nodoc:
+@_documentation(visibility: private)
+@available(iOS 13.0, *)
 extension UIApplication {
     @available(iOSApplicationExtension, unavailable)
     public class func getMostTopViewController(base: UIViewController? = nil) -> UIViewController? {
@@ -25,11 +26,7 @@ extension UIApplication {
             baseVC = base
         }
         else {
-            if #available(iOS 13.0, *) {
-                baseVC = UIApplication.sdkKeyWindow()?.rootViewController
-            } else {
-                // Fallback on earlier versions
-            }
+            baseVC = UIApplication.sdkKeyWindow()?.rootViewController
         }
         
         if let naviController = baseVC as? UINavigationController {
@@ -44,8 +41,8 @@ extension UIApplication {
         return baseVC
     }
     
-    @available(iOS 13.0, *)
     @available(iOSApplicationExtension, unavailable)
+    @available(iOS 13.0, *)
     public class func sdkKeyWindow() -> UIWindow?
     {
         return UIApplication.shared.connectedScenes

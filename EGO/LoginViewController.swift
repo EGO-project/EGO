@@ -56,6 +56,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         lblLogin.font = UIFont(name: "Noto Sans Regular", size: 20)
         bgLoginBox.layer.cornerRadius = 10
         
+        
         self.view.backgroundColor = UIColor.white
         
         password.isSecureTextEntry = true
@@ -389,6 +390,7 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         return self.view.window!
     }
 }
+
 
 
 /*

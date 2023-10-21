@@ -16,11 +16,11 @@ import Foundation
 import UIKit
 import Alamofire
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOS 13.0, *)
 public let API = Api.shared
 
-/// :nodoc:
+@_documentation(visibility: private)
 public enum SessionType {
     case Auth       //KA
     case Api        //KA
@@ -34,7 +34,7 @@ public enum SessionType {
 //    case KAuth
 //}
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOS 13.0, *)
 public class Api {
     public static let shared = Api()
@@ -43,13 +43,13 @@ public class Api {
     
     public var sessions : [SessionType:Session] = [SessionType:Session]()
     
+    
     public init() {
         self.encoding = URLEncoding(boolEncoding: .literal)
         initSession()
     }
 }
 
-/// :nodoc:
 @available(iOS 13.0, *)
 extension Api {
     private func initSession() {
@@ -75,7 +75,6 @@ extension Api {
     }
 }
 
-/// :nodoc:
 @available(iOS 13.0, *)
 extension Api {
     public func getSdkError(error: Error) -> SdkError? {
@@ -88,6 +87,8 @@ extension Api {
                 default:
                     break
                 }
+            case .requestAdaptationFailed(let error):
+                return error as? SdkError
             default:
                 break
             }

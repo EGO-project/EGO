@@ -17,8 +17,9 @@ import SafariServices
 import AuthenticationServices
 import KakaoSDKCommon
 
-@available(iOS 13.0, *)
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 let AUTH_CONTROLLER = AuthController.shared
 
 /// 동의 화면 요청 시 추가 상호작용을 요청할 때 사용
@@ -33,7 +34,7 @@ public enum Prompt : String {
     /// 사용자가 카카오계정 신규 가입 후 로그인하도록 할 때 사용
     case Create = "create"
     
-    ///:nodoc:
+    @_documentation(visibility: private)
     case UnifyDaum = "unify_daum"
     
     /// 카카오계정 간편 로그인을 요청할 때 사용
@@ -48,8 +49,9 @@ class DefaultPresentationContextProvider: NSObject, ASWebAuthenticationPresentat
     }
 }
 
-@available(iOS 13.0, *)
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 public class AuthController {
     
     // MARK: Fields
@@ -71,7 +73,7 @@ public class AuthController {
     public var codeVerifier : String?
     
     //내부 디폴트브라우져용 time delay
-    /// :nodoc:
+    @_documentation(visibility: private)
     public static let delayForAuthenticationSession : Double = 0.4
     
     public init() {
@@ -92,7 +94,8 @@ public class AuthController {
     }
     
     // MARK: Login with KakaoTalk
-    /// :nodoc:
+    @_documentation(visibility: private)
+    @available(iOS 13.0, *)
     public func _authorizeWithTalk(launchMethod: LaunchMethod? = nil,
                                   prompts: [Prompt]? = nil,
                                   state: String? = nil,
@@ -173,7 +176,8 @@ public class AuthController {
         return false
     }
     
-    /// :nodoc:
+    @_documentation(visibility: private)
+    @available(iOS 13.0, *)
     public func _authorizeByAgtWithAuthenticationSession(scopes:[String],
                                                          state: String? = nil,
                                                          nonce: String? = nil,
@@ -214,7 +218,8 @@ public class AuthController {
         }
     }
     
-    /// :nodoc:
+    @_documentation(visibility: private)
+    @available(iOS 13.0, *)
     public func _authorizeWithAuthenticationSession(prompts: [Prompt]? = nil,
                                                     state: String? = nil,
                                                     agtToken: String? = nil,
@@ -318,18 +323,19 @@ public class AuthController {
     }
 }
 
-@available(iOS 13.0, *)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 extension AuthController {
     //Rx 공통 Helper
     
-    /// :nodoc:
+    @_documentation(visibility: private)
     public func makeParametersForTalk(prompts: [Prompt]? = nil,
                                       state: String? = nil,
                                       channelPublicIds: [String]? = nil,
                                       serviceTerms: [String]? = nil,
                                       nonce: String? = nil,
-                                      settleId: String? = nil) -> [String:Any] {
+                                      settleId: String? = nil,
+                                      kauthTxId: String? = nil) -> [String:Any] {
         self.resetCodeVerifier()
         
         var parameters = [String:Any]()
@@ -361,7 +367,9 @@ extension AuthController {
         if let settleId = settleId {
             extraParameters["settle_id"] = settleId
         }
-        
+        if let kauthTxId = kauthTxId {
+            extraParameters["kauth_tx_id"] = kauthTxId
+        }
         if let approvalType = KakaoSDK.shared.approvalType().type {
             extraParameters["approval_type"] = approvalType
         }
@@ -395,7 +403,8 @@ extension AuthController {
                                nonce: String? = nil,
                                accountsSkipIntro: Bool? = nil,
                                accountsTalkLoginVisible: Bool? = nil,
-                               settleId: String? = nil) -> [String:Any] {
+                               settleId: String? = nil,
+                               kauthTxId: String? = nil) -> [String:Any] {
         self.resetCodeVerifier()
         
         var parameters = [String:Any]()
@@ -455,6 +464,10 @@ extension AuthController {
             parameters["settle_id"] = settleId
         }
         
+        if let kauthTxId = kauthTxId {
+            parameters["kauth_tx_id"] = kauthTxId
+        }
+        
         self.codeVerifier = SdkCrypto.shared.generateCodeVerifier()
         if let codeVerifier = self.codeVerifier {
             SdkLog.d("code_verifier: \(codeVerifier)")
@@ -470,19 +483,18 @@ extension AuthController {
 }
 
 // MARK: Cert Login
-@available(iOS 13.0, *)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 extension AuthController {
 
-    /// :nodoc:
+    @_documentation(visibility: private)
     public func _certAuthorizeWithTalk(launchMethod: LaunchMethod? = nil,
-                                      prompts: [Prompt]? = nil,
-                                      state: String? = nil,
-                                      channelPublicIds: [String]? = nil,
-                                      serviceTerms: [String]? = nil,
-                                      nonce: String? = nil,
-                                      settleId: String? = nil,
-                                      completion: @escaping (CertTokenInfo?, Error?) -> Void) {
+                                       prompts: [Prompt]? = nil,
+                                       channelPublicIds: [String]? = nil,
+                                       serviceTerms: [String]? = nil,
+                                       nonce: String? = nil,
+                                       kauthTxId: String? = nil,
+                                       completion: @escaping (CertTokenInfo?, Error?) -> Void) {
         
         AUTH_CONTROLLER.authorizeWithTalkCompletionHandler = { (callbackUrl) in
             let parseResult = callbackUrl.oauthResult()
@@ -510,14 +522,13 @@ extension AuthController {
         if let prompts = prompts {
             certPrompts = prompts + certPrompts
         }
-        
+                   
         let parameters = self.makeParametersForTalk(prompts:certPrompts,
-                                                    state:state,
                                                     channelPublicIds: channelPublicIds,
                                                     serviceTerms: serviceTerms,
                                                     nonce: nonce,
-                                                    settleId: settleId)
-
+                                                    kauthTxId: kauthTxId)
+        
         guard let url = SdkUtils.makeUrlWithParameters(url:Urls.compose(.TalkAuth, path:Paths.authTalk),
                                                        parameters: parameters,
                                                        launchMethod: launchMethod) else {
@@ -538,17 +549,16 @@ extension AuthController {
         }
     }
     
-    /// :nodoc:
+    @_documentation(visibility: private)
     public func _certAuthorizeWithAuthenticationSession(prompts: [Prompt]? = nil,
-                                                       state: String? = nil,
-                                                       agtToken: String? = nil,
-                                                       scopes:[String]? = nil,
-                                                       channelPublicIds: [String]? = nil,
-                                                       serviceTerms: [String]? = nil,
-                                                       loginHint: String? = nil,
-                                                       nonce: String? = nil,
-                                                       settleId: String? = nil,
-                                                       completion: @escaping (CertTokenInfo?, Error?) -> Void) {
+                                                        agtToken: String? = nil,
+                                                        scopes:[String]? = nil,
+                                                        channelPublicIds: [String]? = nil,
+                                                        serviceTerms: [String]? = nil,
+                                                        loginHint: String? = nil,
+                                                        nonce: String? = nil,
+                                                        kauthTxId: String? = nil,
+                                                        completion: @escaping (CertTokenInfo?, Error?) -> Void) {
         
         let authenticationSessionCompletionHandler : (URL?, Error?) -> Void = {
             [weak self] (callbackUrl:URL?, error:Error?) in
@@ -602,15 +612,14 @@ extension AuthController {
             certPrompts = prompts + certPrompts
         }
         
-        let parameters = self.makeParameters(prompts: certPrompts,
-                                             state: state,
+        let parameters = self.makeParameters(prompts: certPrompts,                                             
                                              agtToken: agtToken,
                                              scopes: scopes,
                                              channelPublicIds: channelPublicIds,
                                              serviceTerms: serviceTerms,
                                              loginHint: loginHint,
                                              nonce: nonce,
-                                             settleId: settleId)
+                                             kauthTxId: kauthTxId)
         
         if let url = SdkUtils.makeUrlWithParameters(Urls.compose(.Kauth, path:Paths.authAuthorize), parameters:parameters) {
             SdkLog.d("\n===================================================================================================")

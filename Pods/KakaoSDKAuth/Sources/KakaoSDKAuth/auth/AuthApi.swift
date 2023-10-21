@@ -16,7 +16,6 @@ import Foundation
 import KakaoSDKCommon
 
 /// 카카오 로그인 인증서버로 API 요청을 담당하는 클래스입니다.
-@available(iOS 13.0, *)
 final public class AuthApi {
     
     /// 간편하게 API를 호출할 수 있도록 제공되는 공용 싱글톤 객체입니다.
@@ -36,13 +35,16 @@ final public class AuthApi {
         return Auth.shared.tokenManager.getToken() != nil
     }
     
-    /// :nodoc: 인증코드 요청입니다.
+    @_documentation(visibility: private)
+    /// 인증코드 요청입니다.
     public func authorizeRequest(parameters:[String:Any]) -> URLRequest? {
         guard let finalUrl = SdkUtils.makeUrlWithParameters(Urls.compose(.Kauth, path:Paths.authAuthorize), parameters:parameters) else { return nil }
         return URLRequest(url: finalUrl)
     }
     
-    /// :nodoc: 추가 항목 동의 받기 요청시 인증값으로 사용되는 임시토큰 발급 요청입니다. SDK 내부 전용입니다.
+    @_documentation(visibility: private)
+    @available(iOS 13.0, *)
+    /// 추가 항목 동의 받기 요청시 인증값으로 사용되는 임시토큰 발급 요청입니다. SDK 내부 전용입니다.
     public func agt(completion:@escaping (String?, Error?) -> Void) {
         API.responseData(.post,
                                 Urls.compose(.Kauth, path:Paths.authAgt),
@@ -65,6 +67,7 @@ final public class AuthApi {
                                 }
     }
     
+    @available(iOS 13.0, *)
     /// 사용자 인증코드를 이용하여 신규 토큰 발급을 요청합니다.
     public func token(code: String,
                       codeVerifier: String? = nil,
@@ -97,6 +100,7 @@ final public class AuthApi {
                                 }
     }
     
+    @available(iOS 13.0, *)
     /// 기존 토큰을 갱신합니다.
     public func refreshToken(token oldToken: OAuthToken? = nil,
                              completion:@escaping (OAuthToken?, Error?) -> Void) {
@@ -170,10 +174,9 @@ final public class AuthApi {
     }
 }
 
-
 @available(iOS 13.0, *)
 extension AuthApi {
-    /// :nodoc:
+    @_documentation(visibility: private)
     public func certToken(code: String,
                           codeVerifier: String? = nil,
                           redirectUri: String = KakaoSDK.shared.redirectUri(),
@@ -226,5 +229,54 @@ extension AuthApi {
                     
                                     completion(nil, SdkError(reason: .Unknown, message: "certToken - data is nil."))
                                 }
+    }
+}
+
+// MARK: for Cert Prepare
+@available(iOS 13.0, *)
+extension AuthApi {
+    @_documentation(visibility: private)
+    public func prepare(certType: CertType,
+                        txId: String? = nil, //certType == .K2220 일때 not null
+                        settleId: String? = nil,
+                        signData: String? = nil,
+                        completion: @escaping (String?, Error?) -> Void) {
+        
+        if certType == .K2220 {
+            guard txId != nil else {
+                completion(nil, SdkError(reason: .BadParameter, message: "txId is nil"))
+                return
+            }
+        }
+        
+        API.responseData(.post,
+                         Urls.compose(.Kauth, path: Paths.authPrepare),
+                         parameters: [
+                            "client_id": try! KakaoSDK.shared.appKey(),
+                            "cert_type": certType.rawValue,
+                            "tx_id": txId,
+                            "settle_id":settleId,
+                            "sign_data": signData
+                            ].filterNil(),
+                         sessionType: .Auth,
+                         apiType: .KAuth) { (response, data, error) in
+            
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            if let data = data {
+                if let json = (try? JSONSerialization.jsonObject(with:data, options:[])) as? [String: Any] {
+                    completion(json["kauth_tx_id"] as? String, nil)
+                    return
+                }
+                
+                completion(nil, SdkError(reason: .Unknown, message: "prepare - token parsing error."))
+                return
+            }
+            
+            completion(nil, SdkError(reason: .Unknown, message: "prepare - data is nil."))
+        }
     }
 }

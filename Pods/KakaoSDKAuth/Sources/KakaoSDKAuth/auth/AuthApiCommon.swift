@@ -17,20 +17,23 @@ import Alamofire
 import KakaoSDKCommon
 import UIKit
 
-@available(iOS 13.0, *)
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 public let AUTH_API = AuthApiCommon.shared
 
-@available(iOS 13.0, *)
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
+@available(iOS 13.0, *)
 public class AuthApiCommon {
     
     public static let shared = AuthApiCommon()
     
-    ///:nodoc:
+    @_documentation(visibility: private)
     public init() {
         AUTH.checkMigration()  //for token migration
         initSession()
+        TokenRefresher.shared.registTokenRefresher()
     }
     
     func initSession() {
@@ -66,7 +69,7 @@ public class AuthApiCommon {
         API.upload(HTTPMethod, url, images:images, headers: headers, apiType: apiType, completion: completion)
     }
     
-    ///:nodoc:
+    @_documentation(visibility: private)
     func checkMigrationAndInitSession() {
         //nop
     }
