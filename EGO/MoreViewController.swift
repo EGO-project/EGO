@@ -96,7 +96,9 @@ class MoreViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        do {
+        
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "로그아웃", style: .destructive, handler: { _ in do {
             try Auth.auth().signOut()
             self.presentingViewController?.dismiss(animated: true){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -106,6 +108,10 @@ class MoreViewController: UIViewController {
         
         } catch let error {
             print("로그아웃 에러", error)
-        }
+        } }))
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel , handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+        
     }
 }

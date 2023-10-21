@@ -49,7 +49,10 @@ class WithdrawlViewController: UIViewController {
         }
     }
 
-
+    @IBAction func btnClick(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
     
     /*
     // MARK: - Navigation
