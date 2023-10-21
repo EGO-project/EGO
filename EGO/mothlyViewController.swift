@@ -155,31 +155,26 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
     }
     
     func fetchData() {
-        UserApi.shared.me { user, error in
-            guard let id = user?.id else {
-                print("사용자 ID를 가져올 수 없습니다.")
-                return
-            }
+        guard let uid = Auth.auth().currentUser?.uid else { return print("사용자 ID를 가져올 수 없습니다.")}
+        
+        let databaseRef = Database.database().reference()
+        let calenderRef = databaseRef.child("calender").child(uid)
+        
+        calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
+            self.diaryList.removeAll() // 배열 초기화
             
-            let databaseRef = Database.database().reference()
-            let calenderRef = databaseRef.child("calender").child(String(id))
-            
-            calenderRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot, error: String?)  in
-                self.diaryList.removeAll() // 배열 초기화
-                
-                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                    for childSnapshot in dataSnapshot {
-                        let diary = diary(snapshot: childSnapshot)
-                        if diary.eggId == self.selectedEggId {
-                            self.diaryList.append(diary)
-                        }
+            if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for childSnapshot in dataSnapshot {
+                    let diary = diary(snapshot: childSnapshot)
+                    if diary.eggId == self.idName {
+                        self.diaryList.append(diary)
                     }
-                } else {
-                    print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
                 }
-                
-                self.calendar.reloadData()
+            } else {
+                print("데이터(diary) 스냅샷을 가져올 수 없습니다.")
             }
+            
+            self.calendar.reloadData()
         }
     }
     

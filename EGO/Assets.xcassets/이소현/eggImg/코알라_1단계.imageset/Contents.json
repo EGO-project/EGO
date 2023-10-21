@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "egg_코알라 2.png",
+      "filename" : "egg_코알라 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "egg_코알라 3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

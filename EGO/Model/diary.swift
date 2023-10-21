@@ -95,8 +95,7 @@ class diary: Equatable{
     }
     
     func save() {
-        UserApi.shared.me { user, error in
-            guard let id = user?.id else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return print("글 저장 실패")}
             
             // eggId가 유효한지 확인합니다.
             guard !self.eggId.isEmpty,
@@ -108,8 +107,8 @@ class diary: Equatable{
             let databaseRef = Database.database().reference()
             
             // 해당하는 eggName에 대한 eggnote 수 증가
-            let eggsRef = databaseRef.child("egg").child(String(id)).child(self.eggId).child("eggnote") //주소
-            let eggstat = databaseRef.child("egg").child(String(id)).child(self.eggId)
+            let eggsRef = databaseRef.child("egg").child(uid).child(self.eggId).child("eggnote") //주소
+            let eggstat = databaseRef.child("egg").child(uid).child(self.eggId)
             eggsRef.setValue(ServerValue.increment(1)) // eggnote에 값을 1증가
             eggsRef.observe(.value, with: { (snapshot) in
                 print(snapshot.value as Any)
@@ -127,9 +126,8 @@ class diary: Equatable{
                 print(error.localizedDescription)
             }
             
-            let calenderRef = databaseRef.child("calender").child(String(id)).childByAutoId() // 글의 id 자동 생성
+            let calenderRef = databaseRef.child("calender").child(uid).childByAutoId() // 글의 id 자동 생성
             calenderRef.setValue(self.toAnyObject()) // 글 저장
-        }
     }
     
     func update() {

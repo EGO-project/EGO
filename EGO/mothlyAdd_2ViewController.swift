@@ -207,6 +207,4 @@ extension mothlyAdd_2ViewController: UIImagePickerControllerDelegate, UINavigati
         photoBut.tintColor = UIColor.clear
         
     }
-    
-    
 }

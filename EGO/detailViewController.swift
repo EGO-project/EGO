@@ -57,7 +57,7 @@ class detailViewController: UIViewController {
             
             detailCategory.image = UIImage(named: selectDiary.category)
             
-            loadPhtoWithLocalIdentifier(selectDiary.photo)
+            loadPhtoWithLocalIdentifier(selectDiary.photoURL)
             
         }
         else {print("nil")}

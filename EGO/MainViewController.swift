@@ -92,41 +92,36 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     // 파이어베이스에 저장된 egg정보 가져오기
     func fetchData() {
-        UserApi.shared.me { user, error in
-            guard let id = user?.id else {
-                print("사용자 ID를 가져올 수 없습니다.")
-                return
-            }
+        guard let uid = Auth.auth().currentUser?.uid else { return print("알 저장 실패")}
+        
+        let databaseRef = Database.database().reference()
+        let eggRef = databaseRef.child("egg").child(uid)
+        
+        eggRef.observeSingleEvent(of: .value) { snapshot  in
+            self.eggnames.removeAll()
+            self.images.removeAll() // 이미지 배열 초기화
             
-            let databaseRef = Database.database().reference()
-            let eggRef = databaseRef.child("egg").child(String(id))
-            
-            eggRef.observeSingleEvent(of: .value) { snapshot  in
-                self.eggnames.removeAll()
-                self.images.removeAll() // 이미지 배열 초기화
-                
-                if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                    for childSnapshot in dataSnapshot {
-                        let egg = egg(snapshot: childSnapshot)
-                        
-                        if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
-                            self.images.append(image)
-                        } else {
-                            print("이미지를 찾을 수 없습니다.")
-                        }
-                        
-                        if let name : String? = egg.name{
-                            self.eggnames.append(name!)
-                        } else {
-                            print("알 이름을 찾을 수 없습니다.")
-                        }
+            if let dataSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for childSnapshot in dataSnapshot {
+                    let egg = egg(snapshot: childSnapshot)
+                    
+                    if let image = UIImage(named: "\(egg.kind)_\(egg.state)") {
+                        self.images.append(image)
+                    } else {
+                        print("이미지를 찾을 수 없습니다.")
                     }
                     
-                    self.addContentScrollView()
-                    self.setPageControl()
-                }else {
-                    print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
+                    if let name : String? = egg.name{
+                        self.eggnames.append(name!)
+                    } else {
+                        print("알 이름을 찾을 수 없습니다.")
+                    }
                 }
+                
+                self.addContentScrollView()
+                self.setPageControl()
+            }else {
+                print("데이터(egg) 스냅샷을 가져올 수 없습니다.")
             }
         }
     }
@@ -183,7 +178,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         let xOffset = scrollView.frame.size.width * CGFloat(sender.currentPage)
         scrollView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: true)
     }
-
+    
     
     func setPageControl(){
         pageControl.numberOfPages = images.count
