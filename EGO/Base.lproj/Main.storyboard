@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -251,7 +251,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
                                 <rect key="frame" x="352" y="331" width="11" height="19"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 6" translatesAutoresizingMaskIntoConstraints="NO" id="pVo-Pl-Pju">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Egg" translatesAutoresizingMaskIntoConstraints="NO" id="pVo-Pl-Pju">
                                 <rect key="frame" x="20" y="173" width="94" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="9Y0-ju-RD4"/>
@@ -662,7 +662,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
-                                                    <rect key="frame" x="337" y="10" width="57" height="54"/>
+                                                    <rect key="frame" x="337" y="8.6666666666666679" width="57" height="56.666666666666657"/>
                                                     <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Group 32"/>
@@ -1449,10 +1449,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="Zqj-d5-oLd" customClass="NoticeTableViewCell" customModule="EGO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zqj-d5-oLd" id="vdD-v3-uJm">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="44.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2398,20 +2398,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ece-4P-6pH">
-                                        <rect key="frame" x="0.0" y="50" width="353" height="42.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="353" height="43.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ece-4P-6pH" id="w5A-Lo-hw6">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무슨무슨알" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydk-iQ-i7O">
-                                                    <rect key="frame" x="20" y="11.000000000000002" width="74" height="20.666666666666671"/>
+                                                    <rect key="frame" x="20" y="10.999999999999998" width="74" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kai-hx-vi9">
-                                                    <rect key="frame" x="294" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="294" y="6.3333333333333321" width="51" height="30.999999999999996"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="EUe-4k-fTU"/>
                                                         <constraint firstAttribute="width" constant="49" id="yoi-Wh-PCg"/>
@@ -2499,6 +2499,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="프로필" id="T92-3N-SqV"/>
                     <connections>
+                        <outlet property="CategoryOption" destination="tNL-3S-Ajf" id="fVC-YS-YYn"/>
                         <outlet property="codeLbl" destination="6qb-ib-ntP" id="5wD-4i-5IK"/>
                         <outlet property="nameLbl" destination="CZj-4m-new" id="O6c-Q5-dl4"/>
                         <outlet property="profile" destination="7vp-40-p6y" id="Sz4-Xl-ZAs"/>
@@ -3547,7 +3548,6 @@
         <image name="Ellipse 19" width="27" height="27"/>
         <image name="Ellipse 20" width="27" height="27"/>
         <image name="Ellipse 21" width="21" height="21"/>
-        <image name="Ellipse 6" width="74" height="73"/>
         <image name="Ellipse 8" width="60" height="60"/>
         <image name="Group 30" width="30" height="30"/>
         <image name="Group 32" width="33" height="33"/>
@@ -3562,7 +3562,7 @@
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="egg_다람쥐" width="66.666664123535156" height="66.666664123535156"/>
         <image name="egg_사자" width="66.666664123535156" height="66.666664123535156"/>
-        <image name="egg_신규" width="200.33332824707031" height="200"/>
+        <image name="egg_신규" width="300.5" height="300"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>
@@ -3573,8 +3573,8 @@
         <image name="공유" width="56" height="56"/>
         <image name="글추가" width="59" height="58"/>
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
-        <image name="다람쥐" width="50" height="50"/>
         <image name="달력" width="75" height="75"/>
+        <image name="다람쥐" width="50" height="50"/>
         <image name="더보기" width="74" height="74"/>
         <image name="디저트" width="101" height="100"/>
         <image name="문화생활" width="101" height="100"/>
@@ -3583,9 +3583,9 @@
         <image name="수달" width="50" height="50"/>
         <image name="수정" width="66" height="25"/>
         <image name="식당" width="101" height="100"/>
-        <image name="알추가" width="40" height="39"/>
         <image name="아이콘_더보기_수정" width="75" height="74"/>
         <image name="알림" width="62" height="61"/>
+        <image name="알추가" width="40" height="39"/>
         <image name="여행" width="101" height="100"/>
         <image name="운동" width="101" height="100"/>
         <image name="인스타" width="56" height="56"/>
@@ -3598,24 +3598,24 @@
         <image name="탈퇴 아이콘 1" width="160" height="160"/>
         <image name="홈" width="77" height="77"/>
         <image name="화살표 1" width="11" height="19"/>
+        <image name="화살표 1" width="11" height="19"/>
         <image name="화살표 2" width="26" height="25"/>
         <image name="확인" width="51" height="34"/>
-        <image name="화살표 1" width="11" height="19"/>
         <image name="후라이" width="69" height="68"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
