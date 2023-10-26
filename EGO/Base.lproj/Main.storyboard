@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AyV-hu-94U">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -35,7 +35,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-Jb-4oD">
                                 <rect key="frame" x="265.33333333333331" y="612" width="87.666666666666686" height="72"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="글추가" title=" "/>
+                                <buttonConfiguration key="configuration" style="plain" image="글추가" title=" "/>
                                 <connections>
                                     <segue destination="QSD-DF-o6g" kind="show" identifier="add1" id="1LV-gf-tJJ"/>
                                 </connections>
@@ -248,7 +248,7 @@
                                     <segue destination="iwA-cc-N5S" kind="show" id="pUX-FY-jXU"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="화살표 1" translatesAutoresizingMaskIntoConstraints="NO" id="IX8-cu-b8u">
                                 <rect key="frame" x="352" y="331" width="11" height="19"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Egg" translatesAutoresizingMaskIntoConstraints="NO" id="pVo-Pl-Pju">
@@ -297,7 +297,7 @@
                                 <state key="normal" image="Group 30"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Group 30"/>
                                 <connections>
-                                    <segue destination="R6H-Sv-fE1" kind="show" id="Yr4-wv-uv8"/>
+                                    <segue destination="R6H-Sv-fE1" kind="show" identifier="ProfileSegue" id="Yr4-wv-uv8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -662,7 +662,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWI-y7-i1e">
-                                                    <rect key="frame" x="337" y="8.6666666666666679" width="57" height="56.666666666666657"/>
+                                                    <rect key="frame" x="337" y="3.3333333333333357" width="57" height="67.333333333333314"/>
                                                     <color key="tintColor" red="0.63529413940000001" green="0.52941179279999995" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Group 32"/>
@@ -806,7 +806,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EGO_타이포BI_눈 1" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-aB-7oa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EGO_타이포BI_눈 1" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-aB-7oa">
                                 <rect key="frame" x="126" y="5" width="141" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="Wsa-IG-lMb"/>
@@ -985,7 +985,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EGO_타이포BI_눈 1" translatesAutoresizingMaskIntoConstraints="NO" id="7CA-zI-hdB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EGO_타이포BI_눈 1" translatesAutoresizingMaskIntoConstraints="NO" id="7CA-zI-hdB">
                                 <rect key="frame" x="126" y="5" width="141" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="w0P-gc-jmu"/>
@@ -1449,10 +1449,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="Zqj-d5-oLd" customClass="NoticeTableViewCell" customModule="EGO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zqj-d5-oLd" id="vdD-v3-uJm">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1857,8 +1857,8 @@
                                                 <state key="normal" title="탈퇴 계속하기"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="탈퇴 계속하기">
                                                     <fontDescription key="titleFontDescription" name="NotoSans-Medium" family="Noto Sans" pointSize="16"/>
-                                                    <color key="baseForegroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <color key="baseBackgroundColor" red="1" green="0.95294117647058818" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="baseBackgroundColor" red="1" green="0.78823529411764703" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="moveToWithdrawl:" destination="4qK-hA-ULS" eventType="touchUpInside" id="x09-Zq-PuG"/>
@@ -1932,7 +1932,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="탈퇴 아이콘 1" translatesAutoresizingMaskIntoConstraints="NO" id="WEL-O0-wDB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="탈퇴 아이콘 1" translatesAutoresizingMaskIntoConstraints="NO" id="WEL-O0-wDB">
                                 <rect key="frame" x="90" y="109" width="213" height="160"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="회원 탈퇴 시 계정 정보 및 모든 정보가 사라져요." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMA-eN-quT">
@@ -1998,8 +1998,8 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="계정 삭제하기">
                                             <fontDescription key="titleFontDescription" name="NotoSans-Medium" family="Noto Sans" pointSize="16"/>
-                                            <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" red="1" green="0.95294117647058818" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" red="1" green="0.78823529411764703" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="withdrawlButton:" destination="7iO-7H-tdV" eventType="touchUpInside" id="L59-cs-G5h"/>
@@ -2192,7 +2192,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="기본프로필 1" translatesAutoresizingMaskIntoConstraints="NO" id="Gdv-P6-tdE">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="기본프로필 1" translatesAutoresizingMaskIntoConstraints="NO" id="Gdv-P6-tdE">
                                 <rect key="frame" x="20" y="95" width="353" height="130"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d78-mv-ZEK">
@@ -2398,14 +2398,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ece-4P-6pH">
-                                        <rect key="frame" x="0.0" y="50" width="353" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="50" width="353" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ece-4P-6pH" id="w5A-Lo-hw6">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무슨무슨알" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydk-iQ-i7O">
-                                                    <rect key="frame" x="20" y="10.999999999999998" width="74" height="21.333333333333329"/>
+                                                    <rect key="frame" x="20" y="11.000000000000002" width="74" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2463,7 +2463,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line 7" translatesAutoresizingMaskIntoConstraints="NO" id="sNm-Md-iMl">
                                 <rect key="frame" x="0.0" y="328" width="393" height="1"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="기본프로필 1" translatesAutoresizingMaskIntoConstraints="NO" id="7vp-40-p6y">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="기본프로필 1" translatesAutoresizingMaskIntoConstraints="NO" id="7vp-40-p6y">
                                 <rect key="frame" x="86.666666666666686" y="113" width="220" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="LCX-l8-4ZO"/>
@@ -2513,7 +2513,7 @@
         <scene sceneID="yfi-9B-2Si">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5lG-yR-Lzx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="더보기" selectedImage="아이콘_더보기_수정" id="ujK-HC-MuJ"/>
+                    <tabBarItem key="tabBarItem" title="" image="더보기" selectedImage="더보기" id="ujK-HC-MuJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sHc-QM-kuf">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -2533,7 +2533,7 @@
         <scene sceneID="5gb-U4-9ef">
             <objects>
                 <navigationController storyboardIdentifier="MainNC" automaticallyAdjustsScrollViewInsets="NO" id="ajb-nB-nRg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
+                    <tabBarItem key="tabBarItem" title="" image="홈" id="jHP-4O-rEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfF-OA-VVJ">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -2585,7 +2585,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="egg_신규" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-Sx-X05">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="egg_신규" translatesAutoresizingMaskIntoConstraints="NO" id="qq5-Sx-X05">
                                 <rect key="frame" x="71.666666666666686" y="247" width="250" height="280"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="daI-1X-USZ"/>
@@ -2603,7 +2603,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="다람쥐" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iM-AZ-rMl">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="다람쥐"/>
+                                        <state key="normal" image="다람쥐"/>
                                         <connections>
                                             <action selector="but1:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="0de-JY-EKX"/>
                                         </connections>
@@ -2611,7 +2611,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="사자" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTY-Ni-1ft">
                                         <rect key="frame" x="80" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="사자"/>
+                                        <state key="normal" image="사자"/>
                                         <connections>
                                             <action selector="but2:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="ahR-5h-d0Y"/>
                                         </connections>
@@ -2619,7 +2619,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="수달" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-lv-pwA">
                                         <rect key="frame" x="160" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="수달"/>
+                                        <state key="normal" image="수달"/>
                                         <connections>
                                             <action selector="but3:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="h0B-Xa-DIk"/>
                                         </connections>
@@ -2627,7 +2627,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" restorationIdentifier="코알라" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzS-vb-1dc">
                                         <rect key="frame" x="240" y="0.0" width="50" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="코알라"/>
+                                        <state key="normal" image="코알라"/>
                                         <connections>
                                             <action selector="but4:" destination="Dlv-pl-UwM" eventType="touchUpInside" id="ih9-Hk-ltN"/>
                                         </connections>
@@ -2775,7 +2775,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="101" placeholderIntrinsicHeight="108" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKw-v3-x4v">
                                                 <rect key="frame" x="0.0" y="0.0" width="105.66666666666667" height="105.66666666666667"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="일상"/>
+                                                <state key="normal" backgroundImage="일상"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="N6y-vr-4RD"/>
                                                 </connections>
@@ -2784,7 +2784,7 @@
                                                 <rect key="frame" x="135.66666666666666" y="0.0" width="105.33333333333334" height="105.66666666666667"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="식당"/>
+                                                <state key="normal" backgroundImage="식당"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="mI8-1I-FTG"/>
                                                 </connections>
@@ -2814,7 +2814,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-Ug-ftR">
                                                 <rect key="frame" x="0.0" y="0.0" width="105.66666666666667" height="105.66666666666667"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="디저트"/>
+                                                <state key="normal" backgroundImage="디저트"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="cjI-d8-JK1"/>
                                                 </connections>
@@ -2822,7 +2822,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eW1-wv-nN3">
                                                 <rect key="frame" x="135.66666666666666" y="0.0" width="105.33333333333334" height="105.66666666666667"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="문화생활"/>
+                                                <state key="normal" backgroundImage="문화생활"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="Vs8-00-hhy"/>
                                                 </connections>
@@ -2852,7 +2852,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qu3-hE-DYy">
                                                 <rect key="frame" x="0.0" y="0.0" width="105.66666666666667" height="105.33333333333333"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="쇼핑"/>
+                                                <state key="normal" backgroundImage="쇼핑"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="zXi-Us-HvS"/>
                                                 </connections>
@@ -2860,7 +2860,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9Z-e7-xyB">
                                                 <rect key="frame" x="135.66666666666666" y="0.0" width="105.33333333333334" height="105.33333333333333"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="운동"/>
+                                                <state key="normal" backgroundImage="운동"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="AHw-X0-j7T"/>
                                                 </connections>
@@ -2890,7 +2890,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFP-US-Jxl">
                                                 <rect key="frame" x="0.0" y="0.0" width="105.66666666666667" height="105.66666666666667"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="여행"/>
+                                                <state key="normal" backgroundImage="여행"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="ZT0-4n-yaH"/>
                                                 </connections>
@@ -2898,7 +2898,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZa-g0-qKj">
                                                 <rect key="frame" x="135.66666666666666" y="0.0" width="105.33333333333334" height="105.66666666666667"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" backgroundImage="공부"/>
+                                                <state key="normal" backgroundImage="공부"/>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="QSD-DF-o6g" eventType="touchUpInside" id="u3o-mb-nXU"/>
                                                 </connections>
@@ -3200,7 +3200,7 @@
                                     <constraint firstAttribute="height" constant="44" id="tr5-in-f9U"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="확인" title=" "/>
+                                <buttonConfiguration key="configuration" style="plain" image="홈" title=" "/>
                                 <connections>
                                     <action selector="changeOk:" destination="mTp-QZ-07x" eventType="touchUpInside" id="NRJ-Fg-NDO"/>
                                 </connections>
@@ -3543,7 +3543,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EGO_타이포BI_눈 1" width="85" height="33"/>
+        <image name="EGO_타이포BI_눈 1" width="85" height="33"/>
         <image name="Egg" width="68" height="68"/>
         <image name="Ellipse 19" width="27" height="27"/>
         <image name="Ellipse 20" width="27" height="27"/>
@@ -3562,48 +3562,47 @@
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="egg_다람쥐" width="66.666664123535156" height="66.666664123535156"/>
         <image name="egg_사자" width="66.666664123535156" height="66.666664123535156"/>
-        <image name="egg_신규" width="300.5" height="300"/>
+        <image name="egg_신규" width="300.5" height="300"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
         <image name="googleLogo" width="51" height="50"/>
         <image name="kakaoLogo" width="50" height="50"/>
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
         <image name="rectangle" catalog="system" width="128" height="93"/>
-        <image name="공부" width="101" height="100"/>
+        <image name="공부" width="101" height="100"/>
         <image name="공유" width="56" height="56"/>
-        <image name="글추가" width="59" height="58"/>
+        <image name="글추가" width="59" height="58"/>
         <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
+        <image name="기본프로필 1" width="24.333333969116211" height="24.333333969116211"/>
+        <image name="다람쥐" width="50" height="50"/>
         <image name="달력" width="75" height="75"/>
-        <image name="다람쥐" width="50" height="50"/>
+        <image name="더보기" width="74" height="74"/>
         <image name="더보기" width="74" height="74"/>
-        <image name="디저트" width="101" height="100"/>
-        <image name="문화생활" width="101" height="100"/>
-        <image name="사자" width="50" height="50"/>
-        <image name="쇼핑" width="101" height="100"/>
-        <image name="수달" width="50" height="50"/>
+        <image name="디저트" width="101" height="100"/>
+        <image name="문화생활" width="101" height="100"/>
+        <image name="사자" width="50" height="50"/>
+        <image name="쇼핑" width="101" height="100"/>
+        <image name="수달" width="50" height="50"/>
         <image name="수정" width="66" height="25"/>
-        <image name="식당" width="101" height="100"/>
-        <image name="아이콘_더보기_수정" width="75" height="74"/>
+        <image name="식당" width="101" height="100"/>
         <image name="알림" width="62" height="61"/>
         <image name="알추가" width="40" height="39"/>
-        <image name="여행" width="101" height="100"/>
-        <image name="운동" width="101" height="100"/>
+        <image name="여행" width="101" height="100"/>
+        <image name="운동" width="101" height="100"/>
         <image name="인스타" width="56" height="56"/>
-        <image name="일상" width="101" height="100"/>
-        <image name="친구" width="58" height="58"/>
+        <image name="일상" width="101" height="100"/>
         <image name="친구" width="58" height="58"/>
+        <image name="친구" width="58" height="58"/>
         <image name="친구추가버튼" width="28" height="28"/>
         <image name="카카오" width="56" height="56"/>
-        <image name="코알라" width="50" height="50"/>
-        <image name="탈퇴 아이콘 1" width="160" height="160"/>
-        <image name="홈" width="77" height="77"/>
+        <image name="코알라" width="50" height="50"/>
+        <image name="탈퇴 아이콘 1" width="160" height="160"/>
+        <image name="홈" width="77" height="77"/>
         <image name="화살표 1" width="11" height="19"/>
-        <image name="화살표 1" width="11" height="19"/>
         <image name="화살표 2" width="26" height="25"/>
-        <image name="확인" width="51" height="34"/>
         <image name="후라이" width="69" height="68"/>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
