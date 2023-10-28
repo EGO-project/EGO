@@ -24,6 +24,10 @@ class MoreViewController: UIViewController {
         
         guard let id = Auth.auth().currentUser?.uid else { return }
         self.firebaseManager.fetchProfileImageFromFirebase(id: id) { image in
+            guard image != nil else {
+                self.profileImg.image = UIImage(named: "Profile")
+                return
+            }
             self.profileImg.image = image
         }
     }

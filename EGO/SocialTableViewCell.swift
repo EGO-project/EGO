@@ -12,18 +12,23 @@ import FirebaseDatabase
 class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
     
     @IBOutlet weak var friendsName: UILabel!
+    @IBOutlet weak var friendsProfileImg: UIImageView!
     @IBOutlet weak var friendsEgo1: UIImageView!
     @IBOutlet weak var friendsEgo2: UIImageView!
     @IBOutlet weak var friendsEgo3: UIImageView!
     @IBOutlet weak var friendsEgo4: UIImageView!
-    @IBOutlet weak var friendsEgo5: UIImageView!
     
     var eggTapHandler: ((egg) -> Void)?
 
-    
     var friendName: String? {
         didSet {
             friendsName.text = friendName
+        }
+    }
+    
+    var friendProfileImg: UIImage? {
+        didSet {
+            friendsProfileImg.image = friendProfileImg
         }
     }
     
@@ -34,7 +39,6 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
             friendsEgo2.image = nil
             friendsEgo3.image = nil
             friendsEgo4.image = nil
-            friendsEgo5.image = nil
 
             // 친구의 알들을 이미지 뷰에 설정
             for (index, ego) in friendEggs.prefix(5).enumerated() {
@@ -49,8 +53,6 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
                     imageView = friendsEgo3
                 case 3:
                     imageView = friendsEgo4
-                case 4:
-                    imageView = friendsEgo5
                 default:
                     continue
                 }

@@ -23,9 +23,9 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var friendList: [Friend] = []
     var userEggs: [egg] = []
     
+    let LoginManager = FirebaseManager.shared
     
     @IBOutlet weak var socialTable: UITableView!
-    
     @IBOutlet weak var myTopEgg: UIImageView!
     @IBOutlet weak var myTopName: UILabel!
     @IBOutlet weak var myTopCode: UILabel!
@@ -69,6 +69,14 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             fetchMemberData(for: currentFriend.id ?? "") { member in
                 cell.friendName = member.nickname
+            }
+            
+            FirebaseManager.shared.fetchProfileImageFromFirebase(id: currentFriend.id ?? "") { image in
+                guard image != nil else {
+                    cell.friendProfileImg = UIImage(named: "Profile")
+                    return
+                }
+                cell.friendProfileImg = image
             }
             
             // 친구의 알 데이터도 가져옵니다.
