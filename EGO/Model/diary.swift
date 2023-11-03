@@ -115,11 +115,11 @@ class diary: Equatable{
                 if let snapshotValue = snapshot.value as? Int {
                     if snapshotValue == 1 {
                         // eggstat 경로 업데이트
-                        eggstat.updateChildValues(["state": "1단계"])
+                        eggstat.updateChildValues(["state": "Level1"])
                     } else if snapshotValue == 2 {
-                        eggstat.updateChildValues(["state": "2단계"])
+                        eggstat.updateChildValues(["state": "Level2"])
                     } else {
-                        eggstat.updateChildValues(["state": "10단계"])
+                        eggstat.updateChildValues(["state": "Level10"])
                     }
                 }
             }) { (error) in
