@@ -97,21 +97,21 @@ class mothlyAdd_1ViewController: UIViewController {
         
         switch sender {
         case but1:
-            diaryCategory = "일상"
+            diaryCategory = "life"
         case but2:
-            diaryCategory = "식당"
+            diaryCategory = "restaurant"
         case but3:
-            diaryCategory = "디저트"
+            diaryCategory = "dessert"
         case but4:
-            diaryCategory = "취미"
+            diaryCategory = "cultural"
         case but5:
-            diaryCategory = "쇼핑"
+            diaryCategory = "shopping"
         case but6:
-            diaryCategory = "운동"
+            diaryCategory = "exercise"
         case but7:
-            diaryCategory = "여행"
+            diaryCategory = "trip"
         case but8:
-            diaryCategory = "자기계발"
+            diaryCategory = "study"
         default:
             break
         }

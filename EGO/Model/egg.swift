@@ -77,17 +77,14 @@ class egg {
     
     func save() {
         
-        UserApi.shared.me { user, error in
-                    guard let id = user?.id
-                    else{ return }
-                    
+        guard let uid = Auth.auth().currentUser?.uid else { return print("알 저장 실패")}
+
                     let databaseRef = Database.database().reference()
-                    let eggRef = databaseRef.child("egg").child(String(id)).child(self.name)
-                    let eggList = databaseRef.child("egglist").child(String(id)).child(self.name)
+                    let eggRef = databaseRef.child("egg").child(uid).child(self.name)
+                    let eggList = databaseRef.child("egglist").child(uid).child(self.name)
                     
                     eggRef.setValue(self.toAnyObject())
                     eggList.setValue(self.name)
-                }
     }
     
     func update() {

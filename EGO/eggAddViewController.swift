@@ -31,13 +31,13 @@ class eggAddViewController: UIViewController {
     }
     
     func barStyle(){
-        if let leftImage = UIImage(named: "뒤로") {
+        if let leftImage = UIImage(named: "back") {
             let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
             let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
             navigationItem.leftBarButtonItem = leftItem
         }
         
-        if let rightImage = UIImage(named: "확인") {
+        if let rightImage = UIImage(named: "ok") {
             let buttonImage = rightImage.withRenderingMode(.alwaysOriginal)
             let rightItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(save))
             navigationItem.rightBarButtonItem = rightItem
@@ -50,28 +50,28 @@ class eggAddViewController: UIViewController {
     }
     
     @IBAction func but1(_ sender: Any) {
-        eggImg.image = UIImage(named:  "다람쥐_1단계.png")
-        selectName = "다람쥐"
+        eggImg.image = UIImage(named:  "squirrel_Level1.png")
+        selectName = "squirrel"
     }
     
     @IBAction func but2(_ sender: Any) {
-        eggImg.image = UIImage(named:  "사자_1단계.png")
-        selectName = "사자"
+        eggImg.image = UIImage(named:  "lion_Level1.png")
+        selectName = "lion"
     }
     
     @IBAction func but3(_ sender: Any) {
-        eggImg.image = UIImage(named:  "수달_1단계.png")
-        selectName = "수달"
+        eggImg.image = UIImage(named:  "otter_Level1.png")
+        selectName = "otter"
     }
     
     @IBAction func but4(_ sender: Any) {
-        eggImg.image = UIImage(named:  "코알라_1단계.png")
-        selectName = "코알라"
+        eggImg.image = UIImage(named:  "koala_Level1.png")
+        selectName = "koala"
     }
     
     @objc func save(_ sender: Any) {
         
-        let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "1단계", favoritestate: false, eggState: true, eggnote: 0)
+        let newEgg = egg(name: eggName.text ?? "", kind: selectName ?? "",  state: "Level1", favoritestate: false, eggState: true, eggnote: 0)
         
         let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBar")
             mainView?.modalPresentationStyle = .fullScreen

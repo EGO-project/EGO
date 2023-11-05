@@ -60,7 +60,12 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc private func leftButAction(){
-        performSegue(withIdentifier: "shop", sender: nil)
+//        performSegue(withIdentifier: "shop", sender: nil)
+        let alert = UIAlertController(title:"알림",message: "서비스 준비중입니다.\n조금만 기다려주세요.",preferredStyle: UIAlertController.Style.alert)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        
+        alert.addAction(ok)
+        present(alert,animated: true,completion: nil)
     }
     
     @objc private func rightButAction(){
