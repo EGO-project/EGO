@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "egg_다람쥐 4.png",
+      "filename" : "아이콘_더보기_수정.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,5 +17,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
   }
 }

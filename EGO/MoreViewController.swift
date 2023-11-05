@@ -117,5 +117,8 @@ class MoreViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
         
+        // 세그웨이 실행
+            self.performSegue(withIdentifier: "ProfileSegue", sender: self)
+        
     }
 }
