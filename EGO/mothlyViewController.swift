@@ -195,7 +195,6 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
             image?.draw(in: CGRect(origin: .zero, size: imageSize))
             image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            
             return image
         }
         

@@ -10,6 +10,8 @@ import FirebaseAuth
 
 class WithdrawlViewController: UIViewController {
     
+    private var isWithdrawalEnabled: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +22,14 @@ class WithdrawlViewController: UIViewController {
         guard let id = Auth.auth().currentUser?.uid else {
             return
         }
+        
+        guard isWithdrawalEnabled else {
+           // If not enabled, present an alert to inform the user.
+           let alert = UIAlertController(title: "Error", message: "회원탈퇴를 하시려면 동의합니다를 체크해주세요.", preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           self.present(alert, animated: true, completion: nil)
+           return
+       }
 
         FirebaseManager.shared.withdrawl(id: id) { error in
             if error == nil {
@@ -51,8 +61,12 @@ class WithdrawlViewController: UIViewController {
 
     @IBAction func btnClick(_ sender: UIButton) {
         sender.isSelected.toggle()
+        isWithdrawalEnabled = sender.isSelected
     }
     
+    @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     /*
     // MARK: - Navigation
