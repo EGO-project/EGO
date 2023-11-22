@@ -40,7 +40,7 @@ class mothlyListViewController: UIViewController, UITableViewDataSource, UITable
         
         self.doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTap))
         
-        if let leftImage = UIImage(named: "뒤로") {
+        if let leftImage = UIImage(named: "back") {
             let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
             let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
             navigationItem.leftBarButtonItem = leftItem

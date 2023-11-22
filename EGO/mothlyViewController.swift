@@ -212,13 +212,25 @@ class mothlyViewController: UIViewController, FSCalendarDelegate, FSCalendarData
             diaryList.selectedDate = dateFormatter.date(from: dateString) ?? Date()
             diaryList.selectedEggId = idName
             
-            
             var viewControllers = self.navigationController?.viewControllers
             viewControllers?.removeLast()
             viewControllers?.append(diaryList)
             self.navigationController?.setViewControllers(viewControllers ?? [], animated: false)
             
         }
+        
+        if self.diaryList.isEmpty {
+            self.backAction(self)
+        }
+    }
+    
+    func backAction(_ sender: Any){
+        let backAlert = UIAlertController(title:"알림",message: "해당일 이후 작성된 글이 없어요!",preferredStyle: UIAlertController.Style.alert)
+        
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        
+        backAlert.addAction(ok)
+        present(backAlert,animated: true,completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -46,13 +46,13 @@ class mothlyAdd_1ViewController: UIViewController {
     }
     
     func barStyle(){
-        if let leftImage = UIImage(named: "뒤로") {
+        if let leftImage = UIImage(named: "back") {
             let buttonImage = leftImage.withRenderingMode(.alwaysOriginal)
             let leftItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(leftButAction))
             navigationItem.leftBarButtonItem = leftItem
         }
         
-        if let rightImage = UIImage(named: "확인") {
+        if let rightImage = UIImage(named: "ok") {
             let buttonImage = rightImage.withRenderingMode(.alwaysOriginal)
             let rightItem = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(nextAction))
             navigationItem.rightBarButtonItem = rightItem

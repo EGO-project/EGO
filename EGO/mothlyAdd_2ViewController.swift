@@ -26,7 +26,6 @@ class mothlyAdd_2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         barStyle()
-        
         // 현재 날짜 가져오기
         let currentDate = Date()
         // 날짜를 원하는 형식으로 포맷
@@ -137,11 +136,16 @@ class mothlyAdd_2ViewController: UIViewController {
                 diaryList.selectedEggId = self.saveId
                 newDiary.save() // 내용 저장
                 
-                if var viewControllers = self.navigationController?.viewControllers {
-                    viewControllers.removeLast()
-                    viewControllers.append(diaryList)
-                    self.navigationController?.setViewControllers(viewControllers, animated: true)
-                }
+//                if var viewControllers = self.navigationController?.viewControllers {
+//                    viewControllers.removeLast()
+//                    viewControllers.append(diaryList)
+//                    self.navigationController?.setViewControllers(viewControllers, animated: true)
+//                }
+                
+                var viewControllers = self.navigationController?.viewControllers
+                viewControllers?.removeLast()
+                viewControllers?.append(diaryList)
+                self.navigationController?.setViewControllers(viewControllers ?? [], animated: true)
                 
             })
             
