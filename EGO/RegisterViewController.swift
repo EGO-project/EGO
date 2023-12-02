@@ -287,8 +287,8 @@ class RegisterViewController: UIViewController, ASAuthorizationControllerDelegat
             lblEmailError.textColor = UIColor.red
             return
         }
-        // 파이어베이스 경로 문제로 인해 . 을 -로 치환
-        FirebaseManager.shared.checkDuplicateID(id: email) { (isDuplicate) in
+
+        FirebaseManager.shared.checkDuplicateID(email: email) { (isDuplicate) in
             if isDuplicate {
                 self.lblEmailError.text = "*이미 존재하는 아이디입니다"
                 self.lblEmailError.textColor = UIColor.red

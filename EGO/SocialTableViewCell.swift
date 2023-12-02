@@ -18,6 +18,8 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
     @IBOutlet weak var friendsEgo3: UIImageView!
     @IBOutlet weak var friendsEgo4: UIImageView!
     
+    
+    
     var eggTapHandler: ((egg) -> Void)?
 
     var friendName: String? {
@@ -66,6 +68,11 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
             }
         }
     }
+    
+    var hasEggs: Bool {
+        return !friendEggs.isEmpty
+    }
+
 
     @objc private func eggTapped(_ recognizer: UITapGestureRecognizer) {
         if let imageView = recognizer.view as? UIImageView, imageView.tag < friendEggs.count {
@@ -73,7 +80,5 @@ class SocialTableViewCell: UITableViewCell, UITableViewDelegate {
             eggTapHandler?(selectedEgg)
         }
     }
-
-    
 }
 

@@ -90,8 +90,6 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self?.performSegue(withIdentifier: "showDetail", sender: friendInfo)
         }
 
-        
-        
         return cell
     }
     
@@ -153,8 +151,14 @@ class SocialViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //  segue 연결 후 뷰간 값 전달 하는 법
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // sender가 기존에는 nil이지만, 셀의 ndex의 값을 받아와야 하므로 sender의 값을 indexPath.row로 변경
-        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
+        // 셀 인스턴스를 가져옵니다.
+            if let cell = tableView.cellForRow(at: indexPath) as? SocialTableViewCell {
+                // 친구의 egg 데이터가 있다면, 세그웨이 실행
+                if cell.hasEggs {
+                    // sender가 기존에는 nil이지만, 셀의 ndex의 값을 받아와야 하므로 sender의 값을 indexPath.row로 변경
+                    performSegue(withIdentifier: "showDetail", sender: indexPath.row)
+                }
+            }
     }
     
     // performSegue()가 실행되기 전에 수행되는 함수, 실질적으로 다음 뷰로 값을 전달해준다.

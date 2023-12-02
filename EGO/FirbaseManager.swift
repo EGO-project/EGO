@@ -60,16 +60,23 @@ class FirebaseManager {
         }
     }
     
-    func checkDuplicateID(id: String, completion: @escaping (Bool) -> Void) {
-        let databaseRef = Database.database().reference().child("member").child(id)
-        databaseRef.observeSingleEvent(of: .value) { snapshot in
-            guard !snapshot.exists() else {
+    func checkDuplicateID(email: String, completion: @escaping (Bool) -> Void) {
+        let databaseRef = Database.database().reference().child("member")
+        
+        // 이메일을 쿼리하기 위한 참조 설정
+        let query = databaseRef.queryOrdered(byChild: "email").queryEqual(toValue: email)
+        
+        query.observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                // 스냅샷이 존재하면, 이메일이 데이터베이스에 있음
                 completion(true)
-                return
+            } else {
+                // 스냅샷이 존재하지 않으면, 이메일이 데이터베이스에 없음
+                completion(false)
             }
-            completion(false)
         }
     }
+
     
     //회원탈퇴
     func withdrawl(id: String, completion: @escaping (Error?) -> Void) {

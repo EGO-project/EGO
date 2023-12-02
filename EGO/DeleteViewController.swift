@@ -26,6 +26,9 @@ class DeleteViewController: UIViewController {
         sender.isSelected.toggle()
     }
     
+    @IBAction func btnBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
     /*
      // MARK: - Navigation
